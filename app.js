@@ -1,35 +1,61 @@
 
 const scenarios = window.FAFA_SCENARIOS || [];
+const codes = window.FAFA_CODES || [];
 const TEAM_CODES = ['ALPHA','BRAVO','CHARLIE','DELTA','ECHO','FOXTROT','GAMMA','OMEGA'];
-
 const qs = s => document.querySelector(s);
 const qsa = s => [...document.querySelectorAll(s)];
 const esc = s => String(s ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 const state = { session:null };
 
-function openTab(id){
-  qsa('.tab').forEach(b => b.classList.toggle('active', b.dataset.target===id));
-  qsa('.tab-panel').forEach(p => p.classList.toggle('active', p.id===id));
-}
+const universeCards = [
+  {key:'mario', title:'Super Mario Bros style', text:'Tuyaux secrets, boss, château, objets cachés et niveaux.'},
+  {key:'pokemon', title:'Pokémon style', text:'Capture, évolution, arènes, duel et progression.'},
+  {key:'onepiece', title:'One Piece style', text:'Équipage, trésor, reliques, îles et aventure pirate.'},
+  {key:'dbz', title:'Dragon Ball Z style', text:'Montée en puissance, tournoi, énergie et transformation finale.'},
+  {key:'kpop', title:'K-pop style', text:'Show, performance, défis de scène et bataille d’équipe.'},
+  {key:'manga', title:'Manga / anime style', text:'Rivalité, arcs narratifs, héros, clans et missions secrètes.'},
+];
+
+function openTab(id){ qsa('.tab').forEach(b => b.classList.toggle('active', b.dataset.target===id)); qsa('.tab-panel').forEach(p => p.classList.toggle('active', p.id===id)); }
 function closeModal(){ qs('#modal').classList.add('hidden'); }
 function modal(html){ qs('#modalContent').innerHTML = html; qs('#modal').classList.remove('hidden'); }
 
-function init(){
-  qs('#statScenarios').textContent = scenarios.length;
-  const gameSelect = qs('#gameSelect');
-  const types = [...new Map(scenarios.map(s => [s.gameKey, s.gameLabel])).entries()];
-  gameSelect.innerHTML = types.map(([k,v]) => `<option value="${esc(k)}">${esc(v)}</option>`).join('');
-  renderLibrary();
-  hydrateFromUrl();
+function fillBasicSelects(){
+  qs('#ageSelect').innerHTML = `<option value="6-10">Enfants 6–10 ans</option><option value="11-17" selected>Ados 11–17 ans</option><option value="18+">Adultes 18+</option>`;
+  qs('#difficultySelect').innerHTML = `<option value="facile">Facile</option><option value="moyen" selected>Moyen</option><option value="difficile">Difficile</option><option value="expert">Expert</option>`;
+  qs('#locationSelect').innerHTML = `<option value="intérieur">Intérieur</option><option value="extérieur">Extérieur</option>`;
+  qs('#teamsSelect').innerHTML = Array.from({length:7}, (_,i)=>`<option value="${i+2}" ${i===1?'selected':''}>${i+2} équipes</option>`).join('');
+  qs('#filterAge').innerHTML = `<option value="">Tous les âges</option><option value="6-10">Enfants 6–10 ans</option><option value="11-17">Ados 11–17 ans</option><option value="18+">Adultes 18+</option>`;
+  qs('#filterDifficulty').innerHTML = `<option value="">Toutes les difficultés</option><option value="facile">Facile</option><option value="moyen">Moyen</option><option value="difficile">Difficile</option><option value="expert">Expert</option>`;
+  qs('#filterLocation').innerHTML = `<option value="">Tous les lieux</option><option value="intérieur">Intérieur</option><option value="extérieur">Extérieur</option>`;
 }
-
-function selectedFilters(prefix=''){
+function init(){
+  fillBasicSelects();
+  qs('#statScenarios').textContent = scenarios.length;
+  const types = [...new Map(scenarios.map(s => [s.gameKey, s.gameLabel])).entries()];
+  qs('#gameSelect').innerHTML = `<option value="">Tous les jeux</option>` + types.map(([k,v]) => `<option value="${esc(k)}">${esc(v)}</option>`).join('');
+  const universes = [...new Set(scenarios.map(s => s.universe).filter(Boolean))].sort();
+  qs('#universeSelect').innerHTML = `<option value="">Tous les univers</option>` + universes.map(u => `<option value="${esc(u)}">${esc(u)}</option>`).join('');
+  renderUniverses(); renderLibrary(); renderCodes(); hydrateFromUrl();
+}
+function renderUniverses(){
+  qs('#universeGrid').innerHTML = universeCards.map(u => `
+    <article class="universe-card">
+      <div class="pillbar"><span class="pill">${esc(u.key)}</span></div>
+      <h3>${esc(u.title)}</h3>
+      <p class="story">${esc(u.text)}</p>
+    </article>
+  `).join('');
+}
+function selectedFilters(){
   return {
-    age: qs('#'+prefix+'ageSelect') ? qs('#'+prefix+'ageSelect').value : (qs('#ageSelect').value),
-    difficulty: qs('#'+prefix+'difficultySelect') ? qs('#'+prefix+'difficultySelect').value : (qs('#difficultySelect').value),
-    location: qs('#'+prefix+'locationSelect') ? qs('#'+prefix+'locationSelect').value : (qs('#locationSelect').value),
+    age: qs('#ageSelect').value,
+    difficulty: qs('#difficultySelect').value,
+    location: qs('#locationSelect').value,
     gameKey: qs('#gameSelect').value,
-    universe: qs('#universeSelect').value
+    universe: qs('#universeSelect').value,
+    teams: Number(qs('#teamsSelect').value || 3),
+    sessionName: qs('#sessionName').value || 'Mission FAFATRAINING V8'
   };
 }
 function matchingScenarios(f){
@@ -43,14 +69,12 @@ function matchingScenarios(f){
 }
 function previewMatchingScenarios(){
   const matches = matchingScenarios(selectedFilters());
-  qs('#matchingResults').innerHTML = matches.length
-    ? `<strong>${matches.length}</strong> scénario(x) compatible(s). Clique sur “Bibliothèque” pour tous les voir.`
-    : `Aucun scénario trouvé avec ces critères.`;
+  qs('#matchingResults').innerHTML = matches.length ? `<strong>${matches.length}</strong> scénario(x) compatible(s).` : `Aucun scénario trouvé avec ces critères.`;
 }
 function renderLibrary(){
   const age = qs('#filterAge').value, difficulty = qs('#filterDifficulty').value, location = qs('#filterLocation').value, search = qs('#filterSearch').value.toLowerCase().trim();
   const list = scenarios.filter(s => {
-    const blob = [s.title,s.gameLabel,s.story,s.theme,s.ageLabel].join(' ').toLowerCase();
+    const blob = [s.displayTitle||s.title,s.gameLabel,s.story,s.ageLabel,s.subtitle,s.universe].join(' ').toLowerCase();
     return (!age || s.ageKey===age) && (!difficulty || s.difficulty===difficulty) && (!location || s.location===location) && (!search || blob.includes(search));
   });
   qs('#libraryGrid').innerHTML = list.map(s => `
@@ -58,205 +82,93 @@ function renderLibrary(){
       <div class="pillbar">
         <span class="pill">${esc(s.gameLabel)}</span>
         <span class="pill">${esc(s.ageLabel)}</span>
-        <span class="pill">${esc(s.location)}</span>
         <span class="pill">${esc(s.difficulty)}</span>
+        <span class="pill">${esc(s.universe || 'univers libre')}</span>
       </div>
-      <h4 style="color:${esc(s.themeColor)}">${esc(s.title)}</h4>
-      <p>${esc(s.story)}</p>
-      <button class="ghost" onclick="showScenario('${esc(s.id)}')">Voir le détail</button>
+      <h3>${esc(s.displayTitle || s.title)}</h3>
+      <div class="story">${esc(s.story)}</div>
+      <ul class="list">${(s.tasks||[]).slice(0,3).map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
+      <div class="actions"><button onclick="showScenario('${esc(s.id)}')">Voir le détail</button></div>
     </article>
-  `).join('') || '<div class="notice">Aucun résultat.</div>';
+  `).join('');
 }
 function showScenario(id){
-  const s = scenarios.find(x => x.id===id);
-  if(!s) return;
+  const s = scenarios.find(x => x.id===id); if(!s) return;
   modal(`
-    <h2>${esc(s.title)}</h2>
-    <div class="pillbar">
-      <span class="pill">${esc(s.gameLabel)}</span>
-      <span class="pill">${esc(s.ageLabel)}</span>
-      <span class="pill">${esc(s.location)}</span>
-      <span class="pill">${esc(s.difficulty)}</span>
-      ${s.universe ? `<span class="pill">${esc(s.universe)}</span>` : ''}
-    </div>
+    <h2>${esc(s.displayTitle || s.title)}</h2>
+    <p><strong>${esc(s.subtitle || '')}</strong></p>
     <p>${esc(s.story)}</p>
-    <h3>Manches / épreuves</h3>
-    <ul>${s.tasks.map(t => `<li>${esc(t)}</li>`).join('')}</ul>
-    ${s.roles && s.roles.length ? `<h3>Rôles possibles</h3><p>${s.roles.map(esc).join(', ')}</p>` : ''}
-    <p class="muted">${esc(s.explanations)}</p>
+    <p>${esc(s.intro || '')}</p>
+    <h3>Épreuves</h3>
+    <ul class="list">${(s.taskCards||[]).map(t=>`<li><strong>${esc(t.title)}</strong> — ${esc(t.description)}<br><em>${esc(t.why)}</em></li>`).join('')}</ul>
+    <h3>Rôles</h3>
+    <ul class="list">${(s.roles||[]).map(r=>`<li>${esc(r)}</li>`).join('')}</ul>
   `);
 }
-function scenarioById(id){ return scenarios.find(s => s.id===id); }
-
-function deterministicCode(base){
-  return base.replace(/[^A-Z0-9]/g,'').slice(0,10);
-}
-function buildSession(){
-  const filters = selectedFilters();
-  const matches = matchingScenarios(filters);
-  if(!matches.length) return null;
-  const scenario = matches[0];
-  const teamCount = Math.max(2, Math.min(8, Number(qs('#teamCount').value || 3)));
-  const sessionName = qs('#sessionName').value.trim() || 'Mission FAFATRAINING';
-  const teams = Array.from({length:teamCount}, (_,i) => {
-    const code = TEAM_CODES[i];
-    const missions = scenario.tasks.map((task, idx) => {
-      const answer = deterministicCode(`${scenario.id}-${code}-${idx+1}`);
-      const station = ((i*4)+idx) % 48 + 1;
-      return {
-        step: idx+1,
-        title: `Mission ${idx+1} – ${code}`,
-        prompt: task,
-        answer,
-        station,
-        hint: `Cherche la logique de l’équipe ${code} et note bien chaque détail.`,
-      };
-    });
-    return {
-      code,
-      name: `Équipe ${i+1}`,
-      color: ['#35B9FF','#FF4FD8','#FFC247','#39FF14','#FF8A1F','#8F9BFF','#00E7C4','#FF5A54'][i],
-      missions
-    };
-  });
-  return { sessionName, scenario, teamCount, teams };
-}
-
 function generateSession(){
-  const session = buildSession();
-  if(!session){
-    qs('#sessionOutput').innerHTML = 'Aucun scénario compatible.';
-    openTab('session');
-    return;
-  }
-  state.session = session;
-  const baseUrl = new URL(window.location.href);
-  baseUrl.search = '';
-  const teamBlocks = session.teams.map(team => {
-    const url = `${baseUrl.toString()}?mode=team&sid=${encodeURIComponent(session.scenario.id)}&teams=${session.teamCount}&code=${encodeURIComponent(team.code)}`;
-    return `
-      <div class="team-card" style="box-shadow: inset 0 0 0 2px ${team.color}">
-        <h4 style="color:${team.color}">${esc(team.name)} · ${esc(team.code)}</h4>
-        <p><strong>Lien direct équipe :</strong></p>
-        <div class="linkbox">${esc(url)}</div>
-        <p><strong>Parcours :</strong> ${team.missions.map(m => `Mission ${m.step} → Station ${m.station}`).join(' · ')}</p>
-        <p><strong>Réponses animateur :</strong> ${team.missions.map(m => `${m.title}: ${m.answer}`).join(' | ')}</p>
-      </div>
-    `;
-  }).join('');
-
-  const qrBlock = session.teams.slice(0,4).map(team => {
-    const first = team.missions[0];
-    return `<div class="team-card"><h4>${esc(team.name)} · QR utile</h4><p>Premier QR à utiliser : <strong>Station ${first.station}</strong></p><img src="assets/qr/station-${String(first.station).padStart(2,'0')}.png" alt="QR station ${first.station}" style="max-width:160px;border-radius:12px;background:#fff;padding:6px"></div>`;
-  }).join('');
-
+  const f = selectedFilters(), matches = matchingScenarios(f);
+  if(!matches.length){ qs('#matchingResults').innerHTML = `Aucun scénario trouvé avec ces critères.`; return; }
+  const selected = matches.slice(0, Math.min(f.teams, matches.length));
+  const teams = Array.from({length:f.teams}, (_,i) => ({ code: TEAM_CODES[i], title: selected[i % selected.length].displayTitle || selected[i % selected.length].title, scenario: selected[i % selected.length] }));
+  state.session = { ...f, teamsData: teams, commonFinal: "Assembler les informations de chaque équipe pour ouvrir la finale commune." };
+  renderSession(); generateTeamLinks(); openTab('session');
+}
+function renderSession(){
+  const s = state.session; if(!s) return;
   qs('#sessionOutput').innerHTML = `
-    <div class="notice">
-      <h3>${esc(session.sessionName)}</h3>
-      <div class="pillbar">
-        <span class="pill">${esc(session.scenario.gameLabel)}</span>
-        <span class="pill">${esc(session.scenario.ageLabel)}</span>
-        <span class="pill">${esc(session.scenario.location)}</span>
-        <span class="pill">${esc(session.scenario.difficulty)}</span>
-        ${session.scenario.universe ? `<span class="pill">${esc(session.scenario.universe)}</span>` : ''}
-      </div>
-      <p><strong>Titre :</strong> ${esc(session.scenario.title)}</p>
-      <p><strong>Histoire :</strong> ${esc(session.scenario.story)}</p>
-      <h3>Déroulé conseillé sur 1h à 1h30</h3>
-      <ul>
-        <li>0–10 min : briefing, répartition des équipes, explication du contexte.</li>
-        <li>10–25 min : mission 1.</li>
-        <li>25–40 min : mission 2.</li>
-        <li>40–55 min : mission 3.</li>
-        <li>55–70 min : mission 4 + finale.</li>
-      </ul>
-      <p><strong>Comment tu connais les réponses :</strong> elles sont affichées ci-dessous équipe par équipe et dans le guide fourni dans le ZIP.</p>
-    </div>
-    <h3>Liens et corrections par équipe</h3>
-    <div class="team-grid">${teamBlocks}</div>
-    <h3>QR utiles pour démarrer</h3>
-    <div class="team-grid">${qrBlock}</div>
-  `;
-  openTab('session');
-}
-
-function hydrateFromUrl(){
-  const url = new URL(window.location.href);
-  const mode = url.searchParams.get('mode');
-  const sid = url.searchParams.get('sid');
-  const code = url.searchParams.get('code');
-  const teams = url.searchParams.get('teams');
-  if(mode==='team' && sid && code && teams){
-    openTab('equipe');
-    qs('#teamScenarioId').value = sid;
-    qs('#teamCode').value = code;
-    qs('#teamTotal').value = teams;
-    loadTeamView();
-  }
-}
-
-function buildTeamSession(sid, total, code){
-  const scenario = scenarioById(sid);
-  if(!scenario) return null;
-  const teamIndex = TEAM_CODES.indexOf(code.toUpperCase());
-  if(teamIndex < 0 || teamIndex >= total) return null;
-  const team = {
-    code: TEAM_CODES[teamIndex],
-    name: `Équipe ${teamIndex+1}`,
-    color: ['#35B9FF','#FF4FD8','#FFC247','#39FF14','#FF8A1F','#8F9BFF','#00E7C4','#FF5A54'][teamIndex],
-    missions: scenario.tasks.map((task, idx) => ({
-      step: idx+1,
-      title: `Mission ${idx+1} – ${TEAM_CODES[teamIndex]}`,
-      prompt: task,
-      answer: deterministicCode(`${scenario.id}-${TEAM_CODES[teamIndex]}-${idx+1}`),
-      station: ((teamIndex*4)+idx) % 48 + 1,
-      hint: `Pense au thème du jeu et cherche ce qui débloque la suite.`,
-    }))
-  };
-  return {scenario, team};
-}
-
-function loadTeamView(){
-  const sid = qs('#teamScenarioId').value.trim().toUpperCase();
-  const code = qs('#teamCode').value.trim().toUpperCase();
-  const total = Math.max(2, Math.min(8, Number(qs('#teamTotal').value || 3)));
-  const data = buildTeamSession(sid, total, code);
-  if(!data){
-    qs('#teamView').innerHTML = 'Impossible d’ouvrir cette équipe. Vérifie le code et le scénario.';
-    return;
-  }
-  const {scenario, team} = data;
-  qs('#teamView').innerHTML = `
-    <div class="team-card" style="box-shadow: inset 0 0 0 2px ${team.color}">
-      <div class="pillbar">
-        <span class="pill">${esc(team.name)}</span>
-        <span class="pill">${esc(scenario.title)}</span>
-        <span class="pill">${esc(scenario.location)}</span>
-      </div>
-      <h3 style="color:${team.color};margin-top:0">${esc(team.name)} · ${esc(team.code)}</h3>
-      <p>${esc(scenario.story)}</p>
-      <div class="mission-grid">
-        ${team.missions.map(m => `
-          <div class="mission-card">
-            <h4>${esc(m.title)}</h4>
-            <p><strong>Objectif :</strong> ${esc(m.prompt)}</p>
-            <p><strong>Station / QR :</strong> ${m.station}</p>
-            <p class="muted">${esc(m.hint)}</p>
-            <div class="answer-row">
-              <input id="ans-${m.step}" type="text" placeholder="Entre la réponse">
-              <button onclick="checkAnswer(${m.step}, '${m.answer}')">Valider</button>
-            </div>
-            <div id="res-${m.step}" class="muted"></div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
+    <article class="mission-card">
+      <div class="pillbar"><span class="pill">${esc(s.sessionName)}</span><span class="pill">${s.teams} équipes</span><span class="pill">${esc(s.location)}</span></div>
+      <h3>Brief global</h3>
+      <div class="story">Toutes les équipes jouent en simultané avec des missions différentes. Elles ne peuvent pas se copier mais convergent toutes vers la même finale.</div>
+      <ul class="list"><li>Âge : ${esc(s.age)}</li><li>Difficulté : ${esc(s.difficulty)}</li><li>Lieu : ${esc(s.location)}</li><li>Finale commune : ${esc(s.commonFinal)}</li></ul>
+    </article>
+    ${s.teamsData.map((t,idx)=>`
+      <article class="mission-card" style="box-shadow: inset 0 0 0 2px ${esc(t.scenario.themeColor)}">
+        <div class="pillbar"><span class="pill">${esc(t.code)}</span><span class="pill">Équipe ${idx+1}</span></div>
+        <h3>${esc(t.title)}</h3>
+        <div class="story">${esc(t.scenario.story)}</div>
+        <ul class="list">${(t.scenario.tasks||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>
+      </article>`).join('')}
   `;
 }
-function checkAnswer(step, answer){
-  const val = qs('#ans-'+step).value.trim().toUpperCase().replace(/[^A-Z0-9]/g,'');
-  const ok = val === answer;
-  qs('#res-'+step).innerHTML = ok ? `<span class="ok">Bonne réponse. Mission validée.</span>` : `<span class="bad">Mauvaise réponse. Réessaie.</span>`;
+function generateTeamLinks(){
+  const s = state.session; if(!s) return;
+  const base = location.origin + location.pathname;
+  qs('#teamLinks').innerHTML = s.teamsData.map((t,idx)=>`
+    <article class="team-card" style="box-shadow: inset 0 0 0 2px ${esc(t.scenario.themeColor)}">
+      <div class="pillbar"><span class="pill">${esc(t.code)}</span><span class="pill">Équipe ${idx+1}</span></div>
+      <h3>${esc(t.title)}</h3>
+      <p class="story">Lien direct pour l’équipe. Elle ne verra que ses propres missions.</p>
+      <div class="inline-code">${esc(base)}?team=${esc(t.code)}</div>
+    </article>`).join('');
 }
-
+function hydrateFromUrl(){ const team = new URLSearchParams(location.search).get('team'); if(team){ openTab('equipe'); renderTeamView(team.toUpperCase()); } }
+function renderTeamView(teamCode){
+  const s = state.session; let code = teamCode || new URLSearchParams(location.search).get('team');
+  if(!code){ qs('#teamView').innerHTML = `<div class="notice">Génère une session puis ouvre un lien d’équipe pour voir ce mode.</div>`; return; }
+  if(!s){ qs('#teamView').innerHTML = `<div class="notice">Aucune session active dans cette page. Génère d’abord une session depuis le mode animateur.</div>`; return; }
+  const found = s.teamsData.find(t => t.code === code.toUpperCase());
+  if(!found){ qs('#teamView').innerHTML = `<div class="notice">Code équipe introuvable.</div>`; return; }
+  qs('#teamView').innerHTML = `<article class="team-card" style="box-shadow: inset 0 0 0 2px ${esc(found.scenario.themeColor)}"><div class="pillbar"><span class="pill">${esc(found.code)}</span><span class="pill">${esc(found.scenario.ageLabel)}</span><span class="pill">${esc(found.scenario.difficulty)}</span></div><h3>${esc(found.title)}</h3><div class="story">${esc(found.scenario.story)}</div><h3>Votre mission</h3><ul class="list">${(found.scenario.tasks||[]).map(t=>`<li>${esc(t)}</li>`).join('')}</ul><h3>Votre objectif final</h3><p class="story">Vous devez gagner vos indices, protéger votre information et atteindre la finale commune.</p></article>`;
+}
+function renderCodes(){
+  qs('#codesGrid').innerHTML = codes.slice(0,24).map(c=>`
+    <article class="mission-card">
+      <div class="pillbar"><span class="pill">${esc(c.label||('Station '+c.station))}</span><span class="pill">Niveau ${esc(c.level||'1')}</span></div>
+      <h3>${esc(c.code)}</h3>
+      <button class="qr-button" onclick="showCodeHelp('${esc(c.code)}', ${c.station}, ${c.level||1})">
+        <img src="assets/qr/station-${String(c.station).padStart(2,'0')}.png" alt="${esc(c.code)}">
+      </button>
+      <div class="story">Clique sur le QR pour voir son utilité.</div>
+    </article>`).join('');
+}
+function showCodeHelp(code, station, level){
+  modal(`<h2>QR ${esc(code)}</h2><p><strong>Station :</strong> ${station}</p><p><strong>Niveau :</strong> ${level}</p><p>Ce QR sert à débloquer un indice, un pouvoir, un message secret ou une étape de puzzle final. Il doit être utilisé uniquement au moment où le scénario le demande.</p><p><strong>Conseil animateur :</strong> place ce QR sur une affiche, une enveloppe, une balise ou une zone de jeu.</p>`);
+}
+function exportPrintable(){
+  if(!state.session) return;
+  const win = window.open('', '_blank');
+  win.document.write(`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Déroulé V8</title><style>body{font-family:Arial;padding:30px}.card{border:1px solid #ccc;border-radius:12px;padding:14px;margin-bottom:14px}</style></head><body><h1>${esc(state.session.sessionName)}</h1>${state.session.teamsData.map((t,i)=>`<div class="card"><h2>Équipe ${i+1} · ${esc(t.code)}</h2><h3>${esc(t.title)}</h3><p>${esc(t.scenario.story)}</p><ul>${(t.scenario.tasks||[]).map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</body></html>`);
+  win.document.close();
+}
 init();

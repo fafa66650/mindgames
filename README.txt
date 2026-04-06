@@ -1,12 +1,8 @@
-FAFATRAINING – MINDGAME V6 MASTER COMPLET FINAL
+FAFATRAINING MINDGAME V8 IMPACT
 
-Contenu :
-- 256 scénarios
-- multi-équipes 2 à 8
-- mode animateur + mode équipe
-- liens directs par équipe
-- QR / stations
-- guide animateur
-- guide GitHub Pages
-- préparation terrain
-- PWA / hors ligne
+Corrections :
+- QR maintenant cliquables avec vraie explication d’usage
+- titres de jeux beaucoup plus forts
+- univers pop culture beaucoup plus visibles
+- Mario / Pokémon / One Piece / Dragon Ball Z / K-pop / Manga mieux présents
+- interface plus claire

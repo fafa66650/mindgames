@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>FAFATRAINING – Mindgame V6 Master</title>
+<title>FAFATRAINING – Mindgame V8 Impact</title>
 <meta name="theme-color" content="#0b0b12">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
@@ -12,161 +12,113 @@
 <div class="app">
   <header class="hero">
     <div class="hero-main">
-      <div class="eyebrow">FAFATRAINING · MINDGAME V6 MASTER COMPLET FINAL</div>
-      <h1>Lancer une expérience immersive qui donne envie de jouer dès la première seconde.</h1>
-      <p>Trahison, grand Cluedo, escape game, chasse au trésor, quiz télé revisités, burger challenge, blind test, culture générale et univers pop culture. Tout est adapté par âge, difficulté, lieu et nombre d’équipes.</p>
+      <div class="eyebrow">FAFATRAINING · MINDGAME V8 IMPACT</div>
+      <h1>Des jeux qui donnent envie de jouer avant même de commencer.</h1>
+      <p>Univers pop culture, grandes enquêtes, traîtrise, jeux TV revisités, quiz musical et missions immersives. Cette version corrige les QR et pousse les titres, les univers et l’ambiance beaucoup plus loin.</p>
       <div class="hero-actions">
-        <button onclick="openTab('config')">Lancer une expérience</button>
-        <button class="ghost" onclick="openTab('bibliotheque')">Bibliothèque complète</button>
-        <button class="ghost" onclick="openTab('guide')">Guide animateur</button>
+        <button onclick="openTab('config')">🚀 Lancer une expérience</button>
+        <button class="ghost" onclick="openTab('univers')">🔥 Voir les univers</button>
+        <button class="ghost" onclick="openTab('codes')">🔳 Tester les QR</button>
       </div>
       <div class="brandbox">
         <img src="assets/logo.jpg" alt="Logo FAFATRAINING">
         <div>
-          <strong>Mode animateur + mode équipe</strong><br>
-          <span>Un lien par équipe, des missions séparées, une finale commune.</span>
+          <strong>Version V8 corrigée</strong><br>
+          <span>QR utiles, titres plus forts, univers beaucoup plus visibles et plus fun.</span>
         </div>
       </div>
     </div>
     <div class="hero-side">
       <div class="stat"><strong id="statScenarios">0</strong><span>scénarios</span></div>
       <div class="stat"><strong>2–8</strong><span>équipes</span></div>
-      <div class="stat"><strong>256</strong><span>combinaisons de base</span></div>
-      <div class="stat"><strong>QR</strong><span>guidés</span></div>
+      <div class="stat"><strong>QR</strong><span>cliquables</span></div>
+      <div class="stat"><strong>Pop</strong><span>culture forte</span></div>
     </div>
   </header>
 
   <nav class="tabs">
     <button class="tab active" data-target="config" onclick="openTab('config')">Lancer</button>
+    <button class="tab" data-target="univers" onclick="openTab('univers')">Univers</button>
     <button class="tab" data-target="session" onclick="openTab('session')">Session</button>
     <button class="tab" data-target="bibliotheque" onclick="openTab('bibliotheque')">Bibliothèque</button>
     <button class="tab" data-target="equipe" onclick="openTab('equipe')">Mode équipe</button>
+    <button class="tab" data-target="codes" onclick="openTab('codes')">QR / Codes</button>
     <button class="tab" data-target="guide" onclick="openTab('guide')">Guide</button>
   </nav>
 
   <section id="config" class="panel tab-panel active">
-    <h2>Créer une session claire et jouable</h2>
+    <h2>Créer une session</h2>
     <div class="grid-form">
-      <div>
-        <label>Âge</label>
-        <select id="ageSelect">
-          <option value="6-10">Enfants 6–10 ans</option>
-          <option value="11-17" selected>Ados 11–17 ans</option>
-          <option value="18+">Adultes 18+</option>
-        </select>
-      </div>
-      <div>
-        <label>Difficulté</label>
-        <select id="difficultySelect">
-          <option value="facile">Facile</option>
-          <option value="moyen" selected>Moyen</option>
-          <option value="difficile">Difficile</option>
-          <option value="expert">Expert</option>
-        </select>
-      </div>
-      <div>
-        <label>Lieu</label>
-        <select id="locationSelect">
-          <option value="intérieur" selected>Intérieur</option>
-          <option value="extérieur">Extérieur</option>
-        </select>
-      </div>
-      <div>
-        <label>Type de jeu</label>
-        <select id="gameSelect"></select>
-      </div>
-      <div>
-        <label>Univers</label>
-        <select id="universeSelect">
-          <option value="">Standard</option>
-          <option value="Monde Secret">Monde Secret</option>
-          <option value="Capture & Évolution">Capture & Évolution</option>
-          <option value="Puissance Max">Puissance Max</option>
-          <option value="Quête des Reliques">Quête des Reliques</option>
-          <option value="Star Challenge">Star Challenge</option>
-          <option value="Zone Infectée">Zone Infectée</option>
-          <option value="Nexus Manga">Nexus Manga</option>
-          <option value="City Pulse">City Pulse</option>
-        </select>
-      </div>
-      <div>
-        <label>Nombre d’équipes</label>
-        <input id="teamCount" type="number" min="2" max="8" value="3">
-      </div>
-      <div class="full">
-        <label>Nom de la session</label>
-        <input id="sessionName" type="text" value="Mission FAFATRAINING">
-      </div>
+      <div><label>Âge</label><select id="ageSelect"></select></div>
+      <div><label>Difficulté</label><select id="difficultySelect"></select></div>
+      <div><label>Lieu</label><select id="locationSelect"></select></div>
+      <div><label>Nombre d’équipes</label><select id="teamsSelect"></select></div>
+      <div><label>Type de jeu</label><select id="gameSelect"></select></div>
+      <div><label>Univers</label><select id="universeSelect"></select></div>
+      <div class="full"><label>Nom de la mission</label><input id="sessionName" type="text" value="Mission FAFATRAINING V8"></div>
     </div>
     <div class="actions">
-      <button onclick="generateSession()">Générer la session</button>
+      <button onclick="generateSession()">✨ Générer la session</button>
       <button class="ghost" onclick="previewMatchingScenarios()">Voir les scénarios compatibles</button>
     </div>
-    <div id="matchingResults" class="notice"></div>
+    <div id="matchingResults" class="notice">Choisis tes options puis clique sur “Voir les scénarios compatibles”.</div>
+  </section>
+
+  <section id="univers" class="panel tab-panel">
+    <h2>Univers disponibles</h2>
+    <div class="universe-grid" id="universeGrid"></div>
   </section>
 
   <section id="session" class="panel tab-panel">
-    <h2>Console animateur</h2>
-    <div id="sessionOutput" class="notice">Génère une session pour voir le briefing, les liens d’équipes, les réponses et les QR à utiliser.</div>
+    <div class="section-head">
+      <h2>Session générée</h2>
+      <div class="actions">
+        <button onclick="exportPrintable()">Exporter le déroulé</button>
+        <button class="ghost" onclick="openTab('equipe')">Voir les équipes</button>
+      </div>
+    </div>
+    <div id="sessionOutput" class="mission-grid"></div>
   </section>
 
   <section id="bibliotheque" class="panel tab-panel">
-    <h2>Bibliothèque complète</h2>
-    <div class="grid-form">
-      <div>
-        <label>Filtre âge</label>
-        <select id="filterAge"><option value="">Tous</option><option value="6-10">Enfants 6–10</option><option value="11-17">Ados 11–17</option><option value="18+">Adultes 18+</option></select>
+    <div class="section-head">
+      <h2>Bibliothèque complète</h2>
+      <div class="filters-inline">
+        <select id="filterAge" onchange="renderLibrary()"></select>
+        <select id="filterDifficulty" onchange="renderLibrary()"></select>
+        <select id="filterLocation" onchange="renderLibrary()"></select>
+        <input id="filterSearch" type="text" placeholder="Rechercher un titre, un univers, une histoire..." oninput="renderLibrary()">
       </div>
-      <div>
-        <label>Filtre difficulté</label>
-        <select id="filterDifficulty"><option value="">Toutes</option><option value="facile">Facile</option><option value="moyen">Moyen</option><option value="difficile">Difficile</option><option value="expert">Expert</option></select>
-      </div>
-      <div>
-        <label>Filtre lieu</label>
-        <select id="filterLocation"><option value="">Tous</option><option value="intérieur">Intérieur</option><option value="extérieur">Extérieur</option></select>
-      </div>
-      <div>
-        <label>Recherche</label>
-        <input id="filterSearch" type="text" placeholder="traîtres, blind test, pop culture…">
-      </div>
-    </div>
-    <div class="actions">
-      <button onclick="renderLibrary()">Filtrer</button>
     </div>
     <div id="libraryGrid" class="card-grid"></div>
   </section>
 
   <section id="equipe" class="panel tab-panel">
-    <h2>Mode équipe</h2>
-    <p class="subtle">Une équipe peut ouvrir son lien direct ou entrer son code. Elle ne voit que ses missions, ses réponses à valider et sa progression.</p>
-    <div class="grid-form">
-      <div><label>ID scénario</label><input id="teamScenarioId" type="text" placeholder="SC001"></div>
-      <div><label>Code équipe</label><input id="teamCode" type="text" placeholder="ALPHA"></div>
-      <div><label>Nombre d’équipes</label><input id="teamTotal" type="number" min="2" max="8" value="3"></div>
+    <div class="section-head">
+      <h2>Mode équipe</h2>
+      <div class="actions">
+        <button onclick="generateTeamLinks()">Créer les liens d’équipe</button>
+        <button class="ghost" onclick="renderTeamView()">Afficher le mode équipe</button>
+      </div>
     </div>
-    <div class="actions"><button onclick="loadTeamView()">Ouvrir ma mission</button></div>
-    <div id="teamView" class="notice">Entre un scénario et un code équipe pour voir uniquement ce qui concerne cette équipe.</div>
+    <div class="notice">Chaque équipe peut ouvrir son propre lien. Elle ne voit que ses missions, ses indices et son objectif.</div>
+    <div id="teamLinks" class="team-grid"></div>
+    <div id="teamView" class="team-grid"></div>
+  </section>
+
+  <section id="codes" class="panel tab-panel">
+    <h2>QR / codes</h2>
+    <div class="notice">Ici, les QR sont maintenant cliquables. Clique sur un QR pour voir à quoi il sert dans le jeu.</div>
+    <div id="codesGrid" class="card-grid"></div>
   </section>
 
   <section id="guide" class="panel tab-panel">
     <h2>Guide rapide</h2>
     <div class="guide-grid">
-      <div class="guide-card">
-        <h3>Comment lancer</h3>
-        <p>Choisis âge, difficulté, lieu, type de jeu et nombre d’équipes. Clique sur “Générer la session”. L’app crée un briefing, un déroulé, des liens d’équipes et la correction animateur.</p>
-      </div>
-      <div class="guide-card">
-        <h3>Comment les équipes jouent</h3>
-        <p>Chaque équipe reçoit son lien ou entre son code dans l’onglet “Mode équipe”. Elle voit uniquement ses missions et valide ses réponses sans voir celles des autres.</p>
-      </div>
-      <div class="guide-card">
-        <h3>Comment tu connais les réponses</h3>
-        <p>Dans la console animateur, tu as toutes les réponses, les QR, les titres des missions et le déroulé minute par minute. Un guide imprimable est aussi fourni dans le ZIP.</p>
-      </div>
-      <div class="guide-card">
-        <h3>Intérieur / extérieur</h3>
-        <p>Intérieur = pas d’épreuves physiques non préparées. Extérieur = défis dynamiques autorisés. L’app adapte automatiquement les types d’épreuves selon le lieu.</p>
-      </div>
+      <article class="guide-card"><strong>Réponses</strong><p>Les réponses sont dans le manuel animateur et les fichiers bonus. Les joueurs, eux, ne voient que leurs missions.</p></article>
+      <article class="guide-card"><strong>QR</strong><p>Ils servent à débloquer un indice, un pouvoir, un message secret ou une étape de finale.</p></article>
+      <article class="guide-card"><strong>Univers</strong><p>Mario, Pokémon, One Piece, Dragon Ball Z, K-pop, manga et plus sont maintenant visibles dans l’interface.</p></article>
+      <article class="guide-card"><strong>Multi-équipes</strong><p>Chaque équipe a un parcours différent, mais toutes convergent vers la même fin.</p></article>
     </div>
   </section>
 </div>
@@ -181,8 +133,8 @@
 <script src="data.js"></script>
 <script src="app.js"></script>
 <script>
-if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}));
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {}));
 }
 </script>
 </body>
