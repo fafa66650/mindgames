@@ -3,195 +3,137 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FAFATRAINING Mindgame V4 Royale</title>
+<title>FAFATRAINING Mindgame V5 Final</title>
 <meta name="theme-color" content="#0A0A0A">
 <link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="style.css">
 </head>
 <body data-mode="animateur">
 <div class="app">
-  <header class="hero">
-    <div class="hero-left">
-      <div class="brand">FAFATRAINING · MINDGAME V4 ROYALE</div>
-      <h1>Flash. Classe. Royal. Amusant.</h1>
-      <p>Version finale ultra remplie : console animateur, vraies fiches équipes illustrées par thème, cartes rôles imprimables design, scénarios détaillés minute par minute, packs par univers prêts terrain, niveaux de difficulté variés et validation QR / codes / niveaux.</p>
-      <div class="hero-actions">
-        <button onclick="openTab('tab-biblio')">Bibliothèque</button>
-        <button class="ghost" onclick="openTab('tab-live')">Console animateur</button>
-        <button class="ghost" onclick="openTab('tab-pack')">Packs univers</button>
-      </div>
-      <div class="logo-row">
-        <img src="assets/logo-fafatraining.jpeg" alt="Logo FAFATRAINING">
-        <div><strong>Univers FAFATRAINING GAME</strong><br><span>Explosif, visuel, intuitif, coloré, jouable direct sur GitHub Pages.</span></div>
-      </div>
+<header class="hero">
+  <div class="hero-left">
+    <div class="brand">FAFATRAINING · MINDGAME V5 FINAL</div>
+    <h1>Version finale GitHub Pages.</h1>
+    <p>Application statique complète, colorée, intuitive et prête à publier.</p>
+    <div class="hero-actions">
+      <button onclick="openTab('tab-biblio')">Bibliothèque</button>
+      <button class="ghost" onclick="openTab('tab-live')">Console animateur</button>
+      <button class="ghost" onclick="openTab('tab-pack')">Packs univers</button>
     </div>
-    <div class="hero-right">
-      <div class="stat"><strong id="countScenarios">0</strong><span>scénarios</span></div>
-      <div class="stat"><strong>48</strong><span>codes / stations</span></div>
-      <div class="stat"><strong>4</strong><span>difficultés</span></div>
-      <div class="stat"><strong>10</strong><span>packs univers</span></div>
-    </div>
-  </header>
-
-  <main class="layout">
-    <aside class="sidebar">
-      <section class="panel">
-        <h2>Mode & filtres</h2>
-        <label>Mode</label>
-        <select id="modeSelect" onchange="applyMode()">
-          <option value="animateur">Animateur / maître du jeu</option>
-          <option value="joueur">Joueur / consultation</option>
-        </select>
-        <label>Âge</label>
-        <select id="ageSelect" onchange="applyAll()">
-          <option value="">Tous</option>
-          <option value="6-10">Enfants 6–10 ans</option>
-          <option value="11-17" selected>Ados 11–17 ans</option>
-          <option value="18+">Adultes 18+</option>
-        </select>
-        <label>Famille</label>
-        <select id="familySelect" onchange="applyAll()">
-          <option value="">Toutes</option>
-          <option value="infiltration">Infiltration / Trahison</option>
-          <option value="cluedo">Enquête / Cluedo</option>
-          <option value="escape">Escape Game</option>
-          <option value="treasure">Chasse au trésor</option>
-          <option value="tv">Jeu TV version terrain</option>
-          <option value="gaming">Gaming / Pop Culture</option>
-        </select>
-        <label>Difficulté</label>
-        <select id="difficultySelect" onchange="applyAll()">
-          <option value="">Toutes</option>
-          <option value="facile">Facile</option>
-          <option value="moyen">Moyen</option>
-          <option value="difficile">Difficile</option>
-          <option value="expert">Expert</option>
-        </select>
-        <label>Recherche</label>
-        <input id="searchInput" type="text" placeholder="zombie, manga, streaming..." oninput="applyAll()">
-      </section>
-
-      <section class="panel">
-        <h2>Créer une partie</h2>
-        <label>Nom de mission</label>
-        <input id="gameName" type="text" value="Mission FAFA ROYALE">
-        <label>Équipes</label>
-        <input id="teamCount" type="number" min="2" max="8" value="4">
-        <label>Joueurs / équipe</label>
-        <input id="playersPerTeam" type="number" min="2" max="12" value="6">
-        <label>Durée (min)</label>
-        <input id="durationMin" type="number" min="20" max="180" value="75">
-        <label>Lieu</label>
-        <select id="locationSelect">
-          <option value="intérieur">Intérieur</option>
-          <option value="extérieur">Extérieur</option>
-          <option value="mixte">Mixte</option>
-        </select>
-        <div class="checks">
-          <label><input type="checkbox" id="traitorToggle" checked> Rôles cachés / traîtres</label>
-          <label><input type="checkbox" id="powerToggle" checked> Pouvoirs</label>
-          <label><input type="checkbox" id="eventToggle" checked> Événements automatiques</label>
-          <label><input type="checkbox" id="physicalToggle" checked> Défis physiques</label>
-        </div>
-        <div class="actions">
-          <button class="secondary" onclick="generateLiveGame()">Générer la partie</button>
-          <button class="ghost" onclick="exportPrintable()">Exporter PDF</button>
-        </div>
-      </section>
-
-      <section class="panel">
-        <h2>Console rapide</h2>
-        <div id="quickTeams"></div>
-      </section>
-
-      <section class="panel animateur-only">
-        <h2>Événement auto</h2>
-        <div class="actions">
-          <button class="secondary" onclick="triggerAutoEvent()">Déclencher</button>
-          <button class="ghost" onclick="startTimer()">Lancer chrono</button>
-        </div>
-        <div id="autoEventBox" class="strip">Aucun événement lancé.</div>
-        <div id="timerBox" class="strip">Chrono arrêté.</div>
-      </section>
-    </aside>
-
-    <section class="content">
-      <div class="tabs">
-        <button class="tab active" data-target="tab-biblio" onclick="openTab('tab-biblio')">Bibliothèque</button>
-        <button class="tab" data-target="tab-live" onclick="openTab('tab-live')">Console animateur</button>
-        <button class="tab animateur-only" data-target="tab-roles" onclick="openTab('tab-roles')">Cartes rôles</button>
-        <button class="tab animateur-only" data-target="tab-codes" onclick="openTab('tab-codes')">QR / codes</button>
-        <button class="tab" data-target="tab-score" onclick="openTab('tab-score')">Fiches équipes</button>
-        <button class="tab" data-target="tab-pack" onclick="openTab('tab-pack')">Packs univers</button>
-      </div>
-
-      <section id="tab-biblio" class="tab-panel active">
-        <div class="strip"><span id="filterSummary"></span></div>
-        <div id="scenarioGrid" class="grid"></div>
-      </section>
-
-      <section id="tab-live" class="tab-panel">
-        <div class="panel">
-          <h2>Plan de partie</h2>
-          <div id="liveOutput">Génère une partie pour voir le déroulé complet.</div>
-        </div>
-      </section>
-
-      <section id="tab-roles" class="tab-panel">
-        <div class="panel">
-          <h2>Cartes rôles imprimables</h2>
-          <div class="actions">
-            <button class="secondary" onclick="assignRoles()">Attribuer les rôles</button>
-            <button class="ghost" onclick="exportRolesPDF()">Exporter cartes rôles</button>
-          </div>
-          <div id="rolesOutput"></div>
-        </div>
-      </section>
-
-      <section id="tab-codes" class="tab-panel">
-        <div class="panel">
-          <h2>Validation code / niveau</h2>
-          <div class="mini-grid">
-            <div><label>Équipe</label><select id="codeTeamSelect"></select></div>
-            <div><label>Code station</label><input id="codeInput" type="text" placeholder="FAFA-2001"></div>
-          </div>
-          <div class="actions"><button class="secondary" onclick="validateCode()">Valider</button></div>
-          <div id="codeResult" class="strip">Entre un code de station.</div>
-        </div>
-        <div class="panel">
-          <h2>Banque QR / codes</h2>
-          <div id="codeGrid" class="grid"></div>
-        </div>
-      </section>
-
-      <section id="tab-score" class="tab-panel">
-        <div class="panel">
-          <h2>Fiches équipes ultra visuelles</h2>
-          <div class="actions"><button class="ghost" onclick="exportTeamsPDF()">Exporter fiches équipes</button></div>
-          <div id="scoreBoard"></div>
-        </div>
-      </section>
-
-      <section id="tab-pack" class="tab-panel">
-        <div id="packGrid" class="grid"></div>
-      </section>
-    </section>
-  </main>
-</div>
-
-<div id="modal" class="modal hidden">
-  <div class="modal-card">
-    <button class="close" onclick="closeModal()">✕</button>
-    <div id="modalContent"></div>
   </div>
-</div>
+  <div class="hero-right">
+    <div class="stat"><strong id="countScenarios">0</strong><span>scénarios</span></div>
+    <div class="stat"><strong>48</strong><span>codes</span></div>
+    <div class="stat"><strong>4</strong><span>difficultés</span></div>
+    <div class="stat"><strong>10</strong><span>packs</span></div>
+  </div>
+</header>
 
+<main class="layout">
+  <aside class="sidebar">
+    <section class="panel">
+      <h2>Mode & filtres</h2>
+      <label>Mode</label>
+      <select id="modeSelect" onchange="applyMode()">
+        <option value="animateur">Animateur / maître du jeu</option>
+        <option value="joueur">Joueur / consultation</option>
+      </select>
+      <label>Âge</label>
+      <select id="ageSelect" onchange="applyAll()">
+        <option value="">Tous</option>
+        <option value="6-10">Enfants 6–10 ans</option>
+        <option value="11-17" selected>Ados 11–17 ans</option>
+        <option value="18+">Adultes 18+</option>
+      </select>
+      <label>Famille</label>
+      <select id="familySelect" onchange="applyAll()">
+        <option value="">Toutes</option>
+        <option value="infiltration">Infiltration / Trahison</option>
+        <option value="cluedo">Enquête / Cluedo</option>
+        <option value="escape">Escape Game</option>
+        <option value="treasure">Chasse au trésor</option>
+        <option value="tv">Jeu TV version terrain</option>
+        <option value="gaming">Gaming / Pop Culture</option>
+      </select>
+      <label>Difficulté</label>
+      <select id="difficultySelect" onchange="applyAll()">
+        <option value="">Toutes</option>
+        <option value="facile">Facile</option>
+        <option value="moyen">Moyen</option>
+        <option value="difficile">Difficile</option>
+        <option value="expert">Expert</option>
+      </select>
+      <label>Recherche</label>
+      <input id="searchInput" type="text" placeholder="zombie, manga..." oninput="applyAll()">
+    </section>
+
+    <section class="panel">
+      <h2>Créer une partie</h2>
+      <label>Nom de mission</label>
+      <input id="gameName" type="text" value="Mission FAFA FINALE">
+      <label>Équipes</label>
+      <input id="teamCount" type="number" min="2" max="8" value="4">
+      <label>Joueurs / équipe</label>
+      <input id="playersPerTeam" type="number" min="2" max="12" value="6">
+      <label>Durée (min)</label>
+      <input id="durationMin" type="number" min="20" max="180" value="75">
+      <label>Lieu</label>
+      <select id="locationSelect">
+        <option value="intérieur">Intérieur</option>
+        <option value="extérieur">Extérieur</option>
+        <option value="mixte">Mixte</option>
+      </select>
+      <div class="checks">
+        <label><input type="checkbox" id="traitorToggle" checked> Rôles cachés / traîtres</label>
+        <label><input type="checkbox" id="powerToggle" checked> Pouvoirs</label>
+        <label><input type="checkbox" id="eventToggle" checked> Événements automatiques</label>
+        <label><input type="checkbox" id="physicalToggle" checked> Défis physiques</label>
+      </div>
+      <div class="actions">
+        <button class="secondary" onclick="generateLiveGame()">Générer la partie</button>
+        <button class="ghost" onclick="exportPrintable()">Exporter PDF</button>
+      </div>
+    </section>
+    <section class="panel">
+      <h2>Console rapide</h2>
+      <div id="quickTeams"></div>
+    </section>
+    <section class="panel animateur-only">
+      <h2>Événement auto</h2>
+      <div class="actions">
+        <button class="secondary" onclick="triggerAutoEvent()">Déclencher</button>
+        <button class="ghost" onclick="startTimer()">Lancer chrono</button>
+      </div>
+      <div id="autoEventBox" class="strip">Aucun événement lancé.</div>
+      <div id="timerBox" class="strip">Chrono arrêté.</div>
+    </section>
+  </aside>
+
+  <section class="content">
+    <div class="tabs">
+      <button class="tab active" data-target="tab-biblio" onclick="openTab('tab-biblio')">Bibliothèque</button>
+      <button class="tab" data-target="tab-live" onclick="openTab('tab-live')">Console animateur</button>
+      <button class="tab animateur-only" data-target="tab-roles" onclick="openTab('tab-roles')">Cartes rôles</button>
+      <button class="tab animateur-only" data-target="tab-codes" onclick="openTab('tab-codes')">QR / codes</button>
+      <button class="tab" data-target="tab-score" onclick="openTab('tab-score')">Fiches équipes</button>
+      <button class="tab" data-target="tab-pack" onclick="openTab('tab-pack')">Packs univers</button>
+    </div>
+
+    <section id="tab-biblio" class="tab-panel active">
+      <div class="strip"><span id="filterSummary"></span></div>
+      <div id="scenarioGrid" class="grid"></div>
+    </section>
+    <section id="tab-live" class="tab-panel"><div class="panel"><h2>Plan de partie</h2><div id="liveOutput">Génère une partie pour voir le déroulé complet.</div></div></section>
+    <section id="tab-roles" class="tab-panel"><div class="panel"><h2>Cartes rôles imprimables</h2><div class="actions"><button class="secondary" onclick="assignRoles()">Attribuer les rôles</button><button class="ghost" onclick="exportRolesPDF()">Exporter cartes rôles</button></div><div id="rolesOutput"></div></div></section>
+    <section id="tab-codes" class="tab-panel"><div class="panel"><h2>Validation code / niveau</h2><div class="mini-grid"><div><label>Équipe</label><select id="codeTeamSelect"></select></div><div><label>Code station</label><input id="codeInput" type="text" placeholder="FAFA-2001"></div></div><div class="actions"><button class="secondary" onclick="validateCode()">Valider</button></div><div id="codeResult" class="strip">Entre un code de station.</div></div><div class="panel"><h2>Banque QR / codes</h2><div id="codeGrid" class="grid"></div></div></section>
+    <section id="tab-score" class="tab-panel"><div class="panel"><h2>Fiches équipes ultra visuelles</h2><div class="actions"><button class="ghost" onclick="exportTeamsPDF()">Exporter fiches équipes</button></div><div id="scoreBoard"></div></div></section>
+    <section id="tab-pack" class="tab-panel"><div id="packGrid" class="grid"></div></section>
+  </section>
+</main>
+</div>
+<div id="modal" class="modal hidden"><div class="modal-card"><button class="close" onclick="closeModal()">✕</button><div id="modalContent"></div></div></div>
 <script src="data.js"></script>
 <script src="app.js"></script>
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {}));
-}
-</script>
+<script>if ('serviceWorker' in navigator) { window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js').catch(() => {})); }</script>
 </body>
 </html>

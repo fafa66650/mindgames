@@ -3,259 +3,31 @@ const scenarios = window.FAFA_SCENARIOS || [];
 const codes = window.FAFA_CODES || [];
 const packs = window.FAFA_PACKS || {};
 const state = { currentGenerated:'', teams:[], assignedRoles:[], usedCodes:{}, generatedScenario:null, timer:null, remaining:0 };
-const qs = s => document.querySelector(s);
-const qsa = s => [...document.querySelectorAll(s)];
+const qs = s => document.querySelector(s); const qsa = s => [...document.querySelectorAll(s)];
 function escapeHtml(s=''){return String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');}
 function openTab(id){qsa('.tab').forEach(x=>x.classList.toggle('active',x.dataset.target===id));qsa('.tab-panel').forEach(x=>x.classList.toggle('active',x.id===id));}
-function applyMode(){
-  const mode = qs('#modeSelect').value;
-  document.body.dataset.mode = mode;
-  qsa('.animateur-only').forEach(el => el.classList.toggle('animateur-hidden', mode !== 'animateur'));
-  if(mode !== 'animateur' && qs('.tab.active').classList.contains('animateur-only')) openTab('tab-biblio');
-}
-function filteredScenarios(){
-  const age = qs('#ageSelect').value, family = qs('#familySelect').value, difficulty = qs('#difficultySelect').value;
-  const q = qs('#searchInput').value.toLowerCase().trim();
-  return scenarios.filter(s => {
-    const blob = [s.title,s.familyLabel,s.theme,s.ageLabel,s.inspirations,s.objective,s.tone].join(' ').toLowerCase();
-    if(age && s.ageGroup !== age) return false;
-    if(family && s.family !== family) return false;
-    if(difficulty && s.difficulty !== difficulty) return false;
-    if(q && !blob.includes(q)) return false;
-    return true;
-  });
-}
-function renderScenarios(){
-  const list = filteredScenarios();
-  qs('#countScenarios').textContent = scenarios.length;
-  qs('#filterSummary').innerHTML = `<strong>Résultats :</strong> ${list.length} scénario(s) · <strong>Difficulté :</strong> ${qs('#difficultySelect').value || 'toutes'}`;
-  qs('#scenarioGrid').innerHTML = list.map(s => `
-    <article class="card">
-      <div class="badges">
-        <span class="badge">${escapeHtml(s.familyLabel)}</span>
-        <span class="badge">${escapeHtml(s.ageLabel)}</span>
-        <span class="badge">${escapeHtml(s.difficulty)}</span>
-      </div>
-      <h3>${escapeHtml(s.title)}</h3>
-      <div class="meta">${escapeHtml(s.theme)} · ${escapeHtml(s.tone)}</div>
-      <p class="desc">${escapeHtml(s.briefing)}</p>
-      <div class="actions"><button onclick="openScenario('${s.id}')">Ouvrir</button></div>
-    </article>
-  `).join('') || '<div class="panel"><strong>Aucun scénario trouvé.</strong></div>';
-}
-function openScenario(id){
-  const s = scenarios.find(x=>x.id===id); if(!s) return;
-  qs('#modalContent').innerHTML = `
-    <h2>${escapeHtml(s.title)}</h2>
-    <div class="badges">
-      <span class="badge">${escapeHtml(s.familyLabel)}</span>
-      <span class="badge">${escapeHtml(s.ageLabel)}</span>
-      <span class="badge">${escapeHtml(s.theme)}</span>
-      <span class="badge">${escapeHtml(s.difficulty)}</span>
-    </div>
-    <p>${escapeHtml(s.briefing)}</p>
-    <h3>Minute par minute</h3>
-    ${s.rounds.map(r => `<div class="rule-card" style="margin-bottom:12px"><strong>${escapeHtml(r.name)}</strong><br>Temps : ${escapeHtml(r.minutes)}<br>Objectif : ${escapeHtml(r.objective)}<br>Énigme : ${escapeHtml(r.puzzle)}<br>Épreuve : ${escapeHtml(r.physical)}</div>`).join('')}
-    <h3>Événements</h3><ul>${(s.events||[]).map(e=>`<li>${escapeHtml(e)}</li>`).join('')}</ul>
-    <h3>Pouvoirs</h3><ul>${(s.powers||[]).map(p=>`<li>${escapeHtml(p)}</li>`).join('')}</ul>
-  `;
-  qs('#modal').classList.remove('hidden');
-}
-function closeModal(){ qs('#modal').classList.add('hidden'); }
-
-function setupTeams(){
-  const count = Math.max(2, Number(qs('#teamCount').value || 4));
-  const colors = ['#35B9FF','#FF4FD8','#FFC247','#39FF14','#FF8A1F','#8F9BFF','#00E7C4','#FF3B30'];
-  state.teams = Array.from({length: count}, (_, i) => ({name:`Équipe ${i+1}`, points:0, level:1, lives:3, color:colors[i%colors.length]}));
-  renderQuickTeams(); renderScoreBoard(); fillCodeTeamSelect();
-}
-function renderQuickTeams(){
-  qs('#quickTeams').innerHTML = state.teams.map((t,i) => `
-    <div class="score-row">
-      <span class="team-badge" style="border-color:${t.color};color:${t.color}">${escapeHtml(t.name)}</span>
-      <button class="secondary" onclick="changePoints(${i},5)">+5</button>
-      <button onclick="changePoints(${i},10)">+10</button>
-      <button class="ghost" onclick="changePoints(${i},-5)">-5</button>
-      <button class="ghost" onclick="changeLevel(${i},1)">Lvl+</button>
-    </div>
-  `).join('');
-}
-function renderScoreBoard(){
-  qs('#scoreBoard').innerHTML = state.teams.length ? `<div class="grid">${
-    state.teams.map((t,i) => `
-      <div class="team-sheet" style="box-shadow: inset 0 0 0 2px ${t.color}">
-        <div class="badges"><span class="badge" style="border-color:${t.color};color:${t.color}">${escapeHtml(t.name)}</span><span class="badge">Niveau ${t.level}</span><span class="badge">${t.points} pts</span></div>
-        <h3 style="color:${t.color}">${escapeHtml(t.name)}</h3>
-        <p>Vies : ${t.lives}<br>Points : ${t.points}<br>Niveau : ${t.level}</p>
-        <div class="actions">
-          <button class="secondary" onclick="changePoints(${i},5)">+5</button>
-          <button class="ghost" onclick="changePoints(${i},-5)">-5</button>
-          <button class="ghost" onclick="changeLevel(${i},1)">+ niveau</button>
-        </div>
-      </div>
-    `).join('')
-  }</div>` : '<p>Aucune équipe créée.</p>';
-}
-function changePoints(i,d){ if(!state.teams[i]) return; state.teams[i].points += d; renderQuickTeams(); renderScoreBoard(); }
-function changeLevel(i,d){ if(!state.teams[i]) return; state.teams[i].level = Math.max(1, state.teams[i].level + d); renderQuickTeams(); renderScoreBoard(); }
-function fillCodeTeamSelect(){ qs('#codeTeamSelect').innerHTML = state.teams.map((t,i)=>`<option value="${i}">${escapeHtml(t.name)}</option>`).join(''); }
-
-function pickScenarioForLive(){
-  const age = qs('#ageSelect').value || '11-17';
-  const family = qs('#familySelect').value || 'infiltration';
-  const difficulty = qs('#difficultySelect').value || '';
-  return scenarios.find(s => s.ageGroup === age && s.family === family && (!difficulty || s.difficulty === difficulty)) ||
-         scenarios.find(s => s.ageGroup === age && s.family === family) || scenarios[0];
-}
-function generateLiveGame(){
-  if(!state.teams.length) setupTeams();
-  const chosen = pickScenarioForLive();
-  state.generatedScenario = chosen;
-  const gameName = qs('#gameName').value.trim() || 'Mission FAFA ROYALE';
-  const durationMin = Number(qs('#durationMin').value || 75);
-  const location = qs('#locationSelect').value;
-  const traitor = qs('#traitorToggle').checked;
-  const power = qs('#powerToggle').checked;
-  const event = qs('#eventToggle').checked;
-  const physical = qs('#physicalToggle').checked;
-
-  let html = `
-    <div class="rule-card">
-      <h3>${escapeHtml(gameName)}</h3>
-      <p><strong>Scénario :</strong> ${escapeHtml(chosen.title)}<br>
-      <strong>Durée :</strong> ${durationMin} min · <strong>Lieu :</strong> ${escapeHtml(location)}<br>
-      <strong>Difficulté :</strong> ${escapeHtml(chosen.difficulty)} · <strong>Âge :</strong> ${escapeHtml(chosen.ageLabel)}</p>
-
-      <h3>Brief de départ</h3>
-      <p>${escapeHtml(chosen.briefing)}</p>
-
-      <h3>Minute par minute</h3>
-      ${chosen.rounds.map(r=>`
-        <div class="rule-card" style="margin-bottom:12px">
-          <strong>${escapeHtml(r.name)}</strong><br>
-          Temps : ${escapeHtml(r.minutes)}<br>
-          Objectif : ${escapeHtml(r.objective)}<br>
-          Énigme : ${escapeHtml(r.puzzle)}<br>
-          Épreuve : ${escapeHtml(r.physical)}
-        </div>
-      `).join('')}
-
-      <h3>Modules activés</h3>
-      <ul>
-        <li>Traîtres / infiltrés : ${traitor ? 'oui' : 'non'}</li>
-        <li>Pouvoirs : ${power ? 'oui' : 'non'}</li>
-        <li>Événements automatiques : ${event ? 'oui' : 'non'}</li>
-        <li>Défis physiques : ${physical ? 'oui' : 'non'}</li>
-      </ul>
-      <h3>Événements premium</h3><ul>${(chosen.events||[]).map(e=>`<li>${escapeHtml(e)}</li>`).join('')}</ul>
-      <h3>Pouvoirs disponibles</h3><ul>${(chosen.powers||[]).map(p=>`<li>${escapeHtml(p)}</li>`).join('')}</ul>
-      <h3>Gages fun</h3><ul>${(chosen.gags||[]).map(g=>`<li>${escapeHtml(g)}</li>`).join('')}</ul>
-      <h3>Consignes animateur</h3><ul>${(chosen.notesGM||[]).map(n=>`<li>${escapeHtml(n)}</li>`).join('')}</ul>
-    </div>
-  `;
-  state.currentGenerated = html;
-  qs('#liveOutput').innerHTML = html;
-  openTab('tab-live');
-}
-function assignRoles(){
-  if(!state.teams.length) setupTeams();
-  const chosen = state.generatedScenario || pickScenarioForLive();
-  const traitorOn = qs('#traitorToggle').checked;
-  const roles = chosen.roles || ['joueur','joker'];
-  let html = '<div class="grid">';
-  state.assignedRoles = [];
-  state.teams.forEach(team => {
-    const assigned = [];
-    const size = Number(qs('#playersPerTeam').value || 6);
-    for(let i=1;i<=size;i++){
-      let role = roles[(i-1) % roles.length];
-      if(!traitorOn && role.toLowerCase().includes('infiltr')) role = 'joueur';
-      assigned.push({player:`${team.name} · Joueur ${i}`, role, color:team.color});
-    }
-    if(traitorOn && chosen.ageGroup !== '6-10' && assigned.length) assigned[0].role = 'infiltré';
-    html += `<div class="role-card" style="box-shadow: inset 0 0 0 2px ${team.color}"><strong style="color:${team.color}">${escapeHtml(team.name)}</strong><ul>${assigned.map(a=>`<li>${escapeHtml(a.player)} → <strong>${escapeHtml(a.role)}</strong></li>`).join('')}</ul></div>`;
-    state.assignedRoles.push(...assigned);
-  });
-  html += '</div>';
-  qs('#rolesOutput').innerHTML = html;
-}
-function exportRolesPDF(){
-  if(!state.assignedRoles.length) assignRoles();
-  const grouped = {};
-  state.assignedRoles.forEach(r => { const k = r.player.split(' · ')[0]; (grouped[k] ||= []).push(r); });
-  const html = Object.entries(grouped).map(([team, arr]) => `<div class="card"><strong>${escapeHtml(team)}</strong><ul>${arr.map(a=>`<li>${escapeHtml(a.player)} → <strong>${escapeHtml(a.role)}</strong></li>`).join('')}</ul></div>`).join('');
-  openPrint('Cartes rôles FAFATRAINING', html);
-}
-function renderCodeGrid(){
-  qs('#codeGrid').innerHTML = codes.map(c => `
-    <article class="card code-card">
-      <div class="badges">
-        <span class="badge">${escapeHtml(c.label)}</span>
-        <span class="badge">${escapeHtml(c.code)}</span>
-        <span class="badge">Niveau ${c.level}</span>
-      </div>
-      <img src="assets/qr/station-${String(c.station).padStart(2,'0')}.png" alt="${escapeHtml(c.code)}" onerror="this.style.display='none'">
-      <p class="desc">${escapeHtml(c.payload)}</p>
-    </article>
-  `).join('');
-}
-function validateCode(){
-  const teamIndex = Number(qs('#codeTeamSelect').value || 0);
-  const input = (qs('#codeInput').value || '').trim().toUpperCase();
-  const found = codes.find(c => c.code.toUpperCase() === input);
-  if(!found){ qs('#codeResult').innerHTML = 'Code invalide.'; return; }
-  if(state.usedCodes[input]){ qs('#codeResult').innerHTML = `Code déjà utilisé par ${escapeHtml(state.usedCodes[input])}.`; return; }
-  state.usedCodes[input] = state.teams[teamIndex].name;
-  const gain = 5 + (found.level * 3);
-  state.teams[teamIndex].points += gain;
-  state.teams[teamIndex].level = Math.max(state.teams[teamIndex].level, found.level + 1);
-  renderQuickTeams(); renderScoreBoard();
-  qs('#codeResult').innerHTML = `✅ ${escapeHtml(state.teams[teamIndex].name)} valide ${escapeHtml(found.code)} : +${gain} points, niveau ${state.teams[teamIndex].level}.`;
-  qs('#codeInput').value = '';
-}
-function triggerAutoEvent(){
-  const chosen = state.generatedScenario || pickScenarioForLive();
-  const pool = chosen.events || ['bonus surprise'];
-  const ev = pool[Math.floor(Math.random()*pool.length)];
-  qs('#autoEventBox').innerHTML = `⚡ Événement lancé : <strong>${escapeHtml(ev)}</strong>`;
-}
-function startTimer(){
-  const total = Number(qs('#durationMin').value || 75) * 60;
-  clearInterval(state.timer);
-  state.remaining = total;
-  const tick = () => {
-    const m = Math.floor(state.remaining / 60), s = state.remaining % 60;
-    qs('#timerBox').innerHTML = `⏱ ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-    if(state.remaining <= 0){ clearInterval(state.timer); qs('#timerBox').innerHTML = '⏱ Temps écoulé.'; return; }
-    state.remaining -= 1;
-  };
-  tick();
-  state.timer = setInterval(tick, 1000);
-}
-function renderPacks(){
-  qs('#packGrid').innerHTML = Object.values(packs).map(p => `
-    <article class="card">
-      <h3>${escapeHtml(p.title)}</h3>
-      <div class="meta">${escapeHtml(p.teaser)}</div>
-      <p class="desc">${escapeHtml(p.starter)}</p>
-      <div class="badges">${(p.objects||[]).map(o=>`<span class="badge">${escapeHtml(o)}</span>`).join('')}</div>
-    </article>
-  `).join('');
-}
-function openPrint(title, html){
-  const win = window.open('', '_blank');
-  win.document.write(`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>${title}</title><style>body{font-family:Arial;padding:30px;color:#111}.card{border:1px solid #ccc;border-radius:12px;padding:14px;margin-bottom:12px}</style></head><body><h1>${title}</h1>${html}</body></html>`);
-  win.document.close(); win.focus(); setTimeout(() => win.print(), 300);
-}
-function exportTeamsPDF(){
-  const html = state.teams.map(t => `<div class="card"><strong>${escapeHtml(t.name)}</strong><br>Points : ${t.points}<br>Niveau : ${t.level}<br>Vies : ${t.lives}</div>`).join('');
-  openPrint('Fiches équipes FAFATRAINING', html);
-}
-function exportPrintable(){
-  if(!state.currentGenerated) generateLiveGame();
-  const html = state.currentGenerated || '<p>Aucune partie générée.</p>';
-  const teamsHtml = state.teams.map(t => `<div class="card"><strong>${escapeHtml(t.name)}</strong><br>Points : ${t.points}<br>Niveau : ${t.level}<br>Vies : ${t.lives}</div>`).join('');
-  openPrint('FAFATRAINING Mindgame V4 Royale', html + '<h2>Fiches équipes</h2>' + teamsHtml);
-}
-function init(){ setupTeams(); applyMode(); renderScenarios(); renderCodeGrid(); renderPacks(); }
+function applyMode(){const mode=qs('#modeSelect').value;document.body.dataset.mode=mode;qsa('.animateur-only').forEach(el=>el.classList.toggle('animateur-hidden',mode!=='animateur'));if(mode!=='animateur'&&qs('.tab.active').classList.contains('animateur-only')) openTab('tab-biblio');}
+function filteredScenarios(){const age=qs('#ageSelect').value,family=qs('#familySelect').value,difficulty=qs('#difficultySelect').value;const q=qs('#searchInput').value.toLowerCase().trim();return scenarios.filter(s=>{const blob=[s.title,s.familyLabel,s.theme,s.ageLabel,s.inspirations,s.objective,s.tone].join(' ').toLowerCase();if(age&&s.ageGroup!==age)return false;if(family&&s.family!==family)return false;if(difficulty&&s.difficulty!==difficulty)return false;if(q&&!blob.includes(q))return false;return true;});}
+function renderScenarios(){const list=filteredScenarios();qs('#countScenarios').textContent=scenarios.length;qs('#filterSummary').innerHTML=`<strong>Résultats :</strong> ${list.length} scénario(s) · <strong>Difficulté :</strong> ${qs('#difficultySelect').value || 'toutes'}`;qs('#scenarioGrid').innerHTML=list.map(s=>`<article class="card"><div class="badges"><span class="badge">${escapeHtml(s.familyLabel)}</span><span class="badge">${escapeHtml(s.ageLabel)}</span><span class="badge">${escapeHtml(s.difficulty)}</span></div><h3>${escapeHtml(s.title)}</h3><div class="meta">${escapeHtml(s.theme)} · ${escapeHtml(s.tone)}</div><p class="desc">${escapeHtml(s.briefing)}</p><div class="actions"><button onclick="openScenario('${s.id}')">Ouvrir</button></div></article>`).join('') || '<div class="panel"><strong>Aucun scénario trouvé.</strong></div>'; }
+function openScenario(id){const s=scenarios.find(x=>x.id===id); if(!s) return; document.getElementById('modalContent').innerHTML=`<h2>${escapeHtml(s.title)}</h2><div class="badges"><span class="badge">${escapeHtml(s.familyLabel)}</span><span class="badge">${escapeHtml(s.ageLabel)}</span><span class="badge">${escapeHtml(s.theme)}</span><span class="badge">${escapeHtml(s.difficulty)}</span></div><p>${escapeHtml(s.briefing)}</p><h3>Minute par minute</h3>${s.rounds.map(r=>`<div class="rule-card" style="margin-bottom:12px"><strong>${escapeHtml(r.name)}</strong><br>Temps : ${escapeHtml(r.minutes)}<br>Objectif : ${escapeHtml(r.objective)}<br>Énigme : ${escapeHtml(r.puzzle)}<br>Épreuve : ${escapeHtml(r.physical)}</div>`).join('')}<h3>Événements</h3><ul>${(s.events||[]).map(e=>`<li>${escapeHtml(e)}</li>`).join('')}</ul><h3>Pouvoirs</h3><ul>${(s.powers||[]).map(p=>`<li>${escapeHtml(p)}</li>`).join('')}</ul>`;document.getElementById('modal').classList.remove('hidden');}
+function closeModal(){document.getElementById('modal').classList.add('hidden');}
+function setupTeams(){const count=Math.max(2,Number(qs('#teamCount').value||4));const colors=['#35B9FF','#FF4FD8','#FFC247','#39FF14','#FF8A1F','#8F9BFF','#00E7C4','#FF3B30'];state.teams=Array.from({length:count},(_,i)=>({name:`Équipe ${i+1}`,points:0,level:1,lives:3,color:colors[i%colors.length]}));renderQuickTeams();renderScoreBoard();fillCodeTeamSelect();}
+function renderQuickTeams(){qs('#quickTeams').innerHTML=state.teams.map((t,i)=>`<div class="score-row"><span class="team-badge" style="border-color:${t.color};color:${t.color}">${escapeHtml(t.name)}</span><button class="secondary" onclick="changePoints(${i},5)">+5</button><button onclick="changePoints(${i},10)">+10</button><button class="ghost" onclick="changePoints(${i},-5)">-5</button><button class="ghost" onclick="changeLevel(${i},1)">Lvl+</button></div>`).join('');}
+function renderScoreBoard(){qs('#scoreBoard').innerHTML=state.teams.length?`<div class="grid">${state.teams.map((t,i)=>`<div class="team-sheet" style="box-shadow: inset 0 0 0 2px ${t.color}"><div class="badges"><span class="badge" style="border-color:${t.color};color:${t.color}">${escapeHtml(t.name)}</span><span class="badge">Niveau ${t.level}</span><span class="badge">${t.points} pts</span></div><h3 style="color:${t.color}">${escapeHtml(t.name)}</h3><p>Vies : ${t.lives}<br>Points : ${t.points}<br>Niveau : ${t.level}</p><div class="actions"><button class="secondary" onclick="changePoints(${i},5)">+5</button><button class="ghost" onclick="changePoints(${i},-5)">-5</button><button class="ghost" onclick="changeLevel(${i},1)">+ niveau</button></div></div>`).join('')}</div>`:'<p>Aucune équipe créée.</p>';}
+function changePoints(i,d){if(!state.teams[i]) return; state.teams[i].points+=d; renderQuickTeams(); renderScoreBoard();}
+function changeLevel(i,d){if(!state.teams[i]) return; state.teams[i].level=Math.max(1,state.teams[i].level+d); renderQuickTeams(); renderScoreBoard();}
+function fillCodeTeamSelect(){qs('#codeTeamSelect').innerHTML=state.teams.map((t,i)=>`<option value="${i}">${escapeHtml(t.name)}</option>`).join('');}
+function pickScenarioForLive(){const age=qs('#ageSelect').value||'11-17'; const family=qs('#familySelect').value||'infiltration'; const difficulty=qs('#difficultySelect').value||''; return scenarios.find(s=>s.ageGroup===age&&s.family===family&&(!difficulty||s.difficulty===difficulty)) || scenarios.find(s=>s.ageGroup===age&&s.family===family) || scenarios[0];}
+function generateLiveGame(){if(!state.teams.length) setupTeams(); const chosen=pickScenarioForLive(); state.generatedScenario=chosen; const gameName=qs('#gameName').value.trim()||'Mission FAFA FINALE'; const durationMin=Number(qs('#durationMin').value||75); const location=qs('#locationSelect').value; const traitor=qs('#traitorToggle').checked; const power=qs('#powerToggle').checked; const event=qs('#eventToggle').checked; const physical=qs('#physicalToggle').checked; let html=`<div class="rule-card"><h3>${escapeHtml(gameName)}</h3><p><strong>Scénario :</strong> ${escapeHtml(chosen.title)}<br><strong>Durée :</strong> ${durationMin} min · <strong>Lieu :</strong> ${escapeHtml(location)}<br><strong>Difficulté :</strong> ${escapeHtml(chosen.difficulty)} · <strong>Âge :</strong> ${escapeHtml(chosen.ageLabel)}</p><h3>Brief de départ</h3><p>${escapeHtml(chosen.briefing)}</p><h3>Minute par minute</h3>${chosen.rounds.map(r=>`<div class="rule-card" style="margin-bottom:12px"><strong>${escapeHtml(r.name)}</strong><br>Temps : ${escapeHtml(r.minutes)}<br>Objectif : ${escapeHtml(r.objective)}<br>Énigme : ${escapeHtml(r.puzzle)}<br>Épreuve : ${escapeHtml(r.physical)}</div>`).join('')}<h3>Modules activés</h3><ul><li>Traîtres / infiltrés : ${traitor?'oui':'non'}</li><li>Pouvoirs : ${power?'oui':'non'}</li><li>Événements automatiques : ${event?'oui':'non'}</li><li>Défis physiques : ${physical?'oui':'non'}</li></ul><h3>Événements premium</h3><ul>${(chosen.events||[]).map(e=>`<li>${escapeHtml(e)}</li>`).join('')}</ul><h3>Pouvoirs disponibles</h3><ul>${(chosen.powers||[]).map(p=>`<li>${escapeHtml(p)}</li>`).join('')}</ul><h3>Gages fun</h3><ul>${(chosen.gags||[]).map(g=>`<li>${escapeHtml(g)}</li>`).join('')}</ul><h3>Consignes animateur</h3><ul>${(chosen.notesGM||[]).map(n=>`<li>${escapeHtml(n)}</li>`).join('')}</ul></div>`; state.currentGenerated=html; qs('#liveOutput').innerHTML=html; openTab('tab-live');}
+function assignRoles(){if(!state.teams.length) setupTeams(); const chosen=state.generatedScenario||pickScenarioForLive(); const traitorOn=qs('#traitorToggle').checked; const roles=chosen.roles||['joueur','joker']; let html='<div class="grid">'; state.assignedRoles=[]; state.teams.forEach(team=>{const assigned=[]; const size=Number(qs('#playersPerTeam').value||6); for(let i=1;i<=size;i++){let role=roles[(i-1)%roles.length]; if(!traitorOn&&role.toLowerCase().includes('infiltr')) role='joueur'; assigned.push({player:`${team.name} · Joueur ${i}`,role,color:team.color});} if(traitorOn&&chosen.ageGroup!=='6-10'&&assigned.length) assigned[0].role='infiltré'; html+=`<div class="role-card" style="box-shadow: inset 0 0 0 2px ${team.color}"><strong style="color:${team.color}">${escapeHtml(team.name)}</strong><ul>${assigned.map(a=>`<li>${escapeHtml(a.player)} → <strong>${escapeHtml(a.role)}</strong></li>`).join('')}</ul></div>`; state.assignedRoles.push(...assigned);}); html+='</div>'; qs('#rolesOutput').innerHTML=html;}
+function exportRolesPDF(){if(!state.assignedRoles.length) assignRoles(); const grouped={}; state.assignedRoles.forEach(r=>{const k=r.player.split(' · ')[0]; (grouped[k] ||= []).push(r);}); const html=Object.entries(grouped).map(([team,arr])=>`<div class="card"><strong>${escapeHtml(team)}</strong><ul>${arr.map(a=>`<li>${escapeHtml(a.player)} → <strong>${escapeHtml(a.role)}</strong></li>`).join('')}</ul></div>`).join(''); openPrint('Cartes rôles FAFATRAINING', html);}
+function renderCodeGrid(){qs('#codeGrid').innerHTML=codes.map(c=>`<article class="card code-card"><div class="badges"><span class="badge">${escapeHtml(c.label)}</span><span class="badge">${escapeHtml(c.code)}</span><span class="badge">Niveau ${c.level}</span></div><img src="assets/qr/station-${String(c.station).padStart(2,'0')}.png" alt="${escapeHtml(c.code)}" onerror="this.style.display='none'"><p class="desc">${escapeHtml(c.payload)}</p></article>`).join('');}
+function validateCode(){const teamIndex=Number(qs('#codeTeamSelect').value||0); const input=(qs('#codeInput').value||'').trim().toUpperCase(); const found=codes.find(c=>c.code.toUpperCase()===input); if(!found){qs('#codeResult').innerHTML='Code invalide.'; return;} if(state.usedCodes[input]){qs('#codeResult').innerHTML=`Code déjà utilisé par ${escapeHtml(state.usedCodes[input])}.`; return;} state.usedCodes[input]=state.teams[teamIndex].name; const gain=5+(found.level*3); state.teams[teamIndex].points+=gain; state.teams[teamIndex].level=Math.max(state.teams[teamIndex].level,found.level+1); renderQuickTeams(); renderScoreBoard(); qs('#codeResult').innerHTML=`✅ ${escapeHtml(state.teams[teamIndex].name)} valide ${escapeHtml(found.code)} : +${gain} points, niveau ${state.teams[teamIndex].level}.`; qs('#codeInput').value='';}
+function triggerAutoEvent(){const chosen=state.generatedScenario||pickScenarioForLive(); const pool=chosen.events||['bonus surprise']; const ev=pool[Math.floor(Math.random()*pool.length)]; qs('#autoEventBox').innerHTML=`⚡ Événement lancé : <strong>${escapeHtml(ev)}</strong>`;}
+function startTimer(){const total=Number(qs('#durationMin').value||75)*60; clearInterval(state.timer); state.remaining=total; const tick=()=>{const m=Math.floor(state.remaining/60),s=state.remaining%60; qs('#timerBox').innerHTML=`⏱ ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`; if(state.remaining<=0){clearInterval(state.timer);qs('#timerBox').innerHTML='⏱ Temps écoulé.';return;} state.remaining-=1;}; tick(); state.timer=setInterval(tick,1000);}
+function renderPacks(){qs('#packGrid').innerHTML=Object.values(packs).map(p=>`<article class="card"><h3>${escapeHtml(p.title)}</h3><div class="meta">${escapeHtml(p.teaser)}</div><p class="desc">${escapeHtml(p.starter)}</p><div class="badges">${(p.objects||[]).map(o=>`<span class="badge">${escapeHtml(o)}</span>`).join('')}</div></article>`).join('');}
+function openPrint(title, html){const win=window.open('', '_blank'); win.document.write(`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>${title}</title><style>body{font-family:Arial;padding:30px;color:#111}.card{border:1px solid #ccc;border-radius:12px;padding:14px;margin-bottom:12px}</style></head><body><h1>${title}</h1>${html}</body></html>`); win.document.close(); win.focus(); setTimeout(() => win.print(), 300);}
+function exportTeamsPDF(){const html=state.teams.map(t=>`<div class="card"><strong>${escapeHtml(t.name)}</strong><br>Points : ${t.points}<br>Niveau : ${t.level}<br>Vies : ${t.lives}</div>`).join(''); openPrint('Fiches équipes FAFATRAINING', html);}
+function exportPrintable(){if(!state.currentGenerated) generateLiveGame(); const html=state.currentGenerated || '<p>Aucune partie générée.</p>'; const teamsHtml=state.teams.map(t=>`<div class="card"><strong>${escapeHtml(t.name)}</strong><br>Points : ${t.points}<br>Niveau : ${t.level}<br>Vies : ${t.lives}</div>`).join(''); openPrint('FAFATRAINING Mindgame V5 Final', html + '<h2>Fiches équipes</h2>' + teamsHtml);}
+function init(){setupTeams(); applyMode(); renderScenarios(); renderCodeGrid(); renderPacks();}
 init();

@@ -1,16 +1,13 @@
-FAFATRAINING MINDGAME V4 ROYALE
+FAFATRAINING MINDGAME V5 FINAL
 
-Contenu :
-- 108 scénarios
-- 6 familles de jeux
-- 3 catégories d’âge
-- 4 niveaux de difficulté
-- console animateur
-- événements dynamiques automatiques
-- minute par minute
-- cartes rôles imprimables
-- fiches équipes ultra visuelles
-- 48 QR / codes / niveaux
-- 10 packs univers prêts terrain
-- export imprimable / PDF
-- PWA / hors ligne
+Scénarios: 108
+Codes: 48
+Packs: 10
+
+GitHub Pages:
+1. Crée un dépôt
+2. Dézippe ce pack
+3. Envoie tout à la racine
+4. Active Pages sur main/(root)
+5. Ouvre le lien
+6. Si besoin, vide le cache

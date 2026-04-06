@@ -1,5 +1,5 @@
 
-const CACHE='fafa-mindgame-v4';
+const CACHE='fafa-mindgame-v5';
 const ASSETS=['./','./index.html','./style.css','./app.js','./data.js','./scenarios.json','./codes.json','./packs.json','./manifest.json','./icons/icon-192.png','./icons/icon-512.png','./assets/logo-fafatraining.jpeg'];
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS))); });
 self.addEventListener('activate', e => e.waitUntil(clients.claim()));
