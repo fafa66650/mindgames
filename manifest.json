@@ -1,10 +1,10 @@
 {
-  "name": "FAFATRAINING Mindgame V5 Final",
-  "short_name": "FAFA Game V5",
+  "name": "FAFATRAINING – Mindgame V6 Master",
+  "short_name": "FAFA V6",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0A0A0A",
-  "theme_color": "#39FF14",
+  "background_color": "#0b0b12",
+  "theme_color": "#0b0b12",
   "icons": [
     {
       "src": "icons/icon-192.png",

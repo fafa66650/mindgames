@@ -1,13 +1,12 @@
-FAFATRAINING MINDGAME V5 FINAL
+FAFATRAINING – MINDGAME V6 MASTER COMPLET FINAL
 
-Scénarios: 108
-Codes: 48
-Packs: 10
-
-GitHub Pages:
-1. Crée un dépôt
-2. Dézippe ce pack
-3. Envoie tout à la racine
-4. Active Pages sur main/(root)
-5. Ouvre le lien
-6. Si besoin, vide le cache
+Contenu :
+- 256 scénarios
+- multi-équipes 2 à 8
+- mode animateur + mode équipe
+- liens directs par équipe
+- QR / stations
+- guide animateur
+- guide GitHub Pages
+- préparation terrain
+- PWA / hors ligne

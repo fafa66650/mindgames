@@ -1,10 +1,5 @@
-
-const CACHE='fafa-mindgame-v5';
-const ASSETS=['./','./index.html','./style.css','./app.js','./data.js','./scenarios.json','./codes.json','./packs.json','./manifest.json','./icons/icon-192.png','./icons/icon-512.png','./assets/logo-fafatraining.jpeg'];
+const CACHE='fafa-v6-master';
+const ASSETS=["./", "./index.html", "./style.css", "./app.js", "./data.js", "./scenarios.json", "./codes.json", "./manifest.json", "./icons/icon-192.png", "./icons/icon-512.png", "./assets/logo.jpg", "./assets/qr/station-01.png", "./assets/qr/station-02.png", "./assets/qr/station-03.png", "./assets/qr/station-04.png", "./assets/qr/station-05.png", "./assets/qr/station-06.png", "./assets/qr/station-07.png", "./assets/qr/station-08.png", "./assets/qr/station-09.png", "./assets/qr/station-10.png", "./assets/qr/station-11.png", "./assets/qr/station-12.png", "./assets/qr/station-13.png", "./assets/qr/station-14.png", "./assets/qr/station-15.png", "./assets/qr/station-16.png", "./assets/qr/station-17.png", "./assets/qr/station-18.png", "./assets/qr/station-19.png", "./assets/qr/station-20.png", "./assets/qr/station-21.png", "./assets/qr/station-22.png", "./assets/qr/station-23.png", "./assets/qr/station-24.png", "./assets/qr/station-25.png", "./assets/qr/station-26.png", "./assets/qr/station-27.png", "./assets/qr/station-28.png", "./assets/qr/station-29.png", "./assets/qr/station-30.png", "./assets/qr/station-31.png", "./assets/qr/station-32.png", "./assets/qr/station-33.png", "./assets/qr/station-34.png", "./assets/qr/station-35.png", "./assets/qr/station-36.png", "./assets/qr/station-37.png", "./assets/qr/station-38.png", "./assets/qr/station-39.png", "./assets/qr/station-40.png", "./assets/qr/station-41.png", "./assets/qr/station-42.png", "./assets/qr/station-43.png", "./assets/qr/station-44.png", "./assets/qr/station-45.png", "./assets/qr/station-46.png", "./assets/qr/station-47.png", "./assets/qr/station-48.png"];
 self.addEventListener('install', e => { self.skipWaiting(); e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS))); });
 self.addEventListener('activate', e => e.waitUntil(clients.claim()));
-self.addEventListener('fetch', e => {
-  e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).then(res => {
-    const copy = res.clone(); caches.open(CACHE).then(c=>c.put(e.request, copy)); return res;
-  }).catch(()=>caches.match('./index.html'))));
-});
+self.addEventListener('fetch', e => { e.respondWith(caches.match(e.request).then(r => r || fetch(e.request).then(res => { const copy=res.clone(); caches.open(CACHE).then(c=>c.put(e.request, copy)); return res; }).catch(()=>caches.match('./index.html')))); });

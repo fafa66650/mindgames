@@ -1,338 +1,242 @@
 [
   {
     "station": 1,
-    "code": "FAFA-2001",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=1|STATION=1|CODE=FAFA-2001",
-    "label": "Station 1",
-    "level": 1
+    "code": "FAFA-3001",
+    "payload": "FAFA-V6|STATION=1|CODE=FAFA-3001"
   },
   {
     "station": 2,
-    "code": "FAFA-2002",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=2|STATION=2|CODE=FAFA-2002",
-    "label": "Station 2",
-    "level": 2
+    "code": "FAFA-3002",
+    "payload": "FAFA-V6|STATION=2|CODE=FAFA-3002"
   },
   {
     "station": 3,
-    "code": "FAFA-2003",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=3|STATION=3|CODE=FAFA-2003",
-    "label": "Station 3",
-    "level": 3
+    "code": "FAFA-3003",
+    "payload": "FAFA-V6|STATION=3|CODE=FAFA-3003"
   },
   {
     "station": 4,
-    "code": "FAFA-2004",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=4|STATION=4|CODE=FAFA-2004",
-    "label": "Station 4",
-    "level": 4
+    "code": "FAFA-3004",
+    "payload": "FAFA-V6|STATION=4|CODE=FAFA-3004"
   },
   {
     "station": 5,
-    "code": "FAFA-2005",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=1|STATION=5|CODE=FAFA-2005",
-    "label": "Station 5",
-    "level": 1
+    "code": "FAFA-3005",
+    "payload": "FAFA-V6|STATION=5|CODE=FAFA-3005"
   },
   {
     "station": 6,
-    "code": "FAFA-2006",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=2|STATION=6|CODE=FAFA-2006",
-    "label": "Station 6",
-    "level": 2
+    "code": "FAFA-3006",
+    "payload": "FAFA-V6|STATION=6|CODE=FAFA-3006"
   },
   {
     "station": 7,
-    "code": "FAFA-2007",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=3|STATION=7|CODE=FAFA-2007",
-    "label": "Station 7",
-    "level": 3
+    "code": "FAFA-3007",
+    "payload": "FAFA-V6|STATION=7|CODE=FAFA-3007"
   },
   {
     "station": 8,
-    "code": "FAFA-2008",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=4|STATION=8|CODE=FAFA-2008",
-    "label": "Station 8",
-    "level": 4
+    "code": "FAFA-3008",
+    "payload": "FAFA-V6|STATION=8|CODE=FAFA-3008"
   },
   {
     "station": 9,
-    "code": "FAFA-2009",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=1|STATION=9|CODE=FAFA-2009",
-    "label": "Station 9",
-    "level": 1
+    "code": "FAFA-3009",
+    "payload": "FAFA-V6|STATION=9|CODE=FAFA-3009"
   },
   {
     "station": 10,
-    "code": "FAFA-2010",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=2|STATION=10|CODE=FAFA-2010",
-    "label": "Station 10",
-    "level": 2
+    "code": "FAFA-3010",
+    "payload": "FAFA-V6|STATION=10|CODE=FAFA-3010"
   },
   {
     "station": 11,
-    "code": "FAFA-2011",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=3|STATION=11|CODE=FAFA-2011",
-    "label": "Station 11",
-    "level": 3
+    "code": "FAFA-3011",
+    "payload": "FAFA-V6|STATION=11|CODE=FAFA-3011"
   },
   {
     "station": 12,
-    "code": "FAFA-2012",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=4|STATION=12|CODE=FAFA-2012",
-    "label": "Station 12",
-    "level": 4
+    "code": "FAFA-3012",
+    "payload": "FAFA-V6|STATION=12|CODE=FAFA-3012"
   },
   {
     "station": 13,
-    "code": "FAFA-2013",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=1|STATION=13|CODE=FAFA-2013",
-    "label": "Station 13",
-    "level": 1
+    "code": "FAFA-3013",
+    "payload": "FAFA-V6|STATION=13|CODE=FAFA-3013"
   },
   {
     "station": 14,
-    "code": "FAFA-2014",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=2|STATION=14|CODE=FAFA-2014",
-    "label": "Station 14",
-    "level": 2
+    "code": "FAFA-3014",
+    "payload": "FAFA-V6|STATION=14|CODE=FAFA-3014"
   },
   {
     "station": 15,
-    "code": "FAFA-2015",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=3|STATION=15|CODE=FAFA-2015",
-    "label": "Station 15",
-    "level": 3
+    "code": "FAFA-3015",
+    "payload": "FAFA-V6|STATION=15|CODE=FAFA-3015"
   },
   {
     "station": 16,
-    "code": "FAFA-2016",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=4|STATION=16|CODE=FAFA-2016",
-    "label": "Station 16",
-    "level": 4
+    "code": "FAFA-3016",
+    "payload": "FAFA-V6|STATION=16|CODE=FAFA-3016"
   },
   {
     "station": 17,
-    "code": "FAFA-2017",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=1|STATION=17|CODE=FAFA-2017",
-    "label": "Station 17",
-    "level": 1
+    "code": "FAFA-3017",
+    "payload": "FAFA-V6|STATION=17|CODE=FAFA-3017"
   },
   {
     "station": 18,
-    "code": "FAFA-2018",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=2|STATION=18|CODE=FAFA-2018",
-    "label": "Station 18",
-    "level": 2
+    "code": "FAFA-3018",
+    "payload": "FAFA-V6|STATION=18|CODE=FAFA-3018"
   },
   {
     "station": 19,
-    "code": "FAFA-2019",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=3|STATION=19|CODE=FAFA-2019",
-    "label": "Station 19",
-    "level": 3
+    "code": "FAFA-3019",
+    "payload": "FAFA-V6|STATION=19|CODE=FAFA-3019"
   },
   {
     "station": 20,
-    "code": "FAFA-2020",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=4|STATION=20|CODE=FAFA-2020",
-    "label": "Station 20",
-    "level": 4
+    "code": "FAFA-3020",
+    "payload": "FAFA-V6|STATION=20|CODE=FAFA-3020"
   },
   {
     "station": 21,
-    "code": "FAFA-2021",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=1|STATION=21|CODE=FAFA-2021",
-    "label": "Station 21",
-    "level": 1
+    "code": "FAFA-3021",
+    "payload": "FAFA-V6|STATION=21|CODE=FAFA-3021"
   },
   {
     "station": 22,
-    "code": "FAFA-2022",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=2|STATION=22|CODE=FAFA-2022",
-    "label": "Station 22",
-    "level": 2
+    "code": "FAFA-3022",
+    "payload": "FAFA-V6|STATION=22|CODE=FAFA-3022"
   },
   {
     "station": 23,
-    "code": "FAFA-2023",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=3|STATION=23|CODE=FAFA-2023",
-    "label": "Station 23",
-    "level": 3
+    "code": "FAFA-3023",
+    "payload": "FAFA-V6|STATION=23|CODE=FAFA-3023"
   },
   {
     "station": 24,
-    "code": "FAFA-2024",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=4|STATION=24|CODE=FAFA-2024",
-    "label": "Station 24",
-    "level": 4
+    "code": "FAFA-3024",
+    "payload": "FAFA-V6|STATION=24|CODE=FAFA-3024"
   },
   {
     "station": 25,
-    "code": "FAFA-2025",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=1|STATION=25|CODE=FAFA-2025",
-    "label": "Station 25",
-    "level": 1
+    "code": "FAFA-3025",
+    "payload": "FAFA-V6|STATION=25|CODE=FAFA-3025"
   },
   {
     "station": 26,
-    "code": "FAFA-2026",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=2|STATION=26|CODE=FAFA-2026",
-    "label": "Station 26",
-    "level": 2
+    "code": "FAFA-3026",
+    "payload": "FAFA-V6|STATION=26|CODE=FAFA-3026"
   },
   {
     "station": 27,
-    "code": "FAFA-2027",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=3|STATION=27|CODE=FAFA-2027",
-    "label": "Station 27",
-    "level": 3
+    "code": "FAFA-3027",
+    "payload": "FAFA-V6|STATION=27|CODE=FAFA-3027"
   },
   {
     "station": 28,
-    "code": "FAFA-2028",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=4|STATION=28|CODE=FAFA-2028",
-    "label": "Station 28",
-    "level": 4
+    "code": "FAFA-3028",
+    "payload": "FAFA-V6|STATION=28|CODE=FAFA-3028"
   },
   {
     "station": 29,
-    "code": "FAFA-2029",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=1|STATION=29|CODE=FAFA-2029",
-    "label": "Station 29",
-    "level": 1
+    "code": "FAFA-3029",
+    "payload": "FAFA-V6|STATION=29|CODE=FAFA-3029"
   },
   {
     "station": 30,
-    "code": "FAFA-2030",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=2|STATION=30|CODE=FAFA-2030",
-    "label": "Station 30",
-    "level": 2
+    "code": "FAFA-3030",
+    "payload": "FAFA-V6|STATION=30|CODE=FAFA-3030"
   },
   {
     "station": 31,
-    "code": "FAFA-2031",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=3|STATION=31|CODE=FAFA-2031",
-    "label": "Station 31",
-    "level": 3
+    "code": "FAFA-3031",
+    "payload": "FAFA-V6|STATION=31|CODE=FAFA-3031"
   },
   {
     "station": 32,
-    "code": "FAFA-2032",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=4|STATION=32|CODE=FAFA-2032",
-    "label": "Station 32",
-    "level": 4
+    "code": "FAFA-3032",
+    "payload": "FAFA-V6|STATION=32|CODE=FAFA-3032"
   },
   {
     "station": 33,
-    "code": "FAFA-2033",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=1|STATION=33|CODE=FAFA-2033",
-    "label": "Station 33",
-    "level": 1
+    "code": "FAFA-3033",
+    "payload": "FAFA-V6|STATION=33|CODE=FAFA-3033"
   },
   {
     "station": 34,
-    "code": "FAFA-2034",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=2|STATION=34|CODE=FAFA-2034",
-    "label": "Station 34",
-    "level": 2
+    "code": "FAFA-3034",
+    "payload": "FAFA-V6|STATION=34|CODE=FAFA-3034"
   },
   {
     "station": 35,
-    "code": "FAFA-2035",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=3|STATION=35|CODE=FAFA-2035",
-    "label": "Station 35",
-    "level": 3
+    "code": "FAFA-3035",
+    "payload": "FAFA-V6|STATION=35|CODE=FAFA-3035"
   },
   {
     "station": 36,
-    "code": "FAFA-2036",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=4|STATION=36|CODE=FAFA-2036",
-    "label": "Station 36",
-    "level": 4
+    "code": "FAFA-3036",
+    "payload": "FAFA-V6|STATION=36|CODE=FAFA-3036"
   },
   {
     "station": 37,
-    "code": "FAFA-2037",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=1|STATION=37|CODE=FAFA-2037",
-    "label": "Station 37",
-    "level": 1
+    "code": "FAFA-3037",
+    "payload": "FAFA-V6|STATION=37|CODE=FAFA-3037"
   },
   {
     "station": 38,
-    "code": "FAFA-2038",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=2|STATION=38|CODE=FAFA-2038",
-    "label": "Station 38",
-    "level": 2
+    "code": "FAFA-3038",
+    "payload": "FAFA-V6|STATION=38|CODE=FAFA-3038"
   },
   {
     "station": 39,
-    "code": "FAFA-2039",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=3|STATION=39|CODE=FAFA-2039",
-    "label": "Station 39",
-    "level": 3
+    "code": "FAFA-3039",
+    "payload": "FAFA-V6|STATION=39|CODE=FAFA-3039"
   },
   {
     "station": 40,
-    "code": "FAFA-2040",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=4|STATION=40|CODE=FAFA-2040",
-    "label": "Station 40",
-    "level": 4
+    "code": "FAFA-3040",
+    "payload": "FAFA-V6|STATION=40|CODE=FAFA-3040"
   },
   {
     "station": 41,
-    "code": "FAFA-2041",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=1|STATION=41|CODE=FAFA-2041",
-    "label": "Station 41",
-    "level": 1
+    "code": "FAFA-3041",
+    "payload": "FAFA-V6|STATION=41|CODE=FAFA-3041"
   },
   {
     "station": 42,
-    "code": "FAFA-2042",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=2|STATION=42|CODE=FAFA-2042",
-    "label": "Station 42",
-    "level": 2
+    "code": "FAFA-3042",
+    "payload": "FAFA-V6|STATION=42|CODE=FAFA-3042"
   },
   {
     "station": 43,
-    "code": "FAFA-2043",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=3|STATION=43|CODE=FAFA-2043",
-    "label": "Station 43",
-    "level": 3
+    "code": "FAFA-3043",
+    "payload": "FAFA-V6|STATION=43|CODE=FAFA-3043"
   },
   {
     "station": 44,
-    "code": "FAFA-2044",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=4|STATION=44|CODE=FAFA-2044",
-    "label": "Station 44",
-    "level": 4
+    "code": "FAFA-3044",
+    "payload": "FAFA-V6|STATION=44|CODE=FAFA-3044"
   },
   {
     "station": 45,
-    "code": "FAFA-2045",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=1|STATION=45|CODE=FAFA-2045",
-    "label": "Station 45",
-    "level": 1
+    "code": "FAFA-3045",
+    "payload": "FAFA-V6|STATION=45|CODE=FAFA-3045"
   },
   {
     "station": 46,
-    "code": "FAFA-2046",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=2|STATION=46|CODE=FAFA-2046",
-    "label": "Station 46",
-    "level": 2
+    "code": "FAFA-3046",
+    "payload": "FAFA-V6|STATION=46|CODE=FAFA-3046"
   },
   {
     "station": 47,
-    "code": "FAFA-2047",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=3|STATION=47|CODE=FAFA-2047",
-    "label": "Station 47",
-    "level": 3
+    "code": "FAFA-3047",
+    "payload": "FAFA-V6|STATION=47|CODE=FAFA-3047"
   },
   {
     "station": 48,
-    "code": "FAFA-2048",
-    "payload": "FAFA-MINDGAME-V5|LEVEL=4|STATION=48|CODE=FAFA-2048",
-    "label": "Station 48",
-    "level": 4
+    "code": "FAFA-3048",
+    "payload": "FAFA-V6|STATION=48|CODE=FAFA-3048"
   }
 ]

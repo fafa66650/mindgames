@@ -1,0 +1,10 @@
+GUIDE GITHUB PAGES
+
+1. Crée un dépôt GitHub vide.
+2. Dézippe l’archive.
+3. Envoie tous les fichiers à la racine du dépôt.
+4. Va dans Settings > Pages.
+5. Choisis Deploy from a branch.
+6. Sélectionne main puis /(root).
+7. Ouvre le lien public.
+8. Si une ancienne version s’affiche, ouvre en navigation privée ou vide le cache.
