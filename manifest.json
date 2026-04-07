@@ -1,10 +1,10 @@
 {
-  "name": "FAFATRAINING MindGame Arena",
-  "short_name": "MindGame",
+  "name": "FAFATRAINING MindGame V15 Pro Real",
+  "short_name": "MindGame V15",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#0b0b12",
-  "theme_color": "#0b0b12",
+  "background_color": "#0b1017",
+  "theme_color": "#0b1017",
   "icons": [
     {
       "src": "./icons/icon-192.png",

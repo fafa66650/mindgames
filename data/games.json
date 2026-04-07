@@ -1,128 +1,146 @@
 [
   {
-    "key": "traitrise",
-    "title": "Trahison Ultime",
-    "family": "Rôles cachés",
-    "universe": "Infiltration",
-    "hook": "Une cellule d’élite a été infiltrée. Réussissez les missions, protégez vos infos et démasquez les traîtres avant la révélation finale."
+    "key": "trahison",
+    "title": "TRAHISON ULTIME : MIND WAR",
+    "family": "Traître / bluff",
+    "theme": "theme-infiltration",
+    "accent": "#ff5b6e",
+    "hook": "Une cellule d’élite a été infiltrée. Les équipes doivent avancer, mais quelqu’un brouille les pistes. Il faut lire, douter et frapper juste au bon moment."
   },
   {
     "key": "meute",
-    "title": "Meute Noire",
+    "title": "MEUTE NOIRE : NUIT ROUGE",
     "family": "Loup-garou modernisé",
-    "universe": "Nuit / survie",
-    "hook": "La meute agit dans l’ombre. Observez, accusez, doutez et trouvez les infiltrés avant qu’ils ne renversent la partie."
+    "theme": "theme-night",
+    "accent": "#9f7aea",
+    "hook": "La nuit cache des rôles, des intuitions et des erreurs fatales. Les équipes doivent observer, voter et sentir les incohérences avant l’attaque finale."
   },
   {
     "key": "undercover",
-    "title": "Undercover X",
-    "family": "Social / bluff",
-    "universe": "Identités secrètes",
-    "hook": "Un mot n’est pas le bon. Soyez fins, observez les hésitations et démasquez l’intrus sans vous griller."
+    "title": "UNDERCOVER X : INFILTRATION",
+    "family": "Undercover modernisé",
+    "theme": "theme-neon",
+    "accent": "#00d5ff",
+    "hook": "Un mot n’est pas le bon. Une personne n’est pas à sa place. Ici, parler trop tue. Parler juste sauve."
   },
   {
     "key": "manipulation",
-    "title": "Manipulation",
-    "family": "Psychologie / trahison",
-    "universe": "Jeu mental",
-    "hook": "Alliances fragiles, pressions, retournements. Ici, chaque phrase peut devenir une arme."
+    "title": "MANIPULATION : DOUBLE JEU",
+    "family": "Psychologie / retournement",
+    "theme": "theme-psy",
+    "accent": "#ff8c42",
+    "hook": "Tout le monde a un plan. Presque personne ne dit tout. Les manches montent en tension jusqu’au retournement final."
   },
   {
     "key": "criminal",
-    "title": "Code Criminal",
+    "title": "CODE CRIMINAL : DOSSIER NOIR",
     "family": "Grand Cluedo",
-    "universe": "Enquête",
-    "hook": "Un crime a été commis. Les équipes doivent relier lieu, mobile, temps et suspects pour révéler la vérité."
+    "theme": "theme-crime",
+    "accent": "#ffd166",
+    "hook": "Une affaire complexe s’ouvre devant vous. Reliez lieu, mobile, heure, preuve et suspects. Une seule théorie tient vraiment debout."
   },
   {
     "key": "labyrinthe",
-    "title": "Labyrinthe Mental",
-    "family": "Escape game",
-    "universe": "Labo / énigmes",
-    "hook": "Une suite de verrous et de pièges intellectuels bloque la sortie. Chaque étape doit être parfaitement lue."
+    "title": "LABYRINTHE MENTAL : SORTIE 9",
+    "family": "Escape game logique",
+    "theme": "theme-lab",
+    "accent": "#4ade80",
+    "hook": "Le complexe se verrouille. À chaque manche, une clé mentale, un code ou une observation vous rapproche de la sortie."
   },
   {
     "key": "zero",
-    "title": "Mission Zéro",
+    "title": "MISSION ZÉRO : SABOTAGE FINAL",
     "family": "Escape / sabotage",
-    "universe": "Base secrète",
-    "hook": "Le protocole final peut sauver la base… ou la condamner. À vous d’activer la bonne séquence."
+    "theme": "theme-alert",
+    "accent": "#ef4444",
+    "hook": "Le protocole final doit être activé avant l’effondrement du système. Le moindre mauvais choix coûte du temps."
   },
   {
     "key": "alpha",
-    "title": "Escape Alpha",
-    "family": "Base secrète",
-    "universe": "Verrous / accès",
-    "hook": "La base Alpha se verrouille. Chaque salle renferme une donnée utile au sas final."
+    "title": "ESCAPE ALPHA : SAS INTERDIT",
+    "family": "Escape base secrète",
+    "theme": "theme-base",
+    "accent": "#38bdf8",
+    "hook": "Chaque salle renferme une pièce du sas final. Il faut lire, ordonner, tester et verrouiller."
   },
   {
     "key": "mario",
-    "title": "Mario Chaos Run",
-    "family": "Univers jeunes",
-    "universe": "Plateforme / boss",
-    "hook": "Le royaume part en vrille. Récupérez étoiles, bonus et accès secrets avant le boss final."
+    "title": "MARIO CHAOS RUN : ROYAUME FRACTURÉ",
+    "family": "Aventure fun",
+    "theme": "theme-fun",
+    "accent": "#fb7185",
+    "hook": "Le royaume part en vrille : pièges, raccourcis, portes bonus, chemins trompeurs. Il faut avancer vite, mais pas n’importe comment."
   },
   {
     "key": "poke",
-    "title": "Poké Quest",
-    "family": "Univers jeunes",
-    "universe": "Capture / badges",
-    "hook": "Capturez, collectez, gagnez des badges et ouvrez l’arène finale avant les autres équipes."
+    "title": "POKÉ QUEST : CHASSE LÉGENDAIRE",
+    "family": "Aventure / collection",
+    "theme": "theme-quest",
+    "accent": "#60a5fa",
+    "hook": "Indices, badges, familles, types, symboles : les équipes doivent construire leur collection logique avant le duel final."
   },
   {
     "key": "dragon",
-    "title": "Dragon Force",
-    "family": "Univers jeunes",
-    "universe": "Tournoi / énergie",
-    "hook": "Accumulez l’énergie, maîtrisez les techniques et remportez le duel ultime."
+    "title": "DRAGON FORCE : SAIYAN BREAK",
+    "family": "Montée en puissance",
+    "theme": "theme-power",
+    "accent": "#f97316",
+    "hook": "Chaque manche augmente la charge mentale. Vous grimpez en puissance, mais les erreurs coûtent de plus en plus cher."
   },
   {
     "key": "onepiece",
-    "title": "One Piece Legacy",
-    "family": "Univers jeunes",
-    "universe": "Aventure pirate",
-    "hook": "Les reliques du trésor sont éparpillées. Trouvez la bonne route, les bons symboles et le coffre final."
+    "title": "ONE PIECE LEGACY : TRÉSOR DES MERS",
+    "family": "Carte / exploration",
+    "theme": "theme-sea",
+    "accent": "#22c55e",
+    "hook": "Des cartes, des routes, des symboles marins et des alliances cachent le chemin du trésor. Une route est vraie, les autres vous perdent."
   },
   {
     "key": "kpop",
-    "title": "K-Pop Arena",
-    "family": "Univers jeunes",
-    "universe": "Show / performance",
-    "hook": "Rythme, style, précision, show. Montez en puissance jusqu’au showcase final."
+    "title": "K-POP ARENA : STAGE IMPACT",
+    "family": "Show / rythme",
+    "theme": "theme-stage",
+    "accent": "#e879f9",
+    "hook": "Rythme, mémoire, image, ordre et performance : la scène récompense la précision et la vitesse."
   },
   {
     "key": "cerveau",
-    "title": "Cerveau d’Élite",
-    "family": "Quiz TV",
-    "universe": "Plateau / tension",
-    "hook": "Le plateau chauffe. Questions, logique, mémoire, pièges : seule l’équipe la plus lucide survivra."
+    "title": "CERVEAU D’ÉLITE : CHAMBRE 404",
+    "family": "Cerveau / logique",
+    "theme": "theme-mind",
+    "accent": "#22d3ee",
+    "hook": "Rien n’est offert. Les indices sont propres, mais les liens entre eux sont cachés. Il faut lire comme un stratège."
   },
   {
     "key": "maillon",
-    "title": "Maillon Fatal",
-    "family": "Quiz TV",
-    "universe": "Élimination",
-    "hook": "Chaque erreur fragilise le groupe. Accumulez les bonnes réponses pour ne pas devenir le maillon fatal."
+    "title": "MAILLON FATAL : RUPTURE TOTALE",
+    "family": "Quiz télé revisité",
+    "theme": "theme-show",
+    "accent": "#facc15",
+    "hook": "Chaque erreur pèse sur le groupe. Répondez vite, gardez la chaîne et évitez de devenir le maillon fatal."
   },
   {
     "key": "pire",
-    "title": "Qui est le pire ?",
-    "family": "Défis TV / gages",
-    "universe": "Fun / honte",
-    "hook": "Défis absurdes, choix délicats, pièges publics : évitez la manche honteuse et restez dans la course."
+    "title": "QUI EST LE PIRE ? : CHAMBRE DE PRESSION",
+    "family": "Téléshow / humour / duel",
+    "theme": "theme-arena",
+    "accent": "#a78bfa",
+    "hook": "Des manches rapides, drôles, piquantes et stratégiques. Ici, on joue avec la pression du groupe."
   },
   {
     "key": "music",
-    "title": "Quiz Musical",
-    "family": "Blind test / paroles",
-    "universe": "Musique",
-    "hook": "Reconnaissez refrains, styles, extraits et indices sonores plus vite que les autres."
+    "title": "QUIZ MUSICAL : VIBES WAR",
+    "family": "Musique / reconnaissance",
+    "theme": "theme-music",
+    "accent": "#f472b6",
+    "hook": "Ambiances, refrains, indices visuels et suites logiques musicales s’enchaînent jusqu’au morceau final."
   },
   {
     "key": "culture",
-    "title": "Culture Battle",
-    "family": "Culture générale",
-    "universe": "Questions / défis",
-    "hook": "Histoire, monde, logique, culture pop : tenez le rythme jusqu’à la bataille finale."
+    "title": "CULTURE BATTLE : BURGER QUIZ X",
+    "family": "Culture générale / fun",
+    "theme": "theme-pop",
+    "accent": "#34d399",
+    "hook": "Culture pop, logique fun, manches tordues et questions à relance. Il faut marquer vite et garder la tête froide."
   }
 ]
