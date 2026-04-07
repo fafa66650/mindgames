@@ -1,4 +1,4 @@
-FAFATRAINING MindGame Arena V11
+FAFATRAINING MindGame Arena
 
 Améliorations :
 - QR de partage d’équipe qui ouvrent le bon scénario puis demandent / préremplissent le code équipe
