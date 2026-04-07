@@ -84,11 +84,18 @@ function preparePlayerLobbyFromCurrentSession(){
     select.innerHTML = `<option value="${scenario.id}">${scenario.game_title}</option>`;
     qs('#playerDurationSelect').value = String(session.duration);
     let dl = qs('#teamCodeList');
-    if(!dl){ dl = document.createElement('datalist'); dl.id = 'teamCodeList'; codeInput.parentNode.appendChild(dl); codeInput.setAttribute('list','teamCodeList'); }
+    if(!dl){
+      dl = document.createElement('datalist');
+      dl.id = 'teamCodeList';
+      codeInput.parentNode.appendChild(dl);
+      codeInput.setAttribute('list','teamCodeList');
+    }
     dl.innerHTML = session.teams.map(t => `<option value="${t.code}">${t.teamName}</option>`).join('');
     if(!codeInput.value) codeInput.value = session.teams[0].code;
+    renderPlayerTeams(session);
   } else {
-    select.innerHTML = SCENARIOS.map(s=>`<option value="${s.id}">${s.game_title} · ${s.age_label} · ${s.difficulty_label}</option>`).join('');
+    select.innerHTML = SCENARIOS.map(s=>`<option value="${s.id}">${s.game_title}</option>`).join('');
+    renderPlayerTeams(null);
   }
 }
 function copyLink(link){ if(navigator.clipboard) navigator.clipboard.writeText(link); alert('Lien copié.'); }
@@ -96,10 +103,21 @@ function hydratePlayerLink(){
   const p = new URLSearchParams(window.location.search);
   if(p.get('player') === '1' && p.get('scenario')){
     openTab('player');
-    qs('#playerScenarioSelect').innerHTML = `<option value="${p.get('scenario')}">${scenarioById(p.get('scenario')).game_title}</option>`;
+    const scenario = scenarioById(p.get('scenario'));
+    qs('#playerScenarioSelect').innerHTML = `<option value="${p.get('scenario')}">${scenario ? scenario.game_title : 'Scénario joueur'}</option>`;
     qs('#teamCodeInput').value = (p.get('team') || '').toUpperCase();
     qs('#playerDurationSelect').value = String(Number(p.get('duration') || 60));
     currentPlayer.sessionId = p.get('session') || '';
+    const store = getStore();
+    if(currentPlayer.sessionId && store.sessions[currentPlayer.sessionId]){
+      const session = store.sessions[currentPlayer.sessionId];
+      renderPlayerTeams(session);
+      const team = session.teams.find(t => t.code === qs('#teamCodeInput').value);
+      if(team){
+        qs('#teamNameInput').value = team.teamName || '';
+        qs('#playerNamesInput').value = team.playerNames || '';
+      }
+    }
   }
 }
 function launchPlayerGame(){
@@ -117,12 +135,36 @@ function launchPlayerGame(){
       if(!qs('#playerNamesInput').value) qs('#playerNamesInput').value = team.playerNames || '';
     }
   }
-  currentPlayer = {scenarioId:sid, missionIndex:0, duration, teamCode, teamName:qs('#teamNameInput').value.trim() || teamCode, playerNames:qs('#playerNamesInput').value.trim(), timer:null, remaining:duration*60, sessionId:currentPlayer.sessionId};
+  currentPlayer = {
+    scenarioId:sid,
+    missionIndex:0,
+    duration,
+    teamCode,
+    teamName:qs('#teamNameInput').value.trim() || teamCode,
+    playerNames:qs('#playerNamesInput').value.trim(),
+    timer:null,
+    remaining:duration*60,
+    sessionId:currentPlayer.sessionId
+  };
   syncTeamMeta();
+  const scenario = scenarioById(sid);
+  const firstMission = missionsByScenario(sid)[0];
   qs('#playerLobby').classList.add('hidden');
+  qs('#playerIntro').classList.remove('hidden');
+  qs('#playerGame').classList.add('hidden');
+  qs('#introGamePill').textContent = scenario.game_title;
+  qs('#introTeamPill').textContent = currentPlayer.teamName || currentPlayer.teamCode;
+  qs('#introTitle').textContent = `Prêt ? Votre mission va commencer.`;
+  qs('#introText').textContent = scenario.hook;
+  qs('#introMissionPreview').textContent = firstMission ? `${firstMission.title} — ${firstMission.instruction}` : 'Première mission prête.';
+}
+function enterMission(){
+  qs('#playerIntro').classList.add('hidden');
   qs('#playerGame').classList.remove('hidden');
   renderPlayerGame();
+  startGlobalTimer();
 }
+
 function syncTeamMeta(){
   const store = getStore();
   if(!currentPlayer.sessionId || !store.sessions[currentPlayer.sessionId]) return;
@@ -159,19 +201,22 @@ function updateTeamStatus(status, answer='-'){
 function renderMissionPayload(payload, type){
   if(!payload) return '';
   if(type === 'text'){
-    return `<div class="notice"><strong>Éléments visibles :</strong> ${payload.items.map(x=>`<span class="pill">${esc(x)}</span>`).join(' ')}</div>`;
+    return `<div class="notice"><strong>Données à observer :</strong><div class="pillbar">${payload.items.map(x=>`<span class="pill">${esc(x)}</span>`).join(' ')}</div><p class="meta">Question : quel élément n’appartient pas au bon univers ?</p></div>`;
   }
-  if(type === 'choice' || type === 'vote'){
-    return `<div class="notice"><strong>Options :</strong><ul>${payload.options.map(o=>`<li>${esc(o)}</li>`).join('')}</ul></div>`;
+  if(type === 'choice'){
+    return `<div class="notice"><strong>Choix possibles :</strong><ul>${payload.options.map(o=>`<li>${esc(o)}</li>`).join('')}</ul><p class="meta">Question : quelle option fait réellement avancer l’équipe ?</p></div>`;
+  }
+  if(type === 'vote'){
+    return `<div class="notice"><strong>Choix à débattre :</strong><ul>${payload.options.map(o=>`<li>${esc(o)}</li>`).join('')}</ul><p class="meta">Question : quelle option le groupe décide-t-il de retenir ?</p></div>`;
   }
   if(type === 'order'){
-    return `<div class="notice"><strong>Éléments à remettre dans l’ordre :</strong><ul>${payload.items.map(o=>`<li>${esc(o)}</li>`).join('')}</ul></div>`;
+    return `<div class="notice"><strong>Éléments à remettre dans l’ordre :</strong><ul>${payload.items.map(o=>`<li>${esc(o)}</li>`).join('')}</ul><p class="meta">Répondez au format 2-4-1-3.</p></div>`;
   }
   if(type === 'code'){
-    return `<div class="notice"><strong>Indices :</strong><ul>${payload.clues.map(o=>`<li>${esc(o)}</li>`).join('')}</ul></div>`;
+    return `<div class="notice"><strong>Indices visibles :</strong><ul>${payload.clues.map(o=>`<li>${esc(o)}</li>`).join('')}</ul><p class="meta">Question : quel est le bon code final ?</p></div>`;
   }
   if(type === 'validation'){
-    return `<div class="notice"><strong>Mission terrain :</strong> ${esc(payload.task)}</div>`;
+    return `<div class="notice"><strong>Défi terrain :</strong> ${esc(payload.task)}<p class="meta">Quand c’est fait, l’animateur valide.</p></div>`;
   }
   return '';
 }
@@ -183,21 +228,25 @@ function renderPlayerGame(){
   const phase = m.summary.split('. ')[0];
   qs('#pillGame').textContent = scenario.game_title;
   qs('#pillAge').textContent = '';
-  qs('#pillDiff').textContent = scenario.difficulty_label;
+  qs('#pillDiff').textContent = '';
   qs('#pillTeam').textContent = currentPlayer.teamName || currentPlayer.teamCode;
   qs('#missionProgress').textContent = Math.round(((currentPlayer.missionIndex+1)/ms.length)*100) + '%';
   qs('#playerGameTitle').textContent = `${phase} · ${scenario.game_title}`;
   qs('#playerHook').textContent = scenario.hook;
   qs('#missionTitle').textContent = m.title;
-  qs('#missionSummary').textContent = 'Cette manche fait progresser ton équipe dans le bon univers de jeu.';
+  qs('#missionSummary').textContent = `Manche ${m.number}/${ms.length} — ${m.summary.replace(/^Phase \d · [^.]+\. /,'')}`;
   qs('#missionInstruction').textContent = m.instruction;
   qs('#missionType').textContent = (m.answer_type === 'validation' || m.answer_type === 'vote') ? 'Validation animateur' : 'Réponse directe';
   qs('#hintBox').textContent = 'Aucun indice utilisé pour le moment.';
-  qs('#validationResult').textContent = ['vote','validation'].includes(m.answer_type) ? "Cette mission doit être validée par l’animateur." : "Entre la réponse et valide.";
+  qs('#validationResult').textContent = ['vote','validation'].includes(m.answer_type) ? "Cette manche doit être validée par l’animateur." : "Entre la réponse puis valide.";
   qs('#missionQr').src = qrFor(playerLink(currentPlayer.scenarioId, currentPlayer.teamCode, currentPlayer.duration, currentPlayer.sessionId) + `&mission=${m.number}`);
   qs('#teamMeta').textContent = `Équipe : ${currentPlayer.teamName || currentPlayer.teamCode} · Joueurs : ${currentPlayer.playerNames || '-'}`;
   let holder = qs('#missionPayload');
-  if(!holder){ holder = document.createElement('div'); holder.id = 'missionPayload'; qs('#missionInstruction').parentNode.insertAdjacentElement('afterend', holder); }
+  if(!holder){
+    holder = document.createElement('div');
+    holder.id = 'missionPayload';
+    qs('#missionInstruction').parentNode.insertAdjacentElement('afterend', holder);
+  }
   holder.innerHTML = renderMissionPayload(m.payload, m.answer_type);
   syncTeamMeta();
   updateTeamStatus('En mission', '-');
@@ -287,7 +336,15 @@ function renderAnswers(){
   const scenarioId = qs('#answersScenarioSelect').value || SCENARIOS[0].id;
   const scenario = scenarioById(scenarioId);
   const ms = missionsByScenario(scenarioId);
-  qs('#answersGrid').innerHTML = `<article class="card" style="border-color:${esc(scenario.accent)}77"><h3>${esc(scenario.game_title)} · Réponses animateur</h3><p>${esc(scenario.hook)}</p></article>` + ms.map(m=>`<article class="card"><div class="pillbar"><span class="pill">Mission ${m.number}</span><span class="pill">${esc(m.answer_type)}</span></div><h3>${esc(m.title)}</h3><p><strong>Réponse attendue :</strong> ${esc(m.expected_answer)}</p><p><strong>Indice :</strong> ${esc(m.hint)}</p></article>`).join('');
+  const logs = session && session.scenarioId === scenarioId ? session.logs.slice(-10).reverse() : [];
+  qs('#answersGrid').innerHTML = `
+    <article class="card" style="border-color:${esc(scenario.accent)}77">
+      <h3>${esc(scenario.game_title)} · Vue animateur</h3>
+      <p>${esc(scenario.hook)}</p>
+      ${logs.length ? `<div class="notice"><strong>Dernières actions :</strong>${logs.map(l=>`<p>${esc(l.ts)} · ${esc(l.team)} · manche ${l.mission} · ${esc(l.status)} · ${esc(l.answer)}</p>`).join('')}</div>` : '<div class="notice">Aucune action d’équipe enregistrée pour le moment.</div>'}
+    </article>
+    ${ms.map(m=>`<article class="card"><div class="pillbar"><span class="pill">Manche ${m.number}</span><span class="pill">${esc(m.answer_type)}</span></div><h3>${esc(m.title)}</h3><p><strong>Question :</strong> ${esc(m.instruction)}</p><p><strong>Réponse attendue :</strong> ${esc(m.expected_answer)}</p><p><strong>Indice :</strong> ${esc(m.hint)}</p></article>`).join('')}
+  `;
 }
 function resetSession(){
   const store = getStore();

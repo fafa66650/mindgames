@@ -82,3 +82,18 @@ input,select{width:100%;padding:12px 14px;border-radius:14px;border:1px solid #3
 .notice{background:linear-gradient(145deg,#121927,#1a2230)}
 .mission-box{border-color:#3a4662}
 .card h3,.mission-box h3{color:#f9fbff}
+
+.hero{grid-template-columns:1.4fr .9fr}
+.hero-side-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.big-logo{grid-column:1 / -1;min-height:320px}
+.hero-logo.large{max-height:300px;width:100%;object-fit:contain}
+.feature{display:flex;flex-direction:column;justify-content:center}
+#playerIntro .mission-box{padding:22px}
+#playerIntro .grid{margin-top:12px}
+#playerGame .actions{align-items:center}
+#answersGrid .card .notice p{margin:.35rem 0}
+@media (max-width:1000px){
+  .hero{grid-template-columns:1fr}
+  .big-logo{min-height:220px}
+  .hero-logo.large{max-height:220px}
+}

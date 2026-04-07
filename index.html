@@ -12,9 +12,9 @@
 <div class="app">
   <header class="hero">
     <div class="hero-main">
-      <div class="eyebrow">FAFATRAINING MINDGAME ARENA</div>
-      <h1>L’arène immersive des jeux d’enquête, de traîtrise, d’escape, de quiz et de défis.</h1>
-      <p>Chaque univers a son identité, ses missions, sa tension et sa façon de jouer. Toi, tu pilotes. Les équipes, elles, plongent dans l’expérience.</p>
+      <div class="eyebrow">FAFATRAINING GAME ARENA</div>
+      <h1>Des jeux immersifs, fun et stratégiques pour enfants, ados et adultes.</h1>
+      <p>Prépare la partie côté animateur, distribue les QR d’équipe, puis laisse les joueurs entrer dans leur mission avec un vrai départ de partie, un chrono global et une progression claire.</p>
       <div class="hero-actions">
         <button onclick="openTab('admin')">Console animateur</button>
         <button class="ghost" onclick="openTab('player')">Portail joueurs</button>
@@ -22,11 +22,14 @@
       </div>
     </div>
     <div class="hero-side">
-      <div class="logo-box"><img src="./assets/logo.jpeg" alt="Logo FAFATRAINING" class="hero-logo"></div>
-      <div class="stat"><strong id="countGames">0</strong><span>jeux</span></div>
-      <div class="stat"><strong id="countScenarios">0</strong><span>scénarios</span></div>
-      <div class="stat"><strong id="countMissions">0</strong><span>missions</span></div>
-      <div class="stat"><strong>Admin</strong><span>+ joueurs séparés</span></div>
+      <div class="hero-side-grid">
+        <div class="stat big-logo"><img src="./assets/logo.jpeg" alt="Logo FAFATRAINING" class="hero-logo large"></div>
+        <div class="stat"><strong id="countGames">0</strong><span>jeux</span></div>
+        <div class="stat"><strong id="countScenarios">0</strong><span>scénarios</span></div>
+        <div class="stat"><strong id="countMissions">0</strong><span>missions</span></div>
+        <div class="stat feature"><strong>QR équipe</strong><span>accès direct joueur</span></div>
+        <div class="stat feature"><strong>3 phases</strong><span>immersion · pression · final</span></div>
+      </div>
     </div>
   </header>
 
@@ -71,7 +74,7 @@
     <div class="section-head">
       <h2>Portail joueurs</h2>
       <div class="actions">
-        <button class="ghost" onclick="backToLobby()">Retour lobby</button>
+        <button class="ghost" onclick="backToLobby()">Retour au portail</button>
       </div>
     </div>
     <div id="playerLobby">
@@ -88,6 +91,8 @@
       </div><div id="playerTeamsGrid" class="grid"></div>
     </div>
 
+    <div id="playerIntro" class="hidden"><article class="mission-box intro-box"><div class="pillbar"><span class="pill" id="introGamePill"></span><span class="pill" id="introTeamPill"></span></div><h2 id="introTitle"></h2><p id="introText" class="meta"></p><div class="grid"><article class="card"><h3>Mission d’ouverture</h3><p id="introMissionPreview"></p></article><article class="card"><h3>Mode de jeu</h3><p>À partir du moment où vous entrez dans la mission, le chrono global démarre automatiquement. L’équipe doit ensuite avancer manche après manche.</p></article></div><div class="actions"><button onclick="enterMission()">Entrer dans la mission</button><button class="ghost" onclick="backToLobby()">Changer d’équipe</button></div></article></div>
+
     <div id="playerGame" class="hidden">
       <div class="pillbar">
         <span class="pill" id="pillGame"></span>
@@ -103,7 +108,6 @@
         <div class="team-meta" id="teamMeta"></div>
       </div>
       <div class="actions">
-        <button onclick="startGlobalTimer()">Lancer le chrono</button>
         <button class="ghost" onclick="prevMission()">Mission précédente</button>
         <button class="ghost" onclick="nextMission()">Mission suivante</button>
         <button class="ghost" onclick="backToLobby()">Quitter</button>
@@ -112,7 +116,7 @@
       <article class="mission-box">
         <h3 id="missionTitle"></h3>
         <p id="missionSummary"></p>
-        <p><strong>Consigne :</strong> <span id="missionInstruction"></span></p>
+        <p><strong>Question / objectif :</strong> <span id="missionInstruction"></span></p>
         <p><strong>Validation :</strong> <span id="missionType"></span></p>
 
         <div class="grid">
@@ -122,7 +126,7 @@
             <div class="actions">
               <button onclick="validateCurrentMission()">Valider</button>
             </div>
-            <div id="validationResult" class="notice">Pour les missions sociales, votes ou validations physiques, c’est l’animateur qui tranche.</div>
+            <div id="validationResult" class="notice">Répondez ou demandez la validation animateur selon le type de manche.</div>
           </article>
           <article class="card">
             <h3>Indice</h3>
@@ -151,13 +155,13 @@
 
   <section id="answers" class="panel tab-panel">
     <div class="section-head">
-      <h2>Réponses animateur</h2>
+      <h2>Console animateur</h2>
       <div class="filters">
         <select id="answersScenarioSelect"></select>
         <button onclick="renderAnswers()">Afficher</button>
       </div>
     </div>
-    <div id="answersSessionInfo" class="notice">Aucune session active pour le moment.</div>
+    <div id="answersSessionInfo" class="notice">Aucune session active pour le moment.</div><div class="notice">Cette console te montre les équipes, leur progression et, pour le scénario choisi, les réponses attendues manche par manche.</div>
     <div id="answersLiveTeams" class="grid"></div>
     <div id="answersGrid" class="grid"></div>
   </section>
