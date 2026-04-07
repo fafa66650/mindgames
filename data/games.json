@@ -4,125 +4,125 @@
     "title": "Trahison Ultime",
     "family": "Rôles cachés",
     "universe": "Infiltration",
-    "hook": "Une cellule d’élite a été infiltrée. Réussissez les missions et démasquez les traîtres avant la finale."
+    "hook": "Une cellule d’élite a été infiltrée. Réussissez les missions, protégez vos infos et démasquez les traîtres avant la révélation finale."
   },
   {
     "key": "meute",
     "title": "Meute Noire",
     "family": "Loup-garou modernisé",
     "universe": "Nuit / survie",
-    "hook": "La meute agit dans l’ombre. Identifiez les infiltrés avant qu’ils ne retournent la partie."
+    "hook": "La meute agit dans l’ombre. Observez, accusez, doutez et trouvez les infiltrés avant qu’ils ne renversent la partie."
   },
   {
     "key": "undercover",
     "title": "Undercover X",
     "family": "Social / bluff",
     "universe": "Identités secrètes",
-    "hook": "Un mot n’est pas le bon. Il faut démasquer l’intrus sans trop en dire."
+    "hook": "Un mot n’est pas le bon. Soyez fins, observez les hésitations et démasquez l’intrus sans vous griller."
   },
   {
     "key": "manipulation",
     "title": "Manipulation",
     "family": "Psychologie / trahison",
     "universe": "Jeu mental",
-    "hook": "Influence, bluff, retournements et alliances cachées."
+    "hook": "Alliances fragiles, pressions, retournements. Ici, chaque phrase peut devenir une arme."
   },
   {
     "key": "criminal",
     "title": "Code Criminal",
     "family": "Grand Cluedo",
     "universe": "Enquête",
-    "hook": "Un crime a été commis. Reconstituez la vérité avec indices, témoins et contradictions."
+    "hook": "Un crime a été commis. Les équipes doivent relier lieu, mobile, temps et suspects pour révéler la vérité."
   },
   {
     "key": "labyrinthe",
     "title": "Labyrinthe Mental",
     "family": "Escape game",
     "universe": "Labo / énigmes",
-    "hook": "Chaque niveau cache un verrou. Résolvez les énigmes pour ouvrir la sortie."
+    "hook": "Une suite de verrous et de pièges intellectuels bloque la sortie. Chaque étape doit être parfaitement lue."
   },
   {
     "key": "zero",
     "title": "Mission Zéro",
     "family": "Escape / sabotage",
     "universe": "Base secrète",
-    "hook": "Le protocole final doit être activé avant l’effondrement du système."
+    "hook": "Le protocole final peut sauver la base… ou la condamner. À vous d’activer la bonne séquence."
   },
   {
     "key": "alpha",
     "title": "Escape Alpha",
     "family": "Base secrète",
     "universe": "Verrous / accès",
-    "hook": "La base Alpha se verrouille. Débloquez les accès avant la fermeture."
+    "hook": "La base Alpha se verrouille. Chaque salle renferme une donnée utile au sas final."
   },
   {
     "key": "mario",
     "title": "Mario Chaos Run",
     "family": "Univers jeunes",
     "universe": "Plateforme / boss",
-    "hook": "Le royaume est en alerte. Récupérez les étoiles et battez le boss final."
+    "hook": "Le royaume part en vrille. Récupérez étoiles, bonus et accès secrets avant le boss final."
   },
   {
     "key": "poke",
     "title": "Poké Quest",
     "family": "Univers jeunes",
     "universe": "Capture / badges",
-    "hook": "Capturez, collectionnez, gagnez vos badges et ouvrez l’arène finale."
+    "hook": "Capturez, collectez, gagnez des badges et ouvrez l’arène finale avant les autres équipes."
   },
   {
     "key": "dragon",
     "title": "Dragon Force",
     "family": "Univers jeunes",
     "universe": "Tournoi / énergie",
-    "hook": "Accumulez de l’énergie, survivez aux manches et remportez le duel final."
+    "hook": "Accumulez l’énergie, maîtrisez les techniques et remportez le duel ultime."
   },
   {
     "key": "onepiece",
     "title": "One Piece Legacy",
     "family": "Univers jeunes",
     "universe": "Aventure pirate",
-    "hook": "Les reliques du trésor sont dispersées. Réunissez-les avant les rivaux."
+    "hook": "Les reliques du trésor sont éparpillées. Trouvez la bonne route, les bons symboles et le coffre final."
   },
   {
     "key": "kpop",
     "title": "K-Pop Arena",
     "family": "Univers jeunes",
     "universe": "Show / performance",
-    "hook": "Style, rythme et précision vont décider du vainqueur du showcase final."
+    "hook": "Rythme, style, précision, show. Montez en puissance jusqu’au showcase final."
   },
   {
     "key": "cerveau",
     "title": "Cerveau d’Élite",
     "family": "Quiz TV",
     "universe": "Plateau / tension",
-    "hook": "Questions, pièges et pression : seule l’équipe la plus solide tiendra jusqu’au bout."
+    "hook": "Le plateau chauffe. Questions, logique, mémoire, pièges : seule l’équipe la plus lucide survivra."
   },
   {
     "key": "maillon",
     "title": "Maillon Fatal",
     "family": "Quiz TV",
     "universe": "Élimination",
-    "hook": "Ne devenez pas le maillon fatal : chaque erreur pèse sur toute l’équipe."
+    "hook": "Chaque erreur fragilise le groupe. Accumulez les bonnes réponses pour ne pas devenir le maillon fatal."
   },
   {
     "key": "pire",
     "title": "Qui est le pire ?",
     "family": "Défis TV / gages",
     "universe": "Fun / honte",
-    "hook": "Accumulez le moins d’échecs possible et évitez la manche honteuse."
+    "hook": "Défis absurdes, choix délicats, pièges publics : évitez la manche honteuse et restez dans la course."
   },
   {
     "key": "music",
     "title": "Quiz Musical",
     "family": "Blind test / paroles",
     "universe": "Musique",
-    "hook": "Reconnaissez chansons, refrains et extraits plus vite que les autres."
+    "hook": "Reconnaissez refrains, styles, extraits et indices sonores plus vite que les autres."
   },
   {
     "key": "culture",
     "title": "Culture Battle",
     "family": "Culture générale",
     "universe": "Questions / défis",
-    "hook": "Les thèmes tombent sans prévenir. Gardez le rythme jusqu’à la bataille finale."
+    "hook": "Histoire, monde, logique, culture pop : tenez le rythme jusqu’à la bataille finale."
   }
 ]

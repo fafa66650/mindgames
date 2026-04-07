@@ -13,12 +13,12 @@
   <header class="hero">
     <div class="hero-main">
       <div class="eyebrow">FAFATRAINING MINDGAME ARENA</div>
-      <h1>Plateforme animateur + joueurs pour jeux immersifs.</h1>
-      <p>Prépare la partie côté administrateur, génère les codes équipes, partage les liens joueurs, lance un chrono global de partie et utilise un vrai mode animateur avec toutes les réponses.</p>
+      <h1>Bienvenue dans l’arène des jeux immersifs.</h1>
+      <p>Ici, tu ne lances pas juste un jeu. Tu crées une ambiance, tu répartis les équipes, tu envoies les accès joueurs, tu gardes le contrôle total côté animateur et tu fais monter la pression jusqu’à la finale.</p>
       <div class="hero-actions">
-        <button onclick="openTab('admin')">Administrateur</button>
-        <button class="ghost" onclick="openTab('player')">Joueurs</button>
-        <button class="ghost" onclick="openTab('guide')">Guide</button>
+        <button onclick="openTab('admin')">Espace administrateur</button>
+        <button class="ghost" onclick="openTab('player')">Accès joueurs</button>
+        <button class="ghost" onclick="openTab('guide')">Comment ça marche</button>
       </div>
     </div>
     <div class="hero-side">
@@ -49,9 +49,9 @@
     </div>
     <div class="actions">
       <button onclick="prepareSession()">Préparer la partie</button>
-      <button class="ghost" onclick="renderAnimateur()">Actualiser réponses</button>
+      <button class="ghost" onclick="openTab('animateur')">Voir les réponses de ce scénario</button>
     </div>
-    <div id="sessionSummary" class="notice">Prépare la partie pour générer le scénario, les liens joueurs et les QR de partage.</div>
+    <div id="sessionSummary" class="notice">Choisis ton jeu, ton public et le nombre d’équipes. L’application te générera ensuite les accès joueurs et le scénario détaillé.</div>
     <div id="scenarioPreview" class="grid"></div>
     <div id="teamLinks" class="grid"></div>
   </section>
@@ -64,6 +64,7 @@
       </div>
     </div>
     <div id="playerLobby">
+      <div class="notice">Les joueurs arrivent ici avec le lien donné par l’administrateur ou en entrant leur code équipe. Le chrono global démarre au lancement du jeu, pas à chaque mission.</div>
       <div class="grid-form">
         <div><label>Code équipe</label><input id="teamCodeInput" type="text" placeholder="ALPHA"></div>
         <div><label>Scénario</label><select id="playerScenarioSelect"></select></div>
@@ -72,7 +73,6 @@
       <div class="actions">
         <button onclick="launchPlayerGame()">Commencer la partie</button>
       </div>
-      <div class="notice">Le code équipe est donné par l’administrateur. Les joueurs n’ont pas besoin du mode animateur.</div>
     </div>
     <div id="playerGame" class="hidden">
       <div class="pillbar">
@@ -86,7 +86,7 @@
       <div class="timer" id="globalTimer">00:60:00</div>
       <div class="actions">
         <button onclick="startGlobalTimer()">Lancer le chrono global</button>
-        <button class="ghost" onclick="prevMission()">Mission précédente</button>
+        <button class="ghost" onclick="prevMission()">Retour mission précédente</button>
         <button class="ghost" onclick="nextMission()">Mission suivante</button>
         <button class="ghost" onclick="backToLobby()">Quitter la partie</button>
       </div>
@@ -94,19 +94,19 @@
         <h3 id="missionTitle"></h3>
         <p id="missionSummary"></p>
         <p><strong>Consigne :</strong> <span id="missionInstruction"></span></p>
-        <p><strong>Type de validation :</strong> <span id="missionType"></span></p>
+        <p><strong>Validation :</strong> <span id="missionType"></span></p>
         <div class="grid">
           <article class="card">
-            <h3>Valider la mission</h3>
-            <input id="answerInput" type="text" placeholder="Saisir la réponse ou le code">
+            <h3>Validation mission</h3>
+            <input id="answerInput" type="text" placeholder="Réponse ou code si demandé">
             <div class="actions">
               <button onclick="validateCurrentMission()">Valider</button>
             </div>
-            <div id="validationResult" class="notice">Entre la réponse si la mission demande un code ou un mot. Pour les défis photo / validation, l’animateur tranche.</div>
+            <div id="validationResult" class="notice">Pour les missions photo, vote, bluff ou validation sociale, c’est l’animateur qui tranche.</div>
           </article>
           <article class="card">
-            <h3>QR mission</h3>
-            <p>Ce QR est optionnel : il sert uniquement si tu veux passer par un scan papier pour ouvrir exactement cette mission.</p>
+            <h3>QR mission optionnel</h3>
+            <p>Ce QR n’est plus la base du jeu. Il sert seulement si tu veux ouvrir exactement cette mission par scan.</p>
             <img class="qr-img" id="missionQr" alt="QR mission">
           </article>
         </div>
@@ -125,8 +125,14 @@
   </section>
 
   <section id="animateur" class="panel tab-panel">
-    <h2>Réponses animateur</h2>
-    <div class="notice">Ici, tu retrouves le détail des missions, les réponses attendues, les indices et les liens d’ouverture. C’est ton tableau de bord.</div>
+    <div class="section-head">
+      <h2>Réponses animateur</h2>
+      <div class="filters">
+        <select id="animateurScenarioSelect"></select>
+        <button onclick="renderAnimateur()">Afficher le scénario</button>
+      </div>
+    </div>
+    <div class="notice">Les réponses sont maintenant propres à chaque mission : vrais mots, suites, choix, validations animateur et indices utiles. Ce n’est plus une simple mécanique de chiffres qui se suivent.</div>
     <div id="animateurGrid" class="grid"></div>
   </section>
 
@@ -134,9 +140,9 @@
     <h2>Guide d’utilisation</h2>
     <div class="grid">
       <article class="card"><h3>1. Administrateur</h3><p>Prépare la partie, choisis le jeu, l’âge, la difficulté, le nombre d’équipes et la durée totale. Puis partage les liens générés.</p></article>
-      <article class="card"><h3>2. Joueurs</h3><p>Chaque équipe ouvre son lien ou renseigne son code équipe. Un chrono global démarre pour toute la partie.</p></article>
-      <article class="card"><h3>3. Missions</h3><p>Les missions s’enchaînent avec des boutons précédent / suivant. Les QR sont facultatifs, plus la seule façon de jouer.</p></article>
-      <article class="card"><h3>4. Réponses</h3><p>L’animateur a toutes les réponses et peut trancher les validations photo, bluff ou défis sociaux.</p></article>
+      <article class="card"><h3>2. Joueurs</h3><p>Les équipes arrivent avec leur lien ou entrent leur code équipe. Elles n’ont pas besoin du mode animateur.</p></article>
+      <article class="card"><h3>3. Chrono global</h3><p>Le chrono se lance une seule fois au début de la partie, puis reste actif pendant toutes les missions du jeu.</p></article>
+      <article class="card"><h3>4. Mission par mission</h3><p>Les joueurs avancent avec mission précédente / suivante. Le QR est seulement une option d’accès, pas le cœur du système.</p></article>
     </div>
   </section>
 </div>
