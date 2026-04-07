@@ -1,6 +1,6 @@
 {
-  "name": "FAFATRAINING MindGame V15 Pro Real",
-  "short_name": "MindGame V15",
+  "name": "FAFATRAINING MindGame",
+  "short_name": "MindGame",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0b1017",
