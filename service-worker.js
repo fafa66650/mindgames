@@ -1,5 +1,5 @@
 
-const CACHE = 'fafa-mindgame-v16-elite-build';
+const CACHE = 'fafa-game-arena-v17-elite';
 const ASSETS = [
   './',
   './index.html',

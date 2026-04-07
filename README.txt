@@ -1,26 +1,23 @@
 FAFATRAINING GAME ARENA — GUIDE ANIMATEUR
 
-1. Console animateur
-- choisis le jeu, l’âge, la difficulté, le nombre d’équipes et la durée
-- donne un nom clair à la session : exemple "Point Jeunes Banyuls - Groupe A"
-- prépare la partie pour générer les QR et liens équipes
+1. Dans l’onglet Administrateur, choisis le jeu, l’âge, la difficulté, le nombre d’équipes et la durée.
+2. Clique sur “Préparer la partie”.
+3. Donne ensuite à chaque équipe :
+   - son QR code
+   - ou son lien direct
+   - ou son code équipe
+4. Chaque équipe peut renseigner :
+   - son nom d’équipe
+   - le nom des joueurs
+5. Les équipes jouent en parallèle.
+6. Le premier qui termine toutes les manches gagne.
 
-2. QR et équipes
-- chaque équipe reçoit son QR ou son lien
-- le QR ouvre directement le bon jeu avec la bonne équipe
-- les joueurs peuvent compléter le nom d’équipe et les noms des joueurs
+Pénalités / aides
+- Les indices coûtent du temps et des points.
+- Certaines erreurs déclenchent de la pression.
+- Le classement prend en compte : progression, temps, pénalités, aides.
 
-3. Départ de partie
-- une fois le portail joueur ouvert, l’équipe clique sur "Entrer dans la mission"
-- le chrono global démarre automatiquement
-- la partie se déroule manche après manche
-
-4. Console animateur
-- suis les équipes
-- lis les dernières réponses
-- garde la vue réponses ouverte pour valider ou aider
-
-5. Limite technique
-- cette version fonctionne entièrement sur GitHub Pages
-- le suivi utilise le navigateur
-- pour un vrai temps réel partagé entre plusieurs appareils différents, il faudra un backend
+Important
+- Cette version fonctionne sur GitHub Pages.
+- Le suivi de session est stocké dans le navigateur.
+- Sans backend, le partage temps réel entre plusieurs appareils différents reste limité.
