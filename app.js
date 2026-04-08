@@ -1,538 +1,95 @@
 
-let GAMES = [], SCENARIOS = [], MISSIONS = [];
-const qs = s => document.querySelector(s);
-const qsa = s => [...document.querySelectorAll(s)];
-const esc = s => String(s ?? '').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
-const TEAM_CODES = ['ALPHA','BRAVO','CHARLIE','DELTA','ECHO','FOXTROT','GAMMA','OMEGA'];
-let currentPlayer = {scenarioId:null, missionIndex:0, duration:60, teamCode:'', teamName:'', playerNames:'', timer:null, remaining:0, sessionId:'', hintsUsed:0, points:1000, errors:0, hintPenaltySeconds:0};
-let hintVisible = false;
-
-function getStore(){ return JSON.parse(localStorage.getItem('fafa_game_arena_store') || '{"sessions":{},"currentSession":null}'); }
-function setStore(v){ localStorage.setItem('fafa_game_arena_store', JSON.stringify(v)); }
-
-function openTab(id){
-  qsa('.tab').forEach(b => b.classList.toggle('active', b.dataset.target===id));
-  qsa('.tab-panel').forEach(p => p.classList.toggle('active', p.id===id));
+const qs=s=>document.querySelector(s), qsa=s=>[...document.querySelectorAll(s)];
+let GAMES=[], MISSIONS={}, playerState=null, multiPicked=[];
+const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+async function loadData(){GAMES=await fetch('./data/games.json').then(r=>r.json());MISSIONS=await fetch('./data/missions.json').then(r=>r.json());}
+function store(){return JSON.parse(localStorage.getItem('fafa_game_arena_clean_store_v2')||'{"sessions":{}}')}
+function save(v){localStorage.setItem('fafa_game_arena_clean_store_v2',JSON.stringify(v))}
+function linkFor(sessionId,teamCode){return `${location.origin}${location.pathname}?player=1&session=${encodeURIComponent(sessionId)}&team=${encodeURIComponent(teamCode)}`}
+function ageLabel(a){return a==='6-10'?'Enfants 6–10 ans':a==='11-17'?'Ados 11–17 ans':'Adultes 18+'}
+function diffLabel(d){return d==='facile'?'Accessible':d==='moyen'?'Équilibré':'Challenge'}
+function renderHome(){
+ qs('#app').innerHTML=`<div class="hero"><div><img src="./assets/logo.jpeg" class="hero-logo" alt="FAFATRAINING"></div><div><div class="kicker">FAFATRAINING GAME ARENA</div><h1>Version complète propre avec ton logo.</h1><div class="subtitle">Administrateur simple, entrée joueur directe, liens équipe fiables, missions claires, score temps + points et fiche animateur lisible.</div><div class="actions"><button onclick="showAdmin()">Administrateur</button><button class="ghost" onclick="showGuide()">Guide animateur</button></div></div><div class="hero-stats"><div class="stat"><strong>${GAMES.length}</strong><span>jeux</span></div><div class="stat"><strong>${Object.keys(MISSIONS).length*12}</strong><span>missions</span></div><div class="stat"><strong>2</strong><span>espaces</span></div><div class="stat"><strong>1er</strong><span>gagne</span></div></div></div><div class="tabs"><button class="tabbtn active" onclick="showAdmin()">Administrateur</button><button class="tabbtn" onclick="showGuide()">Guide animateur</button></div><div id="mainpanel"></div>`;
+ showAdmin();
 }
-async function init(){
-  GAMES = await fetch('./data/games.json').then(r=>r.json());
-  SCENARIOS = await fetch('./data/scenarios.json').then(r=>r.json());
-  MISSIONS = await fetch('./data/missions.json').then(r=>r.json());
-
-  qs('#countGames').textContent = GAMES.length;
-  qs('#countScenarios').textContent = SCENARIOS.length;
-  qs('#countMissions').textContent = MISSIONS.length;
-
-  qs('#gameSelect').innerHTML = GAMES.map(g=>`<option value="${g.key}">${g.title}</option>`).join('');
-  qs('#ageSelect').innerHTML = ['6-10','11-17','18+'].map(v=>`<option value="${v}" ${v==='11-17'?'selected':''}>${v==='6-10'?'Enfants 6–10 ans':v==='11-17'?'Ados 11–17 ans':'Adultes 18+'}</option>`).join('');
-  qs('#difficultySelect').innerHTML = ['facile','moyen','difficile'].map(v=>`<option value="${v}" ${v==='moyen'?'selected':''}>${v==='facile'?'Accessible':v==='moyen'?'Équilibré':'Challenge'}</option>`).join('');
-  qs('#teamCount').innerHTML = Array.from({length:7}, (_,i)=>`<option value="${i+2}">${i+2} équipes</option>`).join('');
-  qs('#answersScenarioSelect').innerHTML = SCENARIOS.map(s=>`<option value="${s.id}">${s.game_title} · ${s.difficulty_label}</option>`).join('');
-
-  renderLibrary();
-  preparePlayerLobbyFromCurrentSession();
-  renderLiveBoard();
-  renderAnswers();
-  hydratePlayerLink();
+function active(name){qsa('.tabbtn').forEach(b=>b.classList.toggle('active',b.textContent.trim()===name))}
+function showAdmin(){
+ active('Administrateur');
+ qs('#mainpanel').innerHTML=`<section class="panel"><h2>Préparer une session</h2><div class="notice">Choisis le jeu, l’âge, la difficulté, le nombre d’équipes et la durée. Ensuite l’app génère un lien direct par équipe. Chaque équipe pourra saisir son nom et les noms des joueurs, puis commencer sans passer par l’administrateur.</div><div class="row"><div><label>Nom de session</label><input id="sessionName" value="Session FAFATRAINING"></div><div><label>Jeu</label><select id="gameSelect">${GAMES.map(g=>`<option value="${g.key}">${g.title}</option>`).join('')}</select></div><div><label>Âge</label><select id="ageSelect"><option value="6-10">Enfants 6–10 ans</option><option value="11-17" selected>Ados 11–17 ans</option><option value="18+">Adultes 18+</option></select></div><div><label>Difficulté</label><select id="difficultySelect"><option value="facile">Accessible</option><option value="moyen" selected>Équilibré</option><option value="difficile">Challenge</option></select></div></div><div class="row3" style="margin-top:14px"><div><label>Nombre d’équipes</label><select id="teamCount">${Array.from({length:8},(_,i)=>`<option value="${i+2}">${i+2} équipes</option>`).join('')}</select></div><div><label>Durée totale</label><select id="durationSelect"><option value="30">30 min</option><option value="45">45 min</option><option value="60" selected>60 min</option><option value="75">75 min</option><option value="90">90 min</option></select></div><div><label>Score de départ</label><input id="basePoints" type="number" value="1000"></div></div><div class="actions"><button onclick="createSession()">Lancer la session</button></div><div id="sessionOutput"></div></section>`;
 }
-function scenarioById(id){ return SCENARIOS.find(s => s.id===id); }
-function missionsByScenario(id){ return MISSIONS.filter(m => m.scenario_id===id).sort((a,b)=>a.number-b.number); }
-function absoluteIndex(){
-  const u = new URL(window.location.href);
-  return u.origin + u.pathname.replace(/\/[^\/]*$/, '/index.html');
+function showGuide(){
+ active('Guide animateur');
+ qs('#mainpanel').innerHTML=`<section class="panel"><h2>Guide animateur</h2><div class="notice"><strong>1.</strong> Prépare une session.<br><strong>2.</strong> Envoie à chaque équipe son lien direct.<br><strong>3.</strong> Chaque équipe écrit son nom et ses joueurs.<br><strong>4.</strong> Lis la fiche animateur pour avoir question, réponse et indice à chaque manche.<br><strong>5.</strong> La première équipe qui termine toutes les manches gagne.</div></section>`;
 }
-function playerLink(sid, teamCode, duration, sessionId){
-  return `${absoluteIndex()}?player=1&scenario=${encodeURIComponent(sid)}&team=${encodeURIComponent(teamCode)}&duration=${duration}&session=${encodeURIComponent(sessionId)}`;
+function createSession(){
+ const sessionName=qs('#sessionName').value.trim()||'Session FAFATRAINING';
+ const gameKey=qs('#gameSelect').value, age=qs('#ageSelect').value, difficulty=qs('#difficultySelect').value;
+ const teamCount=Number(qs('#teamCount').value), duration=Number(qs('#durationSelect').value), basePoints=Number(qs('#basePoints').value||1000);
+ const sessionId=`${gameKey}-${Date.now()}`, teamCodes=['ALPHA','BRAVO','CHARLIE','DELTA','ECHO','FOXTROT','GAMMA','OMEGA'].slice(0,teamCount);
+ const s=store(); s.sessions[sessionId]={sessionId,sessionName,gameKey,age,difficulty,duration,basePoints,teams:teamCodes.map((code,i)=>({code,teamName:`Équipe ${i+1}`,playerNames:'',currentMission:0,points:basePoints,penalties:0,hints:0,finished:false,finishedAt:null}))}; save(s);
+ const game=GAMES.find(g=>g.key===gameKey);
+ qs('#sessionOutput').innerHTML=`<div class="grid"><article class="card"><h3>Session créée</h3><p><strong>Nom :</strong> ${esc(sessionName)}</p><p><strong>Jeu :</strong> ${esc(game.title)}</p><p><strong>Âge :</strong> ${ageLabel(age)} · <strong>Difficulté :</strong> ${diffLabel(difficulty)} · <strong>Durée :</strong> ${duration} min</p><div class="actions"><button class="ghost" onclick="showSheet('${sessionId}')">Voir la fiche animateur</button></div></article>${s.sessions[sessionId].teams.map(t=>`<article class="card"><div class="pillbar"><span class="pill">${esc(game.title)}</span><span class="pill">${esc(t.code)}</span></div><h3>${esc(t.teamName)}</h3><p><strong>Lien direct :</strong><br><span class="small">${esc(linkFor(sessionId,t.code))}</span></p><div class="actions"><button onclick="navigator.clipboard.writeText('${linkFor(sessionId,t.code)}')">Copier le lien</button><button class="ghost" onclick="window.open('${linkFor(sessionId,t.code)}','_blank')">Ouvrir</button></div></article>`).join('')}</div><div id="sheetHolder"></div>`;
 }
-function qrFor(url){ return `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(url)}`; }
-
-function prepareSession(){
-  const gameKey = qs('#gameSelect').value;
-  const age = qs('#ageSelect').value;
-  const diff = qs('#difficultySelect').value;
-  const teamCount = Number(qs('#teamCount').value || 2);
-  const duration = Number(qs('#durationSelect').value || 60);
-  const name = qs('#sessionName').value || 'Événement FAFATRAINING';
-  const scenario = SCENARIOS.find(s => s.game_key===gameKey && s.age_key===age && s.difficulty_key===diff);
-  if(!scenario){ qs('#sessionSummary').textContent = 'Aucun scénario trouvé.'; return; }
-
-  const store = getStore();
-  const sessionId = 'S' + Date.now();
-  store.currentSession = sessionId;
-  store.sessions[sessionId] = {
-    id: sessionId,
-    name,
-    scenarioId: scenario.id,
-    duration,
-    createdAt: new Date().toISOString(),
-    teams: TEAM_CODES.slice(0, teamCount).map((code, i)=>({
-      code, teamName:`Équipe ${i+1}`, playerNames:'',
-      missionIndex:0, progress:0, status:'En attente',
-      lastAnswer:'-', history:[], hintsUsed:0, errors:0, points:1000,
-      finished:false, finishedAt:null
-    })),
-    logs:[]
-  };
-  setStore(store);
-
-  const ms = missionsByScenario(scenario.id);
-  qs('#answersScenarioSelect').value = scenario.id;
-  qs('#sessionSummary').innerHTML = `<strong>${esc(name)}</strong><br>Jeu : <strong>${esc(scenario.game_title)}</strong> · Difficulté : <strong>${esc(scenario.difficulty_label)}</strong><br>Durée : <strong>${duration} min</strong> · Manches : <strong>${ms.length}</strong><br>Objectif : finir toutes les manches avant les autres équipes.`;
-  qs('#scenarioPreview').innerHTML = `<article class="card" style="border-color:${esc(scenario.accent)}77"><div class="pillbar"><span class="pill">${esc(scenario.game_title)}</span><span class="pill">${esc(scenario.family)}</span><span class="pill">${esc(scenario.difficulty_label)}</span></div><h3>Présentation</h3><p>${esc(scenario.hook)}</p><p class="meta"><strong>Nom de session :</strong> ${esc(name)} · <strong>Utilité :</strong> identifier ton événement, ton groupe ou ton export.</p></article>`;
-  qs('#teamLinks').innerHTML = store.sessions[sessionId].teams.map((team, i)=>{
-    const link = playerLink(scenario.id, team.code, duration, sessionId);
-    return `<article class="card"><h3>${esc(team.teamName)}</h3><p><strong>Code :</strong> ${esc(team.code)}</p><p><strong>Lien joueur :</strong><br><small>${esc(link)}</small></p><div class="actions"><button onclick="copyLink('${link.replace(/'/g,'&#39;')}')">Copier le lien</button><button class="ghost" onclick="window.open('${link.replace(/'/g,'&#39;')}','_blank')">Ouvrir</button></div><img class="qr-img" src="${qrFor(link)}" alt="QR ${esc(team.code)}"></article>`;
-  }).join('');
-  preparePlayerLobbyFromCurrentSession();
-  renderLiveBoard();
-  renderAnswers();
+function showSheet(sessionId){
+ const s=store().sessions[sessionId], game=GAMES.find(g=>g.key===s.gameKey), list=MISSIONS[s.gameKey]||[];
+ qs('#sheetHolder').innerHTML=`<section class="panel"><h2>Fiche animateur — ${esc(game.title)}</h2><div class="notice"><strong>Session :</strong> ${esc(s.sessionName)}<br><strong>Âge :</strong> ${ageLabel(s.age)} · <strong>Difficulté :</strong> ${diffLabel(s.difficulty)} · <strong>Durée :</strong> ${s.duration} min</div><div class="grid">${list.map((m,i)=>`<article class="sheet-card"><div class="pillbar"><span class="pill">Manche ${i+1}</span><span class="pill">${m.type}</span></div><h3>${esc(m.question)}</h3>${m.options?`<p><strong>Choix :</strong><br>${m.options.map(o=>esc(o)).join('<br>')}</p>`:''}<p><strong>Réponse :</strong> ${Array.isArray(m.answer)?m.answer.join(', '):esc(m.answer)}</p><p><strong>Indice :</strong> ${esc(m.hint)}</p></article>`).join('')}</div></section>`;
 }
-
-function renderPlayerTeams(session){
-  const grid = qs('#playerTeamsGrid');
-  const note = qs('#playerTeamsNotice');
-  if(!grid || !note) return;
-  if(!session){
-    note.textContent = 'Aucune session active côté administrateur.';
-    grid.innerHTML = '';
-    return;
-  }
-  note.innerHTML = `<strong>Session active :</strong> ${esc(session.name)} · ${session.teams.length} équipe(s)`;
-  grid.innerHTML = session.teams.map(team=>`<article class="card"><h3>${esc(team.teamName)}</h3><p><strong>Code :</strong> ${esc(team.code)}</p><p><strong>Joueurs :</strong> ${esc(team.playerNames || '-')}</p></article>`).join('');
+function param(n){return new URLSearchParams(location.search).get(n)}
+function showPlayer(sessionId,teamCode){
+ const s=store().sessions[sessionId];
+ if(!s){qs('#app').innerHTML=`<section class="panel"><h2>Session introuvable</h2><div class="notice">Le lien reçu ne correspond à aucune session enregistrée sur cet appareil.</div></section>`;return}
+ const team=s.teams.find(t=>t.code===teamCode), game=GAMES.find(g=>g.key===s.gameKey);
+ if(!team){qs('#app').innerHTML=`<section class="panel"><h2>Équipe introuvable</h2><div class="notice">Le code équipe demandé n’existe pas dans cette session.</div></section>`;return}
+ qs('#app').innerHTML=`<div class="hero"><div><img src="./assets/logo.jpeg" class="hero-logo" alt="FAFATRAINING"></div><div><div class="kicker">${esc(game.title)}</div><h1>${esc(game.tagline)}</h1><div class="subtitle">${esc(game.story)}</div></div><div class="hero-stats"><div class="stat"><strong>${esc(team.code)}</strong><span>code équipe</span></div><div class="stat"><strong>${s.duration}</strong><span>minutes</span></div><div class="stat"><strong>12</strong><span>manches</span></div><div class="stat"><strong>1er</strong><span>gagne</span></div></div></div><section class="panel"><h2>Entrée d’équipe</h2><div class="notice">Vous entrez directement dans votre jeu. Renseignez simplement votre nom d’équipe et les joueurs avant de lancer la partie.</div><div class="row3"><div><label>Code équipe</label><input value="${esc(team.code)}" disabled></div><div><label>Nom d’équipe</label><input id="teamNameField" value="${esc(team.teamName)}"></div><div><label>Joueurs</label><input id="playerNamesField" placeholder="Ex : Léa, Tom, Lina, Hugo" value="${esc(team.playerNames||'')}"></div></div><div class="actions"><button onclick="startPlayer('${sessionId}','${teamCode}')">COMMENCER</button></div></section>`;
 }
-function preparePlayerLobbyFromCurrentSession(){
-  const store = getStore();
-  const sid = store.currentSession;
-  const session = sid ? store.sessions[sid] : null;
-  const select = qs('#playerScenarioSelect');
-  const codeInput = qs('#teamCodeInput');
-  if(!select) return;
-  if(session){
-    const scenario = scenarioById(session.scenarioId);
-    select.innerHTML = `<option value="${scenario.id}">${scenario.game_title}</option>`;
-    qs('#playerDurationSelect').value = String(session.duration);
-    let dl = qs('#teamCodeList');
-    if(!dl){
-      dl = document.createElement('datalist');
-      dl.id = 'teamCodeList';
-      codeInput.parentNode.appendChild(dl);
-      codeInput.setAttribute('list','teamCodeList');
-    }
-    dl.innerHTML = session.teams.map(t => `<option value="${t.code}">${t.teamName}</option>`).join('');
-    if(!codeInput.value) codeInput.value = session.teams[0].code;
-    renderPlayerTeams(session);
-  } else {
-    select.innerHTML = SCENARIOS.map(s=>`<option value="${s.id}">${s.game_title}</option>`).join('');
-    renderPlayerTeams(null);
-  }
+function startPlayer(sessionId,teamCode){
+ const s=store(), sess=s.sessions[sessionId], team=sess.teams.find(t=>t.code===teamCode);
+ team.teamName=qs('#teamNameField').value.trim()||team.teamName; team.playerNames=qs('#playerNamesField').value.trim(); save(s);
+ playerState={sessionId,teamCode,gameKey:sess.gameKey,duration:sess.duration,missionIndex:team.currentMission||0,points:team.points||sess.basePoints,penalties:team.penalties||0,hints:team.hints||0,remainingSeconds:sess.duration*60,timer:null};
+ const game=GAMES.find(g=>g.key===sess.gameKey);
+ qs('#app').innerHTML=`<div class="mission-wrap"><article class="mission-card"><div class="pillbar"><span class="pill">${esc(game.title)}</span><span class="pill">${esc(team.teamName)}</span></div><h2 class="mission-title">Prêt ? Votre mission commence maintenant.</h2><p class="context">${esc(game.story)}</p><div class="notice"><strong>Objectif :</strong> terminer toutes les missions avant les autres équipes.<br><strong>Consignes :</strong> lisez le contexte, répondez clairement, utilisez l’aide seulement si besoin.<br><strong>Pénalités :</strong> une aide coûte du temps et des points. Les erreurs coûtent aussi des points.<br><strong>Bonus :</strong> terminer très vite rapporte un bonus final.</div><div class="actions"><button onclick="enterGame()">ENTRER DANS LA PARTIE</button></div></article></div>`;
 }
-function hydratePlayerLink(){
-  const p = new URLSearchParams(window.location.search);
-  if(p.get('player') === '1' && p.get('scenario')){
-    openTab('player');
-    const sid = p.get('scenario');
-    qs('#playerScenarioSelect').innerHTML = `<option value="${sid}">${scenarioById(sid).game_title}</option>`;
-    qs('#teamCodeInput').value = (p.get('team') || '').toUpperCase();
-    qs('#playerDurationSelect').value = String(Number(p.get('duration') || 60));
-    currentPlayer.sessionId = p.get('session') || '';
-    const store = getStore();
-    if(currentPlayer.sessionId && store.sessions[currentPlayer.sessionId]){
-      const session = store.sessions[currentPlayer.sessionId];
-      renderPlayerTeams(session);
-      const team = session.teams.find(t => t.code === qs('#teamCodeInput').value);
-      if(team){
-        qs('#teamNameInput').value = team.teamName || '';
-        qs('#playerNamesInput').value = team.playerNames || '';
-      }
-    }
-  }
+function fmt(t){const mm=String(Math.floor(t/60)).padStart(2,'0');const ss=String(t%60).padStart(2,'0');return `${mm}:${ss}`}
+function startTimer(){if(playerState.timer)return;playerState.timer=setInterval(()=>{playerState.remainingSeconds--;const t=qs('#timer');if(t)t.textContent=fmt(playerState.remainingSeconds);if(playerState.remainingSeconds<=0){clearInterval(playerState.timer);playerState.timer=null;finish(false)}},1000)}
+function context(gameKey,i){
+ const map={
+  undercover:["Une série de mots circule. Un seul mot casse l’univers commun.","Quelqu’un a forcé une définition. Un détail trahit l’intrus.","Un joueur a parlé trop large. Un autre trop précis."],
+  loupsgarous:["Le village a repéré une incohérence pendant le débat.","La nuit a semé le doute. Le jour doit trancher.","Un comportement semble casser la logique collective."],
+  traitreabord:["Le navire avance, mais une action ne correspond plus aux procédures.","Un ordre a été transmis. Quelqu’un l’a peut-être déformé.","L’équipage doit décider vite sans tomber dans le sabotage."],
+  burgerquiz:["La manche part vite. Une réponse semble absurde, mais une seule est juste.","Le rythme monte. Il faut trancher sans casser l’ambiance.","Tout va vite, mais la logique existe encore."],
+  mario:["Le niveau semble simple, mais un intrus attend au mauvais endroit.","Un bonus est utile, un autre vous fait perdre du temps.","Le royaume vous teste sur la vitesse et la lecture."],
+  culture:["Une question claire vous attend. Ne surjouez pas, lisez bien.","Le thème change, mais la logique reste simple si vous restez concentrés.","Une seule réponse colle à la bonne catégorie."]
+ };
+ const arr=map[gameKey]||["Le jeu avance. Lisez bien avant de répondre."]; return arr[i%arr.length];
 }
-function copyLink(link){ if(navigator.clipboard) navigator.clipboard.writeText(link); alert('Lien copié.'); }
-
-document.addEventListener('change', (e) => {
-  if(e.target && e.target.id === 'teamCodeInput'){
-    const store = getStore();
-    const sid = currentPlayer.sessionId || store.currentSession;
-    const session = sid && store.sessions[sid] ? store.sessions[sid] : null;
-    if(session){
-      const team = session.teams.find(t => t.code === e.target.value.toUpperCase());
-      if(team){
-        qs('#teamNameInput').value = team.teamName || '';
-        qs('#playerNamesInput').value = team.playerNames || '';
-      }
-    }
-  }
-});
-
-function launchPlayerGame(){
-  const sid = qs('#playerScenarioSelect').value;
-  const teamCode = (qs('#teamCodeInput').value || '').toUpperCase() || 'ALPHA';
-  const duration = Number(qs('#playerDurationSelect').value || 60);
-  const teamName = qs('#teamNameInput').value.trim() || teamCode;
-  const playerNames = qs('#playerNamesInput').value.trim();
-  const store = getStore();
-  if(!currentPlayer.sessionId) currentPlayer.sessionId = store.currentSession || '';
-
-  currentPlayer = {scenarioId:sid, missionIndex:0, duration, teamCode, teamName, playerNames, timer:null, remaining:duration*60, sessionId:currentPlayer.sessionId, hintsUsed:0, points:1000, errors:0, hintPenaltySeconds:0};
-  syncTeamMeta();
-  showIntro();
+function enterGame(){startTimer();renderMission()}
+function renderMission(){
+ const s=store(), sess=s.sessions[playerState.sessionId], team=sess.teams.find(t=>t.code===playerState.teamCode), game=GAMES.find(g=>g.key===playerState.gameKey), list=MISSIONS[playerState.gameKey], m=list[playerState.missionIndex];
+ team.currentMission=playerState.missionIndex; team.points=playerState.points; team.penalties=playerState.penalties; team.hints=playerState.hints; save(s);
+ let block='';
+ if(m.type==='choice'){block=`<div class="choice-grid">${m.options.map((o,i)=>`<button class="choice-btn" onclick="choose('${['A','B','C','D'][i]}')">${esc(o)}</button>`).join('')}</div>`}
+ else if(m.type==='multi'){multiPicked=[]; block=`<div class="choice-grid">${m.options.map((o,i)=>`<button class="choice-btn" onclick="pickMulti('${['A','B','C','D'][i]}',this)">${esc(o)}</button>`).join('')}</div><div class="actions"><button class="ghost" onclick="validateMulti()">Valider la sélection</button></div>`}
+ else {block=`<input id="textAnswer" placeholder="Écris ta réponse ici"><div class="actions"><button onclick="validateText()">Valider</button></div>`}
+ qs('#app').innerHTML=`<div class="mission-wrap"><article class="mission-card"><div class="inline-top"><div class="pillbar"><span class="pill">${esc(game.title)}</span><span class="pill">${esc(team.teamName)}</span><span class="pill">Manche ${playerState.missionIndex+1}/12</span></div><div class="timer" id="timer">${fmt(playerState.remainingSeconds)}</div></div><div class="scoreline"><span class="score-pill">Points : ${playerState.points}</span><span class="score-pill">Aides : ${playerState.hints}</span><span class="score-pill">Pénalités : ${playerState.penalties}</span></div><p class="context"><strong>Contexte :</strong> ${esc(context(playerState.gameKey,playerState.missionIndex))}</p><div class="question">${esc(m.question)}</div>${block}<div class="actions"><button class="ghost" onclick="hint()">Besoin d’aide (-20 pts / -60 s)</button></div><div id="feedback" class="notice">Lis la question, puis réponds. La première équipe qui termine toutes les manches gagne.</div></article></div>`;
 }
-function showIntro(){
-  const scenario = scenarioById(currentPlayer.scenarioId);
-  qs('#playerLobby').classList.add('hidden');
-  qs('#playerGame').classList.add('hidden');
-  qs('#playerIntro').classList.remove('hidden');
-  qs('#introGame').textContent = scenario.game_title;
-  qs('#introTeam').textContent = currentPlayer.teamName || currentPlayer.teamCode;
-  qs('#introTitle').textContent = `Entrée en mission`;
-  qs('#introStory').textContent = scenario.hook;
-  qs('#introRules').innerHTML = `<strong>Objectif :</strong> terminer toutes les manches avant les autres équipes.<br><strong>Règles :</strong> les erreurs peuvent coûter du temps, les indices coûtent du temps et des points, une autre équipe peut vous dépasser à tout moment.<br><strong>Temps :</strong> ${currentPlayer.duration} minutes.`;
+function hint(){const m=MISSIONS[playerState.gameKey][playerState.missionIndex]; playerState.hints+=1; playerState.penalties+=1; playerState.points=Math.max(0,playerState.points-20); playerState.remainingSeconds=Math.max(0,playerState.remainingSeconds-60); qs('#feedback').innerHTML=`<strong>Indice :</strong> ${esc(m.hint)}<br><span class="small">Pénalité appliquée : -20 points et -60 secondes.</span>`; qs('#timer').textContent=fmt(playerState.remainingSeconds)}
+function choose(v){const m=MISSIONS[playerState.gameKey][playerState.missionIndex]; answer(v===m.answer)}
+function pickMulti(v,el){if(multiPicked.includes(v)){multiPicked=multiPicked.filter(x=>x!==v);el.style.outline=''}else{multiPicked.push(v);el.style.outline='2px solid #a9ff4f'}}
+function validateMulti(){const m=MISSIONS[playerState.gameKey][playerState.missionIndex]; answer([...m.answer].sort().join(',')===[...multiPicked].sort().join(','))}
+function validateText(){const m=MISSIONS[playerState.gameKey][playerState.missionIndex], val=(qs('#textAnswer').value||'').trim().toLowerCase(); answer(val===String(m.answer).trim().toLowerCase())}
+function answer(ok){
+ const list=MISSIONS[playerState.gameKey];
+ if(ok){playerState.points+=25; qs('#feedback').innerHTML='<strong>Bonne réponse.</strong> Vous passez à la manche suivante.'; if(playerState.missionIndex>=list.length-1){setTimeout(()=>finish(true),400)}else{playerState.missionIndex+=1; setTimeout(renderMission,450)}}
+ else {playerState.penalties+=1; playerState.points=Math.max(0,playerState.points-10); playerState.remainingSeconds=Math.max(0,playerState.remainingSeconds-15); qs('#feedback').innerHTML='<strong>Mauvaise réponse.</strong> Relis bien la question.<br><span class="small">Pénalité : -10 points et -15 secondes.</span>'; qs('#timer').textContent=fmt(playerState.remainingSeconds)}
 }
-function enterMission(){
-  qs('#playerIntro').classList.add('hidden');
-  qs('#playerGame').classList.remove('hidden');
-  renderPlayerGame();
-  startGlobalTimer();
+function finish(success){
+ if(playerState.timer){clearInterval(playerState.timer); playerState.timer=null}
+ const s=store(), sess=s.sessions[playerState.sessionId], team=sess.teams.find(t=>t.code===playerState.teamCode);
+ team.finished=success; team.points=playerState.points; team.penalties=playerState.penalties; team.hints=playerState.hints; team.finishedAt=Date.now();
+ const spent=sess.duration*60-playerState.remainingSeconds; if(success){if(spent<=sess.duration*60*0.5)team.points+=100; else if(spent<=sess.duration*60*0.75)team.points+=50}
+ save(s);
+ const ranked=[...sess.teams].sort((a,b)=>{const af=a.finished?1:0,bf=b.finished?1:0;if(bf!==af)return bf-af;if((b.points||0)!==(a.points||0))return(b.points||0)-(a.points||0);return(a.finishedAt||999999999999)-(b.finishedAt||999999999999)});
+ qs('#app').innerHTML=`<div class="mission-wrap"><article class="mission-card"><h2 class="mission-title">${success?'Fin de partie':'Temps écoulé'}</h2><p class="context">${success?'Mission accomplie. Votre équipe a terminé toutes les manches.':'Le temps est écoulé. Votre équipe n’a pas terminé à temps.'}</p><div class="notice"><strong>Score final :</strong> ${team.points}<br><strong>Aides utilisées :</strong> ${team.hints}<br><strong>Pénalités :</strong> ${team.penalties}</div><h3>Classement provisoire</h3><div class="grid">${ranked.slice(0,3).map((t,i)=>`<article class="card"><h3>${i===0?'🥇':i===1?'🥈':'🥉'} ${esc(t.teamName)}</h3><p>${t.points||0} points</p></article>`).join('')}</div></article></div>`;
 }
-function syncTeamMeta(){
-  const store = getStore();
-  if(!currentPlayer.sessionId || !store.sessions[currentPlayer.sessionId]) return;
-  const session = store.sessions[currentPlayer.sessionId];
-  const team = session.teams.find(t=>t.code===currentPlayer.teamCode);
-  if(team){
-    team.teamName = currentPlayer.teamName || team.teamName;
-    team.playerNames = currentPlayer.playerNames || team.playerNames;
-    team.missionIndex = currentPlayer.missionIndex;
-    team.points = currentPlayer.points;
-    team.hintsUsed = currentPlayer.hintsUsed;
-    team.errors = currentPlayer.errors;
-    team.progress = Math.round(((currentPlayer.missionIndex+1) / missionsByScenario(session.scenarioId).length) * 100);
-  }
-  setStore(store);
-  renderLiveBoard();
-}
-function updateTeamStatus(status, answer='-'){
-  const store = getStore();
-  if(!currentPlayer.sessionId || !store.sessions[currentPlayer.sessionId]) return;
-  const session = store.sessions[currentPlayer.sessionId];
-  const team = session.teams.find(t=>t.code===currentPlayer.teamCode);
-  if(team){
-    team.status = status;
-    team.lastAnswer = answer;
-    const total = missionsByScenario(session.scenarioId).length;
-    team.progress = Math.round(((currentPlayer.missionIndex+1)/total)*100);
-    team.missionIndex = currentPlayer.missionIndex;
-    team.points = currentPlayer.points;
-    team.hintsUsed = currentPlayer.hintsUsed;
-    team.errors = currentPlayer.errors;
-    if(currentPlayer.missionIndex >= total-1 && status === 'Bonne réponse'){
-      team.finished = true;
-      team.finishedAt = new Date().toISOString();
-    }
-    team.history.push({mission: currentPlayer.missionIndex+1, answer, status, ts: new Date().toLocaleTimeString('fr-FR')});
-  }
-  session.logs.push({team: currentPlayer.teamCode, answer, mission: currentPlayer.missionIndex+1, status, ts: new Date().toLocaleTimeString('fr-FR')});
-  setStore(store);
-  renderLiveBoard();
-  renderAnswers();
-}
-function renderMissionPayload(payload, type){
-  if(!payload) return '';
-  if(type === 'text'){
-    return `<div class="notice"><strong>Éléments visibles :</strong> ${payload.items.map(x=>`<span class="pill">${esc(x)}</span>`).join(' ')}</div>`;
-  }
-  if(type === 'choice' || type === 'vote'){
-    return `<div class="notice"><strong>Données :</strong><ul>${payload.options.map(o=>`<li>${esc(o)}</li>`).join('')}</ul></div>`;
-  }
-  if(type === 'order'){
-    return `<div class="notice"><strong>Éléments à remettre dans l’ordre :</strong><ul>${payload.items.map(o=>`<li>${esc(o)}</li>`).join('')}</ul></div>`;
-  }
-  if(type === 'code'){
-    return `<div class="notice"><strong>Indices :</strong><ul>${payload.clues.map(o=>`<li>${esc(o)}</li>`).join('')}</ul></div>`;
-  }
-  if(type === 'validation'){
-    return `<div class="notice"><strong>Mission terrain :</strong> ${esc(payload.task)}</div>`;
-  }
-  return '';
-}
-function pressureMessage(){
-  const store = getStore();
-  const sid = currentPlayer.sessionId || store.currentSession;
-  const session = sid && store.sessions[sid] ? store.sessions[sid] : null;
-  if(!session) return "Terminez toutes les manches avant les autres équipes.";
-  const me = session.teams.find(t=>t.code===currentPlayer.teamCode);
-  const others = session.teams.filter(t=>t.code!==currentPlayer.teamCode);
-  const lead = others.sort((a,b)=>b.progress-a.progress)[0];
-  if(!lead) return "Aucune autre équipe n’a encore pris l’avantage.";
-  if(lead.progress > me.progress) return `⚠️ ${lead.teamName} a de l’avance. Accélérez pour revenir dans la course.`;
-  if(lead.progress === me.progress) return `🔥 Vous êtes au coude à coude avec ${lead.teamName}. Chaque manche compte.`;
-  return `💣 Vous êtes devant. Gardez votre avance jusqu’à la fin.`;
-}
-function scoreMessage(){
-  return `Points : ${currentPlayer.points} · Indices : ${currentPlayer.hintsUsed} · Erreurs : ${currentPlayer.errors} · Pénalité temps : +${currentPlayer.hintPenaltySeconds}s`;
-}
-function renderAnswerOptions(m){
-  const holder = qs('#answerOptions');
-  if(!holder) return;
-  holder.innerHTML = '';
-  const p = m.payload || {};
-  if(m.answer_type === 'choice' || m.answer_type === 'vote'){
-    const opts = p.options || [];
-    holder.innerHTML = `<div class="choice-grid">${opts.map(opt => {
-      const val = opt.split('·')[0].trim().replace('Option ','').replace(':','').trim();
-      return `<button class="option-btn ghost" onclick="pickAnswer('${esc(val)}')">${esc(opt)}</button>`;
-    }).join('')}</div>`;
-  } else if(m.answer_type === 'text'){
-    holder.innerHTML = `<div class="choice-grid">${(p.items||[]).map(it => `<button class="option-btn ghost" onclick="pickAnswer('${esc(it)}')">${esc(it)}</button>`).join('')}</div>`;
-  } else {
-    holder.innerHTML = '';
-  }
-}
-function pickAnswer(v){
-  qs('#answerInput').value = v;
-}
-function renderPlayerGame(){
-  const scenario = scenarioById(currentPlayer.scenarioId);
-  const ms = missionsByScenario(currentPlayer.scenarioId);
-  const m = ms[currentPlayer.missionIndex];
-  if(!scenario || !m) return;
-
-  const total = ms.length;
-  const phaseText = currentPlayer.missionIndex < Math.ceil(total*0.33) ? 'PHASE 1 — IMMERSION' :
-                    currentPlayer.missionIndex < Math.ceil(total*0.75) ? 'PHASE 2 — PRESSION' :
-                    'PHASE 3 — FINAL';
-
-  qs('#pillGame').textContent = scenario.game_title;
-  qs('#pillAge').textContent = '';
-  qs('#pillDiff').textContent = '';
-  qs('#pillTeam').textContent = currentPlayer.teamName || currentPlayer.teamCode;
-  qs('#missionProgress').textContent = `${currentPlayer.missionIndex+1}/${total}`;
-  qs('#playerGameTitle').textContent = `${phaseText}`;
-  qs('#playerHook').textContent = scenario.hook;
-  qs('#missionTitle').textContent = m.title;
-  qs('#missionSummary').textContent = m.summary.replace(/^Phase \d · [^.]+\.\s*/,'');
-  qs('#missionInstruction').textContent = m.instruction;
-  qs('#missionType').textContent = (m.answer_type === 'validation' || m.answer_type === 'vote') ? 'Décision / validation animateur' : 'Choix, code ou réponse à entrer';
-  qs('#hintBox').textContent = 'Le bouton aide reste discret. Si vous l’utilisez, vous perdez du temps et des points.';
-  qs('#validationResult').textContent = 'Lisez la mission, observez les données puis répondez.';
-  qs('#missionQr').src = qrFor(playerLink(currentPlayer.scenarioId, currentPlayer.teamCode, currentPlayer.duration, currentPlayer.sessionId) + `&mission=${m.number}`);
-  qs('#teamMeta').textContent = `Équipe : ${currentPlayer.teamName || currentPlayer.teamCode} · Joueurs : ${currentPlayer.playerNames || '-'}`;
-  qs('#pressureBox').textContent = pressureMessage();
-  qs('#scoreBox').textContent = scoreMessage();
-
-  let holder = qs('#missionPayload');
-  if(!holder){
-    holder = document.createElement('div');
-    holder.id = 'missionPayload';
-    qs('#missionInstruction').parentNode.insertAdjacentElement('afterend', holder);
-  }
-  holder.innerHTML = renderMissionPayload(m.payload, m.answer_type);
-  renderAnswerOptions(m);
-
-  syncTeamMeta();
-  updateTeamStatus('En mission', '-');
-
-  const hintButton = qs('#hintButton');
-  if(hintButton){
-    hintButton.style.opacity = '0.4';
-    hintButton.disabled = true;
-    clearTimeout(window.__hintTimer);
-    window.__hintTimer = setTimeout(() => {
-      hintButton.style.opacity = '1';
-      hintButton.disabled = false;
-    }, 10000);
-  }
-}
-function startGlobalTimer(){
-  if(currentPlayer.timer) return;
-  currentPlayer.timer = setInterval(()=>{
-    currentPlayer.remaining -= 1;
-    updateGlobalTimer();
-    if(currentPlayer.remaining <= 0){
-      clearInterval(currentPlayer.timer);
-      currentPlayer.timer = null;
-      qs('#globalTimer').textContent = 'Temps écoulé';
-      updateTeamStatus('Temps écoulé', '-');
-    }
-  }, 1000);
-}
-function updateGlobalTimer(){
-  const total = Math.max(0, currentPlayer.remaining || 0);
-  const mm = String(Math.floor(total / 60)).padStart(2, '0');
-  const ss = String(total % 60).padStart(2, '0');
-  qs('#globalTimer').textContent = `${mm}:${ss}`;
-}
-function prevMission(){ if(currentPlayer.missionIndex > 0){ currentPlayer.missionIndex -= 1; renderPlayerGame(); } }
-function nextMission(){
-  const total = missionsByScenario(currentPlayer.scenarioId).length;
-  if(currentPlayer.missionIndex < total-1){
-    currentPlayer.missionIndex += 1;
-    renderPlayerGame();
-  }
-}
-function useHint(){
-  const ms = missionsByScenario(currentPlayer.scenarioId);
-  const m = ms[currentPlayer.missionIndex];
-  currentPlayer.hintsUsed += 1;
-  currentPlayer.hintPenaltySeconds += 60;
-  currentPlayer.remaining = Math.max(0, currentPlayer.remaining - 60);
-  currentPlayer.points = Math.max(0, currentPlayer.points - 20);
-  qs('#hintBox').textContent = `${m.hint} (+60 secondes de pénalité, -20 points)`;
-  qs('#scoreBox').textContent = scoreMessage();
-  updateGlobalTimer();
-  updateTeamStatus('Indice utilisé', 'indice');
-}
-function backToLobby(){
-  if(currentPlayer.timer){ clearInterval(currentPlayer.timer); currentPlayer.timer = null; }
-  updateTeamStatus('Lobby', '-');
-  qs('#playerIntro').classList.add('hidden');
-  qs('#playerGame').classList.add('hidden');
-  qs('#playerLobby').classList.remove('hidden');
-  currentPlayer = {scenarioId:null, missionIndex:0, duration:60, teamCode:'', teamName:'', playerNames:'', timer:null, remaining:0, sessionId:'', hintsUsed:0, points:1000, errors:0, hintPenaltySeconds:0};
-  preparePlayerLobbyFromCurrentSession();
-  openTab('player');
-}
-function validateCurrentMission(){
-  const ms = missionsByScenario(currentPlayer.scenarioId);
-  const m = ms[currentPlayer.missionIndex];
-  const answer = (qs('#answerInput').value || '').trim().toLowerCase();
-  if(['vote','validation'].includes(m.answer_type)){
-    qs('#validationResult').textContent = 'Validation animateur nécessaire pour cette manche.';
-    qs('#hintBox').textContent = m.hint;
-    updateTeamStatus('Attente validation', 'validation animateur');
-    return;
-  }
-  if(!answer){
-    qs('#validationResult').textContent = 'Entre une réponse.';
-    return;
-  }
-  if(answer === String(m.expected_answer).trim().toLowerCase()){
-    qs('#validationResult').innerHTML = '✅ <strong>Bonne réponse</strong> — vous avancez.';
-    currentPlayer.errors = 0;
-    currentPlayer.points += 25;
-    qs('#scoreBox').textContent = scoreMessage();
-    updateTeamStatus('Bonne réponse', answer);
-    if(currentPlayer.missionIndex < ms.length - 1){
-      currentPlayer.missionIndex += 1;
-      setTimeout(renderPlayerGame, 500);
-    } else {
-      finishRun();
-    }
-  } else {
-    currentPlayer.errors += 1;
-    currentPlayer.points = Math.max(0, currentPlayer.points - 10);
-    currentPlayer.remaining = Math.max(0, currentPlayer.remaining - 15);
-    qs('#validationResult').innerHTML = '❌ <strong>Réponse incorrecte</strong>.';
-    qs('#hintBox').textContent = m.hint;
-    qs('#scoreBox').textContent = scoreMessage();
-    updateGlobalTimer();
-    updateTeamStatus('Erreur', answer);
-    if(currentPlayer.errors >= 3){
-      qs('#hintBox').textContent = `${m.hint} (3 erreurs : indice exceptionnel débloqué, +30 sec, -10 pts supplémentaires)`;
-      currentPlayer.remaining = Math.max(0, currentPlayer.remaining - 30);
-      currentPlayer.points = Math.max(0, currentPlayer.points - 10);
-      currentPlayer.errors = 0;
-      qs('#scoreBox').textContent = scoreMessage();
-      updateGlobalTimer();
-    }
-  }
-}
-function finishRun(){
-  if(currentPlayer.timer){ clearInterval(currentPlayer.timer); currentPlayer.timer = null; }
-  const timeSpent = currentPlayer.duration*60 - currentPlayer.remaining + currentPlayer.hintPenaltySeconds;
-  if(timeSpent <= currentPlayer.duration*30){ currentPlayer.points += 100; }
-  else if(timeSpent <= currentPlayer.duration*45){ currentPlayer.points += 50; }
-
-  updateTeamStatus('Terminé', 'finish');
-  const store = getStore();
-  const session = currentPlayer.sessionId && store.sessions[currentPlayer.sessionId] ? store.sessions[currentPlayer.sessionId] : null;
-  let podium = '';
-  if(session){
-    const ranked = [...session.teams].sort((a,b)=>{
-      if((b.progress||0)!==(a.progress||0)) return (b.progress||0)-(a.progress||0);
-      return (b.points||0)-(a.points||0);
-    });
-    podium = ranked.slice(0,3).map((t,i)=>`${i===0?'🥇':i===1?'🥈':'🥉'} ${t.teamName} — ${t.points||0} pts`).join('<br>');
-  }
-  qs('#playerGame').innerHTML = `<article class="mission-box"><h2>MISSION ACCOMPLIE</h2><p class="intro-story">Votre équipe a terminé le jeu. Continuez à surveiller le classement jusqu’à la fin de la session.</p><div class="notice"><strong>Score final :</strong> ${currentPlayer.points} pts<br><strong>Indices utilisés :</strong> ${currentPlayer.hintsUsed}<br><strong>Pénalités temps :</strong> +${currentPlayer.hintPenaltySeconds}s</div><div class="notice"><strong>Classement provisoire :</strong><br>${podium || 'Classement indisponible'}</div><div class="actions"><button class="ghost" onclick="backToLobby()">Retour</button></div></article>`;
-}
-function renderLibrary(){
-  const q = (qs('#searchInput').value || '').toLowerCase().trim();
-  qs('#libraryGrid').innerHTML = SCENARIOS.filter(s=>{
-    const blob = [s.game_title, s.family, s.hook, s.difficulty_label].join(' ').toLowerCase();
-    return !q || blob.includes(q);
-  }).map(s=>`
-    <article class="card ${esc(s.theme)}" style="border-color:${esc(s.accent)}77">
-      <div class="pillbar"><span class="pill">${esc(s.game_title)}</span><span class="pill">${esc(s.difficulty_label)}</span></div>
-      <h3>${esc(s.game_title)}</h3>
-      <p>${esc(s.hook)}</p>
-      <p class="meta"><strong>Univers :</strong> ${esc(s.family)} · <strong>Manches :</strong> ${s.round_count}</p>
-      <div class="actions"><button onclick="previewScenario('${s.id}')">Voir le scénario</button></div>
-    </article>`).join('');
-}
-function previewScenario(sid){
-  openTab('library');
-  const s = scenarioById(sid);
-  const ms = missionsByScenario(sid);
-  qs('#libraryGrid').innerHTML = `<article class="card" style="border-color:${esc(s.accent)}77"><div class="pillbar"><span class="pill">${esc(s.game_title)}</span><span class="pill">${esc(s.difficulty_label)}</span></div><h3>${esc(s.game_title)} · ${esc(s.family)}</h3><p>${esc(s.hook)}</p><div class="actions"><button onclick="renderLibrary()">Retour bibliothèque</button></div></article>` + ms.map(m=>`<article class="card"><div class="pillbar"><span class="pill">Mission ${m.number}</span><span class="pill">${esc(m.answer_type)}</span></div><h3>${esc(m.title)}</h3><p><strong>Question / objectif :</strong> ${esc(m.instruction)}</p></article>`).join('');
-}
-function renderLiveBoard(){
-  const store = getStore();
-  const sid = store.currentSession;
-  const session = sid ? store.sessions[sid] : null;
-  const live = qs('#liveBoard');
-  if(!live) return;
-  if(!session){ live.innerHTML = '<div class="notice">Aucune session active.</div>'; return; }
-  const total = missionsByScenario(session.scenarioId).length;
-  const ranked = [...session.teams].sort((a,b)=>{
-    if((b.progress||0)!==(a.progress||0)) return (b.progress||0)-(a.progress||0);
-    return (b.points||0)-(a.points||0);
-  });
-  live.innerHTML = ranked.map((team,i)=>`<article class="card"><h3>${i===0?'🥇 ':i===1?'🥈 ':i===2?'🥉 ':''}${esc(team.teamName || team.code)}</h3><p><strong>Code :</strong> ${esc(team.code)}</p><p><strong>Joueurs :</strong> ${esc(team.playerNames || '-')}</p><p><strong>Progression :</strong> ${team.progress}%</p><p><strong>Mission :</strong> ${team.missionIndex+1} / ${total}</p><p><strong>Points :</strong> ${team.points||1000}</p><p><strong>Statut :</strong> ${esc(team.status)}</p><p><strong>Dernière réponse :</strong> ${esc(team.lastAnswer)}</p></article>`).join('');
-}
-function renderAnswers(){
-  const store = getStore();
-  const sid = store.currentSession;
-  const session = sid ? store.sessions[sid] : null;
-  const scenarioId = qs('#answersScenarioSelect').value || (session ? session.scenarioId : SCENARIOS[0].id);
-  const scenario = scenarioById(scenarioId);
-  const ms = missionsByScenario(scenarioId);
-
-  if(session){
-    const ranked = [...session.teams].sort((a,b)=>{
-      if((b.progress||0)!==(a.progress||0)) return (b.progress||0)-(a.progress||0);
-      return (b.points||0)-(a.points||0);
-    });
-    qs('#answersSessionInfo').innerHTML = `<strong>Session active :</strong> ${esc(session.name)} · ${esc(scenario.game_title)} · ${session.teams.length} équipe(s)`;
-    qs('#answersLiveTeams').innerHTML = ranked.map((team,i)=>`<article class="card"><h3>${i===0?'🥇 ':i===1?'🥈 ':i===2?'🥉 ':''}${esc(team.teamName || team.code)}</h3><p><strong>Code :</strong> ${esc(team.code)}</p><p><strong>Joueurs :</strong> ${esc(team.playerNames || '-')}</p><p><strong>Progression :</strong> ${team.progress}%</p><p><strong>Mission :</strong> ${team.missionIndex+1}</p><p><strong>Points :</strong> ${team.points||1000}</p><p><strong>Indices :</strong> ${team.hintsUsed||0}</p><p><strong>Statut :</strong> ${esc(team.status)}</p></article>`).join('');
-  } else {
-    qs('#answersSessionInfo').textContent = 'Aucune session active pour le moment. Prépare d’abord une partie dans l’onglet administrateur.';
-    qs('#answersLiveTeams').innerHTML = '';
-  }
-  qs('#answersGrid').innerHTML = `<article class="card" style="border-color:${esc(scenario.accent)}77"><h3>${esc(scenario.game_title)} · Console animateur</h3><p>${esc(scenario.hook)}</p><p class="meta">Lis les questions, la réponse attendue et l’indice. Utilise cette vue pour arbitrer les équipes.</p></article>` + ms.map(m=>`<article class="card"><div class="pillbar"><span class="pill">Manche ${m.number}</span><span class="pill">${esc(m.answer_type)}</span></div><h3>${esc(m.title)}</h3><p><strong>Question :</strong> ${esc(m.instruction)}</p><p><strong>Réponse attendue :</strong> ${esc(m.expected_answer)}</p><p><strong>Indice :</strong> ${esc(m.hint)}</p></article>`).join('');
-}
-function resetSession(){
-  const store = getStore();
-  if(store.currentSession && store.sessions[store.currentSession]) delete store.sessions[store.currentSession];
-  store.currentSession = null;
-  setStore(store);
-  qs('#sessionSummary').textContent = 'Session réinitialisée.';
-  qs('#scenarioPreview').innerHTML = '';
-  qs('#teamLinks').innerHTML = '';
-  preparePlayerLobbyFromCurrentSession();
-  renderLiveBoard();
-  renderAnswers();
-}
-function exportSession(){
-  const store = getStore();
-  const sid = store.currentSession;
-  const session = sid ? store.sessions[sid] : null;
-  if(!session){ alert('Aucune session active.'); return; }
-  const blob = new Blob([JSON.stringify(session, null, 2)], {type:'application/json'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `${session.id}_${session.name.replace(/\s+/g,'_')}.json`;
-  a.click();
-  URL.revokeObjectURL(a.href);
-}
-init();
+async function boot(){await loadData();const isPlayer=new URLSearchParams(location.search).get('player')==='1', sessionId=param('session'), teamCode=param('team'); if(isPlayer&&sessionId&&teamCode)showPlayer(sessionId,teamCode); else renderHome()}
+boot();

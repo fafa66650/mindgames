@@ -1,146 +1,107 @@
 [
   {
-    "key": "trahison",
-    "title": "TRAHISON ULTIME : MIND WAR",
-    "family": "Traître / bluff",
-    "theme": "theme-infiltration",
-    "accent": "#ff5b6e",
-    "hook": "Une cellule d’élite a été infiltrée. Les équipes doivent avancer, mais quelqu’un brouille les pistes. Il faut lire, douter et frapper juste au bon moment."
-  },
-  {
-    "key": "meute",
-    "title": "MEUTE NOIRE : NUIT ROUGE",
-    "family": "Loup-garou modernisé",
-    "theme": "theme-night",
-    "accent": "#9f7aea",
-    "hook": "La nuit cache des rôles, des intuitions et des erreurs fatales. Les équipes doivent observer, voter et sentir les incohérences avant l’attaque finale."
+    "key": "loupsgarous",
+    "title": "Loups-garous de Thiercelieux",
+    "family": "Jeu société",
+    "tagline": "Débat, suspicion et vote du village.",
+    "story": "Le village ne dort plus. Chaque nuit, un danger se rapproche. Chaque jour, votre équipe doit analyser les indices, démasquer les comportements incohérents et avancer plus vite que les autres."
   },
   {
     "key": "undercover",
-    "title": "UNDERCOVER X : INFILTRATION",
-    "family": "Undercover modernisé",
-    "theme": "theme-neon",
-    "accent": "#00d5ff",
-    "hook": "Un mot n’est pas le bon. Une personne n’est pas à sa place. Ici, parler trop tue. Parler juste sauve."
+    "title": "Undercover",
+    "family": "Jeu société",
+    "tagline": "Mots proches, intrus caché, discussion tendue.",
+    "story": "Quelqu’un n’a pas le même mot. Quelqu’un doit improviser. Votre équipe doit repérer les réponses qui trahissent l’intrus sans perdre trop de temps."
   },
   {
-    "key": "manipulation",
-    "title": "MANIPULATION : DOUBLE JEU",
-    "family": "Psychologie / retournement",
-    "theme": "theme-psy",
-    "accent": "#ff8c42",
-    "hook": "Tout le monde a un plan. Presque personne ne dit tout. Les manches montent en tension jusqu’au retournement final."
+    "key": "traitreabord",
+    "title": "Traître à bord",
+    "family": "Jeu société",
+    "tagline": "Équipage, sabotage et lecture du groupe.",
+    "story": "Le navire avance, mais une présence à bord sabote discrètement la mission. Il faut lire les signes, éviter les faux indices et garder l’équipage uni jusqu’au final."
   },
   {
-    "key": "criminal",
-    "title": "CODE CRIMINAL : DOSSIER NOIR",
-    "family": "Grand Cluedo",
-    "theme": "theme-crime",
-    "accent": "#ffd166",
-    "hook": "Une affaire complexe s’ouvre devant vous. Reliez lieu, mobile, heure, preuve et suspects. Une seule théorie tient vraiment debout."
+    "key": "million",
+    "title": "Qui veut gagner des millions",
+    "family": "Jeu télé",
+    "tagline": "Montée de paliers et bonnes réponses.",
+    "story": "Chaque question vous rapproche d’un palier supérieur. Mais une seule erreur peut coûter cher. Votre équipe doit gérer son rythme, ses choix et ses aides avec sang-froid."
   },
   {
-    "key": "labyrinthe",
-    "title": "LABYRINTHE MENTAL : SORTIE 9",
-    "family": "Escape game logique",
-    "theme": "theme-lab",
-    "accent": "#4ade80",
-    "hook": "Le complexe se verrouille. À chaque manche, une clé mentale, un code ou une observation vous rapproche de la sortie."
+    "key": "burgerquiz",
+    "title": "Burger Quiz",
+    "family": "Jeu télé",
+    "tagline": "Culture, logique absurde et manches rapides.",
+    "story": "Bienvenue dans une arène de quiz rapide, drôle et piégeuse. Votre équipe doit enchaîner les manches, garder sa lucidité et terminer avec le meilleur score."
   },
   {
-    "key": "zero",
-    "title": "MISSION ZÉRO : SABOTAGE FINAL",
-    "family": "Escape / sabotage",
-    "theme": "theme-alert",
-    "accent": "#ef4444",
-    "hook": "Le protocole final doit être activé avant l’effondrement du système. Le moindre mauvais choix coûte du temps."
-  },
-  {
-    "key": "alpha",
-    "title": "ESCAPE ALPHA : SAS INTERDIT",
-    "family": "Escape base secrète",
-    "theme": "theme-base",
-    "accent": "#38bdf8",
-    "hook": "Chaque salle renferme une pièce du sas final. Il faut lire, ordonner, tester et verrouiller."
+    "key": "lestraitres",
+    "title": "Les Traîtres",
+    "family": "Jeu télé",
+    "tagline": "Missions, suspicion et élimination mentale.",
+    "story": "Tout le monde sourit, mais tout le monde n’est pas loyal. Avancez, observez, doutez et réussissez les missions avant que la confiance ne s’effondre."
   },
   {
     "key": "mario",
-    "title": "MARIO CHAOS RUN : ROYAUME FRACTURÉ",
-    "family": "Aventure fun",
-    "theme": "theme-fun",
-    "accent": "#fb7185",
-    "hook": "Le royaume part en vrille : pièges, raccourcis, portes bonus, chemins trompeurs. Il faut avancer vite, mais pas n’importe comment."
+    "title": "Super Mario Bros",
+    "family": "Jeu vidéo",
+    "tagline": "Niveaux, intrus, bonus et logique fun.",
+    "story": "Le royaume part dans tous les sens. Des objets utiles, des pièges et des faux raccourcis s’enchaînent. Votre équipe doit garder le bon cap jusqu’au boss final."
   },
   {
-    "key": "poke",
-    "title": "POKÉ QUEST : CHASSE LÉGENDAIRE",
-    "family": "Aventure / collection",
-    "theme": "theme-quest",
-    "accent": "#60a5fa",
-    "hook": "Indices, badges, familles, types, symboles : les équipes doivent construire leur collection logique avant le duel final."
+    "key": "pokemon",
+    "title": "Pokémon",
+    "family": "Jeu vidéo",
+    "tagline": "Types, stratégie et esprit d’équipe.",
+    "story": "L’arène vous attend. Chaque manche demande de lire le bon type, la bonne logique ou le bon ordre. Votre équipe doit construire sa meilleure progression jusqu’au duel final."
   },
   {
-    "key": "dragon",
-    "title": "DRAGON FORCE : SAIYAN BREAK",
-    "family": "Montée en puissance",
-    "theme": "theme-power",
-    "accent": "#f97316",
-    "hook": "Chaque manche augmente la charge mentale. Vous grimpez en puissance, mais les erreurs coûtent de plus en plus cher."
+    "key": "zelda",
+    "title": "Zelda",
+    "family": "Jeu vidéo",
+    "tagline": "Mystère, exploration et logique.",
+    "story": "Un ancien royaume vous envoie ses épreuves. Symboles, mécanismes et chemins cachés vous mettent à l’épreuve dans une aventure plus cérébrale que brutale."
   },
   {
     "key": "onepiece",
-    "title": "ONE PIECE LEGACY : TRÉSOR DES MERS",
-    "family": "Carte / exploration",
-    "theme": "theme-sea",
-    "accent": "#22c55e",
-    "hook": "Des cartes, des routes, des symboles marins et des alliances cachent le chemin du trésor. Une route est vraie, les autres vous perdent."
+    "title": "One Piece",
+    "family": "Manga",
+    "tagline": "Route, trésor et esprit d’équipage.",
+    "story": "Votre équipage a retrouvé une piste menant à un trésor oublié. Entre routes marines, indices trompeurs et cartes incomplètes, seul un groupe soudé ira jusqu’au bout."
   },
   {
-    "key": "kpop",
-    "title": "K-POP ARENA : STAGE IMPACT",
-    "family": "Show / rythme",
-    "theme": "theme-stage",
-    "accent": "#e879f9",
-    "hook": "Rythme, mémoire, image, ordre et performance : la scène récompense la précision et la vitesse."
+    "key": "dbz",
+    "title": "Dragon Ball Z",
+    "family": "Manga",
+    "tagline": "Montée en puissance et défis successifs.",
+    "story": "L’énergie monte manche après manche. Votre équipe doit charger, analyser et choisir juste pour libérer sa puissance au bon moment."
   },
   {
-    "key": "cerveau",
-    "title": "CERVEAU D’ÉLITE : CHAMBRE 404",
-    "family": "Cerveau / logique",
-    "theme": "theme-mind",
-    "accent": "#22d3ee",
-    "hook": "Rien n’est offert. Les indices sont propres, mais les liens entre eux sont cachés. Il faut lire comme un stratège."
-  },
-  {
-    "key": "maillon",
-    "title": "MAILLON FATAL : RUPTURE TOTALE",
-    "family": "Quiz télé revisité",
-    "theme": "theme-show",
-    "accent": "#facc15",
-    "hook": "Chaque erreur pèse sur le groupe. Répondez vite, gardez la chaîne et évitez de devenir le maillon fatal."
-  },
-  {
-    "key": "pire",
-    "title": "QUI EST LE PIRE ? : CHAMBRE DE PRESSION",
-    "family": "Téléshow / humour / duel",
-    "theme": "theme-arena",
-    "accent": "#a78bfa",
-    "hook": "Des manches rapides, drôles, piquantes et stratégiques. Ici, on joue avec la pression du groupe."
-  },
-  {
-    "key": "music",
-    "title": "QUIZ MUSICAL : VIBES WAR",
-    "family": "Musique / reconnaissance",
-    "theme": "theme-music",
-    "accent": "#f472b6",
-    "hook": "Ambiances, refrains, indices visuels et suites logiques musicales s’enchaînent jusqu’au morceau final."
+    "key": "naruto",
+    "title": "Naruto",
+    "family": "Manga",
+    "tagline": "Mission ninja, lecture rapide et stratégie.",
+    "story": "Une mission secrète vous attend. Il faut lire les signes, repérer la bonne technique et prendre la bonne décision avant que le plan adverse ne se referme."
   },
   {
     "key": "culture",
-    "title": "CULTURE BATTLE : BURGER QUIZ X",
-    "family": "Culture générale / fun",
-    "theme": "theme-pop",
-    "accent": "#34d399",
-    "hook": "Culture pop, logique fun, manches tordues et questions à relance. Il faut marquer vite et garder la tête froide."
+    "title": "Culture générale",
+    "family": "Quiz",
+    "tagline": "Mix de thèmes et rapidité de lecture.",
+    "story": "Histoire, sport, science, géographie, médias : votre équipe doit encaisser des thèmes variés, rester lucide et prendre de l’avance sans s’éparpiller."
+  },
+  {
+    "key": "music",
+    "title": "Quiz musical",
+    "family": "Quiz",
+    "tagline": "Titres, artistes, ambiances et refrains.",
+    "story": "L’univers sonore change à chaque manche. Votre équipe doit reconnaître, comparer et choisir vite dans une ambiance de scène et de rythme."
+  },
+  {
+    "key": "disney",
+    "title": "Disney",
+    "family": "Univers",
+    "tagline": "Classiques, nouveaux films et magie.",
+    "story": "Entre classiques intemporels et univers récents, votre équipe voyage dans un monde de personnages, lieux, chansons et objets cultes."
   }
 ]
