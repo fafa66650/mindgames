@@ -2,145 +2,141 @@
   "loupsgarous": [
     {
       "type": "choice",
-      "question": "Quel comportement rend un joueur le plus suspect ?",
+      "question": "Débat du village : quelle phrase rend un joueur le plus suspect ?",
       "options": [
-        "A · Il accuse sans argument",
-        "B · Il écoute puis compare",
-        "C · Il prend des notes",
-        "D · Il attend le vote"
+        "A · « Votez contre lui, je n’ai pas d’argument mais je le sens mal. »",
+        "B · « Comparons ses deux dernières explications. »",
+        "C · « On relit les indices avant de voter. »",
+        "D · « On écoute chaque joueur une dernière fois. »"
       ],
       "answer": "A",
-      "hint": "Cherche l’attitude qui casse la logique collective."
+      "hint": "La mauvaise réponse ici pousse le groupe à voter sans base solide."
     },
     {
       "type": "text",
-      "question": "Dans cet univers, le vote doit-il être réfléchi ou improvisé ?",
+      "question": "Dans une partie de déduction, le vote final doit être réfléchi ou improvisé ?",
       "answer": "réfléchi",
-      "hint": "Le vote est trop important pour être lancé au hasard."
+      "hint": "Le bon mot s’oppose à “improvisé”."
     },
     {
       "type": "multi",
-      "question": "Quels éléments peuvent aider à repérer un loup ?",
+      "question": "Quels indices numériques aident à repérer un loup dans cette version appli ?",
       "options": [
-        "A · Contradictions",
-        "B · Justifications floues",
-        "C · Silence total",
-        "D · Cohérence parfaite"
+        "A · Des contradictions dans deux réponses",
+        "B · Un joueur qui change de version",
+        "C · Un joueur qui accuse sans rien justifier",
+        "D · Un joueur qui compare calmement les faits"
       ],
       "answer": [
         "A",
         "B",
         "C"
       ],
-      "hint": "Garde les comportements qui créent du doute."
+      "hint": "Garde seulement les comportements qui augmentent le doute."
     },
     {
       "type": "choice",
-      "question": "Quel comportement rend un joueur le plus suspect ?",
+      "question": "Phase nuit : quel message envoyé par l’animateur semble le plus dangereux pour le village ?",
       "options": [
-        "A · Il accuse sans argument",
-        "B · Il écoute puis compare",
-        "C · Il prend des notes",
-        "D · Il attend le vote"
+        "A · “Gardez vos notes pour le jour.”",
+        "B · “Un témoignage reçu est peut-être faux.”",
+        "C · “Personne ne parle, on observe.”",
+        "D · “Les loups vous souhaitent bonne chance.”"
       ],
-      "answer": "A",
-      "hint": "Cherche l’attitude qui casse la logique collective."
+      "answer": "B",
+      "hint": "Cherche le message qui perturbe l’analyse collective."
     },
     {
       "type": "text",
-      "question": "Dans cet univers, le vote doit-il être réfléchi ou improvisé ?",
-      "answer": "réfléchi",
-      "hint": "Le vote est trop important pour être lancé au hasard."
-    },
-    {
-      "type": "multi",
-      "question": "Quels éléments peuvent aider à repérer un loup ?",
-      "options": [
-        "A · Contradictions",
-        "B · Justifications floues",
-        "C · Silence total",
-        "D · Cohérence parfaite"
-      ],
-      "answer": [
-        "A",
-        "B",
-        "C"
-      ],
-      "hint": "Garde les comportements qui créent du doute."
+      "question": "Le lieu central de ce jeu est un ______.",
+      "answer": "village",
+      "hint": "Ce n’est ni un navire ni une arène."
     },
     {
       "type": "choice",
-      "question": "Quel comportement rend un joueur le plus suspect ?",
+      "question": "Si votre équipe hésite, quelle action aide le plus ?",
       "options": [
-        "A · Il accuse sans argument",
-        "B · Il écoute puis compare",
-        "C · Il prend des notes",
-        "D · Il attend le vote"
+        "A · Accuser au hasard",
+        "B · Relire les incohérences repérées",
+        "C · Passer directement à l’élimination",
+        "D · Ignorer le vote"
       ],
-      "answer": "A",
-      "hint": "Cherche l’attitude qui casse la logique collective."
-    },
-    {
-      "type": "text",
-      "question": "Dans cet univers, le vote doit-il être réfléchi ou improvisé ?",
-      "answer": "réfléchi",
-      "hint": "Le vote est trop important pour être lancé au hasard."
+      "answer": "B",
+      "hint": "La bonne réponse améliore l’analyse du groupe."
     },
     {
       "type": "multi",
-      "question": "Quels éléments peuvent aider à repérer un loup ?",
+      "question": "Qu’est-ce qui doit être observé avant d’éliminer un joueur ?",
       "options": [
-        "A · Contradictions",
-        "B · Justifications floues",
-        "C · Silence total",
-        "D · Cohérence parfaite"
+        "A · Son ton",
+        "B · Ses contradictions",
+        "C · Sa logique",
+        "D · La couleur de son t-shirt"
       ],
       "answer": [
         "A",
         "B",
         "C"
       ],
-      "hint": "Garde les comportements qui créent du doute."
+      "hint": "Reste sur les éléments utiles au débat."
+    },
+    {
+      "type": "text",
+      "question": "Le cœur émotionnel de ce jeu est la ______.",
+      "answer": "suspicion",
+      "hint": "C’est un mot-clé de déduction sociale."
     },
     {
       "type": "choice",
-      "question": "Quel comportement rend un joueur le plus suspect ?",
+      "question": "Quelle erreur coûte le plus cher au village ?",
       "options": [
-        "A · Il accuse sans argument",
-        "B · Il écoute puis compare",
-        "C · Il prend des notes",
-        "D · Il attend le vote"
+        "A · Prendre 20 secondes pour comparer",
+        "B · Voter trop tôt",
+        "C · Demander une précision",
+        "D · Noter une incohérence"
       ],
-      "answer": "A",
-      "hint": "Cherche l’attitude qui casse la logique collective."
-    },
-    {
-      "type": "text",
-      "question": "Dans cet univers, le vote doit-il être réfléchi ou improvisé ?",
-      "answer": "réfléchi",
-      "hint": "Le vote est trop important pour être lancé au hasard."
+      "answer": "B",
+      "hint": "La précipitation casse souvent la manche."
     },
     {
       "type": "multi",
-      "question": "Quels éléments peuvent aider à repérer un loup ?",
+      "question": "Quels outils numériques peuvent aider une équipe ici ?",
       "options": [
-        "A · Contradictions",
-        "B · Justifications floues",
-        "C · Silence total",
-        "D · Cohérence parfaite"
+        "A · Relire le contexte",
+        "B · Comparer les réponses déjà données",
+        "C · Prendre une aide légère",
+        "D · Fermer l’écran"
       ],
       "answer": [
         "A",
         "B",
         "C"
       ],
-      "hint": "Garde les comportements qui créent du doute."
+      "hint": "Le dernier choix bloque l’équipe."
+    },
+    {
+      "type": "text",
+      "question": "Complète : le verdict doit reposer sur les ______.",
+      "answer": "faits",
+      "hint": "Cherche un mot simple lié à l’analyse concrète."
+    },
+    {
+      "type": "choice",
+      "question": "Finale : quelle qualité fait gagner ce jeu ?",
+      "options": [
+        "A · Bruit",
+        "B · Lecture du groupe",
+        "C · Hasard",
+        "D · Panique"
+      ],
+      "answer": "B",
+      "hint": "La meilleure réponse reste sociale et analytique."
     }
   ],
   "undercover": [
     {
       "type": "choice",
-      "question": "Quel mot est l’intrus : plage, sable, vague, moteur ?",
+      "question": "Quel mot est l’intrus numérique : plage, sable, vague, moteur ?",
       "options": [
         "A · plage",
         "B · sable",
@@ -148,269 +144,261 @@
         "D · moteur"
       ],
       "answer": "D",
-      "hint": "Trois mots appartiennent au même univers."
+      "hint": "Trois mots appartiennent au même champ lexical."
     },
     {
       "type": "text",
-      "question": "Dans Undercover, faut-il répondre trop longtemps ou rester précis ?",
+      "question": "Dans Undercover, vaut-il mieux répondre longuement ou rester précis ?",
       "answer": "précis",
       "hint": "Le bon style de jeu est court et contrôlé."
     },
     {
       "type": "multi",
-      "question": "Qu’est-ce qui peut trahir l’intrus ?",
+      "question": "Qu’est-ce qui peut trahir un Undercover dans une manche appli ?",
       "options": [
         "A · Une définition trop vague",
         "B · Une définition trop précise",
-        "C · Une réponse hors sujet",
-        "D · Une réponse utile et simple"
+        "C · Une réponse hors univers",
+        "D · Une réponse claire et mesurée"
       ],
       "answer": [
         "A",
         "B",
         "C"
       ],
-      "hint": "L’erreur vient souvent d’un mauvais dosage."
+      "hint": "L’erreur vient d’un mauvais dosage."
     },
     {
       "type": "choice",
-      "question": "Quel mot est l’intrus : plage, sable, vague, moteur ?",
+      "question": "Quel mot casse cet univers : couronne, château, roi, ballon de rugby ?",
       "options": [
-        "A · plage",
-        "B · sable",
-        "C · vague",
-        "D · moteur"
+        "A · couronne",
+        "B · château",
+        "C · roi",
+        "D · ballon de rugby"
       ],
       "answer": "D",
-      "hint": "Trois mots appartiennent au même univers."
+      "hint": "Un seul mot sort du décor commun."
     },
     {
       "type": "text",
-      "question": "Dans Undercover, faut-il répondre trop longtemps ou rester précis ?",
-      "answer": "précis",
-      "hint": "Le bon style de jeu est court et contrôlé."
-    },
-    {
-      "type": "multi",
-      "question": "Qu’est-ce qui peut trahir l’intrus ?",
-      "options": [
-        "A · Une définition trop vague",
-        "B · Une définition trop précise",
-        "C · Une réponse hors sujet",
-        "D · Une réponse utile et simple"
-      ],
-      "answer": [
-        "A",
-        "B",
-        "C"
-      ],
-      "hint": "L’erreur vient souvent d’un mauvais dosage."
+      "question": "La première qualité utile dans Undercover est d’______ les autres.",
+      "answer": "observer",
+      "hint": "Avant de trop parler, il faut regarder."
     },
     {
       "type": "choice",
-      "question": "Quel mot est l’intrus : plage, sable, vague, moteur ?",
+      "question": "Quelle réponse protège le plus un joueur ?",
       "options": [
-        "A · plage",
-        "B · sable",
-        "C · vague",
-        "D · moteur"
+        "A · Une réponse juste assez parlante",
+        "B · Une réponse très longue",
+        "C · Une réponse hors sujet",
+        "D · Une réponse copiée mot pour mot"
       ],
-      "answer": "D",
-      "hint": "Trois mots appartiennent au même univers."
-    },
-    {
-      "type": "text",
-      "question": "Dans Undercover, faut-il répondre trop longtemps ou rester précis ?",
-      "answer": "précis",
-      "hint": "Le bon style de jeu est court et contrôlé."
+      "answer": "A",
+      "hint": "La bonne réponse garde l’équilibre."
     },
     {
       "type": "multi",
-      "question": "Qu’est-ce qui peut trahir l’intrus ?",
+      "question": "Quels éléments doivent faire douter l’équipe ?",
       "options": [
-        "A · Une définition trop vague",
-        "B · Une définition trop précise",
-        "C · Une réponse hors sujet",
-        "D · Une réponse utile et simple"
+        "A · Un mot trop général",
+        "B · Un détail anormalement précis",
+        "C · Une rupture de thème",
+        "D · Une réponse calme et simple"
       ],
       "answer": [
         "A",
         "B",
         "C"
       ],
-      "hint": "L’erreur vient souvent d’un mauvais dosage."
+      "hint": "Garde les anomalies de langage."
+    },
+    {
+      "type": "text",
+      "question": "Le joueur caché dans ce jeu est un ______.",
+      "answer": "intrus",
+      "hint": "Ce n’est ni un loup ni un pirate."
     },
     {
       "type": "choice",
-      "question": "Quel mot est l’intrus : plage, sable, vague, moteur ?",
+      "question": "Quel mot est l’intrus : forêt, arbre, mousse, hélicoptère ?",
       "options": [
-        "A · plage",
-        "B · sable",
-        "C · vague",
-        "D · moteur"
+        "A · forêt",
+        "B · arbre",
+        "C · mousse",
+        "D · hélicoptère"
       ],
       "answer": "D",
-      "hint": "Trois mots appartiennent au même univers."
-    },
-    {
-      "type": "text",
-      "question": "Dans Undercover, faut-il répondre trop longtemps ou rester précis ?",
-      "answer": "précis",
-      "hint": "Le bon style de jeu est court et contrôlé."
+      "hint": "Trois mots restent naturels."
     },
     {
       "type": "multi",
-      "question": "Qu’est-ce qui peut trahir l’intrus ?",
+      "question": "Quels réflexes font gagner une équipe ?",
       "options": [
-        "A · Une définition trop vague",
-        "B · Une définition trop précise",
-        "C · Une réponse hors sujet",
-        "D · Une réponse utile et simple"
+        "A · Écouter les autres",
+        "B · Ajuster sa réponse",
+        "C · Repérer un hors thème",
+        "D · Répondre n’importe comment"
       ],
       "answer": [
         "A",
         "B",
         "C"
       ],
-      "hint": "L’erreur vient souvent d’un mauvais dosage."
+      "hint": "Élimine la réponse qui casse totalement la stratégie."
+    },
+    {
+      "type": "text",
+      "question": "Complète : Undercover repose sur des mots ______.",
+      "answer": "proches",
+      "hint": "Ils ne sont pas totalement opposés."
+    },
+    {
+      "type": "choice",
+      "question": "Finale : quel comportement est le plus suspect ?",
+      "options": [
+        "A · Une réponse cohérente",
+        "B · Une réponse équilibrée",
+        "C · Une réponse qui trahit le mauvais thème",
+        "D · Une réponse courte"
+      ],
+      "answer": "C",
+      "hint": "Cherche la rupture la plus visible."
     }
   ],
   "traitreabord": [
     {
       "type": "choice",
-      "question": "Quel signe évoque le sabotage ?",
+      "question": "Quel message évoque le plus un sabotage à bord ?",
       "options": [
-        "A · Un ordre cohérent",
-        "B · Un ordre contradictoire",
-        "C · Une vérification",
-        "D · Une réparation"
+        "A · “On suit le plan prévu.”",
+        "B · “Changez l’ordre des étapes, sans vérifier.”",
+        "C · “Relisons la consigne.”",
+        "D · “On compare les infos avant d’agir.”"
       ],
       "answer": "B",
-      "hint": "Cherche ce qui dérègle l’équipage."
+      "hint": "Cherche le message qui casse la méthode de l’équipage."
     },
     {
       "type": "text",
-      "question": "Quel mot décrit le danger central à bord ?",
+      "question": "Le danger principal à bord s’appelle le ______.",
       "answer": "sabotage",
-      "hint": "Le navire n’est pas au repos."
+      "hint": "Le navire ne dérive pas par hasard."
     },
     {
       "type": "multi",
-      "question": "Quels éléments peuvent trahir le traître ?",
+      "question": "Quels signes peuvent trahir le traître dans une version numérique ?",
       "options": [
         "A · Faux indice",
         "B · Détour inutile",
         "C · Contradiction",
-        "D · Lecture calme"
+        "D · Vérification logique"
       ],
       "answer": [
         "A",
         "B",
         "C"
       ],
-      "hint": "Garde les signes qui gênent la mission."
+      "hint": "Garde ce qui gêne l’équipage."
     },
     {
       "type": "choice",
-      "question": "Quel signe évoque le sabotage ?",
+      "question": "Quel mot est hors univers : ancre, pont, cabine, canapé ?",
       "options": [
-        "A · Un ordre cohérent",
-        "B · Un ordre contradictoire",
-        "C · Une vérification",
-        "D · Une réparation"
+        "A · ancre",
+        "B · pont",
+        "C · cabine",
+        "D · canapé"
       ],
-      "answer": "B",
-      "hint": "Cherche ce qui dérègle l’équipage."
+      "answer": "D",
+      "hint": "Trois mots restent marins."
     },
     {
       "type": "text",
-      "question": "Quel mot décrit le danger central à bord ?",
-      "answer": "sabotage",
-      "hint": "Le navire n’est pas au repos."
-    },
-    {
-      "type": "multi",
-      "question": "Quels éléments peuvent trahir le traître ?",
-      "options": [
-        "A · Faux indice",
-        "B · Détour inutile",
-        "C · Contradiction",
-        "D · Lecture calme"
-      ],
-      "answer": [
-        "A",
-        "B",
-        "C"
-      ],
-      "hint": "Garde les signes qui gênent la mission."
+      "question": "Le groupe principal sur le navire est l’______.",
+      "answer": "équipage",
+      "hint": "Mot collectif du monde marin."
     },
     {
       "type": "choice",
-      "question": "Quel signe évoque le sabotage ?",
+      "question": "Quelle action aide le plus à survivre au sabotage ?",
       "options": [
-        "A · Un ordre cohérent",
-        "B · Un ordre contradictoire",
-        "C · Une vérification",
-        "D · Une réparation"
+        "A · Vérifier chaque info clé",
+        "B · Se précipiter",
+        "C · Se disperser",
+        "D · Ignorer un détail étrange"
       ],
-      "answer": "B",
-      "hint": "Cherche ce qui dérègle l’équipage."
-    },
-    {
-      "type": "text",
-      "question": "Quel mot décrit le danger central à bord ?",
-      "answer": "sabotage",
-      "hint": "Le navire n’est pas au repos."
+      "answer": "A",
+      "hint": "La bonne réponse renforce la discipline."
     },
     {
       "type": "multi",
-      "question": "Quels éléments peuvent trahir le traître ?",
+      "question": "Quelles qualités font gagner ici ?",
       "options": [
-        "A · Faux indice",
-        "B · Détour inutile",
-        "C · Contradiction",
-        "D · Lecture calme"
+        "A · Coordination",
+        "B · Sang-froid",
+        "C · Lecture des indices",
+        "D · Panique"
       ],
       "answer": [
         "A",
         "B",
         "C"
       ],
-      "hint": "Garde les signes qui gênent la mission."
+      "hint": "Le dernier choix ruine la manche."
+    },
+    {
+      "type": "text",
+      "question": "Le décor principal de cette aventure est le ______.",
+      "answer": "navire",
+      "hint": "Toute l’histoire se joue à bord."
     },
     {
       "type": "choice",
-      "question": "Quel signe évoque le sabotage ?",
+      "question": "Quel intrus casse l’univers : boussole, carte, coque, photocopieuse ?",
       "options": [
-        "A · Un ordre cohérent",
-        "B · Un ordre contradictoire",
-        "C · Une vérification",
-        "D · Une réparation"
+        "A · boussole",
+        "B · carte",
+        "C · coque",
+        "D · photocopieuse"
       ],
-      "answer": "B",
-      "hint": "Cherche ce qui dérègle l’équipage."
-    },
-    {
-      "type": "text",
-      "question": "Quel mot décrit le danger central à bord ?",
-      "answer": "sabotage",
-      "hint": "Le navire n’est pas au repos."
+      "answer": "D",
+      "hint": "Un seul mot n’a rien à faire ici."
     },
     {
       "type": "multi",
-      "question": "Quels éléments peuvent trahir le traître ?",
+      "question": "Que doit faire l’équipe avant d’agir ?",
       "options": [
-        "A · Faux indice",
-        "B · Détour inutile",
-        "C · Contradiction",
-        "D · Lecture calme"
+        "A · Lire le contexte",
+        "B · Comparer les données",
+        "C · Vérifier les ordres",
+        "D · Accuser au hasard"
       ],
       "answer": [
         "A",
         "B",
         "C"
       ],
-      "hint": "Garde les signes qui gênent la mission."
+      "hint": "Élimine le réflexe le plus destructeur."
+    },
+    {
+      "type": "text",
+      "question": "Complète : le bon cap se garde avec de la ______.",
+      "answer": "discipline",
+      "hint": "Mot lié à la tenue du groupe."
+    },
+    {
+      "type": "choice",
+      "question": "Finale : quelle qualité sauve l’équipage ?",
+      "options": [
+        "A · La méthode",
+        "B · Le bruit",
+        "C · L’improvisation permanente",
+        "D · Le vide"
+      ],
+      "answer": "A",
+      "hint": "La bonne réponse garde le navire structuré."
     }
   ],
   "million": [
