@@ -1,0 +1,2060 @@
+{
+  "loupsgarous": [
+    {
+      "type": "choice",
+      "question": "Débat du village : quelle phrase rend un joueur le plus suspect ?",
+      "options": [
+        "A · « Votez contre lui, je n’ai pas d’argument mais je le sens mal. »",
+        "B · « Comparons ses deux dernières explications. »",
+        "C · « On relit les indices avant de voter. »",
+        "D · « On écoute chaque joueur une dernière fois. »"
+      ],
+      "answer": "A",
+      "hint": "La mauvaise réponse pousse le groupe à voter sans base solide."
+    },
+    {
+      "type": "text",
+      "question": "Dans une partie de déduction, le vote final doit être réfléchi ou improvisé ?",
+      "answer": "réfléchi",
+      "hint": "Le bon mot s’oppose à “improvisé”."
+    },
+    {
+      "type": "multi",
+      "question": "Quels indices numériques aident à repérer un loup dans cette version appli ?",
+      "options": [
+        "A · Des contradictions dans deux réponses",
+        "B · Un joueur qui change de version",
+        "C · Un joueur qui accuse sans rien justifier",
+        "D · Un joueur qui compare calmement les faits"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde seulement les comportements qui augmentent le doute."
+    },
+    {
+      "type": "choice",
+      "question": "Phase nuit : quel message envoyé par l’animateur semble le plus dangereux pour le village ?",
+      "options": [
+        "A · “Gardez vos notes pour le jour.”",
+        "B · “Un témoignage reçu est peut-être faux.”",
+        "C · “Personne ne parle, on observe.”",
+        "D · “Les loups vous souhaitent bonne chance.”"
+      ],
+      "answer": "B",
+      "hint": "Cherche le message qui perturbe l’analyse collective."
+    },
+    {
+      "type": "text",
+      "question": "Le lieu central de ce jeu est un ______.",
+      "answer": "village",
+      "hint": "Ce n’est ni un navire ni une arène."
+    },
+    {
+      "type": "choice",
+      "question": "Si votre équipe hésite, quelle action aide le plus ?",
+      "options": [
+        "A · Accuser au hasard",
+        "B · Relire les incohérences repérées",
+        "C · Passer directement à l’élimination",
+        "D · Ignorer le vote"
+      ],
+      "answer": "B",
+      "hint": "La bonne réponse améliore l’analyse du groupe."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qui doit être observé avant d’éliminer un joueur ?",
+      "options": [
+        "A · Son ton",
+        "B · Ses contradictions",
+        "C · Sa logique",
+        "D · La couleur de son t-shirt"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Reste sur les éléments utiles au débat."
+    },
+    {
+      "type": "text",
+      "question": "Le cœur émotionnel de ce jeu est la ______.",
+      "answer": "suspicion",
+      "hint": "C’est un mot-clé de déduction sociale."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle erreur coûte le plus cher au village ?",
+      "options": [
+        "A · Prendre 20 secondes pour comparer",
+        "B · Voter trop tôt",
+        "C · Demander une précision",
+        "D · Noter une incohérence"
+      ],
+      "answer": "B",
+      "hint": "La précipitation casse souvent la manche."
+    },
+    {
+      "type": "multi",
+      "question": "Quels outils numériques peuvent aider une équipe ici ?",
+      "options": [
+        "A · Relire le contexte",
+        "B · Comparer les réponses déjà données",
+        "C · Prendre une aide légère",
+        "D · Fermer l’écran"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier choix bloque l’équipe."
+    },
+    {
+      "type": "text",
+      "question": "Complète : le verdict doit reposer sur les ______.",
+      "answer": "faits",
+      "hint": "Cherche un mot simple lié à l’analyse concrète."
+    },
+    {
+      "type": "choice",
+      "question": "Finale : quelle qualité fait gagner ce jeu ?",
+      "options": [
+        "A · Bruit",
+        "B · Lecture du groupe",
+        "C · Hasard",
+        "D · Panique"
+      ],
+      "answer": "B",
+      "hint": "La meilleure réponse reste sociale et analytique."
+    }
+  ],
+  "undercover": [
+    {
+      "type": "choice",
+      "question": "Quel mot est l’intrus numérique : plage, sable, vague, moteur ?",
+      "options": [
+        "A · plage",
+        "B · sable",
+        "C · vague",
+        "D · moteur"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent au même champ lexical."
+    },
+    {
+      "type": "text",
+      "question": "Dans Undercover, vaut-il mieux répondre longuement ou rester précis ?",
+      "answer": "précis",
+      "hint": "Le bon style de jeu est court et contrôlé."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qui peut trahir un Undercover dans une manche appli ?",
+      "options": [
+        "A · Une définition trop vague",
+        "B · Une définition trop précise",
+        "C · Une réponse hors univers",
+        "D · Une réponse claire et mesurée"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "L’erreur vient d’un mauvais dosage."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot casse cet univers : couronne, château, roi, ballon de rugby ?",
+      "options": [
+        "A · couronne",
+        "B · château",
+        "C · roi",
+        "D · ballon de rugby"
+      ],
+      "answer": "D",
+      "hint": "Un seul mot sort du décor commun."
+    },
+    {
+      "type": "text",
+      "question": "La première qualité utile dans Undercover est d’______ les autres.",
+      "answer": "observer",
+      "hint": "Avant de trop parler, il faut regarder."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle réponse protège le plus un joueur ?",
+      "options": [
+        "A · Une réponse juste assez parlante",
+        "B · Une réponse très longue",
+        "C · Une réponse hors sujet",
+        "D · Une réponse copiée mot pour mot"
+      ],
+      "answer": "A",
+      "hint": "La bonne réponse garde l’équilibre."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments doivent faire douter l’équipe ?",
+      "options": [
+        "A · Un mot trop général",
+        "B · Un détail anormalement précis",
+        "C · Une rupture de thème",
+        "D · Une réponse calme et simple"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde les anomalies de langage."
+    },
+    {
+      "type": "text",
+      "question": "Le joueur caché dans ce jeu est un ______.",
+      "answer": "intrus",
+      "hint": "Ce n’est ni un loup ni un pirate."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot est l’intrus : forêt, arbre, mousse, hélicoptère ?",
+      "options": [
+        "A · forêt",
+        "B · arbre",
+        "C · mousse",
+        "D · hélicoptère"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent naturels."
+    },
+    {
+      "type": "multi",
+      "question": "Quels réflexes font gagner une équipe ?",
+      "options": [
+        "A · Écouter les autres",
+        "B · Ajuster sa réponse",
+        "C · Repérer un hors thème",
+        "D · Répondre n’importe comment"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Élimine la réponse qui casse totalement la stratégie."
+    },
+    {
+      "type": "text",
+      "question": "Complète : Undercover repose sur des mots ______.",
+      "answer": "proches",
+      "hint": "Ils ne sont pas totalement opposés."
+    },
+    {
+      "type": "choice",
+      "question": "Finale : quel comportement est le plus suspect ?",
+      "options": [
+        "A · Une réponse cohérente",
+        "B · Une réponse équilibrée",
+        "C · Une réponse qui trahit le mauvais thème",
+        "D · Une réponse courte"
+      ],
+      "answer": "C",
+      "hint": "Cherche la rupture la plus visible."
+    }
+  ],
+  "traitreabord": [
+    {
+      "type": "choice",
+      "question": "Quel message évoque le plus un sabotage à bord ?",
+      "options": [
+        "A · “On suit le plan prévu.”",
+        "B · “Changez l’ordre des étapes, sans vérifier.”",
+        "C · “Relisons la consigne.”",
+        "D · “On compare les infos avant d’agir.”"
+      ],
+      "answer": "B",
+      "hint": "Cherche le message qui casse la méthode de l’équipage."
+    },
+    {
+      "type": "text",
+      "question": "Le danger principal à bord s’appelle le ______.",
+      "answer": "sabotage",
+      "hint": "Le navire ne dérive pas par hasard."
+    },
+    {
+      "type": "multi",
+      "question": "Quels signes peuvent trahir le traître dans une version numérique ?",
+      "options": [
+        "A · Faux indice",
+        "B · Détour inutile",
+        "C · Contradiction",
+        "D · Vérification logique"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde ce qui gêne l’équipage."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot est hors univers : ancre, pont, cabine, canapé ?",
+      "options": [
+        "A · ancre",
+        "B · pont",
+        "C · cabine",
+        "D · canapé"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent marins."
+    },
+    {
+      "type": "text",
+      "question": "Le groupe principal sur le navire est l’______.",
+      "answer": "équipage",
+      "hint": "Mot collectif du monde marin."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle action aide le plus à survivre au sabotage ?",
+      "options": [
+        "A · Vérifier chaque info clé",
+        "B · Se précipiter",
+        "C · Se disperser",
+        "D · Ignorer un détail étrange"
+      ],
+      "answer": "A",
+      "hint": "La bonne réponse renforce la discipline."
+    },
+    {
+      "type": "multi",
+      "question": "Quelles qualités font gagner ici ?",
+      "options": [
+        "A · Coordination",
+        "B · Sang-froid",
+        "C · Lecture des indices",
+        "D · Panique"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier choix ruine la manche."
+    },
+    {
+      "type": "text",
+      "question": "Le décor principal de cette aventure est le ______.",
+      "answer": "navire",
+      "hint": "Toute l’histoire se joue à bord."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse l’univers : boussole, carte, coque, photocopieuse ?",
+      "options": [
+        "A · boussole",
+        "B · carte",
+        "C · coque",
+        "D · photocopieuse"
+      ],
+      "answer": "D",
+      "hint": "Un seul mot n’a rien à faire ici."
+    },
+    {
+      "type": "multi",
+      "question": "Que doit faire l’équipe avant d’agir ?",
+      "options": [
+        "A · Lire le contexte",
+        "B · Comparer les données",
+        "C · Vérifier les ordres",
+        "D · Accuser au hasard"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Élimine le réflexe le plus destructeur."
+    },
+    {
+      "type": "text",
+      "question": "Complète : le bon cap se garde avec de la ______.",
+      "answer": "discipline",
+      "hint": "Mot lié à la tenue du groupe."
+    },
+    {
+      "type": "choice",
+      "question": "Finale : quelle qualité sauve l’équipage ?",
+      "options": [
+        "A · La méthode",
+        "B · Le bruit",
+        "C · L’improvisation permanente",
+        "D · Le vide"
+      ],
+      "answer": "A",
+      "hint": "La bonne réponse garde le navire structuré."
+    }
+  ],
+  "million": [
+    {
+      "type": "choice",
+      "question": "Combien de réponses y a-t-il dans un QCM classique ici ?",
+      "options": [
+        "A · 2",
+        "B · 3",
+        "C · 4",
+        "D · 5"
+      ],
+      "answer": "C",
+      "hint": "Pense au format le plus connu."
+    },
+    {
+      "type": "text",
+      "question": "Comment s’appelle l’aide qui réduit les réponses ?",
+      "answer": "50/50",
+      "hint": "C’est l’aide la plus célèbre du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quelles qualités aident le plus ici ?",
+      "options": [
+        "A · Calme",
+        "B · Lecture précise",
+        "C · Hésitation totale",
+        "D · Gestion des aides"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "hint": "Garde les qualités utiles au jeu télé."
+    },
+    {
+      "type": "choice",
+      "question": "Combien de réponses y a-t-il dans un QCM classique ici ?",
+      "options": [
+        "A · 2",
+        "B · 3",
+        "C · 4",
+        "D · 5"
+      ],
+      "answer": "C",
+      "hint": "Pense au format le plus connu."
+    },
+    {
+      "type": "text",
+      "question": "Comment s’appelle l’aide qui réduit les réponses ?",
+      "answer": "50/50",
+      "hint": "C’est l’aide la plus célèbre du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quelles qualités aident le plus ici ?",
+      "options": [
+        "A · Calme",
+        "B · Lecture précise",
+        "C · Hésitation totale",
+        "D · Gestion des aides"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "hint": "Garde les qualités utiles au jeu télé."
+    },
+    {
+      "type": "choice",
+      "question": "Combien de réponses y a-t-il dans un QCM classique ici ?",
+      "options": [
+        "A · 2",
+        "B · 3",
+        "C · 4",
+        "D · 5"
+      ],
+      "answer": "C",
+      "hint": "Pense au format le plus connu."
+    },
+    {
+      "type": "text",
+      "question": "Comment s’appelle l’aide qui réduit les réponses ?",
+      "answer": "50/50",
+      "hint": "C’est l’aide la plus célèbre du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quelles qualités aident le plus ici ?",
+      "options": [
+        "A · Calme",
+        "B · Lecture précise",
+        "C · Hésitation totale",
+        "D · Gestion des aides"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "hint": "Garde les qualités utiles au jeu télé."
+    },
+    {
+      "type": "choice",
+      "question": "Combien de réponses y a-t-il dans un QCM classique ici ?",
+      "options": [
+        "A · 2",
+        "B · 3",
+        "C · 4",
+        "D · 5"
+      ],
+      "answer": "C",
+      "hint": "Pense au format le plus connu."
+    },
+    {
+      "type": "text",
+      "question": "Comment s’appelle l’aide qui réduit les réponses ?",
+      "answer": "50/50",
+      "hint": "C’est l’aide la plus célèbre du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quelles qualités aident le plus ici ?",
+      "options": [
+        "A · Calme",
+        "B · Lecture précise",
+        "C · Hésitation totale",
+        "D · Gestion des aides"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ],
+      "hint": "Garde les qualités utiles au jeu télé."
+    }
+  ],
+  "burgerquiz": [
+    {
+      "type": "choice",
+      "question": "Quel intrus casse l’univers : ketchup, mayo, pain, planète ?",
+      "options": [
+        "A · ketchup",
+        "B · mayo",
+        "C · pain",
+        "D · planète"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans l’ambiance culinaire."
+    },
+    {
+      "type": "text",
+      "question": "Le ton de Burger Quiz est-il sérieux ou décalé ?",
+      "answer": "décalé",
+      "hint": "L’absurde fait partie du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quelles qualités aident ici ?",
+      "options": [
+        "A · Réactivité",
+        "B · Humour",
+        "C · Lecture rapide",
+        "D · Blocage"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde l’énergie, pas l’arrêt."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse l’univers : ketchup, mayo, pain, planète ?",
+      "options": [
+        "A · ketchup",
+        "B · mayo",
+        "C · pain",
+        "D · planète"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans l’ambiance culinaire."
+    },
+    {
+      "type": "text",
+      "question": "Le ton de Burger Quiz est-il sérieux ou décalé ?",
+      "answer": "décalé",
+      "hint": "L’absurde fait partie du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quelles qualités aident ici ?",
+      "options": [
+        "A · Réactivité",
+        "B · Humour",
+        "C · Lecture rapide",
+        "D · Blocage"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde l’énergie, pas l’arrêt."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse l’univers : ketchup, mayo, pain, planète ?",
+      "options": [
+        "A · ketchup",
+        "B · mayo",
+        "C · pain",
+        "D · planète"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans l’ambiance culinaire."
+    },
+    {
+      "type": "text",
+      "question": "Le ton de Burger Quiz est-il sérieux ou décalé ?",
+      "answer": "décalé",
+      "hint": "L’absurde fait partie du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quelles qualités aident ici ?",
+      "options": [
+        "A · Réactivité",
+        "B · Humour",
+        "C · Lecture rapide",
+        "D · Blocage"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde l’énergie, pas l’arrêt."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse l’univers : ketchup, mayo, pain, planète ?",
+      "options": [
+        "A · ketchup",
+        "B · mayo",
+        "C · pain",
+        "D · planète"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans l’ambiance culinaire."
+    },
+    {
+      "type": "text",
+      "question": "Le ton de Burger Quiz est-il sérieux ou décalé ?",
+      "answer": "décalé",
+      "hint": "L’absurde fait partie du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quelles qualités aident ici ?",
+      "options": [
+        "A · Réactivité",
+        "B · Humour",
+        "C · Lecture rapide",
+        "D · Blocage"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde l’énergie, pas l’arrêt."
+    }
+  ],
+  "lestraitres": [
+    {
+      "type": "choice",
+      "question": "Quel signe crée le plus de doute ?",
+      "options": [
+        "A · Une explication nette",
+        "B · Une version qui change",
+        "C · Une preuve claire",
+        "D · Un résumé précis"
+      ],
+      "answer": "B",
+      "hint": "Cherche l’élément le plus trouble."
+    },
+    {
+      "type": "text",
+      "question": "Le cœur du gameplay repose sur la ______.",
+      "answer": "suspicion",
+      "hint": "C’est le moteur des échanges."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qui aide une équipe fidèle ?",
+      "options": [
+        "A · Lire les attitudes",
+        "B · Comparer les versions",
+        "C · Observer les votes",
+        "D · Fermer les yeux"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde ce qui nourrit l’analyse."
+    },
+    {
+      "type": "choice",
+      "question": "Quel signe crée le plus de doute ?",
+      "options": [
+        "A · Une explication nette",
+        "B · Une version qui change",
+        "C · Une preuve claire",
+        "D · Un résumé précis"
+      ],
+      "answer": "B",
+      "hint": "Cherche l’élément le plus trouble."
+    },
+    {
+      "type": "text",
+      "question": "Le cœur du gameplay repose sur la ______.",
+      "answer": "suspicion",
+      "hint": "C’est le moteur des échanges."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qui aide une équipe fidèle ?",
+      "options": [
+        "A · Lire les attitudes",
+        "B · Comparer les versions",
+        "C · Observer les votes",
+        "D · Fermer les yeux"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde ce qui nourrit l’analyse."
+    },
+    {
+      "type": "choice",
+      "question": "Quel signe crée le plus de doute ?",
+      "options": [
+        "A · Une explication nette",
+        "B · Une version qui change",
+        "C · Une preuve claire",
+        "D · Un résumé précis"
+      ],
+      "answer": "B",
+      "hint": "Cherche l’élément le plus trouble."
+    },
+    {
+      "type": "text",
+      "question": "Le cœur du gameplay repose sur la ______.",
+      "answer": "suspicion",
+      "hint": "C’est le moteur des échanges."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qui aide une équipe fidèle ?",
+      "options": [
+        "A · Lire les attitudes",
+        "B · Comparer les versions",
+        "C · Observer les votes",
+        "D · Fermer les yeux"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde ce qui nourrit l’analyse."
+    },
+    {
+      "type": "choice",
+      "question": "Quel signe crée le plus de doute ?",
+      "options": [
+        "A · Une explication nette",
+        "B · Une version qui change",
+        "C · Une preuve claire",
+        "D · Un résumé précis"
+      ],
+      "answer": "B",
+      "hint": "Cherche l’élément le plus trouble."
+    },
+    {
+      "type": "text",
+      "question": "Le cœur du gameplay repose sur la ______.",
+      "answer": "suspicion",
+      "hint": "C’est le moteur des échanges."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qui aide une équipe fidèle ?",
+      "options": [
+        "A · Lire les attitudes",
+        "B · Comparer les versions",
+        "C · Observer les votes",
+        "D · Fermer les yeux"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde ce qui nourrit l’analyse."
+    }
+  ],
+  "mario": [
+    {
+      "type": "choice",
+      "question": "Quel intrus n’appartient pas à l’univers Mario ?",
+      "options": [
+        "A · tuyau",
+        "B · pièce",
+        "C · champignon",
+        "D · hélicoptère militaire"
+      ],
+      "answer": "D",
+      "hint": "Trois éléments sont typiques du royaume."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet bonus emblématique fait grandir ?",
+      "answer": "champignon",
+      "hint": "Il fait partie des icônes du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à l’univers ?",
+      "options": [
+        "A · étoile",
+        "B · pièce",
+        "C · tuyau",
+        "D · dragon laser"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Un mot casse le monde du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus n’appartient pas à l’univers Mario ?",
+      "options": [
+        "A · tuyau",
+        "B · pièce",
+        "C · champignon",
+        "D · hélicoptère militaire"
+      ],
+      "answer": "D",
+      "hint": "Trois éléments sont typiques du royaume."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet bonus emblématique fait grandir ?",
+      "answer": "champignon",
+      "hint": "Il fait partie des icônes du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à l’univers ?",
+      "options": [
+        "A · étoile",
+        "B · pièce",
+        "C · tuyau",
+        "D · dragon laser"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Un mot casse le monde du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus n’appartient pas à l’univers Mario ?",
+      "options": [
+        "A · tuyau",
+        "B · pièce",
+        "C · champignon",
+        "D · hélicoptère militaire"
+      ],
+      "answer": "D",
+      "hint": "Trois éléments sont typiques du royaume."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet bonus emblématique fait grandir ?",
+      "answer": "champignon",
+      "hint": "Il fait partie des icônes du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à l’univers ?",
+      "options": [
+        "A · étoile",
+        "B · pièce",
+        "C · tuyau",
+        "D · dragon laser"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Un mot casse le monde du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus n’appartient pas à l’univers Mario ?",
+      "options": [
+        "A · tuyau",
+        "B · pièce",
+        "C · champignon",
+        "D · hélicoptère militaire"
+      ],
+      "answer": "D",
+      "hint": "Trois éléments sont typiques du royaume."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet bonus emblématique fait grandir ?",
+      "answer": "champignon",
+      "hint": "Il fait partie des icônes du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à l’univers ?",
+      "options": [
+        "A · étoile",
+        "B · pièce",
+        "C · tuyau",
+        "D · dragon laser"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Un mot casse le monde du jeu."
+    }
+  ],
+  "pokemon": [
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : badge, arène, pokéball, parapluie géant ?",
+      "options": [
+        "A · badge",
+        "B · arène",
+        "C · pokéball",
+        "D · parapluie géant"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet capture les créatures ?",
+      "answer": "pokéball",
+      "hint": "C’est l’objet le plus iconique du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots appartiennent à cet univers ?",
+      "options": [
+        "A · type",
+        "B · évolution",
+        "C · ligue",
+        "D · canapé"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde les termes de progression."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : badge, arène, pokéball, parapluie géant ?",
+      "options": [
+        "A · badge",
+        "B · arène",
+        "C · pokéball",
+        "D · parapluie géant"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet capture les créatures ?",
+      "answer": "pokéball",
+      "hint": "C’est l’objet le plus iconique du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots appartiennent à cet univers ?",
+      "options": [
+        "A · type",
+        "B · évolution",
+        "C · ligue",
+        "D · canapé"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde les termes de progression."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : badge, arène, pokéball, parapluie géant ?",
+      "options": [
+        "A · badge",
+        "B · arène",
+        "C · pokéball",
+        "D · parapluie géant"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet capture les créatures ?",
+      "answer": "pokéball",
+      "hint": "C’est l’objet le plus iconique du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots appartiennent à cet univers ?",
+      "options": [
+        "A · type",
+        "B · évolution",
+        "C · ligue",
+        "D · canapé"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde les termes de progression."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : badge, arène, pokéball, parapluie géant ?",
+      "options": [
+        "A · badge",
+        "B · arène",
+        "C · pokéball",
+        "D · parapluie géant"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet capture les créatures ?",
+      "answer": "pokéball",
+      "hint": "C’est l’objet le plus iconique du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots appartiennent à cet univers ?",
+      "options": [
+        "A · type",
+        "B · évolution",
+        "C · ligue",
+        "D · canapé"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde les termes de progression."
+    }
+  ],
+  "zelda": [
+    {
+      "type": "choice",
+      "question": "Quel intrus casse le décor : temple, clé, énigme, micro-onde ?",
+      "options": [
+        "A · temple",
+        "B · clé",
+        "C · énigme",
+        "D · micro-onde"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans une aventure ancienne."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit le mieux l’univers : exploration ou usine ?",
+      "answer": "exploration",
+      "hint": "L’aventure repose sur le voyage et la découverte."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments aident à avancer ?",
+      "options": [
+        "A · Lecture des symboles",
+        "B · Ordre des mécanismes",
+        "C · Observation",
+        "D · Réponse au hasard"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier élément n’aide pas."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse le décor : temple, clé, énigme, micro-onde ?",
+      "options": [
+        "A · temple",
+        "B · clé",
+        "C · énigme",
+        "D · micro-onde"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans une aventure ancienne."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit le mieux l’univers : exploration ou usine ?",
+      "answer": "exploration",
+      "hint": "L’aventure repose sur le voyage et la découverte."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments aident à avancer ?",
+      "options": [
+        "A · Lecture des symboles",
+        "B · Ordre des mécanismes",
+        "C · Observation",
+        "D · Réponse au hasard"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier élément n’aide pas."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse le décor : temple, clé, énigme, micro-onde ?",
+      "options": [
+        "A · temple",
+        "B · clé",
+        "C · énigme",
+        "D · micro-onde"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans une aventure ancienne."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit le mieux l’univers : exploration ou usine ?",
+      "answer": "exploration",
+      "hint": "L’aventure repose sur le voyage et la découverte."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments aident à avancer ?",
+      "options": [
+        "A · Lecture des symboles",
+        "B · Ordre des mécanismes",
+        "C · Observation",
+        "D · Réponse au hasard"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier élément n’aide pas."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse le décor : temple, clé, énigme, micro-onde ?",
+      "options": [
+        "A · temple",
+        "B · clé",
+        "C · énigme",
+        "D · micro-onde"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans une aventure ancienne."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit le mieux l’univers : exploration ou usine ?",
+      "answer": "exploration",
+      "hint": "L’aventure repose sur le voyage et la découverte."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments aident à avancer ?",
+      "options": [
+        "A · Lecture des symboles",
+        "B · Ordre des mécanismes",
+        "C · Observation",
+        "D · Réponse au hasard"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier élément n’aide pas."
+    }
+  ],
+  "onepiece": [
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : île, trésor, équipage, parking souterrain ?",
+      "options": [
+        "A · île",
+        "B · trésor",
+        "C · équipage",
+        "D · parking souterrain"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent à la même aventure."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit le groupe principal ?",
+      "answer": "équipage",
+      "hint": "Ce mot revient partout dans l’univers."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à une quête en mer ?",
+      "options": [
+        "A · carte",
+        "B · route",
+        "C · coffre",
+        "D · imprimante"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Un seul objet casse l’aventure."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : île, trésor, équipage, parking souterrain ?",
+      "options": [
+        "A · île",
+        "B · trésor",
+        "C · équipage",
+        "D · parking souterrain"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent à la même aventure."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit le groupe principal ?",
+      "answer": "équipage",
+      "hint": "Ce mot revient partout dans l’univers."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à une quête en mer ?",
+      "options": [
+        "A · carte",
+        "B · route",
+        "C · coffre",
+        "D · imprimante"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Un seul objet casse l’aventure."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : île, trésor, équipage, parking souterrain ?",
+      "options": [
+        "A · île",
+        "B · trésor",
+        "C · équipage",
+        "D · parking souterrain"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent à la même aventure."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit le groupe principal ?",
+      "answer": "équipage",
+      "hint": "Ce mot revient partout dans l’univers."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à une quête en mer ?",
+      "options": [
+        "A · carte",
+        "B · route",
+        "C · coffre",
+        "D · imprimante"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Un seul objet casse l’aventure."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : île, trésor, équipage, parking souterrain ?",
+      "options": [
+        "A · île",
+        "B · trésor",
+        "C · équipage",
+        "D · parking souterrain"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent à la même aventure."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit le groupe principal ?",
+      "answer": "équipage",
+      "hint": "Ce mot revient partout dans l’univers."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à une quête en mer ?",
+      "options": [
+        "A · carte",
+        "B · route",
+        "C · coffre",
+        "D · imprimante"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Un seul objet casse l’aventure."
+    }
+  ],
+  "dbz": [
+    {
+      "type": "choice",
+      "question": "Quel mot est hors univers : aura, énergie, transformation, perceuse ?",
+      "options": [
+        "A · aura",
+        "B · énergie",
+        "C · transformation",
+        "D · perceuse"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit la montée de force de cet univers ?",
+      "answer": "puissance",
+      "hint": "Tout repose dessus."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments collent au monde DBZ ?",
+      "options": [
+        "A · combat",
+        "B · charge",
+        "C · transformation",
+        "D · papier peint"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot ne colle pas."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot est hors univers : aura, énergie, transformation, perceuse ?",
+      "options": [
+        "A · aura",
+        "B · énergie",
+        "C · transformation",
+        "D · perceuse"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit la montée de force de cet univers ?",
+      "answer": "puissance",
+      "hint": "Tout repose dessus."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments collent au monde DBZ ?",
+      "options": [
+        "A · combat",
+        "B · charge",
+        "C · transformation",
+        "D · papier peint"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot ne colle pas."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot est hors univers : aura, énergie, transformation, perceuse ?",
+      "options": [
+        "A · aura",
+        "B · énergie",
+        "C · transformation",
+        "D · perceuse"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit la montée de force de cet univers ?",
+      "answer": "puissance",
+      "hint": "Tout repose dessus."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments collent au monde DBZ ?",
+      "options": [
+        "A · combat",
+        "B · charge",
+        "C · transformation",
+        "D · papier peint"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot ne colle pas."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot est hors univers : aura, énergie, transformation, perceuse ?",
+      "options": [
+        "A · aura",
+        "B · énergie",
+        "C · transformation",
+        "D · perceuse"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit la montée de force de cet univers ?",
+      "answer": "puissance",
+      "hint": "Tout repose dessus."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments collent au monde DBZ ?",
+      "options": [
+        "A · combat",
+        "B · charge",
+        "C · transformation",
+        "D · papier peint"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot ne colle pas."
+    }
+  ],
+  "naruto": [
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : mission, ninja, chakra, grille-pain ?",
+      "options": [
+        "A · mission",
+        "B · ninja",
+        "C · chakra",
+        "D · grille-pain"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent à la même aventure."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit l’énergie utilisée dans l’univers ?",
+      "answer": "chakra",
+      "hint": "C’est un mot-clé du manga."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots collent à cet univers ?",
+      "options": [
+        "A · mission",
+        "B · infiltration",
+        "C · technique",
+        "D · moquette"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot ne va pas."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : mission, ninja, chakra, grille-pain ?",
+      "options": [
+        "A · mission",
+        "B · ninja",
+        "C · chakra",
+        "D · grille-pain"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent à la même aventure."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit l’énergie utilisée dans l’univers ?",
+      "answer": "chakra",
+      "hint": "C’est un mot-clé du manga."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots collent à cet univers ?",
+      "options": [
+        "A · mission",
+        "B · infiltration",
+        "C · technique",
+        "D · moquette"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot ne va pas."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : mission, ninja, chakra, grille-pain ?",
+      "options": [
+        "A · mission",
+        "B · ninja",
+        "C · chakra",
+        "D · grille-pain"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent à la même aventure."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit l’énergie utilisée dans l’univers ?",
+      "answer": "chakra",
+      "hint": "C’est un mot-clé du manga."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots collent à cet univers ?",
+      "options": [
+        "A · mission",
+        "B · infiltration",
+        "C · technique",
+        "D · moquette"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot ne va pas."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : mission, ninja, chakra, grille-pain ?",
+      "options": [
+        "A · mission",
+        "B · ninja",
+        "C · chakra",
+        "D · grille-pain"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent à la même aventure."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit l’énergie utilisée dans l’univers ?",
+      "answer": "chakra",
+      "hint": "C’est un mot-clé du manga."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots collent à cet univers ?",
+      "options": [
+        "A · mission",
+        "B · infiltration",
+        "C · technique",
+        "D · moquette"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot ne va pas."
+    }
+  ],
+  "culture": [
+    {
+      "type": "choice",
+      "question": "Quelle ville est la capitale de la France ?",
+      "options": [
+        "A · Lyon",
+        "B · Paris",
+        "C · Lille",
+        "D · Nice"
+      ],
+      "answer": "B",
+      "hint": "Une réponse est évidente ici."
+    },
+    {
+      "type": "text",
+      "question": "Combien de jours y a-t-il dans une semaine ?",
+      "answer": "7",
+      "hint": "C’est une base simple."
+    },
+    {
+      "type": "multi",
+      "question": "Quels domaines relèvent de la culture générale ?",
+      "options": [
+        "A · Histoire",
+        "B · Géographie",
+        "C · Science",
+        "D · Coussin"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas un domaine."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle ville est la capitale de la France ?",
+      "options": [
+        "A · Lyon",
+        "B · Paris",
+        "C · Lille",
+        "D · Nice"
+      ],
+      "answer": "B",
+      "hint": "Une réponse est évidente ici."
+    },
+    {
+      "type": "text",
+      "question": "Combien de jours y a-t-il dans une semaine ?",
+      "answer": "7",
+      "hint": "C’est une base simple."
+    },
+    {
+      "type": "multi",
+      "question": "Quels domaines relèvent de la culture générale ?",
+      "options": [
+        "A · Histoire",
+        "B · Géographie",
+        "C · Science",
+        "D · Coussin"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas un domaine."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle ville est la capitale de la France ?",
+      "options": [
+        "A · Lyon",
+        "B · Paris",
+        "C · Lille",
+        "D · Nice"
+      ],
+      "answer": "B",
+      "hint": "Une réponse est évidente ici."
+    },
+    {
+      "type": "text",
+      "question": "Combien de jours y a-t-il dans une semaine ?",
+      "answer": "7",
+      "hint": "C’est une base simple."
+    },
+    {
+      "type": "multi",
+      "question": "Quels domaines relèvent de la culture générale ?",
+      "options": [
+        "A · Histoire",
+        "B · Géographie",
+        "C · Science",
+        "D · Coussin"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas un domaine."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle ville est la capitale de la France ?",
+      "options": [
+        "A · Lyon",
+        "B · Paris",
+        "C · Lille",
+        "D · Nice"
+      ],
+      "answer": "B",
+      "hint": "Une réponse est évidente ici."
+    },
+    {
+      "type": "text",
+      "question": "Combien de jours y a-t-il dans une semaine ?",
+      "answer": "7",
+      "hint": "C’est une base simple."
+    },
+    {
+      "type": "multi",
+      "question": "Quels domaines relèvent de la culture générale ?",
+      "options": [
+        "A · Histoire",
+        "B · Géographie",
+        "C · Science",
+        "D · Coussin"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas un domaine."
+    }
+  ],
+  "music": [
+    {
+      "type": "choice",
+      "question": "Quel intrus sort du thème musical : refrain, rythme, artiste, radiateur ?",
+      "options": [
+        "A · refrain",
+        "B · rythme",
+        "C · artiste",
+        "D · radiateur"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit la partie qui revient souvent dans une chanson ?",
+      "answer": "refrain",
+      "hint": "C’est le terme classique."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à un quiz musical ?",
+      "options": [
+        "A · artiste",
+        "B · titre",
+        "C · ambiance",
+        "D · tournevis"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas musical."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus sort du thème musical : refrain, rythme, artiste, radiateur ?",
+      "options": [
+        "A · refrain",
+        "B · rythme",
+        "C · artiste",
+        "D · radiateur"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit la partie qui revient souvent dans une chanson ?",
+      "answer": "refrain",
+      "hint": "C’est le terme classique."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à un quiz musical ?",
+      "options": [
+        "A · artiste",
+        "B · titre",
+        "C · ambiance",
+        "D · tournevis"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas musical."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus sort du thème musical : refrain, rythme, artiste, radiateur ?",
+      "options": [
+        "A · refrain",
+        "B · rythme",
+        "C · artiste",
+        "D · radiateur"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit la partie qui revient souvent dans une chanson ?",
+      "answer": "refrain",
+      "hint": "C’est le terme classique."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à un quiz musical ?",
+      "options": [
+        "A · artiste",
+        "B · titre",
+        "C · ambiance",
+        "D · tournevis"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas musical."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus sort du thème musical : refrain, rythme, artiste, radiateur ?",
+      "options": [
+        "A · refrain",
+        "B · rythme",
+        "C · artiste",
+        "D · radiateur"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit la partie qui revient souvent dans une chanson ?",
+      "answer": "refrain",
+      "hint": "C’est le terme classique."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à un quiz musical ?",
+      "options": [
+        "A · artiste",
+        "B · titre",
+        "C · ambiance",
+        "D · tournevis"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas musical."
+    }
+  ],
+  "disney": [
+    {
+      "type": "choice",
+      "question": "Quel intrus casse l’univers Disney : château, princesse, chanson, tractopelle ?",
+      "options": [
+        "A · château",
+        "B · princesse",
+        "C · chanson",
+        "D · tractopelle"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent au même imaginaire."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit souvent l’ambiance Disney : magie ou usine ?",
+      "answer": "magie",
+      "hint": "Reste dans l’imaginaire du studio."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments reviennent souvent dans Disney ?",
+      "options": [
+        "A · héros",
+        "B · chansons",
+        "C · objets cultes",
+        "D · bétonnière"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot casse le décor."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse l’univers Disney : château, princesse, chanson, tractopelle ?",
+      "options": [
+        "A · château",
+        "B · princesse",
+        "C · chanson",
+        "D · tractopelle"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent au même imaginaire."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit souvent l’ambiance Disney : magie ou usine ?",
+      "answer": "magie",
+      "hint": "Reste dans l’imaginaire du studio."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments reviennent souvent dans Disney ?",
+      "options": [
+        "A · héros",
+        "B · chansons",
+        "C · objets cultes",
+        "D · bétonnière"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot casse le décor."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse l’univers Disney : château, princesse, chanson, tractopelle ?",
+      "options": [
+        "A · château",
+        "B · princesse",
+        "C · chanson",
+        "D · tractopelle"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent au même imaginaire."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit souvent l’ambiance Disney : magie ou usine ?",
+      "answer": "magie",
+      "hint": "Reste dans l’imaginaire du studio."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments reviennent souvent dans Disney ?",
+      "options": [
+        "A · héros",
+        "B · chansons",
+        "C · objets cultes",
+        "D · bétonnière"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot casse le décor."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse l’univers Disney : château, princesse, chanson, tractopelle ?",
+      "options": [
+        "A · château",
+        "B · princesse",
+        "C · chanson",
+        "D · tractopelle"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent au même imaginaire."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit souvent l’ambiance Disney : magie ou usine ?",
+      "answer": "magie",
+      "hint": "Reste dans l’imaginaire du studio."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments reviennent souvent dans Disney ?",
+      "options": [
+        "A · héros",
+        "B · chansons",
+        "C · objets cultes",
+        "D · bétonnière"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot casse le décor."
+    }
+  ]
+}

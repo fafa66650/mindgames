@@ -4,3 +4,23 @@
 .penalites{background:rgba(255,119,183,.12);border:1px solid rgba(255,119,183,.35)}
 .contextbox{background:rgba(103,198,255,.08);border:1px solid rgba(103,198,255,.25)}
 .questionbox{background:rgba(169,255,79,.08);border:1px solid rgba(169,255,79,.25);font-size:20px;font-weight:700}
+
+.themed{border-color:color-mix(in srgb, var(--game) 45%, #243044)}
+.themed:before{background:linear-gradient(90deg,var(--game),#fff3,var(--game))}
+.subcard{background:#0d131b}
+.stat.green{background:linear-gradient(145deg,#17361f,#1d4123)}
+.stat.blue{background:linear-gradient(145deg,#152a3d,#173149)}
+.stat.pink{background:linear-gradient(145deg,#38192b,#471f35)}
+.stat.gold{background:linear-gradient(145deg,#443718,#4d3e18)}
+.tabbtn{background:#151d28}
+.tabbtn.active{background:linear-gradient(90deg,#22d3ee,#a855f7,#facc15);color:#081014}
+.score-pill.points{background:rgba(169,255,79,.18);border:1px solid rgba(169,255,79,.45)}
+.score-pill.aides{background:rgba(103,198,255,.18);border:1px solid rgba(103,198,255,.45)}
+.score-pill.penalites{background:rgba(255,119,183,.18);border:1px solid rgba(255,119,183,.45)}
+.contextbox{background:linear-gradient(145deg,rgba(103,198,255,.16),rgba(103,198,255,.06));border:1px solid rgba(103,198,255,.25)}
+.questionbox{background:linear-gradient(145deg,rgba(169,255,79,.18),rgba(169,255,79,.06));border:1px solid rgba(169,255,79,.28);font-size:20px;font-weight:700}
+.feedback{padding:14px;border-radius:16px;border:1px solid #ffffff1f}
+.feedback.ok{background:linear-gradient(145deg,rgba(34,197,94,.22),rgba(34,197,94,.08));border-color:rgba(34,197,94,.35)}
+.feedback.bad{background:linear-gradient(145deg,rgba(239,68,68,.22),rgba(239,68,68,.08));border-color:rgba(239,68,68,.35)}
+.feedback.help{background:linear-gradient(145deg,rgba(59,130,246,.22),rgba(59,130,246,.08));border-color:rgba(59,130,246,.35)}
+.mission-theme{box-shadow:0 0 0 1px color-mix(in srgb, var(--game) 15%, transparent), 0 20px 50px rgba(0,0,0,.35)}
