@@ -24,3 +24,13 @@
 .feedback.bad{background:linear-gradient(145deg,rgba(239,68,68,.22),rgba(239,68,68,.08));border-color:rgba(239,68,68,.35)}
 .feedback.help{background:linear-gradient(145deg,rgba(59,130,246,.22),rgba(59,130,246,.08));border-color:rgba(59,130,246,.35)}
 .mission-theme{box-shadow:0 0 0 1px color-mix(in srgb, var(--game) 15%, transparent), 0 20px 50px rgba(0,0,0,.35)}
+
+.paragraph-box{font-size:17px;line-height:1.7}
+.question-type{margin-top:10px;display:inline-block;padding:7px 12px;border-radius:999px;background:#ffffff12;border:1px solid #ffffff20;font-size:14px;font-weight:800}
+.mission-card .choice-btn{font-size:20px;line-height:1.35;min-height:86px}
+.mission-card .questionbox{padding:20px 22px}
+.mission-card .contextbox{padding:18px 22px;font-size:20px}
+@media (max-width:900px){
+  .mission-card .choice-btn{font-size:18px;min-height:78px}
+  .mission-card .contextbox,.mission-card .questionbox{font-size:18px}
+}

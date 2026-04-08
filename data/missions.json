@@ -1,0 +1,2254 @@
+{
+  "loupsgarous": [
+    {
+      "type": "choice",
+      "question": "Débat du village : quelle phrase rend un joueur le plus suspect ?",
+      "options": [
+        "A · « Votez contre lui, je n’ai pas d’argument mais je le sens mal. »",
+        "B · « Comparons ses deux dernières explications. »",
+        "C · « On relit les indices avant de voter. »",
+        "D · « On écoute chaque joueur une dernière fois. »"
+      ],
+      "answer": "A",
+      "hint": "La mauvaise réponse pousse le groupe à voter sans base solide.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Dans une partie de déduction, le vote final doit être réfléchi ou improvisé ?",
+      "answer": "réfléchi",
+      "hint": "Le bon mot s’oppose à “improvisé”.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels indices numériques aident à repérer un loup dans cette version appli ?",
+      "options": [
+        "A · Des contradictions dans deux réponses",
+        "B · Un joueur qui change de version",
+        "C · Un joueur qui accuse sans rien justifier",
+        "D · Un joueur qui compare calmement les faits"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde seulement les comportements qui augmentent le doute.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Phase nuit : quel message envoyé par l’animateur semble le plus dangereux pour le village ?",
+      "options": [
+        "A · “Gardez vos notes pour le jour.”",
+        "B · “Un témoignage reçu est peut-être faux.”",
+        "C · “Personne ne parle, on observe.”",
+        "D · “Les loups vous souhaitent bonne chance.”"
+      ],
+      "answer": "B",
+      "hint": "Cherche le message qui perturbe l’analyse collective.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le lieu central de ce jeu est un ______.",
+      "answer": "village",
+      "hint": "Ce n’est ni un navire ni une arène.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Si votre équipe hésite, quelle action aide le plus ?",
+      "options": [
+        "A · Accuser au hasard",
+        "B · Relire les incohérences repérées",
+        "C · Passer directement à l’élimination",
+        "D · Ignorer le vote"
+      ],
+      "answer": "B",
+      "hint": "La bonne réponse améliore l’analyse du groupe.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qui doit être observé avant d’éliminer un joueur ?",
+      "options": [
+        "A · Son ton",
+        "B · Ses contradictions",
+        "C · Sa logique",
+        "D · La couleur de son t-shirt"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Reste sur les éléments utiles au débat.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le cœur émotionnel de ce jeu est la ______.",
+      "answer": "suspicion",
+      "hint": "C’est un mot-clé de déduction sociale.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle erreur coûte le plus cher au village ?",
+      "options": [
+        "A · Prendre 20 secondes pour comparer",
+        "B · Voter trop tôt",
+        "C · Demander une précision",
+        "D · Noter une incohérence"
+      ],
+      "answer": "B",
+      "hint": "La précipitation casse souvent la manche.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels outils numériques peuvent aider une équipe ici ?",
+      "options": [
+        "A · Relire le contexte",
+        "B · Comparer les réponses déjà données",
+        "C · Prendre une aide légère",
+        "D · Fermer l’écran"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier choix bloque l’équipe.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Complète : le verdict doit reposer sur les ______.",
+      "answer": "faits",
+      "hint": "Cherche un mot simple lié à l’analyse concrète.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Finale : quelle qualité fait gagner ce jeu ?",
+      "options": [
+        "A · Bruit",
+        "B · Lecture du groupe",
+        "C · Hasard",
+        "D · Panique"
+      ],
+      "answer": "B",
+      "hint": "La meilleure réponse reste sociale et analytique.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "undercover": [
+    {
+      "type": "choice",
+      "question": "Quel mot est l’intrus numérique : plage, sable, vague, moteur ?",
+      "options": [
+        "A · plage",
+        "B · sable",
+        "C · vague",
+        "D · moteur"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent au même champ lexical.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Dans Undercover, vaut-il mieux répondre longuement ou rester précis ?",
+      "answer": "précis",
+      "hint": "Le bon style de jeu est court et contrôlé.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qui peut trahir un Undercover dans une manche appli ?",
+      "options": [
+        "A · Une définition trop vague",
+        "B · Une définition trop précise",
+        "C · Une réponse hors univers",
+        "D · Une réponse claire et mesurée"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "L’erreur vient d’un mauvais dosage.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot casse cet univers : couronne, château, roi, ballon de rugby ?",
+      "options": [
+        "A · couronne",
+        "B · château",
+        "C · roi",
+        "D · ballon de rugby"
+      ],
+      "answer": "D",
+      "hint": "Un seul mot sort du décor commun.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "La première qualité utile dans Undercover est d’______ les autres.",
+      "answer": "observer",
+      "hint": "Avant de trop parler, il faut regarder.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle réponse protège le plus un joueur ?",
+      "options": [
+        "A · Une réponse juste assez parlante",
+        "B · Une réponse très longue",
+        "C · Une réponse hors sujet",
+        "D · Une réponse copiée mot pour mot"
+      ],
+      "answer": "A",
+      "hint": "La bonne réponse garde l’équilibre.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments doivent faire douter l’équipe ?",
+      "options": [
+        "A · Un mot trop général",
+        "B · Un détail anormalement précis",
+        "C · Une rupture de thème",
+        "D · Une réponse calme et simple"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde les anomalies de langage.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le joueur caché dans ce jeu est un ______.",
+      "answer": "intrus",
+      "hint": "Ce n’est ni un loup ni un pirate.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot est l’intrus : forêt, arbre, mousse, hélicoptère ?",
+      "options": [
+        "A · forêt",
+        "B · arbre",
+        "C · mousse",
+        "D · hélicoptère"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent naturels.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels réflexes font gagner une équipe ?",
+      "options": [
+        "A · Écouter les autres",
+        "B · Ajuster sa réponse",
+        "C · Repérer un hors thème",
+        "D · Répondre n’importe comment"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Élimine la réponse qui casse totalement la stratégie.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Complète : Undercover repose sur des mots ______.",
+      "answer": "proches",
+      "hint": "Ils ne sont pas totalement opposés.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Finale : quel comportement est le plus suspect ?",
+      "options": [
+        "A · Une réponse cohérente",
+        "B · Une réponse équilibrée",
+        "C · Une réponse qui trahit le mauvais thème",
+        "D · Une réponse courte"
+      ],
+      "answer": "C",
+      "hint": "Cherche la rupture la plus visible.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "traitreabord": [
+    {
+      "type": "choice",
+      "question": "Quel message évoque le plus un sabotage à bord ?",
+      "options": [
+        "A · “On suit le plan prévu.”",
+        "B · “Changez l’ordre des étapes, sans vérifier.”",
+        "C · “Relisons la consigne.”",
+        "D · “On compare les infos avant d’agir.”"
+      ],
+      "answer": "B",
+      "hint": "Cherche le message qui casse la méthode de l’équipage.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le danger principal à bord s’appelle le ______.",
+      "answer": "sabotage",
+      "hint": "Le navire ne dérive pas par hasard.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels signes peuvent trahir le traître dans une version numérique ?",
+      "options": [
+        "A · Faux indice",
+        "B · Détour inutile",
+        "C · Contradiction",
+        "D · Vérification logique"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde ce qui gêne l’équipage.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot est hors univers : ancre, pont, cabine, canapé ?",
+      "options": [
+        "A · ancre",
+        "B · pont",
+        "C · cabine",
+        "D · canapé"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent marins.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le groupe principal sur le navire est l’______.",
+      "answer": "équipage",
+      "hint": "Mot collectif du monde marin.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle action aide le plus à survivre au sabotage ?",
+      "options": [
+        "A · Vérifier chaque info clé",
+        "B · Se précipiter",
+        "C · Se disperser",
+        "D · Ignorer un détail étrange"
+      ],
+      "answer": "A",
+      "hint": "La bonne réponse renforce la discipline.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quelles qualités font gagner ici ?",
+      "options": [
+        "A · Coordination",
+        "B · Sang-froid",
+        "C · Lecture des indices",
+        "D · Panique"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier choix ruine la manche.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le décor principal de cette aventure est le ______.",
+      "answer": "navire",
+      "hint": "Toute l’histoire se joue à bord.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse l’univers : boussole, carte, coque, photocopieuse ?",
+      "options": [
+        "A · boussole",
+        "B · carte",
+        "C · coque",
+        "D · photocopieuse"
+      ],
+      "answer": "D",
+      "hint": "Un seul mot n’a rien à faire ici.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Que doit faire l’équipe avant d’agir ?",
+      "options": [
+        "A · Lire le contexte",
+        "B · Comparer les données",
+        "C · Vérifier les ordres",
+        "D · Accuser au hasard"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Élimine le réflexe le plus destructeur.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Complète : le bon cap se garde avec de la ______.",
+      "answer": "discipline",
+      "hint": "Mot lié à la tenue du groupe.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Finale : quelle qualité sauve l’équipage ?",
+      "options": [
+        "A · La méthode",
+        "B · Le bruit",
+        "C · L’improvisation permanente",
+        "D · Le vide"
+      ],
+      "answer": "A",
+      "hint": "La bonne réponse garde le navire structuré.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "million": [
+    {
+      "type": "choice",
+      "question": "Palier 1 — Quelle aide emblématique enlève deux mauvaises réponses ?",
+      "options": [
+        "A · Vote du public",
+        "B · 50/50",
+        "C · Switch question",
+        "D · Passe libre"
+      ],
+      "answer": "B",
+      "hint": "C’est l’aide la plus connue du format.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Dans cet univers, comment appelle-t-on chaque niveau de progression ?",
+      "answer": "palier",
+      "hint": "Chaque bonne réponse permet d’en monter un.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Sous les projecteurs, quelle qualité vaut le plus ?",
+      "options": [
+        "A · Répondre trop vite",
+        "B · Garder son calme",
+        "C · Changer d’avis sans lire",
+        "D · Panique"
+      ],
+      "answer": "B",
+      "hint": "La bonne réponse aide à rester lucide.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qui aide vraiment une équipe ici ?",
+      "options": [
+        "A · Lire toutes les options",
+        "B · Gérer les aides",
+        "C · Garder la tête froide",
+        "D · Répondre au hasard"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Élimine le réflexe qui casse tout.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle réponse colle le plus au format ?",
+      "options": [
+        "A · Monter par étapes",
+        "B · Changer de jeu toutes les manches",
+        "C · Supprimer les questions",
+        "D · Avancer au hasard"
+      ],
+      "answer": "A",
+      "hint": "Pense à la structure du jeu télé.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Complète : Qui veut gagner des ______ ?",
+      "answer": "millions",
+      "hint": "C’est dans le titre.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Palier tension — Quel intrus casse l’univers ?",
+      "options": [
+        "A · question",
+        "B · joker",
+        "C · gain",
+        "D · tracteur"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent sur le plateau.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots appartiennent à l’identité du jeu ?",
+      "options": [
+        "A · suspense",
+        "B · question",
+        "C · gain",
+        "D · brouette"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot est hors univers.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel choix est le plus intelligent ?",
+      "options": [
+        "A · Lire puis décider",
+        "B · Jouer sans regarder",
+        "C · Parler pour rien",
+        "D · Fermer l’écran"
+      ],
+      "answer": "A",
+      "hint": "Le bon réflexe reste méthodique.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le climat principal de ce jeu est la ______.",
+      "answer": "tension",
+      "hint": "Un mot simple pour décrire la pression.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Palier final — Quel mot sent le plus le jeu ?",
+      "options": [
+        "A · plateau",
+        "B · garage",
+        "C · chantier",
+        "D · moquette"
+      ],
+      "answer": "A",
+      "hint": "Reste dans l’univers télé.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments définissent le mieux cette adaptation ?",
+      "options": [
+        "A · Paliers",
+        "B · Bonnes réponses",
+        "C · Gestion des aides",
+        "D · Silence radio obligatoire"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier choix ne décrit pas le jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "burgerquiz": [
+    {
+      "type": "choice",
+      "question": "Mise en bouche — Quel intrus casse l’ambiance Burger Quiz ?",
+      "options": [
+        "A · sauce",
+        "B · cornichon",
+        "C · planète absurde",
+        "D · silence administratif"
+      ],
+      "answer": "D",
+      "hint": "Le jeu aime le décalé, pas le vide.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le ton de Burger Quiz est plutôt sérieux ou ______ ?",
+      "answer": "decale",
+      "hint": "Le mot s’oppose à sérieux.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle réponse colle le plus au plateau ?",
+      "options": [
+        "A · Fun rapide",
+        "B · Silence total",
+        "C · Ennui volontaire",
+        "D · Pause infinie"
+      ],
+      "answer": "A",
+      "hint": "La bonne réponse garde l’énergie.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qu’une bonne équipe doit garder ici ?",
+      "options": [
+        "A · Réactivité",
+        "B · Humour",
+        "C · Lecture rapide",
+        "D · Blocage"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier choix casse tout.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus n’a rien à faire ici ?",
+      "options": [
+        "A · ketchup",
+        "B · mayo",
+        "C · pain",
+        "D · photocopieuse"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans le ton du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Complète : Burger ______.",
+      "answer": "quiz",
+      "hint": "C’est le mot du titre.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel choix aide le plus à gagner ?",
+      "options": [
+        "A · Rire puis réfléchir",
+        "B · Ignorer la question",
+        "C · Répondre en panique",
+        "D · Quitter"
+      ],
+      "answer": "A",
+      "hint": "Le jeu récompense l’énergie bien tenue.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots décrivent bien ce jeu ?",
+      "options": [
+        "A · absurde",
+        "B · rapide",
+        "C · piégeux",
+        "D · monotone"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Élimine ce qui sent l’ennui.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse l’univers culte du plateau ?",
+      "options": [
+        "A · burger",
+        "B · sauce",
+        "C · planète qui parle",
+        "D · formulaire RH"
+      ],
+      "answer": "D",
+      "hint": "Un mot sent trop l’administration.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "L’ambiance de ce jeu est surtout ______.",
+      "answer": "fun",
+      "hint": "Un mot court, très simple.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel est le meilleur réflexe ?",
+      "options": [
+        "A · Rester vivant dans le rythme",
+        "B · Tout ralentir",
+        "C · Ne pas lire",
+        "D · Tout prendre trop au sérieux"
+      ],
+      "answer": "A",
+      "hint": "Le rythme compte vraiment.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qui fait la force de cette adaptation ?",
+      "options": [
+        "A · Questions courtes",
+        "B · Logique cachée",
+        "C · Ambiance fun",
+        "D · Manches vides"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier choix n’apporte rien.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "lestraitres": [
+    {
+      "type": "choice",
+      "question": "Ouverture — Quel signe crée le plus de doute ?",
+      "options": [
+        "A · Une version qui change",
+        "B · Une preuve nette",
+        "C · Une logique propre",
+        "D · Une réponse posée"
+      ],
+      "answer": "A",
+      "hint": "Cherche ce qui fissure la confiance.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le cœur émotionnel du jeu est le ______.",
+      "answer": "doute",
+      "hint": "Un mot simple lié à la méfiance.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel comportement semble le plus troublant ?",
+      "options": [
+        "A · Observer calmement",
+        "B · Sourire puis se contredire",
+        "C · Relire les faits",
+        "D · Demander une précision"
+      ],
+      "answer": "B",
+      "hint": "La contradiction gêne plus que le calme.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qui aide une équipe loyale ?",
+      "options": [
+        "A · Lire les attitudes",
+        "B · Comparer les versions",
+        "C · Observer les votes",
+        "D · Fermer les yeux"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier choix bloque l’analyse.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse l’univers ?",
+      "options": [
+        "A · alliance",
+        "B · mission",
+        "C · trahison",
+        "D · radiateur"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans la stratégie sociale.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le joueur dangereux ici est un ______.",
+      "answer": "traitre",
+      "hint": "Mot du titre, sans accent pris en compte.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle erreur coûte le plus cher ?",
+      "options": [
+        "A · Vérifier avant de voter",
+        "B · Accuser trop vite",
+        "C · Lire une incohérence",
+        "D · Prendre une note"
+      ],
+      "answer": "B",
+      "hint": "La précipitation peut faire gagner l’autre camp.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments doivent être surveillés ?",
+      "options": [
+        "A · Contradictions",
+        "B · Votes",
+        "C · Changements d’attitude",
+        "D · Couleur des chaussures"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier choix n’aide pas l’enquête.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot sent le plus cet univers ?",
+      "options": [
+        "A · stratégie",
+        "B · garage",
+        "C · chantier",
+        "D · facture"
+      ],
+      "answer": "A",
+      "hint": "Reste dans le jeu mental.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Complète : Les ______.",
+      "answer": "traitres",
+      "hint": "C’est le titre du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Finale — Quelle qualité garde l’équipe en vie ?",
+      "options": [
+        "A · Sang-froid",
+        "B · Bruit",
+        "C · Panique",
+        "D · Aveuglement"
+      ],
+      "answer": "A",
+      "hint": "Le bon choix garde le groupe lucide.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots appartiennent à ce jeu ?",
+      "options": [
+        "A · fidélité",
+        "B · mission",
+        "C · trahison",
+        "D · bétonnière"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot est hors thème.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "mario": [
+    {
+      "type": "choice",
+      "question": "Quel intrus n’appartient pas à l’univers Mario ?",
+      "options": [
+        "A · tuyau",
+        "B · pièce",
+        "C · champignon",
+        "D · hélicoptère militaire"
+      ],
+      "answer": "D",
+      "hint": "Trois éléments sont typiques du royaume.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet bonus emblématique fait grandir ?",
+      "answer": "champignon",
+      "hint": "Il fait partie des icônes du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à l’univers ?",
+      "options": [
+        "A · étoile",
+        "B · pièce",
+        "C · tuyau",
+        "D · dragon laser"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Un mot casse le monde du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus n’appartient pas à l’univers Mario ?",
+      "options": [
+        "A · tuyau",
+        "B · pièce",
+        "C · champignon",
+        "D · hélicoptère militaire"
+      ],
+      "answer": "D",
+      "hint": "Trois éléments sont typiques du royaume.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet bonus emblématique fait grandir ?",
+      "answer": "champignon",
+      "hint": "Il fait partie des icônes du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à l’univers ?",
+      "options": [
+        "A · étoile",
+        "B · pièce",
+        "C · tuyau",
+        "D · dragon laser"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Un mot casse le monde du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus n’appartient pas à l’univers Mario ?",
+      "options": [
+        "A · tuyau",
+        "B · pièce",
+        "C · champignon",
+        "D · hélicoptère militaire"
+      ],
+      "answer": "D",
+      "hint": "Trois éléments sont typiques du royaume.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet bonus emblématique fait grandir ?",
+      "answer": "champignon",
+      "hint": "Il fait partie des icônes du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à l’univers ?",
+      "options": [
+        "A · étoile",
+        "B · pièce",
+        "C · tuyau",
+        "D · dragon laser"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Un mot casse le monde du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus n’appartient pas à l’univers Mario ?",
+      "options": [
+        "A · tuyau",
+        "B · pièce",
+        "C · champignon",
+        "D · hélicoptère militaire"
+      ],
+      "answer": "D",
+      "hint": "Trois éléments sont typiques du royaume.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet bonus emblématique fait grandir ?",
+      "answer": "champignon",
+      "hint": "Il fait partie des icônes du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à l’univers ?",
+      "options": [
+        "A · étoile",
+        "B · pièce",
+        "C · tuyau",
+        "D · dragon laser"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Un mot casse le monde du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "pokemon": [
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : badge, arène, pokéball, parapluie géant ?",
+      "options": [
+        "A · badge",
+        "B · arène",
+        "C · pokéball",
+        "D · parapluie géant"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet capture les créatures ?",
+      "answer": "pokéball",
+      "hint": "C’est l’objet le plus iconique du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots appartiennent à cet univers ?",
+      "options": [
+        "A · type",
+        "B · évolution",
+        "C · ligue",
+        "D · canapé"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde les termes de progression.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : badge, arène, pokéball, parapluie géant ?",
+      "options": [
+        "A · badge",
+        "B · arène",
+        "C · pokéball",
+        "D · parapluie géant"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet capture les créatures ?",
+      "answer": "pokéball",
+      "hint": "C’est l’objet le plus iconique du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots appartiennent à cet univers ?",
+      "options": [
+        "A · type",
+        "B · évolution",
+        "C · ligue",
+        "D · canapé"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde les termes de progression.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : badge, arène, pokéball, parapluie géant ?",
+      "options": [
+        "A · badge",
+        "B · arène",
+        "C · pokéball",
+        "D · parapluie géant"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet capture les créatures ?",
+      "answer": "pokéball",
+      "hint": "C’est l’objet le plus iconique du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots appartiennent à cet univers ?",
+      "options": [
+        "A · type",
+        "B · évolution",
+        "C · ligue",
+        "D · canapé"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde les termes de progression.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus est hors univers : badge, arène, pokéball, parapluie géant ?",
+      "options": [
+        "A · badge",
+        "B · arène",
+        "C · pokéball",
+        "D · parapluie géant"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel objet capture les créatures ?",
+      "answer": "pokéball",
+      "hint": "C’est l’objet le plus iconique du jeu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots appartiennent à cet univers ?",
+      "options": [
+        "A · type",
+        "B · évolution",
+        "C · ligue",
+        "D · canapé"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Garde les termes de progression.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "zelda": [
+    {
+      "type": "choice",
+      "question": "Quel intrus casse le décor : temple, clé, énigme, micro-onde ?",
+      "options": [
+        "A · temple",
+        "B · clé",
+        "C · énigme",
+        "D · micro-onde"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans une aventure ancienne.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit le mieux l’univers : exploration ou usine ?",
+      "answer": "exploration",
+      "hint": "L’aventure repose sur le voyage et la découverte.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments aident à avancer ?",
+      "options": [
+        "A · Lecture des symboles",
+        "B · Ordre des mécanismes",
+        "C · Observation",
+        "D · Réponse au hasard"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier élément n’aide pas.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse le décor : temple, clé, énigme, micro-onde ?",
+      "options": [
+        "A · temple",
+        "B · clé",
+        "C · énigme",
+        "D · micro-onde"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans une aventure ancienne.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit le mieux l’univers : exploration ou usine ?",
+      "answer": "exploration",
+      "hint": "L’aventure repose sur le voyage et la découverte.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments aident à avancer ?",
+      "options": [
+        "A · Lecture des symboles",
+        "B · Ordre des mécanismes",
+        "C · Observation",
+        "D · Réponse au hasard"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier élément n’aide pas.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse le décor : temple, clé, énigme, micro-onde ?",
+      "options": [
+        "A · temple",
+        "B · clé",
+        "C · énigme",
+        "D · micro-onde"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans une aventure ancienne.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit le mieux l’univers : exploration ou usine ?",
+      "answer": "exploration",
+      "hint": "L’aventure repose sur le voyage et la découverte.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments aident à avancer ?",
+      "options": [
+        "A · Lecture des symboles",
+        "B · Ordre des mécanismes",
+        "C · Observation",
+        "D · Réponse au hasard"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier élément n’aide pas.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse le décor : temple, clé, énigme, micro-onde ?",
+      "options": [
+        "A · temple",
+        "B · clé",
+        "C · énigme",
+        "D · micro-onde"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans une aventure ancienne.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit le mieux l’univers : exploration ou usine ?",
+      "answer": "exploration",
+      "hint": "L’aventure repose sur le voyage et la découverte.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments aident à avancer ?",
+      "options": [
+        "A · Lecture des symboles",
+        "B · Ordre des mécanismes",
+        "C · Observation",
+        "D · Réponse au hasard"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier élément n’aide pas.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "onepiece": [
+    {
+      "type": "choice",
+      "question": "Journal de bord — Quel intrus casse l’univers ?",
+      "options": [
+        "A · île",
+        "B · équipage",
+        "C · trésor",
+        "D · ascenseur de bureau"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent marins et aventureux.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le groupe principal dans One Piece est un ______.",
+      "answer": "equipage",
+      "hint": "Mot collectif du monde pirate.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle qualité aide le plus à garder le cap ?",
+      "options": [
+        "A · Cohésion",
+        "B · Panique",
+        "C · Bruit",
+        "D · Abandon"
+      ],
+      "answer": "A",
+      "hint": "Un bon équipage gagne ensemble.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à l’univers ?",
+      "options": [
+        "A · carte",
+        "B · route",
+        "C · coffre",
+        "D · imprimante"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’a rien à faire en mer.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus casse l’aventure ?",
+      "options": [
+        "A · boussole",
+        "B · drapeau",
+        "C · port",
+        "D · station de métro"
+      ],
+      "answer": "D",
+      "hint": "Reste dans la navigation.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "L’objectif final tourne autour d’un ______.",
+      "answer": "tresor",
+      "hint": "C’est le cœur de la quête.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel choix aide le plus ?",
+      "options": [
+        "A · Lire les indices de route",
+        "B · Se disperser",
+        "C · Ignorer la carte",
+        "D · Répondre sans lire"
+      ],
+      "answer": "A",
+      "hint": "Le bon choix garde la trajectoire.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qu’un bon équipage doit faire ?",
+      "options": [
+        "A · Lire",
+        "B · trier",
+        "C · choisir",
+        "D · abandonner"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier verbe casse le voyage.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot sent le plus l’univers ?",
+      "options": [
+        "A · mer",
+        "B · parking",
+        "C · formulaire",
+        "D · usine"
+      ],
+      "answer": "A",
+      "hint": "Le décor principal est évident.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Complète : chasse au ______.",
+      "answer": "tresor",
+      "hint": "Le mot revient partout dans l’intro.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Finale — Quelle erreur est la plus dangereuse ?",
+      "options": [
+        "A · Lire trop vite une carte",
+        "B · Comparer deux indices",
+        "C · Se coordonner",
+        "D · Vérifier le cap"
+      ],
+      "answer": "A",
+      "hint": "Le faux bon cap peut ruiner la course.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots appartiennent au jeu ?",
+      "options": [
+        "A · port",
+        "B · cap",
+        "C · boussole",
+        "D · photocopieuse"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot ne flotte pas.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "dbz": [
+    {
+      "type": "choice",
+      "question": "Charge initiale — Quel mot est hors univers ?",
+      "options": [
+        "A · aura",
+        "B · énergie",
+        "C · transformation",
+        "D · agrafeuse"
+      ],
+      "answer": "D",
+      "hint": "Trois mots appartiennent à la montée en puissance.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le mot central de cet univers est la ______.",
+      "answer": "puissance",
+      "hint": "Tout tourne autour d’elle.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel choix vaut le plus ?",
+      "options": [
+        "A · Charger au bon moment",
+        "B · Se vider pour rien",
+        "C · Répondre au hasard",
+        "D · Ne rien lire"
+      ],
+      "answer": "A",
+      "hint": "Le bon timing est décisif.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots collent à DBZ ?",
+      "options": [
+        "A · combat",
+        "B · fusion",
+        "C · charge",
+        "D · moquette"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot casse totalement l’univers.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus sort du monde ?",
+      "options": [
+        "A · aura",
+        "B · rival",
+        "C · duel",
+        "D · ticket de caisse"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans le manga.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le petit mot qui désigne l’énergie est le ______.",
+      "answer": "ki",
+      "hint": "Très court, très connu.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle qualité fait gagner ?",
+      "options": [
+        "A · Maîtrise",
+        "B · Bruit",
+        "C · Panique",
+        "D · Immobilité"
+      ],
+      "answer": "A",
+      "hint": "La puissance seule ne suffit pas.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qui peut définir une bonne manche ici ?",
+      "options": [
+        "A · Lecture juste",
+        "B · Montée d’énergie",
+        "C · Décision propre",
+        "D · Vide"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier choix n’apporte rien.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot sent le plus le final ?",
+      "options": [
+        "A · affrontement",
+        "B · comptabilité",
+        "C · stationnement",
+        "D · couloir"
+      ],
+      "answer": "A",
+      "hint": "Le final se joue dans le choc.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Complète : montée en ______.",
+      "answer": "puissance",
+      "hint": "C’est l’expression clé.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle erreur vous ralentit le plus ?",
+      "options": [
+        "A · Répondre sans lire",
+        "B · Observer un indice",
+        "C · Vérifier la question",
+        "D · Attendre 2 secondes"
+      ],
+      "answer": "A",
+      "hint": "Le pire réflexe reste la précipitation aveugle.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots restent fidèles à l’univers ?",
+      "options": [
+        "A · aura",
+        "B · fusion",
+        "C · énergie",
+        "D · radiateur"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’a rien à faire là.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "naruto": [
+    {
+      "type": "choice",
+      "question": "Mission discrète — Quel intrus sort de l’univers ?",
+      "options": [
+        "A · mission",
+        "B · chakra",
+        "C · ninja",
+        "D · grille-pain"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent cohérents.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "L’énergie utilisée dans cet univers s’appelle le ______.",
+      "answer": "chakra",
+      "hint": "Mot-clé du manga.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel choix aide le plus une équipe ninja ?",
+      "options": [
+        "A · Lire puis agir",
+        "B · Foncer sans penser",
+        "C · Répondre au hasard",
+        "D · Ignorer l’indice"
+      ],
+      "answer": "A",
+      "hint": "La stratégie compte plus que la précipitation.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots collent à Naruto ?",
+      "options": [
+        "A · mission",
+        "B · infiltration",
+        "C · technique",
+        "D · canapé"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot casse l’univers.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus sort du décor ?",
+      "options": [
+        "A · bandeau",
+        "B · technique",
+        "C · équipe",
+        "D · ascenseur"
+      ],
+      "answer": "D",
+      "hint": "Reste dans la mission ninja.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le héros agit comme un ______.",
+      "answer": "ninja",
+      "hint": "C’est le rôle principal de l’univers.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle qualité fait avancer ?",
+      "options": [
+        "A · Lecture fine",
+        "B · Panique",
+        "C · Bruit",
+        "D · Abandon"
+      ],
+      "answer": "A",
+      "hint": "Le bon joueur lit avant d’agir.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qu’une bonne équipe doit garder ?",
+      "options": [
+        "A · Attention",
+        "B · stratégie",
+        "C · précision",
+        "D · désordre"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Élimine ce qui casse la mission.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot sent le plus cet univers ?",
+      "options": [
+        "A · infiltration",
+        "B · garage",
+        "C · administration",
+        "D · facture"
+      ],
+      "answer": "A",
+      "hint": "Reste dans la mission.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Complète : mission ______.",
+      "answer": "ninja",
+      "hint": "Deux mots très liés dans cet univers.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle erreur coûte le plus cher ?",
+      "options": [
+        "A · Oublier un détail",
+        "B · Prendre une note",
+        "C · Relire la question",
+        "D · Demander une précision"
+      ],
+      "answer": "A",
+      "hint": "Le petit détail peut tout changer.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots appartiennent à Naruto ?",
+      "options": [
+        "A · chakra",
+        "B · bandeau",
+        "C · technique",
+        "D · perceuse"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’a rien à faire ici.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "culture": [
+    {
+      "type": "choice",
+      "question": "Quelle ville est la capitale de la France ?",
+      "options": [
+        "A · Lyon",
+        "B · Paris",
+        "C · Lille",
+        "D · Nice"
+      ],
+      "answer": "B",
+      "hint": "Une réponse est évidente ici.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Combien de jours y a-t-il dans une semaine ?",
+      "answer": "7",
+      "hint": "C’est une base simple.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels domaines relèvent de la culture générale ?",
+      "options": [
+        "A · Histoire",
+        "B · Géographie",
+        "C · Science",
+        "D · Coussin"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas un domaine.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle ville est la capitale de la France ?",
+      "options": [
+        "A · Lyon",
+        "B · Paris",
+        "C · Lille",
+        "D · Nice"
+      ],
+      "answer": "B",
+      "hint": "Une réponse est évidente ici.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Combien de jours y a-t-il dans une semaine ?",
+      "answer": "7",
+      "hint": "C’est une base simple.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels domaines relèvent de la culture générale ?",
+      "options": [
+        "A · Histoire",
+        "B · Géographie",
+        "C · Science",
+        "D · Coussin"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas un domaine.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle ville est la capitale de la France ?",
+      "options": [
+        "A · Lyon",
+        "B · Paris",
+        "C · Lille",
+        "D · Nice"
+      ],
+      "answer": "B",
+      "hint": "Une réponse est évidente ici.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Combien de jours y a-t-il dans une semaine ?",
+      "answer": "7",
+      "hint": "C’est une base simple.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels domaines relèvent de la culture générale ?",
+      "options": [
+        "A · Histoire",
+        "B · Géographie",
+        "C · Science",
+        "D · Coussin"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas un domaine.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle ville est la capitale de la France ?",
+      "options": [
+        "A · Lyon",
+        "B · Paris",
+        "C · Lille",
+        "D · Nice"
+      ],
+      "answer": "B",
+      "hint": "Une réponse est évidente ici.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Combien de jours y a-t-il dans une semaine ?",
+      "answer": "7",
+      "hint": "C’est une base simple.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels domaines relèvent de la culture générale ?",
+      "options": [
+        "A · Histoire",
+        "B · Géographie",
+        "C · Science",
+        "D · Coussin"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas un domaine.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "music": [
+    {
+      "type": "choice",
+      "question": "Quel intrus sort du thème musical : refrain, rythme, artiste, radiateur ?",
+      "options": [
+        "A · refrain",
+        "B · rythme",
+        "C · artiste",
+        "D · radiateur"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit la partie qui revient souvent dans une chanson ?",
+      "answer": "refrain",
+      "hint": "C’est le terme classique.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à un quiz musical ?",
+      "options": [
+        "A · artiste",
+        "B · titre",
+        "C · ambiance",
+        "D · tournevis"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas musical.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus sort du thème musical : refrain, rythme, artiste, radiateur ?",
+      "options": [
+        "A · refrain",
+        "B · rythme",
+        "C · artiste",
+        "D · radiateur"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit la partie qui revient souvent dans une chanson ?",
+      "answer": "refrain",
+      "hint": "C’est le terme classique.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à un quiz musical ?",
+      "options": [
+        "A · artiste",
+        "B · titre",
+        "C · ambiance",
+        "D · tournevis"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas musical.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus sort du thème musical : refrain, rythme, artiste, radiateur ?",
+      "options": [
+        "A · refrain",
+        "B · rythme",
+        "C · artiste",
+        "D · radiateur"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit la partie qui revient souvent dans une chanson ?",
+      "answer": "refrain",
+      "hint": "C’est le terme classique.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à un quiz musical ?",
+      "options": [
+        "A · artiste",
+        "B · titre",
+        "C · ambiance",
+        "D · tournevis"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas musical.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus sort du thème musical : refrain, rythme, artiste, radiateur ?",
+      "options": [
+        "A · refrain",
+        "B · rythme",
+        "C · artiste",
+        "D · radiateur"
+      ],
+      "answer": "D",
+      "hint": "Trois mots viennent du même monde.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Quel mot décrit la partie qui revient souvent dans une chanson ?",
+      "answer": "refrain",
+      "hint": "C’est le terme classique.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments appartiennent à un quiz musical ?",
+      "options": [
+        "A · artiste",
+        "B · titre",
+        "C · ambiance",
+        "D · tournevis"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot n’est pas musical.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ],
+  "disney": [
+    {
+      "type": "choice",
+      "question": "Ouverture magique — Quel intrus casse l’univers Disney ?",
+      "options": [
+        "A · château",
+        "B · princesse",
+        "C · chanson",
+        "D · bétonnière"
+      ],
+      "answer": "D",
+      "hint": "Trois mots restent dans l’imaginaire du royaume.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Le mot qui décrit le mieux l’ambiance Disney est ______.",
+      "answer": "magie",
+      "hint": "C’est un mot simple et central.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel élément sent le plus l’univers ?",
+      "options": [
+        "A · personnage culte",
+        "B · formulaire RH",
+        "C · stationnement",
+        "D · radiateur"
+      ],
+      "answer": "A",
+      "hint": "La bonne réponse reste dans le récit.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels éléments reviennent souvent dans Disney ?",
+      "options": [
+        "A · chansons",
+        "B · lieux mémorables",
+        "C · personnages",
+        "D · perceuse"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot ne colle pas.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel intrus n’a rien à faire ici ?",
+      "options": [
+        "A · royaume",
+        "B · aventure",
+        "C · objet culte",
+        "D · tractopelle"
+      ],
+      "answer": "D",
+      "hint": "Trois éléments restent dans le conte.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Disney est surtout un monde d’______.",
+      "answer": "animation",
+      "hint": "Le mot s’oppose à mécanique.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle qualité aide le plus une équipe ?",
+      "options": [
+        "A · Lire les détails",
+        "B · Répondre au hasard",
+        "C · Ignorer le contexte",
+        "D · Tout confondre"
+      ],
+      "answer": "A",
+      "hint": "L’univers récompense la mémoire visuelle.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Qu’est-ce qu’une bonne équipe doit reconnaître ?",
+      "options": [
+        "A · personnage",
+        "B · lieu",
+        "C · chanson",
+        "D · notice technique"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier choix casse la magie.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quel mot sent le plus Disney ?",
+      "options": [
+        "A · enchantement",
+        "B · chantier",
+        "C · couloir gris",
+        "D · hangar"
+      ],
+      "answer": "A",
+      "hint": "Un seul mot garde le bon ton.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "text",
+      "question": "Complète : monde ______.",
+      "answer": "disney",
+      "hint": "Mot du titre du thème.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "choice",
+      "question": "Quelle erreur vous fait le plus perdre ?",
+      "options": [
+        "A · Confondre deux univers proches",
+        "B · Lire un indice",
+        "C · Observer une image",
+        "D · Comparer les réponses"
+      ],
+      "answer": "A",
+      "hint": "Le décor peut piéger la mémoire.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    },
+    {
+      "type": "multi",
+      "question": "Quels mots appartiennent vraiment à ce monde ?",
+      "options": [
+        "A · royaume",
+        "B · chanson",
+        "C · magie",
+        "D · moissonneuse"
+      ],
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ],
+      "hint": "Le dernier mot casse totalement l’univers.",
+      "explanation": "Cette bonne réponse respecte la logique de la manche et l’univers du jeu."
+    }
+  ]
+}
