@@ -1,24 +1,19 @@
 FAFATRAINING Game Arena
 
-Bienvenue dans l’arène.
+Cette version a été pensée pour fonctionner en statique, sans backend, tout en restant exploitable sur téléphone.
+Les liens générés par l’admin embarquent les données de session pour rester utilisables sur d’autres appareils.
 
-Cette application permet de préparer, lancer et suivre des sessions de jeux immersifs avec plusieurs équipes, directement sur téléphone.
+Fonctions :
+- tri des univers
+- score automatique selon jeu + difficulté
+- codes d’équipe personnalisables
+- liens directs par équipe
+- types de manches visibles
+- aides, points, pénalités, XP, badges
+- fiche animateur et suivi local des sessions
 
-UTILISATION RAPIDE
-1. Ouvre l’onglet Administrateur
-2. Choisis l’univers puis le jeu
-3. Règle l’âge, la difficulté, la durée et le nombre d’équipes
-4. Personnalise les codes d’équipe si tu veux
-5. Lance la session
-6. Envoie le bon lien à chaque équipe
+Limite honnête :
+sans backend, le vrai live croisé entre plusieurs téléphones n’existe pas.
+Mais les liens et la session sont maintenant autonomes pour un usage GitHub Pages propre.
 
-CÔTÉ JOUEUR
-• l’équipe arrive directement sur son jeu
-• elle entre son nom + les prénoms
-• elle lit une vraie introduction
-• elle commence la partie
-• un joueur actif est affiché à chaque manche
-
-IMPORTANT
-Le suivi des sessions fonctionne localement sur le même appareil / navigateur.
-Pour un vrai suivi à distance sur plusieurs téléphones différents en temps réel, il faudrait un backend partagé.
+Bon jeu.
