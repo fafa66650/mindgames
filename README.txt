@@ -12,8 +12,5 @@ Fonctions :
 - aides, points, pénalités, XP, badges
 - fiche animateur et suivi local des sessions
 
-Limite honnête :
-sans backend, le vrai live croisé entre plusieurs téléphones n’existe pas.
-Mais les liens et la session sont maintenant autonomes pour un usage GitHub Pages propre.
 
 Bon jeu.
