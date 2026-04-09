@@ -1,0 +1,93 @@
+[
+  {
+    "kind": "logic",
+    "title": "Le témoin trop net",
+    "scene": "La pluie a effacé une partie des traces, mais pas les contradictions. Quatre versions circulent déjà. L’une semble construite pour rassurer trop vite le groupe.",
+    "prompt": "Quel témoignage paraît le plus manipulatoire ?",
+    "options": [
+      "A · « J’ai tout vu, donc suivez-moi sans discuter. »",
+      "B · « J’ai aperçu une ombre, mais je veux vérifier encore. »",
+      "C · « J’ai entendu deux sons distincts avant de voir une seule silhouette. »",
+      "D · « Je n’ai pas assez d’éléments pour accuser. »"
+    ],
+    "answer": "A",
+    "explanation": "A cherche l’adhésion totale sans preuve. Dans ce mode, les paroles trop nettes et trop fermes sont souvent les plus dangereuses.",
+    "free_clue": "💧 Méfie-toi des phrases qui ferment toute discussion.",
+    "help1": "Le meilleur témoin n’est pas forcément celui qui parle le plus fort.",
+    "help2": "La réponse suspecte est celle qui exige la confiance sans rien démontrer.",
+    "bonus": "🛡️ Bonus : sans carte bonus, tu verrouilles un Bouclier de Nuit."
+  },
+  {
+    "kind": "observation",
+    "title": "Le marquage brisé",
+    "scene": "Près du puits, des signes trempés forment presque une série. Un seul élément casse le système et trahit une intervention volontaire.",
+    "prompt": "Quel symbole ne suit pas la logique du marquage ?",
+    "visual": "◐   ◓   ◑   ▲",
+    "options": [
+      "A · ◐",
+      "B · ◓",
+      "C · ◑",
+      "D · ▲"
+    ],
+    "answer": "D",
+    "explanation": "Les trois premiers signes sont des variantes d’un même cercle fragmenté. Le triangle est l’intrus. C’est une épreuve d’observation pure.",
+    "free_clue": "👁️ Trois signes appartiennent à une même famille.",
+    "help1": "Cherche la forme qui ne repose pas sur une base circulaire.",
+    "help2": "Le triangle est la rupture de série.",
+    "bonus": "⚡ Bonus pression : moins de 20 secondes = +50 points."
+  },
+  {
+    "kind": "deduction",
+    "title": "Le caveau des trois chiffres",
+    "scene": "Une grille empêche d’ouvrir le caveau. Trois plaques donnent les seules données utiles : la somme vaut 12, le premier chiffre est supérieur au deuxième, et le troisième vaut le double du deuxième.",
+    "prompt": "Quelle combinaison est correcte ?",
+    "options": [
+      "A · 5 - 2 - 4",
+      "B · 4 - 2 - 6",
+      "C · 6 - 3 - 3",
+      "D · 7 - 1 - 4"
+    ],
+    "answer": "B",
+    "explanation": "4-2-6 valide les trois conditions : somme 12, premier > deuxième, troisième = double du deuxième. Le piège était de foncer sur une combinaison plausible sans tout vérifier.",
+    "free_clue": "🧠 Vérifie la somme en dernier.",
+    "help1": "Trouve d’abord une paire cohérente entre le 2e et le 3e chiffre.",
+    "help2": "Le troisième chiffre vaut 6.",
+    "bonus": "💣 Retournement : si tu corriges après une première erreur, tu récupères la moitié de la pénalité."
+  },
+  {
+    "kind": "strategy",
+    "title": "La rumeur empoisonnée",
+    "scene": "Une information trouble le village : une équipe adverse serait déjà ciblée. Si vous la relayez mal, vous vous exposez. Si vous la tenez trop, vous perdez un temps précieux.",
+    "prompt": "Quelle réaction donne le plus d’avantage sans vous brûler ?",
+    "options": [
+      "A · Propager la rumeur comme une certitude",
+      "B · Tester l’info sans la valider totalement",
+      "C · Tout révéler sur votre propre équipe",
+      "D · Ignorer complètement le signal"
+    ],
+    "answer": "B",
+    "explanation": "Tester sans valider totalement permet de sonder l’effet de l’info sans vous enfermer dedans. C’est un choix de lecture et de contrôle.",
+    "free_clue": "🎭 Le bon choix laisse une porte de sortie.",
+    "help1": "Entre trop croire et tout ignorer, il existe une troisième voie.",
+    "help2": "Le bon jeu consiste à tester l’information, pas à s’y lier.",
+    "bonus": "🎯 Bonus lecture : bonne réponse sans aide = +1 mention Stratégie froide."
+  },
+  {
+    "kind": "pattern",
+    "title": "Les lanternes inversées",
+    "scene": "Quatre lanternes se répondent sur la place. Trois alternent lumière forte puis faible. Une seule inverse le rythme et peut signaler un piège.",
+    "prompt": "Quelle lanterne est la mauvaise ?",
+    "options": [
+      "A · Fort / faible / fort",
+      "B · Faible / fort / faible",
+      "C · Fort / faible / fort",
+      "D · Fort / fort / faible"
+    ],
+    "answer": "D",
+    "explanation": "A, B et C respectent une alternance régulière. D casse cette logique dès le départ. C’est une épreuve de rythme visuel et de lecture de motif.",
+    "free_clue": "🔁 Trois suites alternent vraiment.",
+    "help1": "Observe le tout premier basculement.",
+    "help2": "La suite qui commence par deux intensités identiques est la mauvaise.",
+    "bonus": "🌩️ Bonus : si validé du premier coup, l’équipe garde toute sa vitesse."
+  }
+]
