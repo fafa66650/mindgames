@@ -1,16 +1,20 @@
-FAFATRAINING Game Arena
+FAFATRAINING Game Arena — Module 1
 
-Cette version a été pensée pour fonctionner en statique, sans backend, tout en restant exploitable sur téléphone.
-Les liens générés par l’admin embarquent les données de session pour rester utilisables sur d’autres appareils.
+Contenu :
+- nouvelle page d’accueil plus premium
+- nouvel onglet administrateur plus rangé
+- nouvelle entrée joueur
+- démo propre de Domination Nocturne
+- 3 défis vraiment différents :
+  1. logique sociale
+  2. observation visuelle
+  3. déduction / code
 
-Fonctions :
-- tri des univers
-- score automatique selon jeu + difficulté
-- codes d’équipe personnalisables
-- liens directs par équipe
-- types de manches visibles
-- aides, points, pénalités, XP, badges
-- fiche animateur et suivi local des sessions
+But :
+valider le nouveau standard esthétique et de gameplay avant d’étendre à tous les univers.
 
-
-Bon jeu.
+Prochaine étape logique :
+- multiplier les univers
+- enrichir la bibliothèque d’énigmes
+- ajouter les événements de match
+- ajouter plus de sons, d’animations et de variations

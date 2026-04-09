@@ -1,55 +1,334 @@
 
-const qs=s=>document.querySelector(s),qsa=s=>[...document.querySelectorAll(s)];
-let GAMES=[],MISSIONS={},playerState=null,multiPicked=[];
-const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
-async function loadData(){GAMES=await fetch('./data/games.json').then(r=>r.json());MISSIONS=await fetch('./data/missions.json').then(r=>r.json())}
-function store(){return JSON.parse(localStorage.getItem('fafatraining_game_arena_store_max')||'{"sessions":{}}')}
-function save(v){localStorage.setItem('fafatraining_game_arena_store_max',JSON.stringify(v))}
-function gameByKey(k){return GAMES.find(g=>g.key===k)}
-function ageLabel(a){return a==='6-10'?'Enfants 6–10 ans':a==='11-17'?'Ados 11–17 ans':'Adultes 18+'}
-function diffLabel(d){return d==='facile'?'Accessible':d==='moyen'?'Équilibré':'Challenge'}
-function normalize(s){return String(s??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'').trim()}
-function universeOptions(){const fams=[...new Set(GAMES.map(g=>g.family))];return `<option value="all">Tous les univers</option>`+fams.map(f=>`<option value="${f}">${f}</option>`).join('')}
-function filteredGameOptions(f){return GAMES.filter(g=>f==='all'||g.family===f).map(g=>`<option value="${g.key}">${g.title}</option>`).join('')}
-function playTone(type='ok'){try{const c=new(window.AudioContext||window.webkitAudioContext)();const o=c.createOscillator();const g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=type==='ok'?660:type==='bad'?220:440;g.gain.value=.03;o.start();o.stop(c.currentTime+.12)}catch(e){}}
-function scoreBaseFor(game,d){let b=Number(game.score_base||1000);if(d==='moyen')b+=50;if(d==='difficile')b+=100;return b}
-function encodeSession(s){return btoa(unescape(encodeURIComponent(JSON.stringify(s))))}
-function decodeSession(str){try{return JSON.parse(decodeURIComponent(escape(atob(str))))}catch(e){return null}}
-function persistPayloadIfNeeded(){const p=new URLSearchParams(location.search),payload=p.get('payload'),sessionId=p.get('session');if(payload&&sessionId){const parsed=decodeSession(payload);if(parsed&&parsed.sessionId===sessionId){const s=store();s.sessions[sessionId]=parsed;save(s)}}}
-function defaultCodes(n){return ['ALPHA','BRAVO','CHARLIE','DELTA','ECHO','FOXTROT','GAMMA','OMEGA'].slice(0,n)}
-function active(name){qsa('.tabbtn').forEach(b=>b.classList.toggle('active',b.textContent.trim()===name))}
-function linkFor(sessionId,teamCode){const s=store().sessions[sessionId];return `${location.origin}${location.pathname}?player=1&session=${encodeURIComponent(sessionId)}&team=${encodeURIComponent(teamCode)}&payload=${encodeURIComponent(encodeSession(s))}`}
-function renderHome(){qs('#app').innerHTML=`<div class="hero"><div><img src="./assets/logo.jpeg" class="hero-logo" alt="FAFATRAINING"></div><div><div class="kicker">FAFATRAINING Game Arena</div><h1>Un produit d’animation mobile royal, immersif et prêt à lancer.</h1><div class="subtitle">Chaque univers garde son ADN, mais le gameplay a été repensé pour le téléphone : plus fluide, plus fun, plus lisible, plus vivant.</div></div><div class="hero-stats"><div class="stat green"><strong>${GAMES.length}</strong><span>univers</span></div><div class="stat blue"><strong>${Object.keys(MISSIONS).length*12}</strong><span>manches</span></div><div class="stat pink"><strong>100%</strong><span>mobile</span></div><div class="stat gold"><strong>pro</strong><span>terrain</span></div></div></div><div class="tabs"><button class="tabbtn active" onclick="showAdmin()">Administrateur</button><button class="tabbtn" onclick="showTrackingTab()">Suivi des sessions</button><button class="tabbtn" onclick="showGuide()">Guide animateur</button><button class="tabbtn" onclick="showReadme()">README</button></div><div id="mainpanel"></div>`;showAdmin()}
-function showAdmin(){active('Administrateur');qs('#mainpanel').innerHTML=`<section class="panel"><h2>Préparation d’une session</h2><div class="notice paragraph-box"><strong>Étape 1 — Choisir l’univers.</strong><br>Choisis le monde, le jeu exact, l’âge, la difficulté, la durée et le nombre d’équipes. Le score de départ se règle automatiquement selon le jeu et la difficulté.</div><div class="row"><div><label>Nom de session</label><input id="sessionName" value="Session FAFATRAINING"></div><div><label>Univers</label><select id="familySelect" onchange="refreshGameSelect()">${universeOptions()}</select></div><div><label>Jeu</label><select id="gameSelect" onchange="previewGame();renderTeamCodeInputs();updateScorePreview()">${filteredGameOptions('all')}</select></div><div><label>Âge</label><select id="ageSelect"><option value="6-10">Enfants 6–10 ans</option><option value="11-17" selected>Ados 11–17 ans</option><option value="18+">Adultes 18+</option></select></div></div><div class="row3" style="margin-top:14px"><div><label>Difficulté</label><select id="difficultySelect" onchange="updateScorePreview()"><option value="facile">Accessible</option><option value="moyen" selected>Équilibré</option><option value="difficile">Challenge</option></select></div><div><label>Nombre d’équipes</label><select id="teamCount" onchange="renderTeamCodeInputs()">${Array.from({length:8},(_,i)=>`<option value="${i+2}">${i+2} équipes</option>`).join('')}</select></div><div><label>Durée totale</label><select id="durationSelect"><option value="30">30 min</option><option value="45">45 min</option><option value="60" selected>60 min</option><option value="75">75 min</option><option value="90">90 min</option></select></div></div><div class="row3" style="margin-top:14px"><div><label>Score de départ automatique</label><input id="basePoints" disabled></div><div><label>Mode des aides</label><input id="helpMode" disabled></div><div><label>Navigation</label><input value="Liens directs équipe prêts à copier" disabled></div></div><div class="notice paragraph-box" style="margin-top:14px"><strong>Étape 2 — Personnaliser les équipes.</strong><br>Tu peux garder les codes automatiques ou les modifier. Les liens générés intègrent les données de session pour fonctionner même sur un autre téléphone.</div><div id="teamCodeBox"></div><div class="actions"><button onclick="createSession()">Lancer la session</button></div><div id="gamePreview"></div><div id="sessionOutput"></div></section>`;previewGame();renderTeamCodeInputs();updateScorePreview()}
-function refreshGameSelect(){const f=qs('#familySelect').value;qs('#gameSelect').innerHTML=filteredGameOptions(f);previewGame();renderTeamCodeInputs();updateScorePreview()}
-function updateScorePreview(){const g=gameByKey(qs('#gameSelect').value),d=qs('#difficultySelect').value;qs('#basePoints').value=scoreBaseFor(g,d);qs('#helpMode').value=d==='facile'?'Aides surtout en points':d==='moyen'?'Mix progressif':'Aides surtout en temps'}
-function renderTeamCodeInputs(){const n=Number(qs('#teamCount')?.value||2);qs('#teamCodeBox').innerHTML=`<div class="grid">${defaultCodes(n).map((c,i)=>`<article class="card subcard"><label>Code équipe ${i+1}</label><input class="teamCodeInput" value="${c}"></article>`).join('')}</div>`}
-function previewGame(){const g=gameByKey(qs('#gameSelect')?.value||GAMES[0].key);qs('#gamePreview').innerHTML=`<div class="grid"><article class="card themed" style="--theme:${g.theme_color}"><div class="pillbar"><span class="pill">${esc(g.family)}</span><span class="pill">${esc(g.title)}</span></div><h3>${esc(g.tagline)}</h3><p>${esc(g.intro)}</p></article></div>`}
-function createSession(){const name=qs('#sessionName').value.trim()||'Session FAFATRAINING',gameKey=qs('#gameSelect').value,age=qs('#ageSelect').value,difficulty=qs('#difficultySelect').value,teamCount=Number(qs('#teamCount').value),duration=Number(qs('#durationSelect').value),g=gameByKey(gameKey),basePoints=scoreBaseFor(g,difficulty);let codes=qsa('.teamCodeInput').map(i=>i.value.trim().toUpperCase()).filter(Boolean);if(codes.length!==teamCount)codes=defaultCodes(teamCount);codes=codes.map((c,i)=>c||`TEAM${i+1}`);const sessionId=`${gameKey}-${Date.now()}`;const session={sessionId,sessionName:name,gameKey,age,difficulty,duration,basePoints,teams:codes.map((code,i)=>({code,teamName:`Équipe ${i+1}`,playerNames:'',currentMission:0,points:basePoints,penalties:0,hints:0,finished:false,finishedAt:null,badges:[],xp:0}))};const s=store();s.sessions[sessionId]=session;save(s);qs('#sessionOutput').innerHTML=`<div class="grid"><article class="card themed" style="--theme:${g.theme_color}"><h3>Session créée</h3><p><strong>Nom :</strong> ${esc(name)}</p><p><strong>Jeu :</strong> ${esc(g.title)}</p><p><strong>Âge :</strong> ${ageLabel(age)} · <strong>Difficulté :</strong> ${diffLabel(difficulty)} · <strong>Durée :</strong> ${duration} min</p><p><strong>Score de départ :</strong> ${basePoints}</p><div class="actions"><button class="ghost" onclick="showSheet('${sessionId}')">Fiche animateur</button><button class="ghost" onclick="showTrackingTab()">Suivi</button></div></article>${session.teams.map(t=>`<article class="card themed" style="--theme:${g.theme_color}"><div class="pillbar"><span class="pill">${esc(g.title)}</span><span class="pill">${esc(t.code)}</span></div><h3>${esc(t.teamName)}</h3><p><strong>Lien direct :</strong><br><span class="small">${esc(linkFor(sessionId,t.code))}</span></p><div class="actions"><button onclick="navigator.clipboard.writeText('${linkFor(sessionId,t.code)}')">Copier le lien</button><button class="ghost" onclick="window.open('${linkFor(sessionId,t.code)}','_blank')">Ouvrir</button></div></article>`).join('')}</div><div id="sheetHolder"></div>`}
-function showSheet(id){const s=store().sessions[id],g=gameByKey(s.gameKey),list=MISSIONS[s.gameKey]||[];qs('#sheetHolder').innerHTML=`<section class="panel"><h2>Fiche animateur — ${esc(g.title)}</h2><div class="notice"><strong>Session :</strong> ${esc(s.sessionName)}<br><strong>Âge :</strong> ${ageLabel(s.age)} · <strong>Difficulté :</strong> ${diffLabel(s.difficulty)} · <strong>Durée :</strong> ${s.duration} min</div><div class="grid">${list.map((m,i)=>`<article class="sheet-card themed" style="--theme:${g.theme_color}"><div class="pillbar"><span class="pill">Manche ${i+1}</span><span class="pill">${m.type==='multi'?'Plusieurs bonnes réponses':m.type==='choice'?'Une seule bonne réponse':'Réponse texte'}</span></div><h3>${esc(m.question)}</h3>${m.options?`<p><strong>Choix :</strong><br>${m.options.map(o=>esc(o)).join('<br>')}</p>`:''}<p><strong>Réponse :</strong> ${Array.isArray(m.answer)?m.answer.join(', '):esc(m.answer)}</p><p><strong>Indice :</strong> ${esc(m.hint)}</p><p><strong>Explication :</strong> ${esc(m.explanation||'')}</p></article>`).join('')}</div></section>`}
-function showTrackingTab(){active('Suivi des sessions');qs('#mainpanel').innerHTML=`<section class="panel"><h2>Suivi des sessions</h2><div id="adminTracking"></div></section>`;renderTracking()}
-function renderTracking(){if(!qs('#adminTracking'))return;const s=store(),ids=Object.keys(s.sessions);if(ids.length===0){qs('#adminTracking').innerHTML=`<div class="notice">Aucune session active pour le moment.</div>`;return}qs('#adminTracking').innerHTML=`<div class="grid">${ids.reverse().map(id=>{const sess=s.sessions[id],g=gameByKey(sess.gameKey),ranked=[...sess.teams].sort((a,b)=>(b.currentMission-a.currentMission)||((b.points||0)-(a.points||0)));return `<article class="card themed" style="--theme:${g.theme_color}"><div class="pillbar"><span class="pill">${esc(sess.sessionName)}</span><span class="pill">${esc(g.title)}</span></div><p><strong>Âge :</strong> ${ageLabel(sess.age)} · <strong>Difficulté :</strong> ${diffLabel(sess.difficulty)}</p><div class="grid">${ranked.map((t,i)=>`<article class="card subcard"><h3>${i===0?'🥇':i===1?'🥈':i===2?'🥉':'Équipe'} ${esc(t.teamName)}</h3><p><strong>Code :</strong> ${esc(t.code)}</p><p><strong>Joueurs :</strong> ${esc(t.playerNames||'-')}</p><p><strong>Manche :</strong> ${(t.currentMission||0)+1}/12</p><p><strong>Points :</strong> ${t.points||0}</p><p><strong>XP :</strong> ${t.xp||0}</p><p><strong>Badges :</strong> ${(t.badges||[]).join(', ')||'-'}</p><p><strong>Aides :</strong> ${t.hints||0}</p></article>`).join('')}</div></article>`}).join('')}</div>`}
-function showGuide(){active('Guide animateur');qs('#mainpanel').innerHTML=`<section class="panel"><h2>Guide animateur</h2><div class="notice paragraph-box"><strong>Avant de lancer :</strong><br>Choisis le bon univers, personnalise les codes et copie un lien par équipe. Les liens portent les données de session, donc ils restent exploitables sur d’autres téléphones.</div><div class="notice paragraph-box"><strong>Pendant la partie :</strong><br>Une manche = une situation, un joueur actif, un choix, une conséquence. Si un groupe bloque, laisse-le retenter, puis suggère une aide. Tout doit rester rapide, lisible et vivant.</div><div class="notice paragraph-box"><strong>Limite honnête :</strong><br>Sans backend, le vrai live croisé entre téléphones n’existe pas. Le logiciel compense par des liens autonomes et un suivi local propre.</div></section>`}
-function showReadme(){active('README');fetch('./README.txt').then(r=>r.text()).then(t=>qs('#mainpanel').innerHTML=`<section class="panel readme-box"><h2>README</h2><pre>${esc(t)}</pre></section>`)}
-function currentTeam(sessionId,teamCode){const s=store().sessions[sessionId];return s?s.teams.find(t=>t.code===teamCode):null}
-function currentActivePlayer(team){const names=(team.playerNames||'').split(',').map(x=>x.trim()).filter(Boolean);return names.length?names[playerState.missionIndex%names.length]:team.teamName}
-function param(n){return new URLSearchParams(location.search).get(n)}
-function showPlayer(sessionId,teamCode){const s=store().sessions[sessionId];if(!s){qs('#app').innerHTML=`<section class="panel"><h2>Session introuvable</h2><div class="notice">Le lien reçu ne correspond à aucune session. Réessaie depuis l’admin.</div></section>`;return}const t=currentTeam(sessionId,teamCode),g=gameByKey(s.gameKey);if(!t){qs('#app').innerHTML=`<section class="panel"><h2>Équipe introuvable</h2><div class="notice">Le code équipe demandé n’existe pas dans cette session.</div></section>`;return}qs('#app').innerHTML=`<div class="hero themed" style="--theme:${g.theme_color}"><div><img src="./assets/logo.jpeg" class="hero-logo" alt="FAFATRAINING"></div><div><div class="kicker">${esc(g.title)} · ${esc(g.accent)}</div><h1>${esc(g.tagline)}</h1><div class="subtitle">${esc(g.intro)}</div></div><div class="hero-stats"><div class="stat green"><strong>${esc(t.code)}</strong><span>code équipe</span></div><div class="stat blue"><strong>${s.duration}</strong><span>minutes</span></div><div class="stat pink"><strong>12</strong><span>manches</span></div><div class="stat gold"><strong>${s.basePoints}</strong><span>score départ</span></div></div></div><section class="panel themed" style="--theme:${g.theme_color}"><h2>Votre équipe entre dans le jeu</h2><div class="notice paragraph-box"><strong>Avant de commencer :</strong><br>Entrez le nom de votre équipe et les prénoms des joueurs. Le logiciel désigne un joueur actif à chaque manche pour faire participer tout le monde.</div><div class="row3"><div><label>Code équipe</label><input value="${esc(t.code)}" disabled></div><div><label>Nom d’équipe</label><input id="teamNameField" value="${esc(t.teamName)}"></div><div><label>Joueurs</label><input id="playerNamesField" placeholder="Ex : Léa, Tom, Lina, Hugo" value="${esc(t.playerNames||'')}"></div></div><div class="actions"><button onclick="startPlayer('${sessionId}','${teamCode}')">COMMENCER L’AVENTURE</button></div></section>`}
-function startPlayer(sessionId,teamCode){const s=store(),sess=s.sessions[sessionId],t=sess.teams.find(t=>t.code===teamCode);t.teamName=qs('#teamNameField').value.trim()||t.teamName;t.playerNames=qs('#playerNamesField').value.trim();save(s);playerState={sessionId,teamCode,gameKey:sess.gameKey,difficulty:sess.difficulty,duration:sess.duration,missionIndex:t.currentMission||0,points:t.points||sess.basePoints,penalties:t.penalties||0,hints:t.hints||0,remainingSeconds:sess.duration*60,timer:null};const g=gameByKey(sess.gameKey);qs('#app').innerHTML=`<div class="mission-wrap"><article class="mission-card themed" style="--theme:${g.theme_color}"><div class="pillbar"><span class="pill">${esc(g.title)}</span><span class="pill">${esc(t.teamName)}</span></div><h2 class="mission-title">Entrez dans l’univers.</h2><p class="context">${esc(g.intro)}</p><div class="notice paragraph-box"><strong style="color:#8efc63">Objectif</strong><br>Terminer toutes les manches avec le meilleur score possible et dominer le classement final.</div><div class="notice paragraph-box"><strong style="color:#67c6ff">Règles</strong><br>Chaque manche vous donne une situation, un joueur actif, puis un choix. Certaines manches ont une seule bonne réponse, d’autres plusieurs, d’autres demandent une réponse texte.</div><div class="notice paragraph-box"><strong style="color:#ff77b7">Aides</strong><br>Aide 1 = légère, Aide 2 = précise, Aide 3 = forte. Les pénalités s’adaptent au niveau. Si vous tombez à 0 point, les pénalités basculent en temps.</div><div class="actions"><button onclick="enterGame()">ENTRER DANS LA PARTIE</button></div></article></div>`}
-function fmt(t){const mm=String(Math.floor(t/60)).padStart(2,'0'),ss=String(t%60).padStart(2,'0');return `${mm}:${ss}`}
-function startTimer(){if(playerState.timer)return;playerState.timer=setInterval(()=>{playerState.remainingSeconds--;const t=qs('#timer');if(t)t.textContent=fmt(playerState.remainingSeconds);if(playerState.remainingSeconds<=0){clearInterval(playerState.timer);playerState.timer=null;finish(false)}},1000)}
-function worldEvent(gameKey,idx){const map={domination_nocturne:["⚠️ Une silhouette a été aperçue entre deux équipes…","👁️ Une présence étrange trouble le village.","🌘 La nuit favorise les clans les plus lucides."],identite_fracturee:["🕵️ Une équipe semble décalée… sans qu’on sache laquelle.","💬 Un détail de langage pourrait tout changer.","🎭 Le vrai piège reste le mauvais dosage."],trahison_totale:["🎭 Une alliance se fissure quelque part.","⚠️ Une stratégie trop visible attire l’attention.","🗡️ Une équipe prépare peut-être un retournement."]};const arr=map[gameKey]||["⚡ La tension monte entre les équipes.","🎯 Une bonne lecture peut tout changer.","🏁 La moindre erreur coûte cher."];return arr[idx%arr.length]}
-function enterGame(){startTimer();renderMission()}
-function renderMission(){const s=store(),sess=s.sessions[playerState.sessionId],team=sess.teams.find(t=>t.code===playerState.teamCode),g=gameByKey(playerState.gameKey),list=MISSIONS[playerState.gameKey],m=list[playerState.missionIndex];team.currentMission=playerState.missionIndex;team.points=playerState.points;team.penalties=playerState.penalties;team.hints=playerState.hints;save(s);let block='',marker='';if(m.type==='choice'){marker='🎯 Une seule bonne réponse';block=`<div class="choice-grid">${m.options.map((o,i)=>`<button class="choice-btn" onclick="choose('${['A','B','C','D'][i]}')">${esc(o)}</button>`).join('')}</div>`}else if(m.type==='multi'){marker='✅ Plusieurs bonnes réponses';multiPicked=[];block=`<div class="choice-grid">${m.options.map((o,i)=>`<button class="choice-btn" onclick="pickMulti('${['A','B','C','D'][i]}',this)">${esc(o)}</button>`).join('')}</div><div class="actions"><button class="ghost" onclick="validateMulti()">VALIDER LA SÉLECTION</button></div>`}else{marker='⌨️ Réponse texte';block=`<input id="textAnswer" placeholder="Écris ta réponse ici"><div class="actions"><button onclick="validateText()">VALIDER</button></div>`}const noPts=playerState.points<=0;qs('#app').innerHTML=`<div class="mission-wrap"><article class="mission-card themed" style="--theme:${g.theme_color}"><div class="inline-top"><div class="pillbar"><span class="pill">${esc(g.title)}</span><span class="pill">${esc(team.teamName)}</span><span class="pill">Manche ${playerState.missionIndex+1}/12</span><span class="pill">Joueur actif : ${esc(currentActivePlayer(team))}</span></div><div class="timer" id="timer">${fmt(playerState.remainingSeconds)}</div></div><div class="scoreline"><span class="score-pill points">Points : ${playerState.points}</span><span class="score-pill aides">Aides : ${playerState.hints}</span><span class="score-pill penalites">Pénalités : ${playerState.penalties}</span></div>${noPts?'<div class="feedback bad">Votre équipe n’a plus de points. Les pénalités passent maintenant en temps uniquement.</div>':''}<div class="event-banner">${esc(worldEvent(playerState.gameKey,playerState.missionIndex))}</div><div class="notice contextbox"><strong>Contexte</strong><br>${esc((m.explanation||'').split('. ')[0]+'.')}</div><div class="notice questionbox"><strong>Question</strong><br>${esc(m.question)}<div class="question-type">${marker}</div></div>${block}<div class="actions"><button class="ghost" onclick="hint(1)">Aide 1</button><button class="ghost" onclick="hint(2)">Aide 2</button><button class="ghost" onclick="hint(3)">Aide 3</button></div><div id="feedback" class="notice">Lis la question, puis réponds. Une bonne décision peut faire basculer la manche.</div></article></div>`}
-function applyPenalty(mode,value){if(mode==='points'){if(playerState.points<=0){playerState.remainingSeconds=Math.max(0,playerState.remainingSeconds-Math.max(15,value));return{mode:'time',value:Math.max(15,value),fallback:true}}playerState.points=Math.max(0,playerState.points-value);return{mode:'points',value,fallback:false}}playerState.remainingSeconds=Math.max(0,playerState.remainingSeconds-value);return{mode:'time',value,fallback:false}}
-function applyHintPenalty(level){let mode='points',value=0,d=playerState.difficulty;if(d==='facile'){if(level===1){mode='points';value=0}if(level===2){mode='points';value=10}if(level===3){mode='points';value=25}}else if(d==='moyen'){if(level===1){mode='points';value=5}if(level===2){mode='points';value=15}if(level===3){mode='time';value=45}}else{if(level===1){mode='time';value=15}if(level===2){mode='time';value=30}if(level===3){mode='time';value=60}}return applyPenalty(mode,value)}
-function hint(level){const m=MISSIONS[playerState.gameKey][playerState.missionIndex];playerState.hints+=1;playerState.penalties+=1;const p=applyHintPenalty(level);let msg='';if(level===1)msg='On sent que ça bloque. Commence par éliminer ce qui casse clairement l’univers ou la logique.';if(level===2)msg=m.hint;if(level===3)msg=Array.isArray(m.answer)?`Réponses attendues : ${m.answer.join(', ')}`:`La réponse commence par : ${String(m.answer).slice(0,2)}`;playTone('hint');renderMission();qs('#feedback').innerHTML=`<div class="feedback help"><strong>Aide ${level}</strong><br>${esc(msg)}<br><span class="small">Pénalité : ${p.mode==='points'?'-'+p.value+' points':'-'+p.value+' secondes'}${p.fallback?' (points épuisés, bascule en temps)':''}.</span></div>`}
-function pickMulti(v,el){if(multiPicked.includes(v)){multiPicked=multiPicked.filter(x=>x!==v);el.classList.remove('selected')}else{multiPicked.push(v);el.classList.add('selected')}}
-function award(team,type){team.xp=(team.xp||0)+(type==='ok'?30:type==='finish'?100:0);team.badges=team.badges||[];if(type==='finish'&&!team.badges.includes('Finisseur'))team.badges.push('Finisseur');if(type==='ok'&&team.hints===0&&team.currentMission>=4&&!team.badges.includes('Lecture propre'))team.badges.push('Lecture propre');if(type==='ok'&&team.currentMission>=8&&!team.badges.includes('Stratège'))team.badges.push('Stratège')}
-function choose(v){const m=MISSIONS[playerState.gameKey][playerState.missionIndex];answer(v===m.answer,m)}
-function validateMulti(){const m=MISSIONS[playerState.gameKey][playerState.missionIndex];answer([...m.answer].sort().join(',')===[...multiPicked].sort().join(','),m)}
-function validateText(){const m=MISSIONS[playerState.gameKey][playerState.missionIndex],val=normalize(qs('#textAnswer').value||'');answer(val===normalize(m.answer),m)}
-function answer(ok,m){const s=store(),sess=s.sessions[playerState.sessionId],team=sess.teams.find(t=>t.code===playerState.teamCode);if(ok){playerState.points+=25;award(team,'ok');playTone('ok');qs('#feedback').innerHTML=`<div class="feedback ok"><strong>Bonne réponse</strong><br>${esc(m.explanation||'Bonne lecture de la manche.')}</div>`;save(s);if(playerState.missionIndex>=MISSIONS[playerState.gameKey].length-1){setTimeout(()=>finish(true),1200)}else{playerState.missionIndex+=1;setTimeout(renderMission,1400)}}else{const p=applyPenalty('points',10);playerState.penalties+=1;playTone('bad');qs('#feedback').innerHTML=`<div class="feedback bad"><strong>Mauvaise réponse</strong><br>Ce n’est pas la bonne piste.<br><span class="small">Pénalité : ${p.mode==='points'?'-'+p.value+' points':'-'+p.value+' secondes'}${p.fallback?' (points épuisés, bascule en temps)':''}.</span></div><div class="small" style="margin-top:8px">Tu peux retenter une autre réponse ou utiliser une aide si l’équipe bloque.</div>`;const t=qs('#timer');if(t)t.textContent=fmt(playerState.remainingSeconds);save(s)}}
-function finish(success){if(playerState.timer){clearInterval(playerState.timer);playerState.timer=null}const s=store(),sess=s.sessions[playerState.sessionId],team=sess.teams.find(t=>t.code===playerState.teamCode),g=gameByKey(playerState.gameKey);team.finished=success;team.points=playerState.points;team.penalties=playerState.penalties;team.hints=playerState.hints;team.finishedAt=Date.now();if(success){award(team,'finish');const spent=sess.duration*60-playerState.remainingSeconds;if(spent<=sess.duration*60*.5)team.points+=100;else if(spent<=sess.duration*60*.75)team.points+=50}save(s);const ranked=[...sess.teams].sort((a,b)=>{const af=a.finished?1:0,bf=b.finished?1:0;if(bf!==af)return bf-af;if((b.points||0)!==(a.points||0))return(b.points||0)-(a.points||0);return(a.finishedAt||999999999999)-(b.finishedAt||999999999999)});qs('#app').innerHTML=`<div class="mission-wrap"><article class="mission-card themed" style="--theme:${g.theme_color}"><h2 class="mission-title">${success?'Fin de partie':'Temps écoulé'}</h2><p class="context">${success?'Mission accomplie. Votre équipe a terminé toutes les manches.':'Le temps est écoulé. Votre équipe n’a pas terminé à temps.'}</p><div class="notice"><strong>Score final :</strong> ${team.points}<br><strong>Aides utilisées :</strong> ${team.hints}<br><strong>Pénalités :</strong> ${team.penalties}<br><strong>XP :</strong> ${team.xp||0}<br><strong>Badges :</strong> ${(team.badges||[]).join(', ')||'-'}</div><h3>Classement provisoire</h3><div class="grid">${ranked.slice(0,3).map((t,i)=>`<article class="card subcard"><h3>${i===0?'🥇':i===1?'🥈':'🥉'} ${esc(t.teamName)}</h3><p>${t.points||0} points</p><p>${(t.badges||[]).join(', ')||'-'}</p></article>`).join('')}</div></article></div>`}
-async function boot(){await loadData();persistPayloadIfNeeded();const p=new URLSearchParams(location.search);if(p.get('player')==='1'&&p.get('session')&&p.get('team'))showPlayer(p.get('session'),p.get('team'));else renderHome()}
-boot()
+const qs=s=>document.querySelector(s), qsa=s=>[...document.querySelectorAll(s)];
+let GAMES=[], CHALLENGES=[], state=null, picks=[];
+const esc=s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+
+async function loadData(){
+  GAMES = await fetch('./data/games.json').then(r=>r.json());
+}
+function store(){ return JSON.parse(localStorage.getItem('fafa_module1')||'{"sessions":{}}'); }
+function save(v){ localStorage.setItem('fafa_module1', JSON.stringify(v)); }
+function playTone(type='ok'){
+  try{
+    const c = new (window.AudioContext||window.webkitAudioContext)();
+    const o = c.createOscillator(), g = c.createGain();
+    o.connect(g); g.connect(c.destination);
+    o.frequency.value = type==='ok' ? 660 : type==='bad' ? 220 : 440;
+    g.gain.value = 0.03; o.start(); o.stop(c.currentTime + .15);
+  }catch(e){}
+}
+function renderHome(){
+  const g = GAMES[0];
+  qs('#app').innerHTML = `
+    <div class="hero">
+      <div><img src="./assets/logo.png" class="hero-logo" alt="logo"></div>
+      <div>
+        <div class="kicker">FAFATRAINING GAME ARENA</div>
+        <h1>ENTRE DANS LE JEU.</h1>
+        <div class="subtitle">Module 1 propre : nouvelle structure, nouvelle esthétique, nouveau flow. Ici, on abandonne le scolaire pour une vraie mise en ambiance pluie, tension et narration dynamique.</div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat green"><strong>1</strong><span>univers refondu</span></div>
+        <div class="stat blue"><strong>3</strong><span>défis variés</span></div>
+        <div class="stat pink"><strong>mobile</strong><span>lisible</span></div>
+        <div class="stat gold"><strong>pro</strong><span>module démo</span></div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tabbtn active" onclick="showAdmin()">Administrateur</button>
+      <button class="tabbtn" onclick="showPlayerEntry()">Jouer</button>
+      <button class="tabbtn" onclick="showNotes()">Notes module 1</button>
+    </div>
+    <div id="main"></div>
+  `;
+  showAdmin();
+}
+function setActive(name){ qsa('.tabbtn').forEach(b=>b.classList.toggle('active', b.textContent.trim()===name)); }
+function showAdmin(){
+  setActive('Administrateur');
+  const g = GAMES[0];
+  qs('#main').innerHTML = `
+    <section class="panel">
+      <h2 class="section-title">Préparer une session</h2>
+      <div class="notice">Ici, tout est regroupé proprement. L’objectif n’est pas de t’assommer d’options, mais de te permettre de lancer vite une partie claire et stylée.</div>
+      <div class="grid4">
+        <div><label>Nom de session</label><input id="sessionName" value="Session Nocturne"></div>
+        <div><label>Univers</label><input value="${esc(g.family)}" disabled></div>
+        <div><label>Jeu</label><input value="${esc(g.title)}" disabled></div>
+        <div><label>Durée</label><select id="duration"><option value="30">30 min</option><option value="45" selected>45 min</option><option value="60">60 min</option></select></div>
+      </div>
+      <div class="grid4" style="margin-top:14px">
+        <div><label>Difficulté</label><select id="difficulty"><option value="facile">Accessible</option><option value="moyen" selected>Équilibré</option><option value="difficile">Challenge</option></select></div>
+        <div><label>Nombre d’équipes</label><select id="teamCount" onchange="renderTeams()"><option value="2">2 équipes</option><option value="3" selected>3 équipes</option><option value="4">4 équipes</option></select></div>
+        <div><label>Score de départ</label><input id="baseScore" value="1200" disabled></div>
+        <div><label>Mode</label><input value="Compétitif immersif" disabled></div>
+      </div>
+      <div class="notice">Codes et noms d’équipes : tu peux tout personnaliser toi-même.</div>
+      <div id="teamsBox"></div>
+      <div class="actions">
+        <button class="btn-main" onclick="createSession()">Créer la session</button>
+      </div>
+      <div id="sessionOutput"></div>
+    </section>`;
+  renderTeams();
+}
+function renderTeams(){
+  const n = Number(qs('#teamCount')?.value || 3);
+  const defaults = ['ALPHA','BRAVO','CHARLIE','DELTA'];
+  qs('#teamsBox').innerHTML = `<div class="grid3">${Array.from({length:n},(_,i)=>`
+    <div class="card">
+      <div class="pillbar"><span class="pill">Équipe ${i+1}</span></div>
+      <label>Nom d’équipe</label><input class="teamName" value="Équipe ${i+1}">
+      <label style="margin-top:8px">Code</label><input class="teamCode" value="${defaults[i]}">
+    </div>
+  `).join('')}</div>`;
+}
+function createSession(){
+  const sessionId = 'dn-' + Date.now();
+  const names = qsa('.teamName').map(x=>x.value.trim());
+  const codes = qsa('.teamCode').map(x=>x.value.trim().toUpperCase());
+  const session = {
+    sessionId,
+    name: qs('#sessionName').value.trim(),
+    duration: Number(qs('#duration').value),
+    difficulty: qs('#difficulty').value,
+    game: 'domination_nocturne',
+    teams: names.map((n,i)=>({
+      teamName:n||`Équipe ${i+1}`,
+      teamCode:codes[i]||`TEAM${i+1}`,
+      players:'',
+      index:0,
+      score:1200,
+      hints:0
+    }))
+  };
+  const s = store(); s.sessions[sessionId] = session; save(s);
+  qs('#sessionOutput').innerHTML = `
+    <div class="notice"><strong>Session créée.</strong> Les liens ci-dessous ouvrent directement l’entrée joueur.</div>
+    <div class="links-list">
+      ${session.teams.map(t=>`
+        <div class="link-row">
+          <strong>${esc(t.teamName)}</strong><br>
+          <span class="small">${location.origin}${location.pathname}?player=1&session=${sessionId}&team=${encodeURIComponent(t.teamCode)}</span>
+          <div class="actions">
+            <button class="btn-main" onclick="navigator.clipboard.writeText('${location.origin}${location.pathname}?player=1&session=${sessionId}&team=${encodeURIComponent(t.teamCode)}')">Copier</button>
+            <button class="btn-ghost" onclick="window.open('${location.origin}${location.pathname}?player=1&session=${sessionId}&team=${encodeURIComponent(t.teamCode)}','_blank')">Ouvrir</button>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+function showPlayerEntry(){
+  setActive('Jouer');
+  qs('#main').innerHTML = `
+    <section class="panel">
+      <h2 class="section-title">Entrée joueur</h2>
+      <div class="notice">Si tu n’utilises pas un lien admin, tu peux entrer ici manuellement.</div>
+      <div class="grid2">
+        <div><label>ID session</label><input id="manualSession"></div>
+        <div><label>Code équipe</label><input id="manualTeam"></div>
+      </div>
+      <div class="actions"><button class="btn-main" onclick="manualOpen()">Entrer</button></div>
+    </section>`;
+}
+function manualOpen(){
+  const s = qs('#manualSession').value.trim();
+  const t = qs('#manualTeam').value.trim();
+  history.replaceState({},'',`?player=1&session=${encodeURIComponent(s)}&team=${encodeURIComponent(t)}`);
+  bootPlayer();
+}
+function showNotes(){
+  setActive('Notes module 1');
+  qs('#main').innerHTML = `
+    <section class="panel">
+      <h2 class="section-title">Ce module 1 contient déjà</h2>
+      <div class="goal-grid">
+        <div class="goal"><h4>Esthétique refaite</h4><div>Accueil plus propre, moins scolaire, plus premium.</div></div>
+        <div class="goal"><h4>Flow admin propre</h4><div>Préparation de session rangée en blocs cohérents.</div></div>
+        <div class="goal"><h4>Démo de gameplay</h4><div>3 défis vraiment différents sur le même univers.</div></div>
+      </div>
+      <div class="notice">La prochaine étape naturelle sera : multiplier les univers, enrichir la bibliothèque d’énigmes, ajouter les événements de match et les vrais retournements.</div>
+    </section>`;
+}
+async function bootPlayer(){
+  const p = new URLSearchParams(location.search);
+  const sessionId = p.get('session'), teamCode = p.get('team');
+  if(!(p.get('player')==='1' && sessionId && teamCode)){
+    renderHome(); return;
+  }
+  const s = store().sessions[sessionId];
+  if(!s){ qs('#app').innerHTML = `<section class="panel"><div class="notice">Session introuvable.</div></section>`; return; }
+  const team = s.teams.find(x=>x.teamCode===teamCode);
+  if(!team){ qs('#app').innerHTML = `<section class="panel"><div class="notice">Équipe introuvable.</div></section>`; return; }
+  CHALLENGES = await fetch('./data/domination_nocturne.json').then(r=>r.json());
+  qs('#app').innerHTML = `
+    <div class="hero">
+      <div><img src="./assets/logo.png" class="hero-logo" alt="logo"></div>
+      <div>
+        <div class="kicker">Domination Nocturne</div>
+        <h1>La pluie tombe. Le village ment.</h1>
+        <div class="subtitle">Module 1 : nouvelle entrée joueur, plus directe, plus lisible, plus envie de jouer.</div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat green"><strong>${esc(team.teamCode)}</strong><span>code équipe</span></div>
+        <div class="stat blue"><strong>${s.duration}</strong><span>minutes</span></div>
+        <div class="stat pink"><strong>3</strong><span>défis module</span></div>
+        <div class="stat gold"><strong>${team.score}</strong><span>score départ</span></div>
+      </div>
+    </div>
+    <section class="panel">
+      <h2 class="section-title">Avant la mission</h2>
+      <div class="story-block">${esc(gamesIntro())}</div>
+      <div class="goal-grid">
+        <div class="goal"><h4>Objectif</h4><div>Survivre à la pluie, lire juste, rester devant au score.</div></div>
+        <div class="goal"><h4>Règle utile</h4><div>Une manche = un joueur actif, une énigme, une conséquence.</div></div>
+        <div class="goal"><h4>Aides</h4><div>Un indice discret gratuit, puis 2 cartes bonus pénalisantes.</div></div>
+      </div>
+      <div class="grid2" style="margin-top:14px">
+        <div><label>Nom d’équipe</label><input id="pTeamName" value="${esc(team.teamName)}"></div>
+        <div><label>Joueurs (séparés par virgule)</label><input id="pPlayers" placeholder="Lina, Tom, Hugo" value="${esc(team.players)}"></div>
+      </div>
+      <div class="actions"><button class="btn-main" onclick="startRun('${sessionId}','${teamCode}')">Lancer la mission</button></div>
+    </section>`;
+}
+function gamesIntro(){
+  return "Sous la pluie, chaque erreur laisse une trace. Une équipe a déjà paniqué. Une autre prépare peut-être un piège. Vous entrez maintenant dans une version plus nerveuse, plus lisible et plus dynamique de Domination Nocturne.";
+}
+function startRun(sessionId, teamCode){
+  const s = store();
+  const session = s.sessions[sessionId];
+  const team = session.teams.find(x=>x.teamCode===teamCode);
+  team.teamName = qs('#pTeamName').value.trim() || team.teamName;
+  team.players = qs('#pPlayers').value.trim();
+  save(s);
+  state = {
+    sessionId, teamCode,
+    score: team.score || 1200,
+    challengeIndex: team.index || 0,
+    hints: team.hints || 0,
+    startTime: Date.now()
+  };
+  renderChallenge();
+}
+function activePlayer(team, idx){
+  const arr = (team.players||'').split(',').map(x=>x.trim()).filter(Boolean);
+  if(!arr.length) return team.teamName;
+  return arr[idx % arr.length];
+}
+function renderChallenge(){
+  const s = store();
+  const session = s.sessions[state.sessionId];
+  const team = session.teams.find(x=>x.teamCode===state.teamCode);
+  const c = CHALLENGES[state.challengeIndex];
+  let typeLabel = {
+    logic:'🧠 Logique',
+    visual_pattern:'👁 Observation',
+    deduction_code:'🔐 Code & déduction'
+  }[c.kind] || 'Défi';
+  const optionsHtml = c.options.map((o,i)=>`<button class="choice" onclick="pick('${['A','B','C','D'][i]}', this)">${esc(o)}</button>`).join('');
+  qs('#app').innerHTML = `
+    <div class="challenge">
+      <div class="hud">
+        <div class="hud-left">
+          <div class="badge points">Score : ${state.score}</div>
+          <div class="badge time">Défi ${state.challengeIndex+1} / ${CHALLENGES.length}</div>
+          <div class="badge alert">Cartes bonus : ${state.hints}</div>
+        </div>
+        <div class="hud-right"><div class="badge">${session.duration} min</div></div>
+      </div>
+      <div class="focus-player">🔥 C’EST À : ${esc(activePlayer(team, state.challengeIndex))} DE JOUER</div>
+      <div class="story-block">${esc(c.scene)}</div>
+      <h2 class="challenge-title">${esc(c.title)}</h2>
+      <div class="challenge-type">${typeLabel}</div>
+      ${c.special_rule ? `<div class="notice">${esc(c.special_rule)}</div>` : ''}
+      <div class="story-block"><strong>Énigme :</strong><br>${esc(c.prompt)}</div>
+      ${c.symbols ? `<div class="notice" style="font-size:34px;text-align:center;letter-spacing:10px">${c.symbols.map(esc).join(' ')}</div>` : ''}
+      <div class="free-clue"><strong>Indice discret gratuit :</strong><br>${esc(c.free_clue)}</div>
+      <div class="choice-grid">${optionsHtml}</div>
+      ${c.kind==='deduction_code' ? `<div class="help-cards">
+        <div class="help-card" onclick="showHint(1)"><h4>Carte bonus I</h4><div>Petit guidage contre une légère pénalité.</div></div>
+        <div class="help-card" onclick="showHint(2)"><h4>Carte bonus II</h4><div>Révélation forte contre grosse pénalité.</div></div>
+        <div class="help-card" onclick="validateChoice()"><h4>Valider le choix</h4><div>Confirme la réponse sélectionnée.</div></div>
+      </div>` : `<div class="help-cards">
+        <div class="help-card" onclick="showHint(1)"><h4>Carte bonus I</h4><div>Petit guidage contre une légère pénalité.</div></div>
+        <div class="help-card" onclick="showHint(2)"><h4>Carte bonus II</h4><div>Révélation forte contre grosse pénalité.</div></div>
+        <div class="help-card" onclick="validateChoice()"><h4>Valider</h4><div>Confirme la réponse sélectionnée.</div></div>
+      </div>`}
+      <div id="feedback"></div>
+    </div>`;
+  picks = [];
+}
+function pick(letter, el){
+  qsa('.choice').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  picks = [letter];
+}
+function showHint(level){
+  const c = CHALLENGES[state.challengeIndex];
+  state.hints += 1;
+  state.score = Math.max(0, state.score - (level===1 ? 40 : 90));
+  playTone('hint');
+  qs('#feedback').innerHTML = `<div class="feedback help"><strong>${level===1 ? 'Carte bonus I' : 'Carte bonus II'}</strong><br>${esc(level===1 ? c.help_1 : c.help_2)}</div>`;
+}
+function validateChoice(){
+  const c = CHALLENGES[state.challengeIndex];
+  if(!picks.length){
+    qs('#feedback').innerHTML = `<div class="feedback bad">Choisis d’abord une réponse.</div>`;
+    return;
+  }
+  const letter = picks[0];
+  const ok = letter === c.answer;
+  if(ok){
+    state.score += 120;
+    playTone('ok');
+    qs('#feedback').innerHTML = `<div class="feedback ok"><strong>Excellent choix.</strong><br>${esc(c.explanation)}<br><br><strong>${esc(c.bonus)}</strong></div>`;
+  } else {
+    state.score = Math.max(0, state.score - 80);
+    playTone('bad');
+    qs('#feedback').innerHTML = `<div class="feedback bad"><strong>Mauvaise piste.</strong><br>${esc(c.explanation)}<br><br>Relis bien les indices avant de passer.</div>`;
+  }
+  const s = store();
+  const session = s.sessions[state.sessionId];
+  const team = session.teams.find(x=>x.teamCode===state.teamCode);
+  team.score = state.score;
+  team.hints = state.hints;
+  save(s);
+  const last = state.challengeIndex >= CHALLENGES.length-1;
+  qs('#feedback').innerHTML += `<div class="footer-actions">
+    <button class="btn-main" onclick="${last ? 'finishRun()' : 'nextChallenge()'}">${last ? 'Voir le résultat' : 'Défi suivant'}</button>
+  </div>`;
+}
+function nextChallenge(){
+  state.challengeIndex += 1;
+  const s = store();
+  const team = s.sessions[state.sessionId].teams.find(x=>x.teamCode===state.teamCode);
+  team.index = state.challengeIndex;
+  save(s);
+  renderChallenge();
+}
+function finishRun(){
+  const s = store();
+  const session = s.sessions[state.sessionId];
+  const team = session.teams.find(x=>x.teamCode===state.teamCode);
+  team.score = state.score;
+  save(s);
+  qs('#app').innerHTML = `
+    <section class="panel">
+      <h2 class="section-title">Résultat du module 1</h2>
+      <div class="notice"><strong>${esc(team.teamName)}</strong> termine la démo avec <strong>${state.score}</strong> points.</div>
+      <div class="goal-grid">
+        <div class="goal"><h4>Ce qui est validé</h4><div>Nouvelle esthétique, nouvelle entrée, flow admin plus propre.</div></div>
+        <div class="goal"><h4>Ce qui reste à industrialiser</h4><div>Bibliothèque géante, événements live simulés, autres univers.</div></div>
+        <div class="goal"><h4>Suite logique</h4><div>Étendre ce nouveau standard à tous les univers.</div></div>
+      </div>
+      <div class="actions">
+        <button class="btn-main" onclick="history.replaceState({},'',location.pathname); renderHome();">Retour accueil</button>
+      </div>
+    </section>`;
+}
+async function init(){
+  await loadData();
+  const p = new URLSearchParams(location.search);
+  if(p.get('player')==='1') bootPlayer();
+  else renderHome();
+}
+init();

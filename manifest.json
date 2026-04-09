@@ -3,8 +3,8 @@
   "short_name": "Game Arena",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#090d13",
-  "theme_color": "#090d13",
+  "background_color": "#08101a",
+  "theme_color": "#08101a",
   "icons": [
     {
       "src": "./icons/icon-192.png",
