@@ -25,7 +25,7 @@ function renderHome(){
       <div>
         <div class="kicker">FAFATRAINING GAME ARENA</div>
         <h1>ENTRE DANS LE JEU.</h1>
-        <div class="subtitle">Module 1 propre : nouvelle structure, nouvelle esthétique, nouveau flow. Ici, on abandonne le scolaire pour une vraie mise en ambiance pluie, tension et narration dynamique.</div>
+        <div class="subtitle">Une arène d’énigmes narrative, intense et lisible, pensée pour donner envie d’entrer dans le jeu tout de suite. Ici, chaque défi doit surprendre, pousser l’équipe à réfléchir, et garder une vraie sensation de tension jusqu’au résultat final.</div>
       </div>
       <div class="hero-stats">
         <div class="stat green"><strong>1</strong><span>univers refondu</span></div>
@@ -58,9 +58,9 @@ function showAdmin(){
         <div><label>Durée</label><select id="duration"><option value="30">30 min</option><option value="45" selected>45 min</option><option value="60">60 min</option></select></div>
       </div>
       <div class="grid4" style="margin-top:14px">
-        <div><label>Difficulté</label><select id="difficulty"><option value="facile">Accessible</option><option value="moyen" selected>Équilibré</option><option value="difficile">Challenge</option></select></div>
+        <div><label>Difficulté</label><select id="difficulty" onchange="updateBaseScore()"><option value="facile">Accessible</option><option value="moyen" selected>Équilibré</option><option value="difficile">Challenge</option></select></div>
         <div><label>Nombre d’équipes</label><select id="teamCount" onchange="renderTeams()"><option value="2">2 équipes</option><option value="3" selected>3 équipes</option><option value="4">4 équipes</option></select></div>
-        <div><label>Score de départ</label><input id="baseScore" value="1200" disabled></div>
+        <div><label>Score de départ</label><input id="baseScore" value="1200" disabled><div class="score-auto">Calcul automatique selon jeu + difficulté.</div></div>
         <div><label>Mode</label><input value="Compétitif immersif" disabled></div>
       </div>
       <div class="notice">Codes et noms d’équipes : tu peux tout personnaliser toi-même.</div>
@@ -70,12 +70,18 @@ function showAdmin(){
       </div>
       <div id="sessionOutput"></div>
     </section>`;
-  renderTeams();
+  renderTeams(); updateBaseScore();
 }
 function renderTeams(){
   const n = Number(qs('#teamCount')?.value || 3);
   const defaults = ['ALPHA','BRAVO','CHARLIE','DELTA'];
-  qs('#teamsBox').innerHTML = `<div class="grid3">${Array.from({length:n},(_,i)=>`
+  qs('#teamsBox').innerHTML = `<div class="grid3">${Array.from({length:n}
+function updateBaseScore(){
+  const d = qs('#difficulty')?.value || 'moyen';
+  let score = d==='facile' ? 1050 : d==='moyen' ? 1200 : 1350;
+  if(qs('#baseScore')) qs('#baseScore').value = score;
+}
+,(_,i)=>`
     <div class="card">
       <div class="pillbar"><span class="pill">Équipe ${i+1}</span></div>
       <label>Nom d’équipe</label><input class="teamName" value="Équipe ${i+1}">
@@ -98,7 +104,7 @@ function createSession(){
       teamCode:codes[i]||`TEAM${i+1}`,
       players:'',
       index:0,
-      score:1200,
+      score:Number(qs('#baseScore')?.value||1200),
       hints:0
     }))
   };
@@ -166,22 +172,22 @@ async function bootPlayer(){
       <div>
         <div class="kicker">Domination Nocturne</div>
         <h1>La pluie tombe. Le village ment.</h1>
-        <div class="subtitle">Module 1 : nouvelle entrée joueur, plus directe, plus lisible, plus envie de jouer.</div>
+        <div class="subtitle">Une entrée plus nette, plus classe et plus lisible. L’objectif : faire monter la tension, intriguer l’équipe, puis la lancer vite dans une vraie série de défis.</div>
       </div>
       <div class="hero-stats">
         <div class="stat green"><strong>${esc(team.teamCode)}</strong><span>code équipe</span></div>
         <div class="stat blue"><strong>${s.duration}</strong><span>minutes</span></div>
         <div class="stat pink"><strong>3</strong><span>défis module</span></div>
-        <div class="stat gold"><strong>${team.score}</strong><span>score départ</span></div>
+        <div class="stat gold"><strong>${team.score}</strong><span>score départ auto</span></div>
       </div>
     </div>
     <section class="panel">
       <h2 class="section-title">Avant la mission</h2>
       <div class="story-block">${esc(gamesIntro())}</div>
       <div class="goal-grid">
-        <div class="goal"><h4>Objectif</h4><div>Survivre à la pluie, lire juste, rester devant au score.</div></div>
-        <div class="goal"><h4>Règle utile</h4><div>Une manche = un joueur actif, une énigme, une conséquence.</div></div>
-        <div class="goal"><h4>Aides</h4><div>Un indice discret gratuit, puis 2 cartes bonus pénalisantes.</div></div>
+        <div class="goal"><h4>Objectif</h4><div>Traverser la pluie, déjouer les pièges, accumuler l’avantage et finir devant les autres.</div></div>
+        <div class="goal"><h4>Règle utile</h4><div>Le joueur actif décide ou valide. Une fois la réponse enregistrée, pas de retour arrière : la partie continue.</div></div>
+        <div class="goal"><h4>Aides</h4><div>Un indice discret gratuit peut aider à sentir la piste. Ensuite, les cartes bonus deviennent vos vrais coups de pouce, avec pénalité.</div></div>
       </div>
       <div class="grid2" style="margin-top:14px">
         <div><label>Nom d’équipe</label><input id="pTeamName" value="${esc(team.teamName)}"></div>
@@ -205,7 +211,8 @@ function startRun(sessionId, teamCode){
     score: team.score || 1200,
     challengeIndex: team.index || 0,
     hints: team.hints || 0,
-    startTime: Date.now()
+    startTime: Date.now(),
+    attempts: 0
   };
   renderChallenge();
 }
@@ -224,6 +231,7 @@ function renderChallenge(){
     visual_pattern:'👁 Observation',
     deduction_code:'🔐 Code & déduction'
   }[c.kind] || 'Défi';
+  let answerLabel = c.multi ? '✅ Plusieurs réponses possibles' : '';
   const optionsHtml = c.options.map((o,i)=>`<button class="choice" onclick="pick('${['A','B','C','D'][i]}', this)">${esc(o)}</button>`).join('');
   qs('#app').innerHTML = `
     <div class="challenge">
@@ -238,7 +246,7 @@ function renderChallenge(){
       <div class="focus-player">🔥 C’EST À : ${esc(activePlayer(team, state.challengeIndex))} DE JOUER</div>
       <div class="story-block">${esc(c.scene)}</div>
       <h2 class="challenge-title">${esc(c.title)}</h2>
-      <div class="challenge-type">${typeLabel}</div>
+      <div class="challenge-type">${typeLabel}${answerLabel ? ' · ' + answerLabel : ''}</div>
       ${c.special_rule ? `<div class="notice">${esc(c.special_rule)}</div>` : ''}
       <div class="story-block"><strong>Énigme :</strong><br>${esc(c.prompt)}</div>
       ${c.symbols ? `<div class="notice" style="font-size:34px;text-align:center;letter-spacing:10px">${c.symbols.map(esc).join(' ')}</div>` : ''}
@@ -255,7 +263,7 @@ function renderChallenge(){
       </div>`}
       <div id="feedback"></div>
     </div>`;
-  picks = [];
+  picks = []; state.attempts = 0;
 }
 function pick(letter, el){
   qsa('.choice').forEach(b=>b.classList.remove('selected'));
@@ -269,6 +277,7 @@ function showHint(level){
   playTone('hint');
   qs('#feedback').innerHTML = `<div class="feedback help"><strong>${level===1 ? 'Carte bonus I' : 'Carte bonus II'}</strong><br>${esc(level===1 ? c.help_1 : c.help_2)}</div>`;
 }
+
 function validateChoice(){
   const c = CHALLENGES[state.challengeIndex];
   if(!picks.length){
@@ -281,21 +290,36 @@ function validateChoice(){
     state.score += 120;
     playTone('ok');
     qs('#feedback').innerHTML = `<div class="feedback ok"><strong>Excellent choix.</strong><br>${esc(c.explanation)}<br><br><strong>${esc(c.bonus)}</strong></div>`;
+    const s = store();
+    const session = s.sessions[state.sessionId];
+    const team = session.teams.find(x=>x.teamCode===state.teamCode);
+    team.score = state.score;
+    team.hints = state.hints;
+    save(s);
+    const last = state.challengeIndex >= CHALLENGES.length-1;
+    qs('#feedback').innerHTML += `<div class="footer-actions">
+      <button class="btn-main" onclick="${last ? 'finishRun()' : 'nextChallenge()'}">${last ? 'Voir le résultat' : 'Défi suivant'}</button>
+    </div>`;
   } else {
-    state.score = Math.max(0, state.score - 80);
+    state.attempts += 1;
     playTone('bad');
-    qs('#feedback').innerHTML = `<div class="feedback bad"><strong>Mauvaise piste.</strong><br>${esc(c.explanation)}<br><br>Relis bien les indices avant de passer.</div>`;
+    if(state.attempts < 2){
+      state.score = Math.max(0, state.score - 40);
+      qs('#feedback').innerHTML = `<div class="feedback bad"><strong>Mauvaise piste.</strong><br>Tu as encore une chance. Reprenez vos indices, relisez la scène et essayez une dernière fois.<br><br><span class="small">Pénalité légère appliquée : -40 points.</span></div>`;
+    } else {
+      state.score = Math.max(0, state.score - 80);
+      const s = store();
+      const session = s.sessions[state.sessionId];
+      const team = session.teams.find(x=>x.teamCode===state.teamCode);
+      team.score = state.score;
+      team.hints = state.hints;
+      save(s);
+      const last = state.challengeIndex >= CHALLENGES.length-1;
+      qs('#feedback').innerHTML = `<div class="feedback bad"><strong>Défi perdu.</strong><br>La bonne réponse était <strong>${esc(c.answer)}</strong>.<br>${esc(c.explanation)}<br><br><span class="small">Vous passez au défi suivant. Pas de retour arrière possible.</span></div><div class="footer-actions">
+      <button class="btn-main" onclick="${last ? 'finishRun()' : 'nextChallenge()'}">${last ? 'Voir le résultat' : 'Défi suivant'}</button>
+    </div>`;
+    }
   }
-  const s = store();
-  const session = s.sessions[state.sessionId];
-  const team = session.teams.find(x=>x.teamCode===state.teamCode);
-  team.score = state.score;
-  team.hints = state.hints;
-  save(s);
-  const last = state.challengeIndex >= CHALLENGES.length-1;
-  qs('#feedback').innerHTML += `<div class="footer-actions">
-    <button class="btn-main" onclick="${last ? 'finishRun()' : 'nextChallenge()'}">${last ? 'Voir le résultat' : 'Défi suivant'}</button>
-  </div>`;
 }
 function nextChallenge(){
   state.challengeIndex += 1;
@@ -305,20 +329,27 @@ function nextChallenge(){
   save(s);
   renderChallenge();
 }
+
 function finishRun(){
   const s = store();
   const session = s.sessions[state.sessionId];
   const team = session.teams.find(x=>x.teamCode===state.teamCode);
   team.score = state.score;
   save(s);
+  let mention = state.score >= 1500 ? 'Domination totale' : state.score >= 1250 ? 'Très belle percée' : state.score >= 1000 ? 'Mission tenue' : 'Survie sous pression';
   qs('#app').innerHTML = `
-    <section class="panel">
-      <h2 class="section-title">Résultat du module 1</h2>
-      <div class="notice"><strong>${esc(team.teamName)}</strong> termine la démo avec <strong>${state.score}</strong> points.</div>
-      <div class="goal-grid">
-        <div class="goal"><h4>Ce qui est validé</h4><div>Nouvelle esthétique, nouvelle entrée, flow admin plus propre.</div></div>
-        <div class="goal"><h4>Ce qui reste à industrialiser</h4><div>Bibliothèque géante, événements live simulés, autres univers.</div></div>
-        <div class="goal"><h4>Suite logique</h4><div>Étendre ce nouveau standard à tous les univers.</div></div>
+    <section class="panel final-wrap">
+      <h2 class="section-title">Fin de mission</h2>
+      <div class="final-reward">
+        <div class="final-rank">${esc(team.teamName)}</div>
+        <p><strong>Score final :</strong> ${state.score}</p>
+        <p><strong>Mention :</strong> ${mention}</p>
+        <p><strong>Cartes bonus utilisées :</strong> ${state.hints}</p>
+      </div>
+      <div class="goal-grid" style="margin-top:16px">
+        <div class="goal"><h4>Ce qui a fait la différence</h4><div>Lecture de la scène, gestion de la pression, et capacité à corriger vite après une première erreur.</div></div>
+        <div class="goal"><h4>Récompense</h4><div>Votre équipe débloque une fin plus marquante et un rendu beaucoup plus premium que la version précédente.</div></div>
+        <div class="goal"><h4>Suite logique</h4><div>On peut maintenant pousser cette qualité sur tous les univers, avec plus d’énigmes, de sons, d’images et de retournements.</div></div>
       </div>
       <div class="actions">
         <button class="btn-main" onclick="history.replaceState({},'',location.pathname); renderHome();">Retour accueil</button>
