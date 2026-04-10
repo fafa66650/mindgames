@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>FAFATRAINING GOD MODE V4</title>
+<link rel="manifest" href="./manifest.json">
+<style>
+:root{
+  --bg:#060912; --bg2:#0a1120; --panel:#101827; --panel2:#162234; --line:#314763;
+  --text:#f8fbff; --muted:#bfd0e5; --cyan:#72ccff; --violet:#8b5cf6; --gold:#ffd166;
+  --green:#8efc63; --red:#ff6262; --pink:#ff77b7; --glow:0 0 24px rgba(114,204,255,.22);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--text);overflow-x:hidden}
+body{
+  background:
+  radial-gradient(circle at top left, rgba(114,204,255,.14), transparent 18%),
+  radial-gradient(circle at top right, rgba(255,119,183,.08), transparent 16%),
+  linear-gradient(180deg,#06101a,#050912 72%);
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.05;
+  background-image:linear-gradient(transparent 0 92%, rgba(255,255,255,.35) 92% 100%);
+  background-size:100% 14px;
+}
+body.night{
+  background:
+  radial-gradient(circle at top left, rgba(114,204,255,.12), transparent 18%),
+  radial-gradient(circle at top right, rgba(139,92,246,.18), transparent 16%),
+  linear-gradient(180deg,#080a13,#04070f 72%);
+}
+body.jungle{
+  background:
+  radial-gradient(circle at top left, rgba(16,185,129,.18), transparent 18%),
+  radial-gradient(circle at top right, rgba(255,209,102,.12), transparent 16%),
+  linear-gradient(180deg,#07140f,#04100b 72%);
+}
+body.lab{
+  background:
+  radial-gradient(circle at top left, rgba(255,98,98,.14), transparent 18%),
+  radial-gradient(circle at top right, rgba(114,204,255,.16), transparent 16%),
+  linear-gradient(180deg,#12080a,#090409 72%);
+}
+#rain{position:fixed;inset:0;pointer-events:none;opacity:.40;z-index:1}
+#app{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:18px}
+.hero,.panel,.card,.game-shell,.final-card,.doc-frame{
+  background:linear-gradient(145deg,var(--panel),var(--panel2));
+  border:1px solid var(--line);
+  border-radius:28px;
+  box-shadow:0 18px 40px rgba(0,0,0,.35);
+}
+.hero{display:grid;grid-template-columns:220px 1.2fr .8fr;gap:18px;align-items:center;padding:20px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-8%;bottom:-45%;width:340px;height:340px;background:radial-gradient(circle, rgba(114,204,255,.16), transparent 60%)}
+.hero-logo{width:200px;height:200px;border-radius:26px;border:2px solid rgba(255,255,255,.14);background:#081019;padding:8px;object-fit:contain}
+.kicker{font-size:12px;font-weight:900;letter-spacing:.16em;color:var(--green);text-transform:uppercase}
+h1{margin:8px 0 10px;font-size:46px;line-height:1.02}
+.subtitle{font-size:18px;line-height:1.6;color:var(--muted)}
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stat{padding:14px;border-radius:18px;border:1px solid rgba(255,255,255,.12)}
+.stat strong{display:block;font-size:30px}
+.stat.a{background:linear-gradient(145deg,#17372c,#1d4935)}
+.stat.b{background:linear-gradient(145deg,#132b3d,#17374d)}
+.stat.c{background:linear-gradient(145deg,#351c34,#4d2150)}
+.stat.d{background:linear-gradient(145deg,#44391a,#59471b)}
+.section-title{font-size:30px;margin:0 0 12px}
+.panel{padding:18px;margin-top:18px}
+.grid4,.grid3,.grid2,.goal-grid,.choice-grid,.cards{display:grid;gap:14px}
+.grid4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.goal-grid{grid-template-columns:1fr 1fr 1fr}
+.cards{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.card{padding:16px;position:relative;overflow:hidden}
+.card::before,.game-shell::before,.final-card::before,.doc-frame::before{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--gold))}
+label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+input,select,textarea{width:100%;padding:13px 14px;border-radius:14px;border:1px solid #34475f;background:#0d141f;color:#fff}
+.notice,.story,.freeclue,.feedback,.eventbox,.cinematic-line{
+  margin-top:14px;padding:16px 18px;border-radius:22px;line-height:1.65
+}
+.notice,.story{background:linear-gradient(145deg,rgba(114,204,255,.12),rgba(114,204,255,.04));border:1px solid rgba(114,204,255,.22)}
+.freeclue{background:linear-gradient(145deg,rgba(255,209,102,.18),rgba(255,209,102,.06));border:1px solid rgba(255,209,102,.28)}
+.feedback.ok{background:linear-gradient(145deg,rgba(52,211,153,.26),rgba(52,211,153,.08));border:1px solid rgba(52,211,153,.34)}
+.feedback.bad{background:linear-gradient(145deg,rgba(255,98,98,.26),rgba(255,98,98,.08));border:1px solid rgba(255,98,98,.34)}
+.feedback.help{background:linear-gradient(145deg,rgba(114,204,255,.24),rgba(114,204,255,.08));border:1px solid rgba(114,204,255,.32)}
+.eventbox{background:linear-gradient(145deg,rgba(255,119,183,.16),rgba(255,119,183,.05));border:1px solid rgba(255,119,183,.22);font-weight:900}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.pill{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);font-size:12px;font-weight:900}
+.small{font-size:13px;color:var(--muted)}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+button{border:none;border-radius:16px;padding:13px 18px;font-size:17px;font-weight:900;cursor:pointer}
+.btn-main{background:linear-gradient(90deg,var(--cyan),var(--violet),var(--gold));color:#081019}
+.btn-alt{background:#ffffff08;color:#fff;border:1px solid rgba(255,255,255,.14)}
+.btn-dark{background:#09111d;color:#fff;border:1px solid rgba(255,255,255,.12)}
+.goal{padding:14px;border-radius:18px;background:#0e1724;border:1px solid rgba(255,255,255,.1)}
+.goal h4{margin:0 0 6px}
+.game-shell{max-width:1020px;margin:0 auto;padding:18px 18px 122px;position:relative;overflow:hidden}
+.hud{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.hud-left,.hud-right{display:flex;gap:10px;flex-wrap:wrap}
+.badge{padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.12);font-weight:900}
+.points{background:rgba(142,252,99,.18)}
+.meta{background:rgba(114,204,255,.18)}
+.timer.green{background:rgba(52,211,153,.18)}
+.timer.orange{background:rgba(255,209,102,.18)}
+.timer.red{background:rgba(255,98,98,.18);box-shadow:0 0 30px rgba(255,98,98,.28)}
+.turn{margin-top:14px;padding:14px 16px;border-radius:18px;background:linear-gradient(145deg,rgba(139,92,246,.28),rgba(139,92,246,.10));border:1px solid rgba(139,92,246,.36);font-size:24px;font-weight:900}
+.challenge-title{font-size:36px;margin:16px 0 8px}
+.challenge-type{display:inline-flex;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);font-size:13px;font-weight:900}
+.choice-grid{grid-template-columns:1fr 1fr}
+.choice{padding:18px;border-radius:18px;border:1px solid #39506d;background:#0d1420;color:#fff;text-align:left;font-size:19px;font-weight:800;line-height:1.35;cursor:pointer}
+.choice.selected{outline:2px solid var(--green);background:#122031;box-shadow:var(--glow)}
+.help-floating{position:sticky;top:10px;display:flex;justify-content:flex-end;gap:10px;z-index:5;margin-top:14px}
+.help-pill{width:54px;height:54px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:#0d1420;border:1px solid rgba(255,255,255,.14);font-size:18px;font-weight:900;cursor:pointer;box-shadow:0 10px 24px rgba(0,0,0,.24)}
+.help-pill:nth-child(1){color:var(--cyan)} .help-pill:nth-child(2){color:var(--gold)} .help-pill:nth-child(3){color:var(--pink)}
+.validate-bar{position:fixed;left:0;right:0;bottom:0;padding:14px 18px;background:linear-gradient(180deg,rgba(6,11,18,0),rgba(6,11,18,.9) 30%, rgba(6,11,18,.98));display:flex;justify-content:center;z-index:40}
+.validate-btn{width:min(760px,92vw);padding:18px 20px;border:none;border-radius:18px;background:linear-gradient(90deg,var(--cyan),var(--violet),var(--gold));color:#081019;font-size:22px;font-weight:900;box-shadow:0 16px 28px rgba(0,0,0,.35);cursor:pointer}
+.visual{margin-top:14px;padding:18px;border-radius:20px;background:#0d1420;border:1px solid rgba(255,255,255,.1)}
+.visual svg{width:100%;height:auto;display:block}
+.doc-frame{padding:16px;text-align:left}
+.doc-table{width:100%;border-collapse:collapse;margin-top:12px}
+.doc-table td,.doc-table th{border:1px solid rgba(255,255,255,.12);padding:8px;text-align:left}
+.final-wrap{max-width:980px;margin:0 auto}
+.final-card{padding:24px;border-radius:28px;position:relative;background:linear-gradient(145deg,rgba(255,209,102,.22),rgba(255,209,102,.08))}
+.big-score{font-size:72px;font-weight:900;line-height:1}
+.cinematic-screen{min-height:70vh;display:flex;align-items:center;justify-content:center}
+.cinematic-box{width:min(900px,95vw);background:rgba(0,0,0,.72);border:1px solid rgba(114,204,255,.18);border-radius:24px;padding:24px;box-shadow:0 0 40px rgba(114,204,255,.12)}
+.cinematic-line{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.glitch{position:relative}
+.glitch::after{content:attr(data-text);position:absolute;left:2px;top:0;color:#72ccff;opacity:.25;clip-path:inset(0 0 55% 0)}
+.glow{box-shadow:var(--glow)}
+.fadein{animation:fadein .7s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.flash-good{animation:flashGood .45s}
+.flash-bad{animation:flashBad .45s}
+@keyframes flashGood{0%{box-shadow:0 0 0 rgba(52,211,153,0)}50%{box-shadow:0 0 60px rgba(52,211,153,.45)}100%{box-shadow:0 0 0 rgba(52,211,153,0)}}
+@keyframes flashBad{0%{box-shadow:0 0 0 rgba(255,98,98,0)}50%{box-shadow:0 0 60px rgba(255,98,98,.45)}100%{box-shadow:0 0 0 rgba(255,98,98,0)}}
+@media (max-width:1100px){
+  .hero{grid-template-columns:1fr}
+  .hero-logo{margin:0 auto}
+  .grid4,.grid3,.grid2,.goal-grid,.choice-grid{grid-template-columns:1fr}
+  h1{font-size:38px}
+  .challenge-title{font-size:30px}
+}
+</style>
+</head>
+<body>
+<canvas id="rain"></canvas>
+<div id="app"></div>
+<script>
+const APP = document.getElementById('app');
+const RAIN = document.getElementById('rain');
+const CTX = RAIN.getContext('2d');
+
+let audioCtx = null, ambienceNode = null;
+
+function initAudio(){ if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); return audioCtx; }
+function beep(freq=440,dur=.15,type='sine',vol=.03){
+  try{
+    const ctx = initAudio();
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = type; o.frequency.value = freq;
+    g.gain.value = vol;
+    o.connect(g); g.connect(ctx.destination);
+    o.start(); o.stop(ctx.currentTime + dur);
+  }catch(e){}
+}
+function playOk(){ beep(760,.12,'triangle',.03); setTimeout(()=>beep(980,.12,'triangle',.02),90); }
+function playBad(){ beep(180,.18,'sawtooth',.035); setTimeout(()=>beep(130,.18,'sawtooth',.03),100); }
+function playTension(){ beep(320,.08,'square',.016); }
+function toggleAmbience(on=true){
+  try{
+    const ctx = initAudio();
+    if(ambienceNode){ ambienceNode.osc.stop(); ambienceNode = null; }
+    if(!on) return;
+    const osc = ctx.createOscillator(), gain = ctx.createGain(), filter = ctx.createBiquadFilter();
+    osc.type = 'sawtooth'; osc.frequency.value = 58;
+    filter.type = 'lowpass'; filter.frequency.value = 240;
+    gain.gain.value = .008;
+    osc.connect(filter); filter.connect(gain); gain.connect(ctx.destination);
+    osc.start(); ambienceNode = {osc,gain};
+  }catch(e){}
+}
+function norm(s){ return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'').trim(); }
+
+const GAMES = {
+  night:{
+    body:'night', title:'NIGHT PROTOCOL', color:'#8b5cf6',
+    short:'Enquête cinématique, néons, surveillance et pièges narratifs.',
+    introLines:[
+      'Transmission instable…',
+      'Une infiltration a été confirmée dans votre périmètre.',
+      'Plusieurs fragments ont été altérés avant votre arrivée.',
+      'Certaines preuves sont vraies. D’autres ont été injectées pour vous faire conclure trop vite.',
+      'Vous n’avez qu’une seule chance de garder une lecture froide.',
+      'Dans NIGHT PROTOCOL, la mauvaise réponse ressemble souvent à la bonne pendant quelques secondes.',
+      'Réseau rétabli. Mission autorisée.'
+    ],
+    bank:{
+      facile:[
+        {kind:'logic',type:'text',title:'Déclaration verrouillée',scene:'Trois agents sont interrogés. Un seul dit vrai.',prompt:'A dit : “B ment.” B dit : “C ment.” C dit : “A et B mentent.” Qui dit vrai ?',validator:v=>norm(v)==='c',exp:'Si C dit vrai, alors A et B mentent. La structure reste cohérente jusqu’au bout.',free:'🧠 Commence par l’hypothèse la plus forte.',h1:'Teste C vrai, puis remonte.',h2:'La bonne réponse est C.',fragment:'N'},
+        {kind:'observation',type:'choice',visual:'surveillance',title:'Écran de badge',scene:'Quatre badges apparaissent. Un seul casse la logique d’orientation.',prompt:'Quel badge est incohérent ?',choices:['A · Badge 1','B · Badge 2','C · Badge 3','D · Badge 4'],answerIndex:3,exp:'Les trois premiers portent leur repère dans le même coin. Le quatrième l’inverse.',free:'👁️ Cherche ce qui change de coin.',h1:'Le symbole ne change pas, seule sa position.',h2:'Le badge incohérent est le 4.',fragment:'7'},
+        {kind:'deduction',type:'choice',visual:'document',title:'Dossier scellé 04',scene:'Le rapport donne trois indices fiables : le traître n’était pas au quai, le badge bleu est exclu, et la sortie a eu lieu après 22h.',prompt:'Quel profil reste cohérent ?',choices:['A · Quai / badge bleu / 21h40','B · Hall / badge noir / 22h15','C · Quai / badge noir / 22h20','D · Hall / badge bleu / 22h30'],answerIndex:1,exp:'A et C tombent à cause du quai. D tombe à cause du badge bleu. Il reste B.',free:'🧾 Élimine d’abord le quai.',h1:'Puis élimine le badge bleu.',h2:'Le profil cohérent est B.',fragment:'G'}
+      ],
+      moyen:[
+        {kind:'pattern',type:'choice',title:'Signal miroir',scene:'Une seule séquence est parfaitement symétrique.',prompt:'Quelle ligne respecte le miroir ?',choices:['A · ▲ ● ■ ■ ● ▲','B · ▲ ● ■ ● ■ ▲','C · ● ▲ ■ ■ ● ▲','D · ▲ ● ▲ ▲ ● ■'],answerIndex:0,exp:'A se relit de droite à gauche sans casser la structure.',free:'🔁 Relis depuis la fin.',h1:'Le centre doit se répondre exactement.',h2:'La bonne ligne est A.',fragment:'4'},
+        {kind:'logic',type:'choice',title:'Mot-clé masqué',scene:'Le terminal indique : le mot-clé contient 5 lettres. La 2e est A. La 5e est E. Ce n’est ni ALIVE ni FABLE.',prompt:'Quel mot reste possible ?',choices:['A · TABLE','B · CABLE','C · CARTE','D · SALVE'],answerIndex:3,exp:'SALVE est le seul mot qui garde A en 2e, E en 5e, sans être exclu.',free:'🧠 Vérifie toutes les contraintes dans l’ordre.',h1:'Deux choix tombent sur la position finale.',h2:'Le mot possible est SALVE.',fragment:'H'},
+        {kind:'memory',type:'choice',title:'Lecture brève',scene:'Le message s’affiche une seconde : pluie, lanterne, clé cuivre, vitre fendue, quai vide.',prompt:'Quel duo apparaissait vraiment ?',choices:['A · clé cuivre + vitre fendue','B · pluie + torche blanche','C · quai vide + badge rouge','D · lanterne + moteur bleu'],answerIndex:0,exp:'A est la seule proposition qui reprend exactement deux éléments sans les modifier.',free:'📝 Cherche le duo qui ne change aucun mot important.',h1:'Les faux adjectifs sont le piège principal.',h2:'Le bon duo est A.',fragment:'2'},
+        {kind:'observation',type:'choice',visual:'trajectories',title:'Trajectoires surveillées',scene:'Quatre trajectoires paraissent cohérentes. Une seule casse la direction d’ensemble.',prompt:'Quelle trajectoire est fausse ?',choices:['A · Trace 1','B · Trace 2','C · Trace 3','D · Trace 4'],answerIndex:3,exp:'Les trois premières montent dans le même sens. La quatrième inverse brutalement l’angle.',free:'👁️ Ce n’est pas la forme : c’est le sens qui trahit.',h1:'Compare d’abord les angles.',h2:'La trajectoire fausse est la 4.',fragment:'9'}
+      ],
+      difficile:[
+        {kind:'logic',type:'text',title:'Salle d’interrogatoire',scene:'Quatre phrases ont été enregistrées. Une seule peut tenir sans contradiction avec les autres.',prompt:'A : “Je suis innocent et B ment.”\nB : “C était avec moi toute la soirée.”\nC : “A et D ne disent pas la vérité.”\nD : “Si B ment, alors A ment aussi.”\n\nQuelle phrase est la plus crédible ?',validator:v=>norm(v)==='d',exp:'D est la seule phrase qui reste stable quand on teste les autres hypothèses.',free:'🧠 Cherche une structure conditionnelle stable.',h1:'Teste le cas où B ment. Que force alors D ?',h2:'La phrase la plus crédible est D.',fragment:'T'},
+        {kind:'code',type:'choice',title:'Clavier asymétrique',scene:'Le terminal impose un code à 4 chiffres. Leur somme vaut 18. Le 2e vaut le 1er + 2. Le dernier vaut la moitié du 3e.',prompt:'Quel code reste cohérent ?',choices:['A · 4 - 6 - 8 - 4','B · 2 - 4 - 8 - 4','C · 3 - 5 - 6 - 3','D · 5 - 7 - 4 - 2'],answerIndex:1,exp:'B respecte les relations internes et la somme 18.',free:'🔐 Fixe d’abord la relation 2e = 1er + 2.',h1:'Puis vérifie la moitié entre le 3e et le 4e.',h2:'Le code cohérent est B.',fragment:'A'},
+        {kind:'strategy',type:'choice',title:'Fenêtre de tirage',scene:'Le protocole te donne deux options : verrouiller maintenant en perdant un fragment, ou relire une dernière fois en perdant 20 secondes.',prompt:'Quel choix maximise vos chances de finir correctement ?',choices:['A · Verrouiller maintenant','B · Relire encore','C · Ignorer le fragment','D · Réinitialiser au hasard'],answerIndex:1,exp:'Dans Night Protocol, les faux évidents sont nombreux. Relire avant la fermeture reste le meilleur choix stratégique.',free:'⚠️ Ici, la précipitation est le vrai piège.',h1:'Le protocole récompense la lucidité avant la vitesse brute.',h2:'Le meilleur choix est B.',fragment:'3'}
+      ],
+      extreme:[
+        {kind:'meta',type:'choice',title:'Croisement lourd',scene:'Tu disposes de quatre fragments de règle : la taupe n’utilise jamais la sortie principale ; si l’agent noir ment, l’agent gris ment aussi ; l’agent gris n’était pas sur zone après 22h ; la taupe était encore là après 22h.',prompt:'Quel agent reste le plus crédible comme taupe ?',choices:['A · Agent noir','B · Agent blanc','C · Agent gris','D · Agent bleu'],answerIndex:1,exp:'Le gris tombe à cause de l’heure. Le noir reste instable à cause de la condition. Le blanc est la piste la plus stable.',free:'🧠 Commence par éliminer ce qui viole directement l’heure.',h1:'Le gris tombe tout de suite. Le noir reste fragile.',h2:'La piste la plus stable est l’agent blanc.',fragment:'E'},
+        {kind:'observation',type:'text',visual:'grid9',title:'Grille de surveillance 9 cases',scene:'Huit cases suivent un déplacement régulier du repère. Une seule brise la logique générale.',prompt:'Quel numéro de case est l’intrus ?',validator:v=>norm(v)==='9' || norm(v)==='case9',exp:'Les huit premières suivent un rythme progressif. La neuvième casse l’ensemble.',free:'👁️ Ce n’est pas la forme qui change, c’est le rythme du déplacement.',h1:'Observe comment le point glisse de case en case.',h2:'L’intrus est la case 9.',fragment:'1'}
+      ]
+    },
+    finalPrompt:'Quel profil reste la piste finale la plus solide ?',
+    finalChoices:['A · Agent noir','B · Agent blanc','C · Agent gris','D · Agent bleu'],
+    finalAnswer:1
+  },
+  jungle:{
+    body:'jungle', title:'L’EXPÉDITION INTERDITE', color:'#10b981',
+    short:'Jungle, ruines, orientation, mécanismes et survie.',
+    introLines:[
+      'L’expédition est entrée dans une zone que personne n’a réussi à cartographier entièrement.',
+      'Des repères anciens réapparaissent, mais ils mentent parfois sur l’ordre des passages.',
+      'Le terrain doit être lu comme un langage.',
+      'Ici, la curiosité seule ne suffit pas. Il faut de la lecture, du calme, et du rythme.',
+      'Passage autorisé.'
+    ],
+    bank:{
+      facile:[
+        {kind:'navigation',type:'choice',title:'Le couloir des ruines',scene:'La route correcte doit suivre : arche creuse, zone détrempée, dalle gravée, clairière.',prompt:'Quelle route reste crédible ?',choices:['A · Est / arche / zone humide / dalle / clairière','B · Ouest / arche / clairière / zone humide','C · Nord / dalle / arche / clairière','D · Sud / rivière / colline / 2 pierres'],answerIndex:0,exp:'A garde les bons repères dans le bon ordre.',free:'🧭 L’ordre complet est la clé.',h1:'La clairière vient après la dalle.',h2:'La bonne route commence par l’Est.',fragment:'V'},
+        {kind:'pattern',type:'choice',title:'La mosaïque humide',scene:'Une frise doit être symétrique depuis le centre vers les bords.',prompt:'Quelle ligne garde la bonne symétrie ?',choices:['A · feuille / eau / soleil / soleil / eau / feuille','B · feuille / eau / lune / soleil / eau / feuille','C · eau / feuille / soleil / soleil / eau / feuille','D · feuille / eau / soleil / lune / eau / feuille'],answerIndex:0,exp:'A est la seule séquence qui répond exactement en miroir.',free:'🔁 Relis la ligne depuis la fin.',h1:'Le centre doit se répondre exactement.',h2:'La bonne suite est A.',fragment:'E'}
+      ],
+      moyen:[
+        {kind:'code',type:'choice',title:'Le mécanisme des runes',scene:'Le code a 4 chiffres pairs différents. Leur somme vaut 20 et le deuxième vaut le premier + 2.',prompt:'Quelle séquence est valable ?',choices:['A · 2 - 4 - 6 - 8','B · 4 - 6 - 8 - 2','C · 6 - 8 - 4 - 2','D · 2 - 6 - 4 - 8'],answerIndex:0,exp:'A valide tout.',free:'🔐 Commence par la relation entre le 1er et le 2e chiffre.',h1:'La somme 20 élimine déjà beaucoup d’options.',h2:'La bonne séquence commence par 2 puis 4.',fragment:'R'},
+        {kind:'observation',type:'choice',title:'Le mur des glyphes',scene:'Cinq glyphes appartiennent à deux familles répétées. Un seul n’appartient à aucune famille.',prompt:'Quel glyphe est isolé ?',choices:['A · 2e','B · 4e','C · 5e','D · 1er'],answerIndex:2,exp:'Les glyphes 1 et 3 se répondent, 2 et 4 aussi. Le 5e reste isolé.',free:'👁️ Cherche celui qui n’a aucun jumeau.',h1:'Deux paires se forment avant l’intrus.',h2:'Le glyphe isolé se trouve à la fin.',fragment:'T'},
+        {kind:'memory',type:'choice',title:'Le carnet détrempé',scene:'Le carnet s’ouvre une seconde : pierre rouge, clé cuivre, feuille noire, roue d’obsidienne, corde verte.',prompt:'Quel duo était visible ?',choices:['A · roue d’obsidienne + corde verte','B · pierre rouge + lampe blanche','C · feuille noire + gourde','D · clé cuivre + torche'],answerIndex:0,exp:'A est le seul duo entièrement présent dans la scène.',free:'👁️ Une seule proposition contient deux vrais éléments vus ensemble.',h1:'Élimine les objets jamais cités.',h2:'Le bon duo réunit la roue et la corde.',fragment:'U'}
+      ],
+      difficile:[
+        {kind:'choice',type:'choice',title:'La chambre des faux leviers',scene:'Un message prévient : “ne choisis pas le levier central, sauf si la lampe bleue s’éteint.” La lampe bleue est encore allumée.',prompt:'Quel levier faut-il éviter ?',choices:['A · Levier gauche','B · Levier central','C · Levier droit','D · Aucun'],answerIndex:1,exp:'Tant que la lampe bleue reste allumée, il faut éviter le levier central.',free:'⚠️ Ici, le décor donne déjà la règle.',h1:'La lampe bleue n’est pas éteinte.',h2:'Le levier central est interdit.',fragment:'R'},
+        {kind:'meta',type:'choice',title:'Orientation finale',scene:'Les fragments de l’expédition dessinent le mot VERTURE. Une lettre manque pour stabiliser la voie.',prompt:'Quelle lettre manque ?',choices:['A · A','B · O','C · I','D · N'],answerIndex:1,exp:'VERTURE devient OUVERTURE quand on ajoute O.',free:'🧠 Le site cherche une ouverture, pas un mot abstrait.',h1:'Le mot final doit évoquer le passage.',h2:'La lettre manquante est O.',fragment:'O'}
+      ],
+      extreme:[]
+    },
+    finalPrompt:'Quelle dernière lettre ferme le passage ?',
+    finalChoices:['A · A','B · O','C · I','D · N'],
+    finalAnswer:1
+  },
+  lab:{
+    body:'lab', title:'ZONE 13', color:'#ff6262',
+    short:'Laboratoire, urgence, pression, stabilisation.',
+    introLines:[
+      'L’alarme a déjà commencé quand vous entrez.',
+      'La lumière change, les signaux se déclenchent en cascade, et plusieurs écrans se contredisent.',
+      'Dans Zone 13, chaque action a un coût. Chaque hésitation a un impact.',
+      'Ce qu’il faut, c’est de la vitesse intelligente.',
+      'Protocole activé.'
+    ],
+    bank:{
+      facile:[
+        {kind:'code',type:'choice',title:'Code de stabilisation',scene:'Le panneau impose un code dont la somme vaut 12, avec trois chiffres égaux.',prompt:'Quelle combinaison doit être validée ?',choices:['A · 4 - 4 - 4','B · 3 - 3 - 6','C · 2 - 5 - 5','D · 1 - 1 - 10'],answerIndex:0,exp:'4-4-4 est la seule combinaison qui respecte à la fois la somme et l’égalité.',free:'🔐 Le mot important ici est “égaux”.',h1:'La somme 12 doit être atteinte avec trois chiffres identiques.',h2:'La combinaison correcte est 4 - 4 - 4.',fragment:'S'},
+        {kind:'logic',type:'choice',title:'Suite critique',scene:'La suite affichée grimpe trop vite pour être lue à moitié : 2, 4, 8, ?',prompt:'Quelle valeur doit suivre ?',choices:['A · 16','B · 10','C · 12','D · 14'],answerIndex:0,exp:'La valeur double à chaque étape : 2, 4, 8, 16.',free:'🧠 La logique ne change pas en cours de route.',h1:'Chaque valeur vaut le double de la précédente.',h2:'La bonne réponse est 16.',fragment:'A'}
+      ],
+      moyen:[
+        {kind:'strategy',type:'choice',title:'Protocole d’urgence',scene:'Attendre peut aggraver la situation. Fuir coupe toute chance de stabilisation.',prompt:'Quelle action reste la plus crédible ?',choices:['A · Attendre','B · Agir','C · Fuir','D · Éteindre tout'],answerIndex:1,exp:'Agir reste la seule réponse cohérente dans cette configuration.',free:'⚠️ Élimine les options qui abandonnent le problème.',h1:'Attendre ou fuir ne stabilisent rien.',h2:'Il faut agir.',fragment:'F'},
+        {kind:'observation',type:'choice',title:'Écran parasite',scene:'Quatre lignes semblent correctes, mais une seule casse la logique d’ensemble.',prompt:'Quelle ligne est incohérente ?',choices:['A · 22 / 24 / 26','B · 30 / 32 / 34','C · 12 / 16 / 14','D · 40 / 42 / 44'],answerIndex:2,exp:'A, B et D suivent une progression régulière de +2. C casse cette logique.',free:'👁️ Trois lignes gardent la même montée régulière.',h1:'Cherche la seule ligne qui brise le rythme.',h2:'La ligne C casse la progression.',fragment:'E'},
+        {kind:'memory',type:'choice',title:'Rapport de confinement',scene:'Le rapport affiche : vanne rouge, chambre 4, niveau 2, clé noire, module est.',prompt:'Quel élément n’était pas présent ?',choices:['A · chambre 4','B · clé noire','C · niveau 3','D · module est'],answerIndex:2,exp:'Niveau 3 n’apparaissait pas : le rapport indiquait niveau 2.',free:'📝 Un seul élément a été modifié.',h1:'Tout est correct sauf le niveau.',h2:'Le faux élément est niveau 3.',fragment:'T'}
+      ],
+      difficile:[
+        {kind:'choice',type:'choice',title:'Fermeture finale',scene:'Le système propose deux actions : lancer la fermeture générale maintenant, ou vérifier une dernière fois le circuit.',prompt:'Quel choix garde le plus de maîtrise ?',choices:['A · Fermer immédiatement sans relire','B · Vérifier le dernier circuit puis fermer','C · Ignorer le dernier circuit','D · Rebooter tout au hasard'],answerIndex:1,exp:'Dans un environnement critique, relire une dernière fois avant la fermeture reste la décision la plus robuste.',free:'⚠️ Le bon réflexe mélange vitesse et contrôle.',h1:'La précipitation pure est une fausse sécurité.',h2:'Vérifier puis fermer est la meilleure piste.',fragment:'Y'},
+        {kind:'meta',type:'choice',title:'Dernière stabilisation',scene:'Les fragments restants forment SAFE TY. Une seule lettre manque pour verrouiller le protocole.',prompt:'Quelle lettre manque ?',choices:['A · R','B · N','C · I','D · U'],answerIndex:1,exp:'SAFE TY devient SAFETY avec N.',free:'🧠 Le mot final doit signifier sécurité.',h1:'Le protocole cherche un mot de stabilisation.',h2:'La lettre manquante est N.',fragment:'N'}
+      ],
+      extreme:[]
+    },
+    finalPrompt:'Quelle lettre verrouille la sécurité finale ?',
+    finalChoices:['A · R','B · N','C · I','D · U'],
+    finalAnswer:1
+  }
+};
+
+let state = {game:'night',totalPlayers:18,teamCount:3,publicType:'adultes',difficulty:'difficile',duration:3600,players:[],teamName:'',hints:0,score:1000,index:0,time:0,picked:null,attempts:0,selectedChallenges:[],fragments:[],timer:null,metaPick:null};
+
+function setTheme(){ document.body.classList.remove('night','jungle','lab'); document.body.classList.add(GAMES[state.game].body); }
+function teamDistribution(total,teams){ const base=Math.floor(total/teams),rest=total%teams; if(rest===0) return `${teams} équipes de ${base}`; return `${rest} équipes de ${base+1} · ${teams-rest} équipes de ${base}`; }
+function chooseChallenges(){
+  const bank = GAMES[state.game].bank;
+  const order = {facile:['facile'], moyen:['facile','moyen'], difficile:['moyen','difficile'], extreme:['difficile','extreme']};
+  let count = state.duration <= 1800 ? 4 : state.duration <= 2700 ? 5 : state.duration <= 3600 ? 6 : state.duration <= 5400 ? 7 : 8;
+  if(state.publicType === 'enfants') count = Math.max(4, count - 1);
+  if(state.publicType === 'adultes' && state.difficulty === 'extreme') count = Math.min(8, count + 1);
+  let arr = []; (order[state.difficulty] || ['moyen']).forEach(k => arr = arr.concat(bank[k] || []));
+  return arr.slice(0, count);
+}
+function renderHome(){
+  setTheme();
+  APP.innerHTML = `
+    <div class="hero">
+      <div><img src="./assets/logo.jpeg" class="hero-logo" alt="logo"></div>
+      <div>
+        <div class="kicker">FAFATRAINING GOD MODE — priorité 3 : immersion cinématique</div>
+        <h1>VERSION V4 — PLUS CINÉMATIQUE</h1>
+        <div class="subtitle">Toujours sur la base GOD MODE V2. On renforce maintenant l’intro filmique, les contrastes, le feedback visuel/sonore, le chrono et l’impact de fin de mission.</div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat a"><strong>3</strong><span>univers</span></div>
+        <div class="stat b"><strong>cinéma</strong><span>immersion prioritaire</span></div>
+        <div class="stat c"><strong>admin</strong><span>pilotage auto</span></div>
+        <div class="stat d"><strong>v4</strong><span>même base, plus fort</span></div>
+      </div>
+    </div>
+    <section class="panel">
+      <h2 class="section-title">Choisir l’univers</h2>
+      <div class="cards">
+        ${Object.entries(GAMES).map(([key,g])=>`
+          <div class="card">
+            <div class="pills"><span class="pill">${g.title}</span><span class="pill">${g.short}</span></div>
+            <h3>${g.title}</h3>
+            <div class="small">${g.introLines.join(' ').slice(0,180)}...</div>
+            <div class="btns"><button class="btn-main" onclick="openAdmin('${key}')">CONFIGURER</button></div>
+          </div>`).join('')}
+      </div>
+    </section>`;
+}
+function openAdmin(key){
+  state.game = key; setTheme();
+  const g = GAMES[key];
+  APP.innerHTML = `
+    <div class="hero glow">
+      <div><img src="./assets/logo.jpeg" class="hero-logo" alt="logo"></div>
+      <div>
+        <div class="kicker">${g.short}</div>
+        <h1>${g.title}</h1>
+        <div class="subtitle">${g.introLines.join('<br><br>')}</div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat a"><strong>${teamDistribution(state.totalPlayers, state.teamCount)}</strong><span>répartition</span></div>
+        <div class="stat b"><strong>${state.difficulty}</strong><span>difficulté</span></div>
+        <div class="stat c"><strong>${state.duration/60} min</strong><span>durée</span></div>
+        <div class="stat d"><strong>${chooseChallenges().length}</strong><span>épreuves auto</span></div>
+      </div>
+    </div>
+    <section class="panel">
+      <h2 class="section-title">Administration de mission</h2>
+      <div class="grid4">
+        <div><label>Nom d’équipe</label><input id="teamName" value="${state.teamName}"></div>
+        <div><label>Nombre total de joueurs</label><input id="totalPlayers" type="number" min="2" value="${state.totalPlayers}"></div>
+        <div><label>Nombre d’équipes</label><select id="teamCount">${[2,3,4,5,6].map(n=>`<option value="${n}" ${state.teamCount==n?'selected':''}>${n} équipes</option>`).join('')}</select></div>
+        <div><label>Type de public</label><select id="publicType">
+          <option value="enfants" ${state.publicType==='enfants'?'selected':''}>Enfants</option>
+          <option value="ados" ${state.publicType==='ados'?'selected':''}>Ados</option>
+          <option value="adultes" ${state.publicType==='adultes'?'selected':''}>Adultes</option>
+        </select></div>
+      </div>
+      <div class="grid4" style="margin-top:14px">
+        <div><label>Difficulté</label><select id="difficulty">
+          <option value="facile" ${state.difficulty==='facile'?'selected':''}>Facile</option>
+          <option value="moyen" ${state.difficulty==='moyen'?'selected':''}>Moyen</option>
+          <option value="difficile" ${state.difficulty==='difficile'?'selected':''}>Difficile</option>
+          <option value="extreme" ${state.difficulty==='extreme'?'selected':''}>Extrême</option>
+        </select></div>
+        <div><label>Durée</label><select id="duration">
+          <option value="1800" ${state.duration===1800?'selected':''}>30 min</option>
+          <option value="2700" ${state.duration===2700?'selected':''}>45 min</option>
+          <option value="3600" ${state.duration===3600?'selected':''}>60 min</option>
+          <option value="5400" ${state.duration===5400?'selected':''}>90 min</option>
+          <option value="7200" ${state.duration===7200?'selected':''}>120 min</option>
+        </select></div>
+        <div><label>Joueurs (séparés par virgule)</label><input id="players" value="${state.players.join(', ')}" placeholder="Lina, Tom, Hugo"></div>
+        <div><label>Nombre d’épreuves auto</label><input disabled value="${chooseChallenges().length} épreuves + méta final"></div>
+      </div>
+      <div class="notice"><strong>Priorité V4 :</strong><br>intro noire et progressive, pluie visuelle, feedback sonore/visuel plus fort, chrono plus intégré, fin plus spectaculaire. On reste sur la même base God Mode V2, mais on pousse l’habillage et le ressenti cinématique.</div>
+      <div class="btns"><button class="btn-main" onclick="launchMission()">LANCER LA MISSION</button><button class="btn-alt" onclick="renderHome()">Retour</button></div>
+    </section>`;
+}
+function launchMission(){
+  state.teamName = document.getElementById('teamName').value.trim();
+  state.totalPlayers = parseInt(document.getElementById('totalPlayers').value || '18', 10);
+  state.teamCount = parseInt(document.getElementById('teamCount').value || '3', 10);
+  state.publicType = document.getElementById('publicType').value;
+  state.difficulty = document.getElementById('difficulty').value;
+  state.duration = parseInt(document.getElementById('duration').value || '3600', 10);
+  state.players = document.getElementById('players').value.split(',').map(s=>s.trim()).filter(Boolean);
+  state.hints = 0; state.score = 1000; state.index = 0; state.fragments = []; state.metaPick = null;
+  state.selectedChallenges = chooseChallenges();
+  showIntro();
+}
+function showIntro(){
+  clearInterval(state.timer); setTheme(); toggleAmbience(true);
+  const lines = GAMES[state.game].introLines;
+  APP.innerHTML = `
+    <section class="cinematic-screen">
+      <div class="cinematic-box">
+        <div class="kicker glitch" data-text="TRANSMISSION">TRANSMISSION</div>
+        <h1 class="glitch" data-text="${GAMES[state.game].title}">${GAMES[state.game].title}</h1>
+        <div id="cineBox"></div>
+        <div class="btns"><button class="btn-main hidden" id="introBtn" onclick="startMission()">ENTRER DANS LA MISSION</button></div>
+      </div>
+    </section>`;
+  let i = 0;
+  const box = document.getElementById('cineBox');
+  function step(){
+    if(i < lines.length){
+      box.innerHTML += `<div class="cinematic-line fadein">${lines[i]}</div>`;
+      playTension();
+      i++;
+      setTimeout(step, 950);
+    } else {
+      document.getElementById('introBtn').classList.remove('hidden');
+      beep(640,.16,'triangle',.03);
+    }
+  }
+  step();
+}
+function startMission(){
+  state.time = state.duration;
+  state.timer = setInterval(()=>{
+    state.time--;
+    const badge = document.getElementById('timerBadge');
+    if(badge){ badge.textContent = `⏱ ${fmt(state.time)}`; badge.className = `badge timer ${timerColor()}`; }
+    if(state.time === 45) playTension();
+    if(state.time === 30) playBad();
+    if(state.time <= 0){ clearInterval(state.timer); finishMission(true); }
+  }, 1000);
+  renderChallenge();
+}
+function timerColor(){ if(state.time > 120) return 'green'; if(state.time > 45) return 'orange'; return 'red'; }
+function fmt(t){ const m=String(Math.floor(t/60)).padStart(2,'0'); const s=String(t%60).padStart(2,'0'); return `${m}:${s}`; }
+function currentPlayer(){ if(!state.players.length) return state.teamName || 'Équipe'; return state.players[state.index % state.players.length]; }
+function randomEvent(){
+  if(Math.random() < 0.40){
+    const events = [
+      {txt:'🎁 BONUS : +100 points', fn:()=>state.score += 100},
+      {txt:'💣 SABOTAGE : -80 points', fn:()=>state.score = Math.max(0, state.score - 80)},
+      {txt:'⏱ FAILLE TEMPORELLE : -15 secondes', fn:()=>state.time = Math.max(0, state.time - 15)},
+      {txt:'⚠️ FAUX INDICE : cette manche contient une évidence piégée', fn:()=>{}},
+    ];
+    const ev = events[Math.floor(Math.random()*events.length)];
+    ev.fn(); return ev.txt;
+  }
+  return '';
+}
+function visualMarkup(type){
+  if(type === 'surveillance'){
+    return `<div class="visual"><svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg"><rect width="720" height="220" rx="18" fill="#0b1220"/><g fill="#18243b" stroke="#72ccff" stroke-width="3"><rect x="30" y="40" width="120" height="120" rx="12"/><rect x="200" y="40" width="120" height="120" rx="12"/><rect x="370" y="40" width="120" height="120" rx="12"/><rect x="540" y="40" width="120" height="120" rx="12"/></g><g fill="#ffd166"><circle cx="58" cy="68" r="10"/><circle cx="228" cy="68" r="10"/><circle cx="398" cy="68" r="10"/><circle cx="632" cy="132" r="10"/></g><text x="35" y="192" fill="#bdd0e3" font-size="16">1</text><text x="205" y="192" fill="#bdd0e3" font-size="16">2</text><text x="375" y="192" fill="#bdd0e3" font-size="16">3</text><text x="545" y="192" fill="#bdd0e3" font-size="16">4</text></svg></div>`;
+  }
+  if(type === 'trajectories'){
+    return `<div class="visual"><svg viewBox="0 0 720 220" xmlns="http://www.w3.org/2000/svg"><rect width="720" height="220" rx="18" fill="#0b1220"/><g stroke="#72ccff" stroke-width="5" fill="none" stroke-linecap="round"><path d="M70 160 C110 130 140 100 180 70"/><path d="M250 160 C290 130 320 100 360 70"/><path d="M430 160 C470 130 500 100 540 70"/><path d="M610 70 C580 100 560 130 520 160" stroke="#ff6262"/></g><text x="80" y="195" fill="#bdd0e3" font-size="16">1</text><text x="260" y="195" fill="#bdd0e3" font-size="16">2</text><text x="440" y="195" fill="#bdd0e3" font-size="16">3</text><text x="600" y="195" fill="#bdd0e3" font-size="16">4</text></svg></div>`;
+  }
+  if(type === 'document'){
+    return `<div class="doc-frame"><table class="doc-table"><tr><th>Lieu</th><th>Badge</th><th>Heure</th></tr><tr><td>Quai</td><td>Bleu</td><td>21h40</td></tr><tr><td>Hall</td><td>Noir</td><td>22h15</td></tr><tr><td>Quai</td><td>Noir</td><td>22h20</td></tr><tr><td>Hall</td><td>Bleu</td><td>22h30</td></tr></table><div class="small" style="margin-top:10px">Rappel : le traître n’était pas au quai. Badge bleu exclu. Sortie après 22h.</div></div>`;
+  }
+  if(type === 'grid9'){
+    return `<div class="visual"><svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg"><rect width="720" height="260" rx="18" fill="#0b1220"/><g fill="#18243b" stroke="#72ccff" stroke-width="2">${[0,1,2,3,4,5,6,7,8].map(i=>{const x=40+(i%3)*220,y=30+Math.floor(i/3)*70;return `<rect x="${x}" y="${y}" width="120" height="48" rx="8"/>`;}).join('')}</g><g fill="#ffd166"><circle cx="60" cy="50" r="6"/><circle cx="280" cy="50" r="6"/><circle cx="500" cy="50" r="6"/><circle cx="80" cy="120" r="6"/><circle cx="300" cy="120" r="6"/><circle cx="520" cy="120" r="6"/><circle cx="100" cy="190" r="6"/><circle cx="320" cy="190" r="6"/><circle cx="580" cy="210" r="6"/></g>${[1,2,3,4,5,6,7,8,9].map((n,i)=>{const x=48+(i%3)*220,y=93+Math.floor(i/3)*70;return `<text x="${x}" y="${y}" fill="#bdd0e3" font-size="16">${n}</text>`;}).join('')}</svg></div>`;
+  }
+  return '';
+}
+function renderChallenge(){
+  const c = state.selectedChallenges[state.index];
+  if(!c){ renderMetaFinal(); return; }
+  const event = randomEvent();
+  const names = {logic:'🧠 Logique',observation:'👁 Observation',deduction:'🔐 Déduction',strategy:'⚔️ Stratégie',pattern:'🔁 Motif',code:'🔐 Code',memory:'🧠 Mémoire',meta:'💣 Recoupement',navigation:'🧭 Orientation'};
+  APP.innerHTML = `
+    <section class="game-shell fadein">
+      <div class="hud">
+        <div class="hud-left">
+          <div class="badge points">Score : ${state.score}</div>
+          <div class="badge meta">Défi ${state.index+1}/${state.selectedChallenges.length}</div>
+          <div class="badge meta">Pastilles : ${state.hints}</div>
+        </div>
+        <div class="hud-right"><div id="timerBadge" class="badge timer ${timerColor()}">⏱ ${fmt(state.time)}</div></div>
+      </div>
+      ${event ? `<div class="eventbox">${event}</div>` : ''}
+      <div class="turn">🔥 C’EST À : ${currentPlayer()} DE JOUER</div>
+      <div class="story">${c.scene.replace(/\n/g,'<br>')}</div>
+      <div class="help-floating">
+        <button class="help-pill" onclick="useHint(1)">⚡</button>
+        <button class="help-pill" onclick="useHint(2)">⚡⚡</button>
+        <button class="help-pill" onclick="showFree()">👁</button>
+      </div>
+      <h2 class="challenge-title">${c.title}</h2>
+      <div class="challenge-type">${names[c.kind] || 'Défi'}</div>
+      ${c.visual ? visualMarkup(c.visual) : ''}
+      <div class="story"><strong>Énigme :</strong><br>${c.prompt.replace(/\n/g,'<br>')}</div>
+      <div id="freeSlot"></div>
+      ${c.type === 'choice'
+        ? `<div class="choice-grid">${c.choices.map((ch, i)=>`<button class="choice" onclick="pick(${i}, this)">${ch}</button>`).join('')}</div>`
+        : `<div class="panel" style="padding:14px;margin-top:14px"><label>Réponse libre</label><input id="freeAnswer" placeholder="Entre ta réponse"></div>`}
+      <div id="feedback"></div>
+    </section>
+    <div class="validate-bar"><button class="validate-btn" onclick="validate()">VALIDER LA RÉPONSE</button></div>`;
+  state.picked = null; state.attempts = 0;
+}
+function showFree(){ const c = state.selectedChallenges[state.index]; document.getElementById('freeSlot').innerHTML = `<div class="freeclue"><strong>Indice discret :</strong><br>${c.free}</div>`; }
+function pick(i,el){ document.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected')); el.classList.add('selected'); state.picked = i; }
+function useHint(level){
+  const c = state.selectedChallenges[state.index];
+  state.hints++; state.score = Math.max(0, state.score - (level===1 ? 40 : 90)); beep(level===1?520:420,.09,'triangle',.02);
+  document.getElementById('feedback').innerHTML = `<div class="feedback help"><strong>${level===1 ? 'Pastille ⚡' : 'Pastille ⚡⚡'}</strong><br>${level===1 ? c.h1 : c.h2}</div>`;
+}
+function validate(){
+  const c = state.selectedChallenges[state.index];
+  let ok = false;
+  if(c.type === 'choice'){
+    if(state.picked === null){ document.getElementById('feedback').innerHTML = `<div class="feedback bad">Choisis d’abord une réponse.</div>`; return; }
+    ok = state.picked === c.answerIndex;
+  } else {
+    ok = c.validator(document.getElementById('freeAnswer').value);
+  }
+  const shell = document.querySelector('.game-shell');
+  if(ok){
+    state.score += 120; state.fragments.push(c.fragment); playOk();
+    shell.classList.remove('flash-bad'); shell.classList.add('flash-good');
+    document.getElementById('feedback').innerHTML = `<div class="feedback ok"><strong>✅ Bonne réponse.</strong><br>${c.exp}<br><br><strong>Fragment obtenu : ${c.fragment}</strong></div><div class="btns"><button class="btn-main" onclick="nextChallenge()">DÉFI SUIVANT</button></div>`;
+  } else {
+    state.attempts++; playBad();
+    shell.classList.remove('flash-good'); shell.classList.add('flash-bad');
+    if(state.attempts < 2){
+      state.score = Math.max(0, state.score - 40);
+      document.getElementById('feedback').innerHTML = `<div class="feedback bad"><strong>❌ Mauvaise piste.</strong><br>Tu as encore une chance. Relis la scène, l’indice discret, et corrige ta lecture.<br><br><span class="small">Pénalité : -40 points.</span></div>`;
+    } else {
+      state.score = Math.max(0, state.score - 80);
+      document.getElementById('feedback').innerHTML = `<div class="feedback bad"><strong>💥 Défi perdu.</strong><br>${c.exp}<br><br><span class="small">Vous passez au défi suivant. Pas de retour arrière.</span></div><div class="btns"><button class="btn-main" onclick="nextChallenge()">DÉFI SUIVANT</button></div>`;
+    }
+  }
+}
+function nextChallenge(){ state.index++; renderChallenge(); }
+function renderMetaFinal(){
+  const g = GAMES[state.game];
+  const fragments = state.fragments.join(' · ') || 'aucun';
+  APP.innerHTML = `
+    <section class="game-shell fadein glow">
+      <div class="hud">
+        <div class="hud-left"><div class="badge points">Score : ${state.score}</div><div class="badge meta">Méta final</div><div class="badge meta">Fragments : ${state.fragments.length}</div></div>
+        <div class="hud-right"><div id="timerBadge" class="badge timer ${timerColor()}">⏱ ${fmt(state.time)}</div></div>
+      </div>
+      <div class="turn glitch" data-text="RÉSOLUTION FINALE">💣 RÉSOLUTION FINALE</div>
+      <div class="story">Fragments récupérés : <strong>${fragments}</strong><br><br>La dernière étape te force à relire le parcours et à désigner la piste la plus stable de l’univers.</div>
+      <div class="story"><strong>${g.finalPrompt}</strong></div>
+      <div class="choice-grid">
+        ${g.finalChoices.map((choice,i)=>`<button class="choice" onclick="pickMeta(${i}, this)">${choice}</button>`).join('')}
+      </div>
+      <div id="feedback"></div>
+    </section>
+    <div class="validate-bar"><button class="validate-btn" onclick="validateMeta()">VALIDER LE VERDICT FINAL</button></div>`;
+  state.metaPick = null;
+}
+function pickMeta(i,el){ document.querySelectorAll('.choice').forEach(x=>x.classList.remove('selected')); el.classList.add('selected'); state.metaPick = i; }
+function validateMeta(){
+  const answer = GAMES[state.game].finalAnswer;
+  if(state.metaPick === null){ document.getElementById('feedback').innerHTML = `<div class="feedback bad">Choisis d’abord une piste.</div>`; return; }
+  if(state.metaPick === answer){
+    state.score += 180; playOk();
+    document.getElementById('feedback').innerHTML = `<div class="feedback ok"><strong>✅ Verdict validé.</strong><br>Vous avez choisi la piste la plus solide pour fermer l’univers.</div><div class="btns"><button class="btn-main" onclick="finishMission(false)">VOIR LA FIN DE MISSION</button></div>`;
+  } else {
+    state.score = Math.max(0, state.score - 120); playBad();
+    document.getElementById('feedback').innerHTML = `<div class="feedback bad"><strong>❌ Verdict erroné.</strong><br>La meilleure piste finale n’était pas celle-ci. Vous pouvez quand même clôturer la mission avec le score actuel.</div><div class="btns"><button class="btn-main" onclick="finishMission(false)">VOIR LA FIN DE MISSION</button></div>`;
+  }
+}
+function finishMission(timeout){
+  clearInterval(state.timer); toggleAmbience(false);
+  const mention = timeout ? 'Temps écoulé' : state.score >= 1800 ? 'Domination totale' : state.score >= 1500 ? 'Percée magistrale' : state.score >= 1200 ? 'Mission tenue' : 'Survie sous pression';
+  const icon = timeout ? '⏱' : state.score >= 1800 ? '👑' : state.score >= 1500 ? '🏆' : state.score >= 1200 ? '⚡' : '🌧️';
+  APP.innerHTML = `
+    <section class="final-wrap fadein">
+      <div class="final-card glow">
+        <div class="big-score">${state.score} pts</div>
+        <p><strong>${icon} ${state.teamName || 'Votre équipe'}</strong> — ${mention}</p>
+        <p>Pastilles utilisées : ${state.hints}</p>
+        <p>${timeout ? 'Le chrono a refermé la mission avant la résolution complète.' : 'La mission se ferme dans un halo de néon, de bruit parasite et de pluie. Vous avez tenu jusqu’au bout, encaissé les faux indices et trouvé une piste plus stable que les autres.'}</p>
+      </div>
+      <div class="goal-grid">
+        <div class="goal"><h4>Ce qui a compté</h4><div>Le recoupement d’indices, la lecture des pièges et la capacité à ne pas conclure trop vite.</div></div>
+        <div class="goal"><h4>Effet final</h4><div>Fin plus visuelle, plus affirmée, plus “générique de fin” que sur V2.</div></div>
+        <div class="goal"><h4>Suite</h4><div>Cette base peut encore être poussée, mais V4 renforce déjà clairement le ressenti cinématique.</div></div>
+      </div>
+      <div class="btns"><button class="btn-main" onclick="renderHome()">RETOUR ACCUEIL</button></div>
+    </section>`;
+}
+function resizeRain(){ RAIN.width = innerWidth; RAIN.height = innerHeight; }
+let drops=[];
+function initRain(){ resizeRain(); drops = Array.from({length:180}, ()=>({x:Math.random()*RAIN.width,y:Math.random()*RAIN.height,l:10+Math.random()*18,v:6+Math.random()*8})); }
+function drawRain(){
+  CTX.clearRect(0,0,RAIN.width,RAIN.height);
+  CTX.strokeStyle='rgba(114,204,255,.35)'; CTX.lineWidth=1; CTX.beginPath();
+  for(const d of drops){ CTX.moveTo(d.x,d.y); CTX.lineTo(d.x-4,d.y+d.l); d.y+=d.v; d.x-=.6; if(d.y>RAIN.height||d.x<-20){d.x=Math.random()*RAIN.width+40; d.y=-20;} }
+  CTX.stroke(); requestAnimationFrame(drawRain);
+}
+window.addEventListener('resize', resizeRain);
+initRain(); drawRain(); renderHome();
+</script>
+</body>
+</html>

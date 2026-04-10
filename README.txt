@@ -1,13 +1,17 @@
-FAFATRAINING GOD MODE
+FAFATRAINING GOD MODE V4
 
-Contient :
-- 3 escape games
-- intros longues et immersives
-- chrono visible
-- événements aléatoires
-- score dynamique
-- pastilles d’aide
-- bouton valider fixe
-- fin de mission renforcée
+Base utilisée :
+- FAFATRAINING GOD MODE V2
 
-Fonctionne sans backend.
+Priorité appliquée :
+- 3 = immersion cinématique
+
+Ajouts V4 :
+- intro noire et progressive
+- glitch texte
+- pluie visuelle conservée
+- ambiance sonore synthétique plus présente
+- feedback bonne/mauvaise réponse renforcé
+- chrono plus intégré et plus visible
+- fin plus spectaculaire
+- toujours sur la même base, sans repartir sur un autre projet
