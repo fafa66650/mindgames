@@ -1,4 +1,4 @@
-const CACHE = 'fafa-github-final-v5';
+const CACHE = 'fafa-github-v7-fix';
 const ASSETS = [
   './','./index.html','./styles.css','./app.js','./manifest.json','./sw.js',
   './assets/logo.png','./icons/icon-192.png','./icons/icon-512.png',
@@ -7,7 +7,8 @@ const ASSETS = [
   './assets/jungle_scene_intro.png','./assets/jungle_scene_ruins.png','./assets/jungle_scene_map.png',
   './assets/jungle_puzzle_tablet.png','./assets/jungle_puzzle_path.png','./assets/jungle_puzzle_glyphs.png',
   './assets/lab_scene_intro.png','./assets/lab_scene_report.png','./assets/lab_scene_circuit.png',
-  './assets/lab_puzzle_matrix.png','./assets/lab_puzzle_lock.png','./assets/lab_puzzle_alert.png'
+  './assets/lab_puzzle_matrix.png','./assets/lab_puzzle_lock.png','./assets/lab_puzzle_alert.png',
+  './audio/ambience_rain.wav','./audio/ok.wav','./audio/bad.wav','./audio/tension.wav','./audio/glitch.wav'
 ];
 self.addEventListener('install', e => e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS))));
 self.addEventListener('fetch', e => e.respondWith(caches.match(e.request).then(r => r || fetch(e.request))));
