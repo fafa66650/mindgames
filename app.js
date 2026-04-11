@@ -215,6 +215,37 @@ function chooseChallenges() {
   return out;
 }
 
+
+function renderStudioSystems(){
+  return `<section class="studio-systems panel">
+    <h3>Interface tactique</h3>
+    <div class="inventory-bar">
+      <div class="inv-slot">🔑<span>Clé</span></div>
+      <div class="inv-slot">📁<span>Dossier</span></div>
+      <div class="inv-slot">💾<span>Data</span></div>
+      <div class="inv-slot">🧩<span>Fragment</span></div>
+    </div>
+    <div class="mini-grid">
+      <button class="sys-btn" onclick="triggerStudioEvent('scan')">SCAN DOSSIER</button>
+      <button class="sys-btn" onclick="triggerStudioEvent('decrypt')">DÉCRYPTER</button>
+      <button class="sys-btn" onclick="triggerStudioEvent('combine')">COMBINER OBJETS</button>
+      <button class="sys-btn" onclick="triggerStudioEvent('trace')">TRACER INDICES</button>
+    </div>
+    <div id="studioFeed" class="notice">Les systèmes interactifs de mission sont prêts.</div>
+  </section>`;
+}
+function triggerStudioEvent(type){
+  const feed=document.getElementById('studioFeed');
+  const map={
+    scan:'Analyse en cours… anomalies détectées dans le dossier sélectionné.',
+    decrypt:'Décryptage progressif… une donnée cachée vient d’être révélée.',
+    combine:'Association logique validée… un nouvel élément de puzzle est disponible.',
+    trace:'Traçage des indices terminé… plusieurs connexions ont été établies.'
+  };
+  if(feed) feed.innerHTML='<strong>Système :</strong> '+map[type];
+}
+
+
 function renderAdmin() {
   setTheme();
   const theme = THEMES[state.theme || ''];
@@ -361,7 +392,7 @@ function launchMission() {
 function showIntro(isPlayer=false) {
   const theme = THEMES[state.theme];
   playFile('glitch');
-  APP.innerHTML = `<section class="cinematic"><div class="cinematic-box"><div class="kicker">OUVERTURE CINÉMATIQUE</div><h1>ACCÈS MISSION</h1><div class="notice"><strong>Brief de mission :</strong><br>${theme.mission}</div><div class="notice"><strong>Important :</strong><br>le chrono part dès que tu entres dans la première épreuve. Lis vite, répartis les rôles, et garde tes aides pour les vrais blocages.</div><div id="cineBox"></div><div class="btns"><button class="btn-alt" onclick="location.hash='#admin';renderRoute();">RETOUR ACCUEIL</button><button class="btn-main hidden" id="introBtn" onclick="${isPlayer ? 'goPlayer()' : 'goAdmin()'}">ENTRER DANS LA PREMIÈRE ÉPREUVE</button></div></div></section>`;
+  APP.innerHTML = `<section class="cinematic"><div class="cinematic-box"><div class="kicker">OUVERTURE CINÉMATIQUE</div><h1>ACCÈS MISSION</h1><div class="notice"><strong>Brief de mission :</strong><br>${theme.mission}<br><br><em>Les systèmes tactiques, inventaires et outils d’analyse ont été synchronisés. Votre cellule entre en zone rouge.</em></div><div class="notice"><strong>Important :</strong><br>le chrono part dès que tu entres dans la première épreuve. Lis vite, répartis les rôles, et garde tes aides pour les vrais blocages.</div><div id="cineBox"></div><div class="btns"><button class="btn-alt" onclick="location.hash='#admin';renderRoute();">RETOUR ACCUEIL</button><button class="btn-main hidden" id="introBtn" onclick="${isPlayer ? 'goPlayer()' : 'goAdmin()'}">ENTRER DANS LA PREMIÈRE ÉPREUVE</button></div></div></section>`;
   let i=0; const box=document.getElementById('cineBox');
   function step() {
     if (i < theme.intro.length) {
@@ -550,7 +581,7 @@ function renderFinal(showAdmin) {
   const main = `
     <section class="game-shell fadein">
       <div class="hud"><div class="hud-left"><div class="badge points">Final de mission</div><div class="badge meta">Fragments : ${state.fragments.length}</div></div><div class="hud-right"><div id="live-timer" class="badge timer timer-live ${timerColor()}">⏱ ${fmt(state.time)}</div></div></div>
-      <div class="turn">💣 RÉVÉLATION FINALE</div>
+      <div class="turn">💣 RÉVÉLATION FINALE • DOSSIER CLASSIFIÉ</div>
       <div class="story">Fragments récupérés : <strong>${state.fragments.join(' · ')||'aucun'}</strong></div>
       <div class="story"><strong>${f.prompt}</strong></div>
       <div class="choice-grid">${f.choices.map((choice,i)=>`<button class="choice" onclick="pickMeta(${i}, this)">${choice}</button>`).join('')}</div>
