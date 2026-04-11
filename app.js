@@ -1,57 +1,11 @@
 
-const audioFiles = {
-  ambience:'./audio/ambience_rain.wav',
-  ok:'./audio/ok.wav',
-  bad:'./audio/bad.wav',
-  tension:'./audio/tension.wav',
-  glitch:'./audio/glitch.wav'
-};
-const audioPool = {};
-function prepareAudio(){
-  Object.entries(audioFiles).forEach(([k,v])=>{
-    if(!audioPool[k]){
-      const a = new Audio(v);
-      a.preload = 'auto';
-      if(k === 'ambience'){ a.loop = true; a.volume = 0.28; }
-      else if(k === 'glitch'){ a.volume = 0.32; }
-      else { a.volume = 0.45; }
-      audioPool[k] = a;
-    }
-  });
-}
-function playFile(name){
-  try{
-    prepareAudio();
-    const src = audioPool[name];
-    if(!src) return;
-    const a = src.cloneNode();
-    a.volume = src.volume;
-    a.play().catch(()=>{});
-  }catch(e){}
-}
-function startAmbienceFile(){
-  try{
-    prepareAudio();
-    audioPool.ambience.currentTime = 0;
-    audioPool.ambience.play().catch(()=>{});
-  }catch(e){}
-}
-function stopAmbienceFile(){
-  try{
-    prepareAudio();
-    audioPool.ambience.pause();
-    audioPool.ambience.currentTime = 0;
-  }catch(e){}
-}
-
-
 const APP=document.getElementById('app');const RAIN=document.getElementById('rain');const CTX=RAIN.getContext('2d');let audioCtx=null,ambienceNode=null;
 function initAudio(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx}
 function beep(freq=440,dur=.15,type='sine',vol=.03){try{const ctx=initAudio();const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.value=freq;g.gain.value=vol;o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+dur)}catch(e){}}
-function playOk(){playFile('ok');beep(760,.12,'triangle',.03);setTimeout(()=>beep(980,.12,'triangle',.02),90)}
-function playBad(){playFile('bad');beep(180,.18,'sawtooth',.035);setTimeout(()=>beep(130,.18,'sawtooth',.03),100)}
-function playTension(){playFile('tension');beep(320,.08,'square',.016)}
-function toggleAmbience(on=true){try{if(ambienceNode){ambienceNode.osc.stop();ambienceNode=null}if(!on){stopAmbienceFile();return;}startAmbienceFile();const ctx=initAudio();const osc=ctx.createOscillator(),gain=ctx.createGain(),filter=ctx.createBiquadFilter();osc.type='sawtooth';osc.frequency.value=58;filter.type='lowpass';filter.frequency.value=240;gain.gain.value=.005;osc.connect(filter);filter.connect(gain);gain.connect(ctx.destination);osc.start();ambienceNode={osc,gain}}catch(e){}}
+function playOk(){beep(760,.12,'triangle',.03);setTimeout(()=>beep(980,.12,'triangle',.02),90)}
+function playBad(){beep(180,.18,'sawtooth',.035);setTimeout(()=>beep(130,.18,'sawtooth',.03),100)}
+function playTension(){beep(320,.08,'square',.016)}
+function toggleAmbience(on=true){try{const ctx=initAudio();if(ambienceNode){ambienceNode.osc.stop();ambienceNode=null}if(!on)return;const osc=ctx.createOscillator(),gain=ctx.createGain(),filter=ctx.createBiquadFilter();osc.type='sawtooth';osc.frequency.value=58;filter.type='lowpass';filter.frequency.value=240;gain.gain.value=.008;osc.connect(filter);filter.connect(gain);gain.connect(ctx.destination);osc.start();ambienceNode={osc,gain}}catch(e){}}
 function norm(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'').trim()}
 
 const THEMES={
@@ -432,7 +386,7 @@ function finishMission(timeout){
  </section>`;
 }
 function resetAll(){clearState();state={theme:'night',totalPlayers:18,teamCount:3,publicType:'adultes',difficulty:'difficile',duration:3600,teams:[],activeTeam:0,hints:0,time:0,index:0,picked:null,attempts:0,selectedChallenges:[],fragments:[],timerActive:false,metaPick:null};location.hash='#admin';renderRoute()}
-function renderRoute(){loadState();setTheme();const r=route();if(r.startsWith('#team-')){if(!state.selectedChallenges.length){APP.innerHTML=`<section class="panel"><h2>Lien d’équipe</h2><div class="notice">La mission n’a pas encore été lancée par l’administrateur.</div><div class="btns"><button class="btn-main" onclick="location.hash='#admin';renderRoute()">Retour</button></div></section>`;return}playFile('glitch'); showIntro(true);return}if(r==='#admin-intro'){playFile('glitch'); showIntro(false);return}if(r==='#admin-play'){if(!state.selectedChallenges.length){renderAdmin();return}renderAdminPlay();return}renderAdmin()}
+function renderRoute(){loadState();setTheme();const r=route();if(r.startsWith('#team-')){if(!state.selectedChallenges.length){APP.innerHTML=`<section class="panel"><h2>Lien d’équipe</h2><div class="notice">La mission n’a pas encore été lancée par l’administrateur.</div><div class="btns"><button class="btn-main" onclick="location.hash='#admin';renderRoute()">Retour</button></div></section>`;return}showIntro(true);return}if(r==='#admin-intro'){showIntro(false);return}if(r==='#admin-play'){if(!state.selectedChallenges.length){renderAdmin();return}renderAdminPlay();return}renderAdmin()}
 function resizeRain(){RAIN.width=innerWidth;RAIN.height=innerHeight}let drops=[];function initRain(){resizeRain();drops=Array.from({length:180},()=>({x:Math.random()*RAIN.width,y:Math.random()*RAIN.height,l:10+Math.random()*18,v:6+Math.random()*8}))}
 function drawRain(){CTX.clearRect(0,0,RAIN.width,RAIN.height);CTX.strokeStyle='rgba(114,204,255,.35)';CTX.lineWidth=1;CTX.beginPath();for(const d of drops){CTX.moveTo(d.x,d.y);CTX.lineTo(d.x-4,d.y+d.l);d.y+=d.v;d.x-=.6;if(d.y>RAIN.height||d.x<-20){d.x=Math.random()*RAIN.width+40;d.y=-20}}CTX.stroke();requestAnimationFrame(drawRain)}
 window.addEventListener('hashchange',renderRoute);window.addEventListener('resize',resizeRain);initRain();drawRain();renderRoute();if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
